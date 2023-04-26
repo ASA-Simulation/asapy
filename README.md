@@ -27,13 +27,13 @@ pip install .
 ## Documentation
 
 
-* [Contributing](contributing.md)
+* [Contributing](docs/build/md/markdown/contributing.md)
 
 
-    * [Clone the Software Repository](contributing.md#clone-the-software-repository)
+    * [Clone the Software Repository](docs/build/md/markdown/contributing.md#clone-the-software-repository)
 
 
-    * [Install `asapy` in Development Mode](contributing.md#install-asapy-in-development-mode)
+    * [Install `asapy` in Development Mode](docs/build/md/markdown/contributing.md#install-asapy-in-development-mode)
 
 
     * [Build the Documentation](docs/build/md/markdowncontributing.md#build-the-documentation)
