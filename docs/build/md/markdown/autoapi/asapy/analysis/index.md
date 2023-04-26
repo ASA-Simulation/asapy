@@ -55,7 +55,6 @@ Method that performs hypothesis testing
 The figure below shows the flow of the hypothesis method:
 
 
-C:\Users\samarasrs\Documents\Artigo\asapy\docs\image\Diagrama_hypothesis.png
 ![image](../../../../../../image/Diagrama_hypothesis.png)
 
 Example usage:
