@@ -5,9 +5,9 @@ import pingouin as pg
 import os 
 import sys
 import seaborn as sns
-#import pypref as p
+import random
 import re
-
+from typing import List, Tuple
 from scipy.stats import chi2_contingency
 from matplotlib import pyplot as plt
 from sklearn import preprocessing
@@ -24,7 +24,7 @@ class Analysis:
     """The Analysis object."""
 
     @staticmethod
-    def hypothesis(df, alpha = 0.05, verbose=False):    
+    def hypothesis(df: pd.DataFrame, alpha: float = 0.05, verbose: bool = False) -> pd.DataFrame:    
         """ Method that performs hypothesis testing
 
         Args:
@@ -276,7 +276,7 @@ class Analysis:
         return output
 
     @staticmethod
-    def fit_distribution(df, verbose=False):
+    def fit_distribution(df: pd.DataFrame, verbose: bool = False) -> pd.DataFrame:
         """Find the distribution that best fits the input data.
 
         Args:
@@ -385,7 +385,7 @@ class Analysis:
         return result
 
     @staticmethod
-    def feature_score(df, x, y, scoring_function, verbose = False):
+    def feature_score(df: pd.DataFrame, x: List[str], y: List[str], scoring_function: str, verbose: bool = False) -> pd.DataFrame:
         """Calculate the score of input data.
 
         Args:
@@ -451,76 +451,94 @@ class Analysis:
 
         return scores_df
 
-    '''
-    @staticmethod
-    def pareto_front(df, list_min, list_max, verbose=False):
-        """
-        Calculate the Pareto front of a DataFrame given a set of minimum and maximum criteria.
-
-        Args:
-            df (Pandas DataFrame): The DataFrame to calculate the Pareto front for.
-            list_min (list): A list of column names that represent minimum criteria for the Pareto front.
-            list_max (list): A list of column names that represent maximum criteria for the Pareto front.
-            verbose (bool): If True, print the resulting Pareto front DataFrame. Defaults to False.
-
-        Raises:
-            ValueError: If fewer than two criteria are provided.
-
-        Returns:
-            (Pandas DataFrame): The Pareto front of the DataFrame.
-        """
-        if (len(list_min) + len(list_max)) < 2:
-            raise ValueError('Para calcular a fronteira de Pareto é necessário selecionar pelo menos duas variáveis.')
-
-        pref = None
-        if list_min:
-            pref = p.low(list_min[0])
-            for i in range(1, len(list_min)):
-                pref = pref * p.low(list_min[i])
-
-        if list_max:
-            if pref:
-                pref = pref * p.high(list_max[0])
-            else:
-                pref = p.max(list_max[0])
-            for i in range(1, len(list_max)):
-                pref = pref * p.high(list_max[i])
-
-        pareto = pref.psel(df)
-
-        if verbose:
-            print(tabulate(pareto, headers='keys', tablefmt='tab'))
-
-        return pareto
-
-    @staticmethod
-    def get_best_pareto_point(df, list_variable, weigths, verbose=False):
-        """
-        Calculate the best Pareto point of a DataFrame given a set of variables and weights.
-
-        Args:
-            df (Pandas DataFrame): The DataFrame to calculate the best Pareto point for.
-            list_variable (list): A list of column names to consider in the calculation.
-            weights (list): A list of weights to use in the calculation.
-            verbose (bool): If True, print the DataFrame and the best Pareto point found. Defaults to False.
-
-        Returns:
-            tuple: A tuple containing the index of the best Pareto point and the coordinates of the point.
-
-        """
-        df = df[list_variable].reset_index(drop=True)
-        f = np.array(df.values.tolist())
-        decomp = ASF()
-        I = decomp(f, weigths).argmin()
-        if verbose:
-            print(tabulate(df, headers='keys', tablefmt='tab'))
-            print("Melhor opção de acordo com a decomposição: Ponto %s - %s" % (I, f[I]))
-        
-        return I, f[I]
-    '''
     
     @staticmethod
-    def detect_outliers(df, method = 'IQR', thr = 3, verbose = False):
+    def pareto(df: pd.DataFrame, min_list: List[str], max_list: List[str]) -> pd.DataFrame:
+        """
+        Returns a subset of the input DataFrame consisting of Pareto optimal points based on the specified columns.
+
+        Parameters:
+            df (pd.DataFrame): The input DataFrame.
+            min_list (List[str]): A list of column names that should be minimized in the Pareto optimality calculation.
+            max_list (List[str]): A list of column names that should be maximized in the Pareto optimality calculation.
+
+        Returns:
+            pd.DataFrame: A DataFrame that contains the Pareto optimal points of the input DataFrame based on the specified columns.
+
+        Example usage:
+        
+        .. code-block::
+
+            >>> import pandas as pd
+            >>> from sklearn.datasets import load_wine
+            >>> X, y  = load_wine(as_frame=True, return_X_y=True)
+            >>> p = pareto(X, ['alcohol'], ['malic_acid','ash'])
+            >>> print(p.index.tolist())
+            [77, 88, 110, 112, 113, 115, 120, 121, 122, 123, 124, 136, 137, 169, 173]
+
+        .. note::
+
+            This function drops any row that contains missing values before performing the Pareto optimality calculation.
+
+            The columns specified in the `min_list` parameter will be multiplied by -1 to convert them into maximization criteria.
+        """
+        df = df.dropna()
+        df_pareto = df.copy()[min_list + max_list]
+        for col in min_list:
+            df_pareto[col] = df_pareto[col]*-1
+        idx_pareto = pd.DataFrame([False]*len(df), columns = ['pareto'])
+        while not idx_pareto['pareto'].all():
+            point = random.choice(idx_pareto[idx_pareto.pareto ==False].index.tolist())
+            dominated = df_pareto[df_pareto <= df_pareto.loc[point]].dropna().drop(point)
+            df_pareto = df_pareto.drop(dominated.index.tolist())
+            idx_pareto = idx_pareto.drop(dominated.index.tolist())
+            idx_pareto.loc[point, 'pareto'] = True
+
+        return df.iloc[idx_pareto.index.tolist()]
+
+    @staticmethod
+    def get_best_pareto_point(df: pd.DataFrame, list_variable: List[str], weights: List[float], verbose: bool = False) -> pd.DataFrame:
+        """
+        Calculate the best Pareto optimal point in the input DataFrame based on the specified variables and weights.
+
+        Parameters:
+            df (pd.DataFrame): The input DataFrame.
+            list_variable (List[str]): A list of column names that should be considered in the Pareto optimality calculation.
+            weights (List[float]): A list of weights that determine the relative importance of each variable.
+            verbose (bool): A flag that determines whether to print the best Pareto optimal point or not.
+
+        Returns:
+            pd.DataFrame: A DataFrame that contains the best Pareto optimal point based on the specified variables and weights.
+
+        Example usage:
+        
+        .. code-block::
+
+            >>> import asapy
+            >>> from sklearn.datasets import load_wine
+            >>> X, y  = load_wine(as_frame=True, return_X_y=True)
+            >>> p = asapy.Analysis.pareto(X, ['alcohol'], ['malic_acid','ash'])
+            >>> best = asapy.Analysis.get_best_pareto_point(p,['alcohol', 'malic_acid', 'ash'],[0.0,0.9,0.1], True)
+            Melhor opção de acordo com a decomposição: Ponto 115 - [11.03  1.51  2.2 ]
+
+        .. note::
+
+            This function assumes that the input DataFrame contains only Pareto optimal points.
+            
+            The weights parameter should contain a value for each variable specified in the list_variable parameter.
+        """
+        df1 = df[list_variable].reset_index(drop = True)
+        f = np.array(df1.values.tolist())
+        decomp = ASF()
+        I = decomp(f, weights).argmin()
+        if verbose:
+            print("Melhor opção de acordo com a decomposição: Ponto %s - %s" % (df.iloc[[I]].index[0], f[I]))
+        
+        return df.iloc[[I]]
+    
+    
+    @staticmethod
+    def detect_outliers(df: pd.DataFrame, method: str = 'IQR', thr: float = 3, verbose: bool = False) -> Tuple[pd.DataFrame]:
         """Detect outliers in a Pandas DataFrame using IQR or zscore method.
 
         Args:
@@ -589,7 +607,7 @@ class Analysis:
             print(tabulate(df_output, headers='keys', tablefmt='tab'),"\n")
         return df_output, df_thres
 
-    def remove_outliers(self, df, verbose = False):
+    def remove_outliers(self, df: pd.DataFrame, verbose: bool = False) -> Tuple[pd.DataFrame, List[int]]:
         """
         Remove outliers from a Pandas DataFrame using the Interquartile Range (IQR) method.
         
@@ -629,7 +647,7 @@ class Analysis:
         return df_new, idx
 
     @staticmethod
-    def cramer_V(df, verbose = False, save = False, path = None, format = 'png'):
+    def cramer_V(df: pd.DataFrame, verbose: bool = False, save: bool = False, path: str = None, format: str = 'png') -> pd.DataFrame:
         """
         Calculate Cramer's V statistic for categorical feature association in a DataFrame.
 
@@ -696,7 +714,7 @@ class Analysis:
         return df
     
     
-    def EDA(self, df, save = False, path = None, format = 'png'):
+    def EDA(self, df: pd.DataFrame, save: bool = False, path: str = None, format: str = 'png') -> None:
         """Perform exploratory data analysis (EDA) on a given pandas DataFrame.
         
         The function displays a summary table of the DataFrame, a table of class balance for categorical variables,
