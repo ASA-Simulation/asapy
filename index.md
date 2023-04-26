@@ -36,13 +36,13 @@ pip install .
     * [Install `asapy` in Development Mode](contributing.md#install-asapy-in-development-mode)
 
 
-    * [Build the Documentation](contributing.md#build-the-documentation)
+    * [Build the Documentation](docs/build/md/markdowncontributing.md#build-the-documentation)
 
 
-* [API Reference](autoapi/asapy/index.md)
+* [API Reference](docs/build/md/markdown/autoapi/asapy/index.md)
 
 
-    * [Submodules](autoapi/asapy/index.md#submodules)
+    * [Submodules](docs/build/md/markdown/autoapi/asapy/index.md#submodules)
 
 
-    * [Package Contents](autoapi/asapy/index.md#package-contents)
+    * [Package Contents](docs/build/md/markdown/autoapi/asapy/index.md#package-contents)
