@@ -1,8 +1,77 @@
 import pandas as pd
 from scipy.stats import ttest_ind
 import math
+import json
+import ast
+import asaclient
 
+def prepare_simulation_batch(sim: asaclient.Simulation) -> asaclient.Simulation:
+    """
+    Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run in batch mode.
 
+    Args:
+        sim (Simulation): The simulation instance for which the simulation setup needs to be prepared.
+
+    Returns:
+        Simulation: The updated Simulation instance with the added recorder configurations in its subcomponents.
+    """
+    batch_recorder = {
+            "identifier": "AsaWsDBRecorder@AsaModels",
+            "attributes": {},
+            "subcomponents": {
+                "asaBasicMsgs": [
+                ],
+                "asaCustomMsgs": [
+                    {
+                        "identifier": "AsaCustomMsg11@AsaModels",
+                        "attributes": {}
+                    }
+                ]
+            }
+        }
+    recorders=[batch_recorder, ]
+    sim = dict(sim)
+    sim['station']['subcomponents']['recorders'] = recorders
+    return asaclient.Simulation(**sim)
+
+def prepare_simulation_tacview(sim: asaclient.Simulation) -> asaclient.Simulation:
+    """
+    Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run on Tacview.
+
+    Args:
+        sim (Simulation): The simulation instance for which the simulation setup needs to be prepared.
+
+    Returns:
+        Simulation: The updated Simulation instance with the added recorder configurations in its subcomponents.
+    """
+    tac_recorder = {
+        "identifier": "AsaWsTacviewRecorder@AsaModels",
+        "attributes": {},
+        "subcomponents": {}
+    }
+    recorders=[tac_recorder, ]
+    sim = dict(sim)
+    sim['station']['subcomponents']['recorders'] = recorders
+    return asaclient.Simulation(**sim)
+
+def load_simulation(path: str) -> asaclient.Simulation:
+    """
+    Loads a Simulation object from a JSON file.
+
+    This method accepts a path to a JSON file, reads the content of the file and 
+    creates a Simulation object using the data parsed from the file. 
+
+    Args:
+        path (str): The absolute or relative path to the JSON file to be loaded.
+
+    Returns:
+        Simulation: The Simulation object created from the loaded JSON data.
+    """
+    with open(path, "r") as f:
+        sim_data = json.load(f)
+    simulation = asaclient.Simulation(**sim_data)
+    return simulation
+    
 def json_to_df(self, json, id='id') -> pd.DataFrame:
     """
     Convert a JSON object to a pandas DataFrame and set the index to the given id column.
@@ -13,7 +82,6 @@ def json_to_df(self, json, id='id') -> pd.DataFrame:
 
     Returns:
         pandas.DataFrame: A DataFrame representation of the JSON object.
-
     """
     return pd.DataFrame(json).set_index(id)
 
@@ -28,7 +96,6 @@ def list_to_df(arr, id='id'):
 
     Returns:
         pandas.DataFrame: A DataFrame representation of the list of dictionaries.
-
     """
     return pd.DataFrame(arr).set_index(id).sort_index()
 
@@ -42,7 +109,6 @@ def unique_list(list1):
 
     Returns:
         list: A list of unique values in the input list.
-
     """
     # initialize a null list
     unique_arr = []
@@ -65,7 +131,6 @@ def get_parents_dict(dic, value):
 
     Returns:
         list: A list of keys that lead to the given value in the dictionary.
-
     """
     for k, v in dic.items():
         if isinstance(v, dict):
@@ -118,7 +183,106 @@ def test_t(sample1, sample2, alpha=0.05):
         print("The two samples are different.")
         return False
 
+def convert_nested_string_to_dict(s):
+    """
+    Converts a string that contains a dictionary and JSON-formatted strings into a nested dictionary.
+    
+    Args:
+        s (str): The input string containing a dictionary and JSON-formatted strings.
+        
+    Returns:
+        dict: The output dictionary after conversion of JSON-formatted strings.
+    """
+    d = ast.literal_eval(s)
+    for k, v in d.items():
+        if isinstance(v, str):
+            try:
+                d[k] = json.loads(v)
+            except json.JSONDecodeError:
+                pass
+    return d
 
+def find_key(nested_dict, target_key):
+    """Find a key in a nested dictionary.
+
+    Args:
+        nested_dict (dict): The dictionary to search.
+        target_key (str): The key to find.
+
+    Returns:
+        value: The value of the found key, or None if the key was not found.
+    """
+    for key, value in nested_dict.items():
+        if key == target_key:
+            return value
+        elif isinstance(value, dict):
+            result = find_key(value, target_key)
+            if result is not None:
+                return result
+    return None
+
+def gen_dict_extract(key, var):
+    """
+    A generator function to iterate and yield values from a dictionary or list nested inside the dictionary, given a key.
+
+    Args:
+        key (str): The key to search for in the dictionary.
+        var (dict or list): The dictionary or list to search.
+
+    Yields:
+        value: The value from the dictionary or list that corresponds to the given key.
+    """
+    if hasattr(var,'items'): 
+        for k, v in var.items(): 
+            if k == key:
+                yield v
+            if isinstance(v, dict):
+                for result in gen_dict_extract(key, v):
+                    yield result
+            elif isinstance(v, list):
+                for d in v:
+                    for result in gen_dict_extract(key, d):
+                        yield result
+
+def transform_stringified_dict(data):
+    """
+    Recursively converts stringified JSON parts of a dictionary or list into actual dictionaries or lists.
+    
+    This function checks if an item is a string and attempts to convert it to a dictionary or list 
+    using `json.loads()`. If the conversion is successful, the function recursively processes the new 
+    dictionary or list. If a string is not a valid JSON representation, it remains unchanged.
+    
+    Args:
+        data (Union[dict, list, str]): Input data that might contain stringified JSON parts.
+
+    Returns:
+        Union[dict, list, str]: The transformed data with all stringified JSON parts converted 
+        to dictionaries or lists.
+        
+    Raises:
+        json.JSONDecodeError: If there's an issue decoding a JSON string. This is caught internally 
+        and the original string is returned.
+    """
+    
+    # If data is a string, try to parse it as JSON
+    if isinstance(data, str):
+        try:
+            data = json.loads(data)
+            return transform_stringified_dict(data)  # Recursive call
+        except json.JSONDecodeError:  # String is not JSON
+            return data
+    
+    # If data is a dictionary, process its values
+    if isinstance(data, dict):
+        for key, value in data.items():
+            data[key] = transform_stringified_dict(value)
+    
+    # If data is a list, process its items
+    if isinstance(data, list):
+        for i, value in enumerate(data):
+            data[i] = transform_stringified_dict(value)
+            
+    return data
 
 """
 Constants and Methods for Converting Distance Measurement Units
@@ -558,7 +722,6 @@ def aepcd_rad(x):
 
     Returns:
         float, the angle within the range -pi to pi, with the same orientation as the original angle.
-
     """
     y = 0.0
 

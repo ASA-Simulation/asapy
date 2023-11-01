@@ -3,6 +3,7 @@ from pyDOE import lhs
 from math import isnan
 from typing import List
 import pandas as pd
+import numpy as np
 
 class Doe:
     def __init__(self):
@@ -85,17 +86,29 @@ class Doe:
         Returns:
         DataFrame: A DataFrame containing aliases and their corresponding attributes.
         """
+        required_columns = ['label', 'type', 'default', 'min', 'max', 'alias_attribute']
+        
         aliases_dic = dict()
+        
+        # Extract aliases and iterate
         self.aliases = list(self._get_aliases(sim))
         for alias in self.aliases:
             for i in list(self._get_configs(configs, alias)):
                 i['alias_attribute'] = alias['alias_attribute']
                 aliases_dic[alias['alias']] = i
-        self.aliases_df = DataFrame(aliases_dic)
-        return self.aliases_df.T
+                
+        # Convert the dictionary to a dataframe and transpose it
+        self.aliases_df = pd.DataFrame(aliases_dic).T
+        
+        # Check and add any missing required columns to the dataframe with NaN values
+        for col in required_columns:
+            if col not in self.aliases_df.columns:
+                self.aliases_df[col] = np.nan
+                
+        return self.aliases_df[required_columns]
 
     @staticmethod
-    def create(df_T, samples):
+    def create(df_T, samples, seed=42):
         """
         Creates a design of experiments (DOE) based on the input DataFrame ``df_T``.
         The DOE is created using a Latin Hypercube Sampling (LHS) method and a sample size ``samples``.
@@ -118,6 +131,7 @@ class Doe:
             TypeError: If ``df_T`` is not a pandas DataFrame or ``samples`` is not an integer.
             ValueError: If ``df_T`` does not contain the required columns or the ``default`` value is not within the ``min`` and ``max`` range.
         """
+        np.random.seed(seed)
         df = df_T.T
         n = df.shape[1]
         doe = DataFrame(lhs(n=n, samples=samples))
@@ -205,5 +219,4 @@ class Doe:
         Raises:
             None
         """
-        #dic = {k: v for d in list(self._get_metrics(sim)) for k, v in d.items()}
         return pd.DataFrame(list(self._get_metrics(sim))).set_index('ws_name')

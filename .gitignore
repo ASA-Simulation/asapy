@@ -1,0 +1,6 @@
+asapy/__pycache__
+.vscode
+__pycache__
+asapy.egg-info
+.eggs
+.ipynb_checkpoints

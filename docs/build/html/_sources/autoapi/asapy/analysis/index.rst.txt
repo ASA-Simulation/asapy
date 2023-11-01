@@ -21,7 +21,7 @@ Classes
 
    The Analysis object.
 
-   .. py:method:: hypothesis(df, alpha=0.05, verbose=False)
+   .. py:method:: hypothesis(df: pandas.DataFrame, alpha: float = 0.05, verbose: bool = False) -> pandas.DataFrame
       :staticmethod:
 
       Method that performs hypothesis testing
@@ -119,7 +119,7 @@ Classes
 
 
 
-   .. py:method:: fit_distribution(df, verbose=False)
+   .. py:method:: fit_distribution(df: pandas.DataFrame, verbose: bool = False) -> pandas.DataFrame
       :staticmethod:
 
       Find the distribution that best fits the input data.
@@ -158,7 +158,7 @@ Classes
       .. image:: /../../../../../image/output_fit_distribution.png
 
 
-   .. py:method:: feature_score(df, x, y, scoring_function, verbose=False)
+   .. py:method:: feature_score(df: pandas.DataFrame, x: List[str], y: List[str], scoring_function: str, verbose: bool = False) -> pandas.DataFrame
       :staticmethod:
 
       Calculate the score of input data.
@@ -212,7 +212,75 @@ Classes
           0  230.65  207.27  106.52  100.07  81.24  75.4  20.71   16.1  13.75   0.82
 
 
-   .. py:method:: detect_outliers(df, method='IQR', thr=3, verbose=False)
+   .. py:method:: pareto(df: pandas.DataFrame, min_list: List[str], max_list: List[str]) -> pandas.DataFrame
+      :staticmethod:
+
+      Returns a subset of the input DataFrame consisting of Pareto optimal points based on the specified columns.
+
+      :param df: The input DataFrame.
+      :type df: pd.DataFrame
+      :param min_list: A list of column names that should be minimized in the Pareto optimality calculation.
+      :type min_list: List[str]
+      :param max_list: A list of column names that should be maximized in the Pareto optimality calculation.
+      :type max_list: List[str]
+
+      :returns: A DataFrame that contains the Pareto optimal points of the input DataFrame based on the specified columns.
+      :rtype: pd.DataFrame
+
+      Example usage:
+
+      .. code-block::
+
+          >>> import pandas as pd
+          >>> from sklearn.datasets import load_wine
+          >>> X, y  = load_wine(as_frame=True, return_X_y=True)
+          >>> p = pareto(X, ['alcohol'], ['malic_acid','ash'])
+          >>> print(p.index.tolist())
+          [77, 88, 110, 112, 113, 115, 120, 121, 122, 123, 124, 136, 137, 169, 173]
+
+      .. note::
+
+          This function drops any row that contains missing values before performing the Pareto optimality calculation.
+
+          The columns specified in the `min_list` parameter will be multiplied by -1 to convert them into maximization criteria.
+
+
+   .. py:method:: get_best_pareto_point(df: pandas.DataFrame, list_variable: List[str], weights: List[float], verbose: bool = False) -> pandas.DataFrame
+      :staticmethod:
+
+      Calculate the best Pareto optimal point in the input DataFrame based on the specified variables and weights.
+
+      :param df: The input DataFrame.
+      :type df: pd.DataFrame
+      :param list_variable: A list of column names that should be considered in the Pareto optimality calculation.
+      :type list_variable: List[str]
+      :param weights: A list of weights that determine the relative importance of each variable.
+      :type weights: List[float]
+      :param verbose: A flag that determines whether to print the best Pareto optimal point or not.
+      :type verbose: bool
+
+      :returns: A DataFrame that contains the best Pareto optimal point based on the specified variables and weights.
+      :rtype: pd.DataFrame
+
+      Example usage:
+
+      .. code-block::
+
+          >>> import asapy
+          >>> from sklearn.datasets import load_wine
+          >>> X, y  = load_wine(as_frame=True, return_X_y=True)
+          >>> p = asapy.Analysis.pareto(X, ['alcohol'], ['malic_acid','ash'])
+          >>> best = asapy.Analysis.get_best_pareto_point(p,['alcohol', 'malic_acid', 'ash'],[0.0,0.9,0.1], True)
+          Melhor opção de acordo com a decomposição: Ponto 115 - [11.03  1.51  2.2 ]
+
+      .. note::
+
+          This function assumes that the input DataFrame contains only Pareto optimal points.
+
+          The weights parameter should contain a value for each variable specified in the list_variable parameter.
+
+
+   .. py:method:: detect_outliers(df: pandas.DataFrame, method: str = 'IQR', thr: float = 3, verbose: bool = False) -> Tuple[pandas.DataFrame]
       :staticmethod:
 
       Detect outliers in a Pandas DataFrame using IQR or zscore method.
@@ -254,7 +322,7 @@ Classes
 
 
 
-   .. py:method:: remove_outliers(df, verbose=False)
+   .. py:method:: remove_outliers(df: pandas.DataFrame, verbose: bool = False) -> Tuple[pandas.DataFrame, List[int]]
 
       Remove outliers from a Pandas DataFrame using the Interquartile Range (IQR) method.
 
@@ -280,7 +348,7 @@ Classes
           Foram removidas 31 linhas.
 
 
-   .. py:method:: cramer_V(df, verbose=False, save=False, path=None, format='png')
+   .. py:method:: cramer_V(df: pandas.DataFrame, verbose: bool = False, save: bool = False, path: str = None, format: str = 'png') -> pandas.DataFrame
       :staticmethod:
 
       Calculate Cramer's V statistic for categorical feature association in a DataFrame.
@@ -313,7 +381,7 @@ Classes
       .. image:: /../../../../../image/output_cramer_v.png
 
 
-   .. py:method:: EDA(df, save=False, path=None, format='png')
+   .. py:method:: EDA(df: pandas.DataFrame, save: bool = False, path: str = None, format: str = 'png') -> None
 
       Perform exploratory data analysis (EDA) on a given pandas DataFrame.
 

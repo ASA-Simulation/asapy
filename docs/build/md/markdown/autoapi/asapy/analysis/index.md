@@ -3,9 +3,11 @@
 ## Module Contents
 
 ### Classes
-|  |  |
-| ------ | ------ |
-| `Analysis`| The Analysis object.|
+
+| `Analysis`
+ | The Analysis object.
+
+ |
 
 ### _class_ asapy.analysis.Analysis()
 The Analysis object.
@@ -55,7 +57,8 @@ Method that performs hypothesis testing
 The figure below shows the flow of the hypothesis method:
 
 
-![image](../../../../../../image/Diagrama_hypothesis.png)
+
+![image](../../../../../image/Diagrama_hypothesis.png)
 
 Example usage:
 
@@ -167,7 +170,7 @@ chi2                  0            0.915856   (0.64, 70.0, 3.93)
 
 
 
-![image](../../../../../../image/output_fit_distribution.png)
+![image](../../../../../image/output_fit_distribution.png)
 
 
 #### _static_ feature_score(df: pandas.DataFrame, x: List[str], y: List[str], scoring_function: str, verbose: bool = False)
@@ -466,7 +469,7 @@ Example usage:
 
 
 
-![image](../../../../../../image/output_cramer_v.png)
+![image](../../../../../image/output_cramer_v.png)
 
 
 #### EDA(df: pandas.DataFrame, save: bool = False, path: str = None, format: str = 'png')
@@ -521,7 +524,7 @@ Associação:
 
 
 
-![image](../../../../../../image/association.png)
+![image](../../../../../image/association.png)
 
 ```default
 Histogramas:
@@ -529,15 +532,15 @@ Histogramas:
 
 
 
-![image](../../../../../../image/occupation.png)
+![image](../../../../../image/occupation.png)
 
 
 
-![image](../../../../../../image/education.png)
+![image](../../../../../image/education.png)
 
 
 
-![image](../../../../../../image/educational-num.png)
+![image](../../../../../image/educational-num.png)
 
 ```default
 Variáveis Numéricas:
@@ -558,7 +561,7 @@ Correlação:
 
 
 
-![image](../../../../../../image/correlation.png)
+![image](../../../../../image/correlation.png)
 
 ```default
 Histogramas e boxplots:
@@ -566,7 +569,7 @@ Histogramas e boxplots:
 
 
 
-![image](../../../../../../image/age.png)
+![image](../../../../../image/age.png)
 
 ```default
 Detecção de outlier da variável 'age':
@@ -577,7 +580,7 @@ Critério: Os valores menores que -2.0 ou maiores que 78.0 foram considerados ou
 
 
 
-![image](../../../../../../image/fnlwgt.png)
+![image](../../../../../image/fnlwgt.png)
 
 ```default
 Detecção de outlier da variável 'fnlwgt':

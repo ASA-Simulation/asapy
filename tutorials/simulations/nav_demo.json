@@ -1,0 +1,1544 @@
+{
+	"name": "nav",
+	"attributes": {},
+	"station": {
+		"identifier": "AsaStation@AsaExtensions",
+		"attributes": {
+			"duration": 4200
+		},
+		"subcomponents": {
+			"recorders": [
+				{
+					"identifier": "AsaWsDBRecorder@AsaModels",
+					"attributes": {},
+					"subcomponents": {
+						"asaBasicMsgs": [
+							{
+								"identifier": "AsaBasicMsg6@AsaExtensions",
+								"attributes": {}
+							},
+							{
+								"identifier": "AsaBasicMsg5@AsaExtensions",
+								"attributes": {}
+							},
+							{
+								"identifier": "AsaBasicMsg4@AsaExtensions",
+								"attributes": {}
+							},
+							{
+								"identifier": "AsaBasicMsg7@AsaExtensions",
+								"attributes": {}
+							}
+						],
+						"asaCustomMsgs": [
+							{
+								"identifier": "AsaCustomMsg10@AsaModels",
+								"attributes": {}
+							},
+							{
+								"identifier": "AsaCustomMsg11@AsaModels",
+								"attributes": {}
+							}
+						]
+					}
+				}
+			],
+			"worldmodel": [
+				{
+					"identifier": "AsaWorldModel@AsaModels",
+					"attributes": {
+						"ws_lat": -15.5,
+						"ws_lon": -47.5,
+						"refRange": 150,
+						"simulationTime": 43200,
+						"day": 23,
+						"month": 3,
+						"year": 1982,
+						"enableTerrain": " ",
+						"tempMslCelsius": 15,
+						"pressMslHPa": 1013.25,
+						"seed": 1
+					},
+					"subcomponents": {
+						"zones": [
+							{
+								"identifier": "AsaZone@AsaModels",
+								"attributes": {
+									"ws_name": "Blue_Land",
+									"altitudeMin": 0,
+									"altitudeMax": 60000,
+									"side": "blue"
+								},
+								"subcomponents": {
+									"ws_closed_polygon": [
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -15.80578,
+												"ws_lon": -48.57188,
+												"alt": 0
+											},
+											"label": "Position 1"
+										},
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -16.95009,
+												"ws_lon": -48.56748,
+												"alt": 0
+											},
+											"label": "Position 2"
+										},
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -17.00391,
+												"ws_lon": -47.11325,
+												"alt": 0
+											},
+											"label": "Position 3"
+										},
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -15.85456,
+												"ws_lon": -47.15403,
+												"alt": 0
+											},
+											"label": "Position 4"
+										}
+									]
+								}
+							},
+							{
+								"identifier": "AsaZone@AsaModels",
+								"attributes": {
+									"ws_name": "Red_Land",
+									"altitudeMin": 0,
+									"altitudeMax": 60000,
+									"side": "red"
+								},
+								"subcomponents": {
+									"ws_closed_polygon": [
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -15.80578,
+												"ws_lon": -48.57189,
+												"alt": 0
+											},
+											"label": "Position 1"
+										},
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -14.65014,
+												"ws_lon": -48.59004,
+												"alt": 0
+											},
+											"label": "Position 2"
+										},
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -14.67867,
+												"ws_lon": -47.194,
+												"alt": 0
+											},
+											"label": "Position 3"
+										},
+										{
+											"identifier": "AsaPosition@AsaModels",
+											"attributes": {
+												"ws_lat": -15.85461,
+												"ws_lon": -47.15397,
+												"alt": 0
+											},
+											"label": "Position 4"
+										}
+									]
+								}
+							}
+						],
+						"pois": [
+							{
+								"identifier": "AsaPOI@AsaModels",
+								"attributes": {
+									"ws_name": "Blue_CAP_Point",
+									"ws_lat": -16.01906967163086,
+									"ws_lon": -47.44292068481445,
+									"alt": 3120,
+									"side": "blue"
+								}
+							}
+						],
+						"players": [
+							{
+								"identifier": "AsaAirBase@AsaModels",
+								"attributes": {
+									"ws_name": "Blue_Airbase",
+									"side": "blue",
+									"ws_lat": -16.8580269,
+									"ws_lon": -48.4300192,
+									"initAlt": 3024,
+									"initFuel": 250000,
+									"reactionTime": 8,
+									"controlCenter": "Blue_HQ"
+								},
+								"subcomponents": {
+									"targetData": [],
+									"weaponsInventory": [
+										{
+											"identifier": "AsaAamAllocator@AsaModels",
+											"attributes": {
+												"quantity": 50
+											},
+											"label": "Generic AAM 1"
+										},
+										{
+											"identifier": "AsaBombAllocator@AsaModels",
+											"attributes": {
+												"quantity": 50
+											},
+											"label": "Generic Bomb 2"
+										}
+									],
+									"datalink": [
+										{
+											"identifier": "AsaDatalinkAirBase@AsaModels",
+											"attributes": {
+												"netID": 1
+											},
+											"label": "Airbase DL 1"
+										}
+									]
+								}
+							},
+							{
+								"identifier": "AsaFighter@AsaModels",
+								"attributes": {
+									"ws_name": "B01",
+									"side": "blue",
+									"type": "F-16C",
+									"rcs": 5,
+									"ws_lat": -16.8580269,
+									"ws_lon": -48.4300192,
+									"fuelFreeze": false,
+									"dataLogTime": 0.1,
+									"airBaseName": "Blue_Airbase",
+									"repositioningTime": 15,
+									"quickReaction": false
+								},
+								"subcomponents": {
+									"airTrackManager": [
+										{
+											"label": "Air Trk. Mgr. 1",
+											"identifier": "AsaAirTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 10,
+												"alpha": 0.95,
+												"beta": 0.75,
+												"gamma": 0,
+												"logTrackUpdates": false,
+												"positionGate": 500,
+												"velocityGate": 100
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commRadio": [
+										{
+											"label": "Comm. 1",
+											"identifier": "AsaCommRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 9,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 123.45
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalink": [
+										{
+											"label": "Fighter DL 1",
+											"identifier": "AsaDatalinkFighter@AsaModels",
+											"attributes": {
+												"timeStatusMsg": 1,
+												"timeTrkListMsg": 1,
+												"netID": 1,
+												"subnetID": 1,
+												"intranetID": 1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {}
+										}
+									],
+									"datalinkRadio": [
+										{
+											"label": "DL Radio 1",
+											"identifier": "AsaDatalinkRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 10,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 276.8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"dynamicsModel": [
+										{
+											"label": "Fighter Aero 1",
+											"identifier": "AsaFighterAerodynamics@AsaModels",
+											"attributes": {
+												"rollRate": 90,
+												"pitchRate": 10,
+												"initFuelWtLbs": 13000,
+												"zeroFuelWeightLbs": 17400,
+												"numEngines": 1,
+												"wingArea": 27.88,
+												"minSpeedKts": 200,
+												"maxSpeedKts": 1000,
+												"minPitchDeg": -30,
+												"maxPitchDeg": 60,
+												"loadFactorDragMult": 1,
+												"tsfcMilitary": 18,
+												"tsfcAfterBurner": 59.2,
+												"maxLoadFactorTable": "FIGHTER_DEFAULT_MAX_G",
+												"dragTable": "FIGHTER_DEFAULT_DRAG",
+												"thrustMinTable": "FIGHTER_DEFAULT_IDLE_THRUST",
+												"thrustMaxMilTable": "FIGHTER_DEFAULT_MIL_THRUST",
+												"thrustMaxAbTable": "FIGHTER_DEFAULT_AB_THRUST"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radar": [
+										{
+											"label": "Fighter Rdr. 1",
+											"identifier": "AsaFighterRadar@AsaModels",
+											"attributes": {
+												"frequency": 10,
+												"bandwidth": 2,
+												"powerPeak": 4,
+												"threshold": 12,
+												"noiseFigure": 3,
+												"systemTemperature": 290,
+												"lossXmit": 2,
+												"lossRecv": 2,
+												"lossSignalProcess": 2,
+												"prfTws": 5000,
+												"pwTws": 2,
+												"prfStt": 10000,
+												"pwStt": 0.5,
+												"igain": 26.19093,
+												"dataLogTime": 0.1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radarAntenna": [
+										{
+											"label": "Fighter Rdr. Ant. 1",
+											"identifier": "AsaFighterRdrAntenna@AsaModels",
+											"attributes": {
+												"type": "electronic",
+												"azimuthLimit": 60,
+												"elevationLimit": 60,
+												"commandRateAzimuth": 60,
+												"maxRateAzimuth": 120,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 100,
+												"maxAngle2PlayersOfInterest": 90,
+												"barSpacing": 0.05235988,
+												"revolutionsPerSec": 25,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 35,
+												"beamWidth": 3.5,
+												"gainPattern": "FIGHTER_DEFAULT_ANT_PATTERN",
+												"scanWidth": 2.094395,
+												"numBars": 4,
+												"commandRateElevation": 60,
+												"maxRateElevation": 120
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwr": [
+										{
+											"label": "RWR 1",
+											"identifier": "AsaRwr@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 500,
+												"threshold": 18,
+												"noiseFigure": 8,
+												"systemTemperature": 290,
+												"lossRecv": 2,
+												"lossSignalProcess": 5,
+												"bufferingTime": 0.1,
+												"aoiAccuracy": 3,
+												"freqResolution": 2,
+												"emitterDb": "ASA_DEFAULT_EMITTER_DB"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrAntenna": [
+										{
+											"label": "RWR Ant. 1",
+											"identifier": "AsaRwrAntenna@AsaModels",
+											"attributes": {
+												"elevationLimit": 45,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 5
+											},
+											"subcomponents": {}
+										}
+									],
+									"rwrTrackManager": [
+										{
+											"label": "RWR Trk. Mgr. 1",
+											"identifier": "AsaRwrTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 8,
+												"alpha": 0.15,
+												"beta": 0.01,
+												"logTrackUpdates": true
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									]
+								},
+								"alias": {},
+								"dependencies": {
+									"airBaseName": [
+										{
+											"class": "asa::models::AsaAirBase",
+											"attributeName": "ws_name",
+											"side": "own"
+										}
+									]
+								}
+							},
+							{
+								"identifier": "AsaFighter@AsaModels",
+								"attributes": {
+									"ws_name": "B02",
+									"side": "blue",
+									"type": "F-16C",
+									"rcs": 5,
+									"ws_lat": -16.8580269,
+									"ws_lon": -48.4300192,
+									"fuelFreeze": false,
+									"dataLogTime": 0.1,
+									"airBaseName": "Blue_Airbase",
+									"repositioningTime": 15,
+									"quickReaction": false
+								},
+								"subcomponents": {
+									"airTrackManager": [
+										{
+											"label": "Air Trk. Mgr. 1",
+											"identifier": "AsaAirTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 10,
+												"alpha": 0.95,
+												"beta": 0.75,
+												"gamma": 0,
+												"logTrackUpdates": false,
+												"positionGate": 500,
+												"velocityGate": 100
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commRadio": [
+										{
+											"label": "Comm. 1",
+											"identifier": "AsaCommRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 9,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 123.45
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalink": [
+										{
+											"label": "Fighter DL 1",
+											"identifier": "AsaDatalinkFighter@AsaModels",
+											"attributes": {
+												"timeStatusMsg": 1,
+												"timeTrkListMsg": 1,
+												"netID": 1,
+												"subnetID": 1,
+												"intranetID": 1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkRadio": [
+										{
+											"label": "DL Radio 1",
+											"identifier": "AsaDatalinkRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 10,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 276.8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"dynamicsModel": [
+										{
+											"label": "Fighter Aero 1",
+											"identifier": "AsaFighterAerodynamics@AsaModels",
+											"attributes": {
+												"rollRate": 90,
+												"pitchRate": 10,
+												"initFuelWtLbs": 13000,
+												"zeroFuelWeightLbs": 17400,
+												"numEngines": 1,
+												"wingArea": 27.88,
+												"minSpeedKts": 200,
+												"maxSpeedKts": 1000,
+												"minPitchDeg": -30,
+												"maxPitchDeg": 60,
+												"loadFactorDragMult": 1,
+												"tsfcMilitary": 18,
+												"tsfcAfterBurner": 59.2,
+												"maxLoadFactorTable": "FIGHTER_DEFAULT_MAX_G",
+												"dragTable": "FIGHTER_DEFAULT_DRAG",
+												"thrustMinTable": "FIGHTER_DEFAULT_IDLE_THRUST",
+												"thrustMaxMilTable": "FIGHTER_DEFAULT_MIL_THRUST",
+												"thrustMaxAbTable": "FIGHTER_DEFAULT_AB_THRUST"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radar": [
+										{
+											"label": "Fighter Rdr. 1",
+											"identifier": "AsaFighterRadar@AsaModels",
+											"attributes": {
+												"frequency": 10,
+												"bandwidth": 2,
+												"powerPeak": 4,
+												"threshold": 12,
+												"noiseFigure": 3,
+												"systemTemperature": 290,
+												"lossXmit": 2,
+												"lossRecv": 2,
+												"lossSignalProcess": 2,
+												"prfTws": 5000,
+												"pwTws": 2,
+												"prfStt": 10000,
+												"pwStt": 0.5,
+												"igain": 26.19093,
+												"dataLogTime": 0.1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radarAntenna": [
+										{
+											"label": "Fighter Rdr. Ant. 1",
+											"identifier": "AsaFighterRdrAntenna@AsaModels",
+											"attributes": {
+												"type": "electronic",
+												"azimuthLimit": 60,
+												"elevationLimit": 60,
+												"commandRateAzimuth": 60,
+												"maxRateAzimuth": 120,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 100,
+												"maxAngle2PlayersOfInterest": 90,
+												"barSpacing": 0.05235988,
+												"revolutionsPerSec": 25,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 35,
+												"beamWidth": 3.5,
+												"gainPattern": "FIGHTER_DEFAULT_ANT_PATTERN",
+												"scanWidth": 2.094395,
+												"numBars": 4,
+												"commandRateElevation": 60,
+												"maxRateElevation": 120
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwr": [
+										{
+											"label": "RWR 1",
+											"identifier": "AsaRwr@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 500,
+												"threshold": 18,
+												"noiseFigure": 8,
+												"systemTemperature": 290,
+												"lossRecv": 2,
+												"lossSignalProcess": 5,
+												"bufferingTime": 0.1,
+												"aoiAccuracy": 3,
+												"freqResolution": 2,
+												"emitterDb": "ASA_DEFAULT_EMITTER_DB"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrAntenna": [
+										{
+											"label": "RWR Ant. 1",
+											"identifier": "AsaRwrAntenna@AsaModels",
+											"attributes": {
+												"elevationLimit": 45,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 5
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrTrackManager": [
+										{
+											"label": "RWR Trk. Mgr. 1",
+											"identifier": "AsaRwrTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 8,
+												"alpha": 0.15,
+												"beta": 0.01,
+												"logTrackUpdates": false
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									]
+								},
+								"alias": {},
+								"dependencies": {
+									"airBaseName": [
+										{
+											"class": "asa::models::AsaAirBase",
+											"attributeName": "ws_name",
+											"side": "own"
+										}
+									]
+								}
+							},
+							{
+								"identifier": "AsaFighter@AsaModels",
+								"attributes": {
+									"ws_name": "B03",
+									"side": "blue",
+									"type": "F-16C",
+									"rcs": 5,
+									"ws_lat": -16.8580269,
+									"ws_lon": -48.4300192,
+									"fuelFreeze": false,
+									"dataLogTime": 0.1,
+									"airBaseName": "Blue_Airbase",
+									"repositioningTime": 15,
+									"quickReaction": false
+								},
+								"subcomponents": {
+									"airTrackManager": [
+										{
+											"label": "Air Trk. Mgr. 1",
+											"identifier": "AsaAirTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 10,
+												"alpha": 0.95,
+												"beta": 0.75,
+												"gamma": 0,
+												"logTrackUpdates": false,
+												"positionGate": 500,
+												"velocityGate": 100
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commRadio": [
+										{
+											"label": "Comm. 1",
+											"identifier": "AsaCommRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 9,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 123.45
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalink": [
+										{
+											"label": "Fighter DL 1",
+											"identifier": "AsaDatalinkFighter@AsaModels",
+											"attributes": {
+												"timeStatusMsg": 1,
+												"timeTrkListMsg": 1,
+												"netID": 1,
+												"subnetID": 1,
+												"intranetID": 1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkRadio": [
+										{
+											"label": "DL Radio 1",
+											"identifier": "AsaDatalinkRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 10,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 276.8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"dynamicsModel": [
+										{
+											"label": "Fighter Aero 1",
+											"identifier": "AsaFighterAerodynamics@AsaModels",
+											"attributes": {
+												"rollRate": 90,
+												"pitchRate": 10,
+												"initFuelWtLbs": 13000,
+												"zeroFuelWeightLbs": 17400,
+												"numEngines": 1,
+												"wingArea": 27.88,
+												"minSpeedKts": 200,
+												"maxSpeedKts": 1000,
+												"minPitchDeg": -30,
+												"maxPitchDeg": 60,
+												"loadFactorDragMult": 1,
+												"tsfcMilitary": 18,
+												"tsfcAfterBurner": 59.2,
+												"maxLoadFactorTable": "FIGHTER_DEFAULT_MAX_G",
+												"dragTable": "FIGHTER_DEFAULT_DRAG",
+												"thrustMinTable": "FIGHTER_DEFAULT_IDLE_THRUST",
+												"thrustMaxMilTable": "FIGHTER_DEFAULT_MIL_THRUST",
+												"thrustMaxAbTable": "FIGHTER_DEFAULT_AB_THRUST"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radar": [
+										{
+											"label": "Fighter Rdr. 1",
+											"identifier": "AsaFighterRadar@AsaModels",
+											"attributes": {
+												"frequency": 10,
+												"bandwidth": 2,
+												"powerPeak": 4,
+												"threshold": 12,
+												"noiseFigure": 3,
+												"systemTemperature": 290,
+												"lossXmit": 2,
+												"lossRecv": 2,
+												"lossSignalProcess": 2,
+												"prfTws": 5000,
+												"pwTws": 2,
+												"prfStt": 10000,
+												"pwStt": 0.5,
+												"igain": 26.19093,
+												"dataLogTime": 0.1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radarAntenna": [
+										{
+											"label": "Fighter Rdr. Ant. 1",
+											"identifier": "AsaFighterRdrAntenna@AsaModels",
+											"attributes": {
+												"type": "electronic",
+												"azimuthLimit": 60,
+												"elevationLimit": 60,
+												"commandRateAzimuth": 60,
+												"maxRateAzimuth": 120,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 100,
+												"maxAngle2PlayersOfInterest": 90,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 35,
+												"beamWidth": 3.5,
+												"gainPattern": "FIGHTER_DEFAULT_ANT_PATTERN",
+												"scanWidth": 2.094395,
+												"numBars": 4,
+												"revolutionsPerSec": 25,
+												"barSpacing": 0.05235988,
+												"commandRateElevation": 60,
+												"maxRateElevation": 120
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwr": [
+										{
+											"label": "RWR 1",
+											"identifier": "AsaRwr@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 500,
+												"threshold": 18,
+												"noiseFigure": 8,
+												"systemTemperature": 290,
+												"lossRecv": 2,
+												"lossSignalProcess": 5,
+												"bufferingTime": 0.1,
+												"aoiAccuracy": 3,
+												"freqResolution": 2,
+												"emitterDb": "ASA_DEFAULT_EMITTER_DB"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrAntenna": [
+										{
+											"label": "RWR Ant. 1",
+											"identifier": "AsaRwrAntenna@AsaModels",
+											"attributes": {
+												"elevationLimit": 45,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 5
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrTrackManager": [
+										{
+											"label": "RWR Trk. Mgr. 1",
+											"identifier": "AsaRwrTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 8,
+												"alpha": 0.15,
+												"beta": 0.01,
+												"logTrackUpdates": false
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									]
+								},
+								"alias": {},
+								"dependencies": {
+									"airBaseName": [
+										{
+											"class": "asa::models::AsaAirBase",
+											"attributeName": "ws_name",
+											"side": "own"
+										}
+									]
+								}
+							},
+							{
+								"identifier": "AsaFighter@AsaModels",
+								"attributes": {
+									"ws_name": "B04",
+									"side": "blue",
+									"type": "F-16C",
+									"rcs": 5,
+									"ws_lat": -16.8580269,
+									"ws_lon": -48.4300192,
+									"fuelFreeze": false,
+									"dataLogTime": 0.1,
+									"airBaseName": "Blue_Airbase",
+									"repositioningTime": 15,
+									"quickReaction": false
+								},
+								"subcomponents": {
+									"airTrackManager": [
+										{
+											"label": "Air Trk. Mgr. 1",
+											"identifier": "AsaAirTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 10,
+												"alpha": 0.95,
+												"beta": 0.75,
+												"gamma": 0,
+												"logTrackUpdates": false,
+												"positionGate": 500,
+												"velocityGate": 100
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"commRadio": [
+										{
+											"label": "Comm. 1",
+											"identifier": "AsaCommRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 9,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 123.45
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalink": [
+										{
+											"label": "Fighter DL 1",
+											"identifier": "AsaDatalinkFighter@AsaModels",
+											"attributes": {
+												"timeStatusMsg": 1,
+												"timeTrkListMsg": 1,
+												"netID": 1,
+												"subnetID": 1,
+												"intranetID": 1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkAntenna": [
+										{
+											"label": "Comm. Ant. 1",
+											"identifier": "AsaCommAntenna@AsaModels",
+											"attributes": {
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"datalinkRadio": [
+										{
+											"label": "DL Radio 1",
+											"identifier": "AsaDatalinkRadio@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 10,
+												"powerPeak": 25,
+												"threshold": 23,
+												"noiseFigure": 5,
+												"systemTemperature": 290,
+												"lossXmit": 3,
+												"lossRecv": 3,
+												"lossSignalProcess": 5,
+												"channelFreq": 276.8
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"dynamicsModel": [
+										{
+											"label": "Fighter Aero 1",
+											"identifier": "AsaFighterAerodynamics@AsaModels",
+											"attributes": {
+												"rollRate": 90,
+												"pitchRate": 10,
+												"initFuelWtLbs": 13000,
+												"zeroFuelWeightLbs": 17400,
+												"numEngines": 1,
+												"wingArea": 27.88,
+												"minSpeedKts": 200,
+												"maxSpeedKts": 1000,
+												"minPitchDeg": -30,
+												"maxPitchDeg": 60,
+												"loadFactorDragMult": 1,
+												"tsfcMilitary": 18,
+												"tsfcAfterBurner": 59.2,
+												"maxLoadFactorTable": "FIGHTER_DEFAULT_MAX_G",
+												"dragTable": "FIGHTER_DEFAULT_DRAG",
+												"thrustMinTable": "FIGHTER_DEFAULT_IDLE_THRUST",
+												"thrustMaxMilTable": "FIGHTER_DEFAULT_MIL_THRUST",
+												"thrustMaxAbTable": "FIGHTER_DEFAULT_AB_THRUST"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radar": [
+										{
+											"label": "Fighter Rdr. 1",
+											"identifier": "AsaFighterRadar@AsaModels",
+											"attributes": {
+												"frequency": 10,
+												"bandwidth": 2,
+												"powerPeak": 4,
+												"threshold": 12,
+												"noiseFigure": 3,
+												"systemTemperature": 290,
+												"lossXmit": 2,
+												"lossRecv": 2,
+												"lossSignalProcess": 2,
+												"prfTws": 5000,
+												"pwTws": 2,
+												"prfStt": 10000,
+												"pwStt": 0.5,
+												"igain": 26.19093,
+												"dataLogTime": 0.1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"radarAntenna": [
+										{
+											"label": "Fighter Rdr. Ant. 1",
+											"identifier": "AsaFighterRdrAntenna@AsaModels",
+											"attributes": {
+												"type": "electronic",
+												"azimuthLimit": 60,
+												"elevationLimit": 60,
+												"commandRateAzimuth": 60,
+												"maxRateAzimuth": 120,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 100,
+												"maxAngle2PlayersOfInterest": 90,
+												"barSpacing": 0.05235988,
+												"revolutionsPerSec": 25,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 35,
+												"beamWidth": 3.5,
+												"gainPattern": "FIGHTER_DEFAULT_ANT_PATTERN",
+												"scanWidth": 2.094395,
+												"numBars": 4,
+												"commandRateElevation": 60,
+												"maxRateElevation": 120
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwr": [
+										{
+											"label": "RWR 1",
+											"identifier": "AsaRwr@AsaModels",
+											"attributes": {
+												"bandwidthNoise": 500,
+												"threshold": 18,
+												"noiseFigure": 8,
+												"systemTemperature": 290,
+												"lossRecv": 2,
+												"lossSignalProcess": 5,
+												"bufferingTime": 0.1,
+												"aoiAccuracy": 3,
+												"freqResolution": 2,
+												"emitterDb": "ASA_DEFAULT_EMITTER_DB"
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrAntenna": [
+										{
+											"label": "RWR Ant. 1",
+											"identifier": "AsaRwrAntenna@AsaModels",
+											"attributes": {
+												"elevationLimit": 45,
+												"terrainOcculting": false,
+												"maxRange2PlayersOfInterest": 120,
+												"polarization": "none",
+												"threshold": 1e-7,
+												"gain": 5
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"rwrTrackManager": [
+										{
+											"label": "RWR Trk. Mgr. 1",
+											"identifier": "AsaRwrTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 32,
+												"maxTrackAge": 8,
+												"alpha": 0.15,
+												"beta": 0.01,
+												"logTrackUpdates": false
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									]
+								},
+								"alias": {},
+								"dependencies": {
+									"airBaseName": [
+										{
+											"class": "asa::models::AsaAirBase",
+											"attributeName": "ws_name",
+											"side": "own"
+										}
+									]
+								}
+							},
+							{
+								"identifier": "AsaC2C@AsaModels",
+								"attributes": {
+									"ws_name": "Blue_HQ",
+									"side": "blue",
+									"ws_lat": -16.7582088,
+									"ws_lon": -47.3325168,
+									"initAlt": 2906,
+									"groundClamp": true,
+									"initHeading": 0,
+									"borderID": "Blue_Land",
+									"reactionFactor": 1
+								},
+								"subcomponents": {
+									"capPoints": [],
+									"datalink": [
+										{
+											"label": "C2C DL 1",
+											"identifier": "AsaDatalinkC2C@AsaModels",
+											"attributes": {
+												"timeTrkListMsg": 1,
+												"hasGroundLink": true,
+												"timeTrkListMsgBroadCtrl": 15,
+												"netID": 1
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									],
+									"stdPilotProfile": [],
+									"stdWeaponsProfile": [],
+									"targetData": [],
+									"taskOrders": [
+										{
+											"label": "ATO 1",
+											"identifier": "AsaAirTaskOrder@AsaModels",
+											"attributes": {
+												"ownerID": "user",
+												"taskID": "ATO_1",
+												"taskType": "other",
+												"airBaseDep": "Blue_Airbase",
+												"airBaseLand": "Blue_Airbase",
+												"numAcft": 4,
+												"formType": "arrow",
+												"borderCrossAllowed": false,
+												"borderShootAllowed": false,
+												"fuelPerAcft": 7000,
+												"startTime": 5,
+												"lifeSpan": 300,
+												"ws_lat": -16.8580269,
+												"ws_lon": -48.4300192,
+												"initAlt": 5000,
+												"isAltHeight": false,
+												"initHeading": 0,
+												"baseAirspeedKts": 420,
+												"netID": 1,
+												"subnetID": 1,
+												"intranetID": 1,
+												"netChannelFreq": 276.8,
+												"ws_name": "Eagle"
+											},
+											"subcomponents": {
+												"capFaorProfile": [],
+												"capProfile": [],
+												"gndAtkProfile": [],
+												"pilotProfile": [
+													{
+														"label": "Basic Pilot 1",
+														"identifier": "AsaBasPilotSetter@AsaModels",
+														"attributes": {
+															"groupRank": 1,
+															"baseAltitude": 25000
+														},
+														"subcomponents": {}
+													}
+												],
+												"weaponProfile": [],
+												"ws_open_polygon": [
+													{
+														"label": "Steerpoint 1",
+														"identifier": "AsaSteerpointSetter@AsaModels",
+														"attributes": {
+															"ws_lat": -16.74795913696289,
+															"ws_lon": -48.16693115234375,
+															"elevation": 2707,
+															"cmdAltitude": 20000,
+															"cmdAirspeed": 450,
+															"groundClamp": true,
+															"heightAboveTerrain": 300,
+															"terrainFollowingLeg": false,
+															"formType": "arrow",
+															"hasHold": false,
+															"holdLegHeading": 0,
+															"holdLegTime": 120,
+															"holdDuration": 600,
+															"holdCounterClockwise": false
+														},
+														"subcomponents": {
+															"action": []
+														},
+														"alias": {}
+													},
+													{
+														"label": "Steerpoint 2",
+														"identifier": "AsaSteerpointSetter@AsaModels",
+														"attributes": {
+															"ws_lat": -16.61747932434082,
+															"ws_lon": -47.44364929199219,
+															"elevation": 2841,
+															"cmdAltitude": 10000,
+															"cmdAirspeed": 380,
+															"groundClamp": true,
+															"terrainFollowingLeg": false,
+															"heightAboveTerrain": 300,
+															"formType": "arrow",
+															"hasHold": false,
+															"holdLegHeading": 0,
+															"holdLegTime": 120,
+															"holdDuration": 600,
+															"holdCounterClockwise": false
+														},
+														"subcomponents": {
+															"action": []
+														},
+														"alias": {}
+													},
+													{
+														"label": "Steerpoint 3",
+														"identifier": "AsaSteerpointSetter@AsaModels",
+														"attributes": {
+															"ws_lat": -16.01906967163086,
+															"ws_lon": -47.44292068481445,
+															"elevation": 3120,
+															"cmdAltitude": 25000,
+															"cmdAirspeed": 420,
+															"formType": "wedge",
+															"hasHold": true,
+															"holdLegHeading": 0,
+															"holdLegTime": 60,
+															"holdDuration": 900,
+															"holdCounterClockwise": false,
+															"terrainFollowingLeg": false,
+															"groundClamp": true,
+															"heightAboveTerrain": 300
+														},
+														"subcomponents": {
+															"action": []
+														},
+														"alias": {
+															"cmdAltitude": "hold_altitude_ft",
+															"cmdAirspeed": "hold_speed_kt"
+														}
+													},
+													{
+														"label": "Steerpoint 4",
+														"identifier": "AsaSteerpointSetter@AsaModels",
+														"attributes": {
+															"ws_lat": -15.959589958190918,
+															"ws_lon": -48.105628967285159,
+															"elevation": 3513,
+															"cmdAltitude": 15000,
+															"cmdAirspeed": 500,
+															"formType": "box",
+															"groundClamp": true,
+															"terrainFollowingLeg": false,
+															"heightAboveTerrain": 300,
+															"hasHold": false,
+															"holdLegHeading": 0,
+															"holdLegTime": 120,
+															"holdDuration": 600,
+															"holdCounterClockwise": false
+														},
+														"subcomponents": {
+															"action": []
+														},
+														"alias": {}
+													},
+													{
+														"label": "Steerpoint 5",
+														"identifier": "AsaSteerpointSetter@AsaModels",
+														"attributes": {
+															"ws_lat": -16.528770446777345,
+															"ws_lon": -48.40293884277344,
+															"elevation": 850,
+															"cmdAltitude": 10000,
+															"cmdAirspeed": 500,
+															"formType": "line_abreast",
+															"groundClamp": true,
+															"terrainFollowingLeg": false,
+															"heightAboveTerrain": 300,
+															"hasHold": false,
+															"holdLegHeading": 0,
+															"holdLegTime": 120,
+															"holdDuration": 600,
+															"holdCounterClockwise": false
+														},
+														"subcomponents": {
+															"action": []
+														},
+														"alias": {}
+													}
+												]
+											},
+											"alias": {}
+										}
+									],
+									"trackManager": [
+										{
+											"label": "Air Trk. Mgr. 1",
+											"identifier": "AsaAirTrkMgr@AsaModels",
+											"attributes": {
+												"maxTracks": 100,
+												"maxTrackAge": 10,
+												"alpha": 0.95,
+												"beta": 0.75,
+												"gamma": 0,
+												"logTrackUpdates": false,
+												"positionGate": 2778,
+												"velocityGate": 100
+											},
+											"subcomponents": {},
+											"alias": {}
+										}
+									]
+								},
+								"alias": {},
+								"dependencies": {
+									"borderID": [
+										{
+											"class": "asa::models::AsaZone",
+											"attributeName": "ws_name",
+											"side": "own"
+										}
+									]
+								}
+							}
+						],
+						"wezRepo": [
+							{
+								"identifier": "AsaWezAam@AsaModels",
+								"attributes": {}
+							}
+						],
+						"monitors": [
+							{
+								"identifier": "AsaTeamMetrics@AsaModels",
+								"attributes": {
+									"ws_name": "Team_Metrics_Blue",
+									"side": "blue",
+									"metrics": [
+										"fuel_consumed",
+										"time_of_flight",
+										"acft_standing",
+										"acft_damaged",
+										"acft_killed",
+										"aam_remaining",
+										"aam_hit",
+										"aam_frat",
+										"aam_lost",
+										"sam_remaining",
+										"sam_hit",
+										"sam_frat",
+										"sam_lost",
+										"bmb_remaining",
+										"bmb_released",
+										"air_vehicle_damage",
+										"gnd_vehicle_damage",
+										"building_damage"
+									]
+								},
+								"subcomponents": {},
+								"alias": {},
+								"dependencies": {}
+							}
+						]
+					},
+					"alias": {}
+				}
+			]
+		}
+	}
+}
