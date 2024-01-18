@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.models &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../../_static/copybutton.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">asapy.models</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/build/md/markdown/autoapi/asapy/models/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asapy-models">
+<h1><code class="docutils literal notranslate"><span class="pre">asapy.models</span></code><a class="headerlink" href="#asapy-models" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<p>| <code class="docutils literal notranslate"><span class="pre">Model</span></code>
+| Abstract base class for machine learning models.</p>
+<p>|
+| <code class="docutils literal notranslate"><span class="pre">NN</span></code>
+| The class NN is a wrapper around Keras Sequential API, which provides an easy way to create and train neural network models. It can perform hyperparameters search and model building with specified hyperparameters.</p>
+<p>|
+| <code class="docutils literal notranslate"><span class="pre">RandomForest</span></code>
+| This class is used to build and search hyperparameters for a random forest model in scikit-learn.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                 |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">Scaler</span></code>
+| The Scaler class is designed to scale and transform data using various scaling techniques. It contains methods for fitting and transforming data, as well as saving and loading scaler objects to and from files.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">AsaML</span></code>
+|</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                                                                  |
+</pre></div>
+</div>
+</section>
+<section id="class-asapy-models-model">
+<h3><em>class</em> asapy.models.Model()<a class="headerlink" href="#class-asapy-models-model" title="Permalink to this heading"></a></h3>
+<p>Bases: <code class="docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract base class for machine learning models.</p>
+<section id="attributes">
+<h4>Attributes:<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+<section id="methods">
+<h4>Methods:<a class="headerlink" href="#methods" title="Permalink to this heading"></a></h4>
+<p>build():</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Builds the machine learning model.
+</pre></div>
+</div>
+<p>load(path: str):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Loads the machine learning model from a file.
+</pre></div>
+</div>
+<p>fit(X_train: np.ndarray, y_train: np.ndarray):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Trains the machine learning model on the input data.
+</pre></div>
+</div>
+<p>predict(X: np.ndarray):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Makes predictions using the trained machine learning model.
+</pre></div>
+</div>
+<p>save(path: str):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Saves the trained machine learning model to a file.
+</pre></div>
+</div>
+</section>
+<section id="raises">
+<h4>Raises:<a class="headerlink" href="#raises" title="Permalink to this heading"></a></h4>
+<p>None</p>
+</section>
+<section id="build">
+<h4>build()<a class="headerlink" href="#build" title="Permalink to this heading"></a></h4>
+</section>
+<section id="load">
+<h4>load()<a class="headerlink" href="#load" title="Permalink to this heading"></a></h4>
+</section>
+<section id="fit">
+<h4>fit()<a class="headerlink" href="#fit" title="Permalink to this heading"></a></h4>
+</section>
+<section id="predict">
+<h4>predict()<a class="headerlink" href="#predict" title="Permalink to this heading"></a></h4>
+</section>
+<section id="save">
+<h4>save()<a class="headerlink" href="#save" title="Permalink to this heading"></a></h4>
+</section>
+</section>
+<section id="class-asapy-models-nn-model-none">
+<h3><em>class</em> asapy.models.NN(model=None)<a class="headerlink" href="#class-asapy-models-nn-model-none" title="Permalink to this heading"></a></h3>
+<p>Bases: <code class="docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>The class NN is a wrapper around Keras Sequential API, which provides an easy way to create and train neural network models. It can perform hyperparameters search and model building with specified hyperparameters.</p>
+<section id="id1">
+<h4>Attributes:<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>model: the built Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>loss: the loss function used to compile the Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>metrics: the metrics used to compile the Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>dir_name: a string that defines the name of the directory to save the hyperparameters search results.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>input_shape: the shape of the input data for the Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>output_shape: the shape of the output data for the Keras model.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="model-search-hp-kwargs">
+<h4>_model_search(hp, **kwargs)<a class="headerlink" href="#model-search-hp-kwargs" title="Permalink to this heading"></a></h4>
+<p>Searches for the best hyperparameters to create a Keras model using the given hyperparameters space.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>hp</strong> (<em>keras_tuner.engine.hyperparameters.HyperParameters</em>) – Object that holds
+the hyperparameters space to search.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A compiled Keras model with the best hyperparameters found.</p>
+</li>
+</ul>
+</section>
+<section id="search-hyperparams-x-y-project-name-verbose-false">
+<h4>search_hyperparams(X, y, project_name=’’, verbose=False)<a class="headerlink" href="#search-hyperparams-x-y-project-name-verbose-false" title="Permalink to this heading"></a></h4>
+<p>Perform hyperparameter search for the neural network using Keras Tuner.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> (<em>numpy.ndarray</em>) – Input data.</p></li>
+<li><p><strong>y</strong> (<em>numpy.ndarray</em>) – Target data.</p></li>
+<li><p><strong>project_name</strong> (<em>str</em>) – Name of the Keras Tuner project (default ‘’).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether or not to print out information about the search progress (default False).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A dictionary containing the optimal hyperparameters found by the search.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>dict</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If self.loss is not a supported loss function.</p>
+</li>
+</ul>
+</section>
+<section id="build-input-shape-1-output-shape-1-n-neurons-1-n-layers-1-learning-rate-0-001-activation-relu-kwargs">
+<h4>build(input_shape=(1,), output_shape=(1,), n_neurons=[1], n_layers=1, learning_rate=0.001, activation=’relu’, **kwargs)<a class="headerlink" href="#build-input-shape-1-output-shape-1-n-neurons-1-n-layers-1-learning-rate-0-001-activation-relu-kwargs" title="Permalink to this heading"></a></h4>
+<p>Builds a Keras neural network model with the given hyperparameters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>input_shape</strong> (<em>tuple</em>*, *<em>optional</em>) – The shape of the input data. Defaults to (1,).</p></li>
+<li><p><strong>output_shape</strong> (<em>tuple</em>*, *<em>optional</em>) – The shape of the output data. Defaults to (1,).</p></li>
+<li><p><strong>n_neurons</strong> (<em>list</em>*, *<em>optional</em>) – A list of integers representing the number of neurons in each hidden layer.
+The length of the list determines the number of hidden layers. Defaults to [1].</p></li>
+<li><p><strong>n_layers</strong> (<em>int</em>*, *<em>optional</em>) – The number of hidden layers in the model. Defaults to 1.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>*, *<em>optional</em>) – The learning rate of the optimizer. Defaults to 1e-3.</p></li>
+<li><p><strong>activation</strong> (<em>str</em>*, *<em>optional</em>) – The activation function used for the hidden layers. Defaults to ‘relu’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None.</p>
+</li>
+</ul>
+</section>
+<section id="load-path">
+<h4>load(path)<a class="headerlink" href="#load-path" title="Permalink to this heading"></a></h4>
+<p>Load a Keras model from an H5 file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – Path to the H5 file containing the Keras model.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the file extension is not ‘.h5’.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="predict-x">
+<h4>predict(x)<a class="headerlink" href="#predict-x" title="Permalink to this heading"></a></h4>
+<p>Uses the trained neural network to make predictions on input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>x</strong> (<em>numpy.ndarray</em>) – Input data to be used for prediction. It must have the same number of features
+as the input_shape used to build the network.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Predicted outputs for the input data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>numpy.ndarray</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the input data x does not have the same number of features as the input_shape
+used to build the network.</p>
+</li>
+</ul>
+</section>
+<section id="fit-x-y-validation-data-batch-size-32-epochs-500-save-true-patience-5-path">
+<h4>fit(x, y, validation_data, batch_size=32, epochs=500, save=True, patience=5, path=’’)<a class="headerlink" href="#fit-x-y-validation-data-batch-size-32-epochs-500-save-true-patience-5-path" title="Permalink to this heading"></a></h4>
+<p>Trains the neural network model using the given input and output data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>x</strong> (<em>numpy array</em>) – The input data used to train the model.</p></li>
+<li><p><strong>y</strong> (<em>numpy array</em>) – The output data used to train the model.</p></li>
+<li><p><strong>validation_data</strong> (<em>tuple</em>) – A tuple containing the validation data as input and output data.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – The batch size used for training the model (default=32).</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – The number of epochs used for training the model (default=500).</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – Whether to save the model after training (default=True).</p></li>
+<li><p><strong>patience</strong> (<em>int</em>) – The number of epochs to wait before early stopping if the validation loss does not improve (default=5).</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – The path to save the trained model (default=’’).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="save-path">
+<h4>save(path)<a class="headerlink" href="#save-path" title="Permalink to this heading"></a></h4>
+<p>Saves the trained neural network model to a file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> – A string specifying the path and filename for the saved model. The “.h5” file extension
+will be appended to the provided filename if not already present.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the provided file extension is not “.h5”.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-models-randomforest-model-none">
+<h3><em>class</em> asapy.models.RandomForest(model=None)<a class="headerlink" href="#class-asapy-models-randomforest-model-none" title="Permalink to this heading"></a></h3>
+<p>Bases: <code class="docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>This class is used to build and search hyperparameters for a random forest model in scikit-learn.</p>
+<section id="id2">
+<h4>Attributes:<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>model: the built RandomForest scikit-learn model.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="search-hyperparams-x-y-verbose-false-kwargs">
+<h4>search_hyperparams(X, y, verbose=False, **kwargs)<a class="headerlink" href="#search-hyperparams-x-y-verbose-false-kwargs" title="Permalink to this heading"></a></h4>
+<p>Perform a hyperparameter search for a Random Forest model using RandomizedSearchCV.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> (<em>numpy array</em>) – The feature matrix of the data.</p></li>
+<li><p><strong>y</strong> (<em>numpy array</em>) – The target vector of the data.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – If True, print the optimal hyperparameters. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments. The following hyperparameters can be set:</p></li>
+</ul>
+<ul class="simple">
+<li><p>n_estimators (int): Number of trees in the forest. Defaults to sp_randint(10, 1000).</p></li>
+<li><p>max_features (list): The number of features to consider when looking for the best split.
+Allowed values are ‘sqrt’, ‘log2’ or a float between 0 and 1. Defaults to [‘sqrt’, ‘log2’].</p></li>
+<li><p>max_depth (list): The maximum depth of the tree. Defaults to [None, 5, 10, 15, 20, 30, 40].</p></li>
+<li><p>min_samples_split (int): The minimum number of samples required to split an internal node.
+Defaults to sp_randint(2, 20).</p></li>
+<li><p>min_samples_leaf (int): The minimum number of samples required to be at a leaf node.
+Defaults to sp_randint(1, 20).</p></li>
+<li><p>bootstrap (bool): Whether bootstrap samples are used when building trees.
+Defaults to [True, False].</p></li>
+<li><p>y_type (str): Type of target variable. Either ‘num’ for numeric or ‘cat’ for categorical.
+Defaults to ‘cat’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A dictionary with the best hyperparameters found during the search.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>dict</p>
+</li>
+</ul>
+</section>
+<section id="build-n-estimators-100-max-depth-none-min-samples-split-2-min-samples-leaf-1-max-features-sqrt-kwargs">
+<h4>build(n_estimators=100, max_depth=None, min_samples_split=2, min_samples_leaf=1, max_features=’sqrt’, **kwargs)<a class="headerlink" href="#build-n-estimators-100-max-depth-none-min-samples-split-2-min-samples-leaf-1-max-features-sqrt-kwargs" title="Permalink to this heading"></a></h4>
+<p>Builds a new Random Forest model with the specified hyperparameters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>n_estimators</strong> (<em>int</em>*, *<em>optional</em>) – The number of trees in the forest. Default is 100.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em>* or <strong>None</strong>, *<em>optional</em>) – The maximum depth of each tree. None means unlimited. Default is None.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em>*, *<em>optional</em>) – The minimum number of samples required to split an internal node. Default is 2.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em>*, *<em>optional</em>) – The minimum number of samples required to be at a leaf node. Default is 1.</p></li>
+<li><p><strong>max_features</strong> (<em>str</em>* or <strong>int</strong>, *<em>optional</em>) – The maximum number of features to consider when looking for the best split.
+Can be ‘sqrt’, ‘log2’, an integer or None. Default is ‘sqrt’.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments. Must include a ‘y_type’ parameter, which should be set to ‘num’ for
+regression problems and ‘cat’ for classification problems.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h4>load(path)<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>Load a saved random forest model.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path to the saved model file. The file must be a joblib file with the extension ‘.joblib’.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the extension of the file is not ‘.joblib’.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None.</p>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h4>predict(x)<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<p>Makes predictions using the trained Random Forest model on the given input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>x</strong> – The input data to make predictions on.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>An array of predicted target values.</p>
+</li>
+</ul>
+</section>
+<section id="fit-x-y">
+<h4>fit(x, y)<a class="headerlink" href="#fit-x-y" title="Permalink to this heading"></a></h4>
+<p>Trains the Random Forest model on the given input and target data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>x</strong> – The input data to train the model on.</p></li>
+<li><p><strong>y</strong> – The target data to train the model on.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h4>save(path)<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<p>Saves the trained model to a file with the specified path.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The file path where the model should be saved. The file extension should be ‘.joblib’.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the file extension is invalid or missing.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-models-scaler-scaler-none">
+<h3><em>class</em> asapy.models.Scaler(scaler=None)<a class="headerlink" href="#class-asapy-models-scaler-scaler-none" title="Permalink to this heading"></a></h3>
+<p>The Scaler class is designed to scale and transform data using various scaling techniques. It contains methods for fitting and transforming data, as well as saving and loading scaler objects to and from files.</p>
+<section id="fit-transform-data">
+<h4>fit_transform(data)<a class="headerlink" href="#fit-transform-data" title="Permalink to this heading"></a></h4>
+<p>Fit to data, then transform it.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>data</strong> (<em>array-like</em>) – The data to be transformed.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The transformed data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>array-like</p>
+</li>
+</ul>
+</section>
+<section id="transform-data">
+<h4>transform(data)<a class="headerlink" href="#transform-data" title="Permalink to this heading"></a></h4>
+<p>Perform standardization on an array.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>data</strong> (<em>array-like</em>) – The data to be standardized.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The standardized data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>array-like</p>
+</li>
+</ul>
+</section>
+<section id="inverse-transform-data">
+<h4>inverse_transform(data)<a class="headerlink" href="#inverse-transform-data" title="Permalink to this heading"></a></h4>
+<p>Scale back the data to the original representation.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>data</strong> (<em>array-like</em>) – The data to be scaled back.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The original representation of the data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>array-like</p>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h4>save(path)<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<p>Save the scaler object to a file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path where the scaler object will be saved.</p>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h4>load(path)<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h4>
+<p>Load a saved scaler object from a file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path where the scaler object is saved.</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-models-asaml-dir-name-none">
+<h3><em>class</em> asapy.models.AsaML(dir_name=None)<a class="headerlink" href="#class-asapy-models-asaml-dir-name-none" title="Permalink to this heading"></a></h3>
+<section id="static-identify-categorical-data-df">
+<h4><em>static</em> identify_categorical_data(df)<a class="headerlink" href="#static-identify-categorical-data-df" title="Permalink to this heading"></a></h4>
+<p>Identifies categorical data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>df</strong> (<em>pandas.DataFrame</em>) – The DataFrame containing the data.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A tuple containing two DataFrames - one containing the categorical columns and the other containing the numerical columns.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>tuple</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the input DataFrame is empty or if it contains no categorical or numerical data.</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;col3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_cat</span><span class="p">,</span> <span class="n">df_num</span> <span class="o">=</span> <span class="n">identify_categorical_data</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_cat</span>
+<span class="go">col1</span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_num</span>
+<span class="go">col2</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+</pre></div>
+</div>
+</section>
+<section id="pre-processing-train-x-y-remove-outlier-false">
+<h4>pre_processing_train(X, y, remove_outlier=False)<a class="headerlink" href="#pre-processing-train-x-y-remove-outlier-false" title="Permalink to this heading"></a></h4>
+<p>Perform pre-processing steps for the training dataset.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> – pandas.DataFrame - input features.</p></li>
+<li><p><strong>y</strong> – pandas.DataFrame - target variable.</p></li>
+<li><p><strong>remove_outlier</strong> – bool - if True, removes the outliers from the dataset.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>pandas.DataFrame - pre-processed input features.
+y: pandas.DataFrame - pre-processed target variable.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>X</p>
+</li>
+</ul>
+</section>
+<section id="add-random-value-to-max-row">
+<h4>__add_random_value_to_max(row)<a class="headerlink" href="#add-random-value-to-max-row" title="Permalink to this heading"></a></h4>
+</section>
+<section id="train-model-x-none-y-none-name-model-none-save-true-scaling-true-scaler-type-standardscaler-remove-outlier-false-search-false-params-none-kwargs">
+<h4>train_model(X=None, y=None, name_model=None, save=True, scaling=True, scaler_Type=’StandardScaler’, remove_outlier=False, search=False, params=None, **kwargs)<a class="headerlink" href="#train-model-x-none-y-none-name-model-none-save-true-scaling-true-scaler-type-standardscaler-remove-outlier-false-search-false-params-none-kwargs" title="Permalink to this heading"></a></h4>
+<p>Train a model on a given dataset.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> – A pandas dataframe containing the feature data. Default is None.</p></li>
+<li><p><strong>y</strong> – A pandas dataframe containing the target data. Default is None.</p></li>
+<li><p><strong>name_model</strong> – The name of the model to train. Default is None.</p></li>
+<li><p><strong>save</strong> – A boolean indicating whether to save the model or not. Default is True.</p></li>
+<li><p><strong>scaling</strong> – A boolean indicating whether to perform data scaling or not. Default is True.</p></li>
+<li><p><strong>scaler_Type</strong> – The type of data scaling to perform. Must be one of ‘StandardScaler’, ‘Normalizer’, or ‘MinMaxScaler’. Default is ‘StandardScaler’.</p></li>
+<li><p><strong>remove_outlier</strong> – A boolean indicating whether to remove outliers or not. Default is False.</p></li>
+<li><p><strong>search</strong> – A boolean indicating whether to search for the best hyperparameters or not. Default is False.</p></li>
+<li><p><strong>params</strong> – A dictionary containing the hyperparameters to use for training. Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Additional arguments to be passed to the training function.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="load-model-path">
+<h4>load_model(path=’’)<a class="headerlink" href="#load-model-path" title="Permalink to this heading"></a></h4>
+<p>Loads a saved model from the specified path and returns a dictionary of models
+with their corresponding parameters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path where the model and its associated files are saved.
+Defaults to an empty string.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A dictionary containing the loaded models with their corresponding parameters.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>dict</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the path argument is empty.</p>
+</li>
+</ul>
+<p><strong>NOTE</strong>: The path variable must be the address of the ‘dirname’ folder and MUST contain the scaler.pkl file and each subdirectory MUST contain the ‘paramenters’, ‘model’ files.</p>
+</section>
+<section id="pre-processing-predict-x-input-list-var-type">
+<h4>pre_processing_predict(X, input_list, var_type)<a class="headerlink" href="#pre-processing-predict-x-input-list-var-type" title="Permalink to this heading"></a></h4>
+<p>Pre-processes the input data before prediction by scaling numerical features and creating dummy variables
+for categorical features. Also handles missing and extra features in the input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> (<em>pandas.DataFrame</em>) – The input data to be pre-processed.</p></li>
+<li><p><strong>input_list</strong> (<em>list</em>) – A list of expected input features.</p></li>
+<li><p><strong>var_type</strong> (<em>dict</em>) – A dictionary with the types of the input features. The keys ‘cat’ and ‘num’ contain lists
+of categorical and numerical feature names respectively.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The pre-processed input data with scaled numerical features and dummy variables</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  for categorical features. Any missing or extra features are handled accordingly.
+</pre></div>
+</div>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pandas.DataFrame</p>
+</li>
+</ul>
+</section>
+<section id="pos-processing-y-output-list">
+<h4>pos_processing(y, output_list)<a class="headerlink" href="#pos-processing-y-output-list" title="Permalink to this heading"></a></h4>
+<p>Post-processes the output of a model prediction to transform it into a more usable format.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – The output of the model prediction, as a NumPy array.</p></li>
+<li><p><strong>output_list</strong> (<em>list</em>) – A list of column names representing the output variables.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A pandas DataFrame containing the post-processed output values.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pd.DataFrame</p>
+</li>
+</ul>
+<p>This function takes the output of a model prediction, which is typically a NumPy array of raw output values, and transforms it into a more usable format. The output variables are expected to have been one-hot encoded with the use of triple underscores (‘___’) as separator, and possibly have a random value added to the max value of each row. The function first separates the categorical and numerical variables, then processes the categorical variables by selecting the maximum value for each row and one-hot encoding them. Finally, it concatenates the categorical and numerical variables back together to produce a pandas DataFrame containing the post-processed output values.</p>
+</section>
+<section id="predict-all-x-model-dict">
+<h4>predict_all(X, model_dict)<a class="headerlink" href="#predict-all-x-model-dict" title="Permalink to this heading"></a></h4>
+<p>Apply all models in the model dictionary to the input data frame X and return the predictions.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> – A pandas DataFrame representing the input data.</p></li>
+<li><p><strong>model_dict</strong> – A dictionary containing the models and their associated metadata. The keys are the names of the
+models and the values are themselves dictionaries containing the following keys:</p></li>
+</ul>
+<ul class="simple">
+<li><p>‘model’: A trained machine learning model.</p></li>
+<li><p>‘input_list’: A list of the names of the input features used by the model.</p></li>
+<li><p>‘output_list’: A list of the names of the output features produced by the model.</p></li>
+<li><p>‘var_type’: A dictionary containing the types of the input and output features, with the keys</p></li>
+</ul>
+<blockquote>
+<div><p>’X’ and ‘y’, respectively, and the values being dictionaries themselves with
+the following keys:</p>
+<ul class="simple">
+<li><p>‘cat’: A list of the categorical input features.</p></li>
+<li><p>‘num’: A list of the numerical input features.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A pandas DataFrame containing the predictions of all models in the model dictionary. The columns of the
+DataFrame are the names of the models, and the rows correspond to the input rows in X.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If X is empty or None, or if the model dictionary is empty or None.</p>
+</li>
+</ul>
+</section>
+<section id="full-cycle-x-pred-load-false-kwargs">
+<h4>full_cycle(X_pred, load=False, **kwargs)<a class="headerlink" href="#full-cycle-x-pred-load-false-kwargs" title="Permalink to this heading"></a></h4>
+<p>Performs the full cycle of the machine learning pipeline: loads or trains the models, preprocesses the input data,
+generates predictions, and post-processes the output data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X_pred</strong> (<em>pandas.DataFrame</em>) – Input data to generate predictions for.</p></li>
+<li><p><strong>load</strong> (<em>bool</em>*, *<em>optional</em>) – If True, loads the trained models from disk instead of training new ones. Default is False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments passed to either load_model() or train_model() method.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Dataframe with the generated predictions.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pandas.DataFrame</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If load is True and path is not provided in kwargs.</p>
+</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

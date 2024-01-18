@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.utils &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../../_static/copybutton.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">asapy.utils</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/build/md/markdown/autoapi/asapy/utils/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asapy-utils">
+<h1><code class="docutils literal notranslate"><span class="pre">asapy.utils</span></code><a class="headerlink" href="#asapy-utils" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<p>| <code class="docutils literal notranslate"><span class="pre">json_to_df</span></code>(→ pandas.DataFrame)</p>
+<p>| Convert a JSON object to a pandas DataFrame and set the index to the given id column.</p>
+<p>|
+| <code class="docutils literal notranslate"><span class="pre">list_to_df</span></code>(arr[, id])</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>      | Convert a list of dictionaries to a pandas DataFrame and set the index to the given id column.
+
+                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">unique_list</span></code>(list1)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>         | Return a list of unique values in the given list.
+
+                                                                                                                                                                 |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">get_parents_dict</span></code>(dic, value)</p>
+<p>| Return a list of keys that lead to the given value in the given dictionary.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                       |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">check_samples_similar</span></code>(new_sample, last_sample, threshold)</p>
+<p>| Checks if two samples are similar based on a given threshold.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">test_t</span></code>(sample1, sample2[, alpha])</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                     | Performs a t-test and compares the p-value with a given alpha value.
+
+                                                                                                                                              |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">meters_to_micrometers</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                              | Convert meters to micrometers.
+
+                                                                                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">micrometers_to_meters</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                              | Convert micrometers to meters.
+
+                                                                                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">meters_to_centimeters</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                              | Convert meters to centimeters.
+
+                                                                                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">centimeters_to_meters</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                              | Convert centimeters to meters.
+
+                                                                                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">meters_to_kilometers</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                               | Convert meters to kilometers.
+
+                                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">kilometers_to_meters</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                               | Convert kilometers to meters.
+
+                                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">meters_to_inches</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                   | Convert meters to inches.
+
+                                                                                                                                                                                         |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">inches_to_meters</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                   | Convert inches to meters.
+
+                                                                                                                                                                                         |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">meters_to_feet</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                     | Converts a distance in meters to feet.
+
+                                                                                                                                                                            |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">feet_to_meters</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                     | Converts a distance in feet to meters.
+
+                                                                                                                                                                            |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">kilometers_to_nautical_miles</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                       | Converts a distance in kilometers to nautical miles.
+
+                                                                                                                                                              |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">nautical_miles_to_kilometers</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                       | Converts a distance in nautical miles to kilometers.
+
+                                                                                                                                                              |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">kilometers_to_statute_miles</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                        | Converts a distance in kilometers to statute miles.
+
+                                                                                                                                                               |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">statute_miles_to_kilometers</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                        | Converts a distance in statute miles to kilometers.
+
+                                                                                                                                                               |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">nautical_miles_to_statute_miles</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                    | Converts a distance in nautical miles to statute miles.
+
+                                                                                                                                                           |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">statute_miles_to_nautical_miles</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                    | Converts a distance in statute miles to nautical miles.
+
+                                                                                                                                                           |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">degrees_to_radians</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                 | Converts a value from degrees to radians.
+
+                                                                                                                                                                         |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">degrees_to_semicircles</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                             | Converts a value from degrees to semicircles.
+
+                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">radians_to_degrees</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                 | Converts a value from radians to degrees.
+
+                                                                                                                                                                         |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">radians_to_semicircles</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                             | Converts a value from radians to semicircles.
+
+                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">semicircles_to_radians</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                             | Converts a value from semicircles to radians.
+
+                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">semicircles_to_degrees</span></code>(v)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                             | Converts a value from semicircles to degrees.
+
+                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">aepcd_deg</span></code>(x)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                          | The method aepcd_deg keeps an angle within the range -180.0 to 180.0 as presented in the figure bellow.
+
+                                                                                                           |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">aepcd_rad</span></code>(x)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                          | Keeps an angle within the range -pi to pi, equivalent to the function aepcd_deg but in radians.
+
+                                                                                                                   |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">alimd</span></code>(x, limit)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                       | Limits the value of x to +/- limit.
+
+                                                                                                                                                                               |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">gbd2ll</span></code>(slat, slon, brg, dist, index_earth_model)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>      | This function computes the destination (target) point from starting (ref) point given distance and initial bearing.
+
+                                                                                               |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">fbd2ll</span></code>(slat, slon, brg, dist)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                         | This function computes the destination (target) point from starting (ref) point given distance and initial bearing.
+
+                                                                                               |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">gll2bd</span></code>(slat, slon, dlat, dlon, index_earth_model)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     | This function computes the initial bearing and the distance from the starting point to the destination point.
+
+                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">fll2bd</span></code>(slat, slon, dlat, dlon)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                        | This function computes the initial bearing and the distance from the starting point to the destination point.
+
+                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">convert_ecef_to_geod</span></code>(x, y, z, index_earth_model)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>      | This function converts Earth Centered, Earth Fixed (ECEF) coordinates (x,y,z) to geodetic coordinates (latitude,longitude,altitude).
+
+                                                                              |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">convert_geod_to_ecef</span></code>(lat, lon, alt, index_earth_model)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>| This function converts Geodetic ((Latitude,Longitude,Altitude) coordinates) to ECEF ((X,Y,Z) coordinates).
+
+                                                                                                        |
+</pre></div>
+</div>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h3>
+<p>| <code class="docutils literal notranslate"><span class="pre">FT2M</span></code>
+| Conversion factor from feet to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                            |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2FT</span></code>
+| Conversion factor from meters to feet.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                            |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">IN2M</span></code>
+| Conversion factor from inches to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                          |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2IN</span></code>
+| Conversion factor from meters to inches.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                          |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">NM2M</span></code>
+| Conversion factor from nautical miles to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                  |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2NM</span></code>
+| Conversion factor from meters to nautical miles.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                  |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">NM2FT</span></code>
+| Conversion factor from nautical miles to feet.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">FT2NM</span></code>
+| Conversion factor from feet to nautical miles.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                    |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">SM2M</span></code>
+| Conversion factor from statute miles to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                   |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2SM</span></code>
+| Conversion factor from meters to statute miles.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                   |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">SM2FT</span></code>
+| Conversion factor from statute miles to feet.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">FT2SM</span></code>
+| Conversion factor from feet to statute miles.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">KM2M</span></code>
+| Conversion factor from kilometers to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                      |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2KM</span></code>
+| Conversion factor from meters to kilometers.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                      |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">CM2M</span></code>
+| Conversion factor from centimeters to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2CM</span></code>
+| Conversion factor from meters to centimeters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">UM2M</span></code>
+| Conversion factor from micrometers to meters.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">M2UM</span></code>
+| Conversion factor from meters to micrometers.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                     |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">D2SC</span></code>
+| Conversion factor for converting degrees to semicircles.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                          |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">SC2D</span></code>
+| Conversion factor for converting semicircles to degrees.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                          |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">R2SC</span></code>
+| Conversion factor for converting radians to semicircles.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                          |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">SC2R</span></code>
+| Conversion factor for converting semicircles to radians.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                          |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">R2DCC</span></code>
+| Conversion factor for converting radians to degrees.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                              |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">D2RCC</span></code>
+| Conversion factor for converting degrees to radians.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                              |
+</pre></div>
+</div>
+<p>| <code class="docutils literal notranslate"><span class="pre">earth_model_data</span></code>
+| Data from Different Models of the Earth</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                                                                                                                                                                           |
+</pre></div>
+</div>
+</section>
+<section id="asapy-utils-json-to-df-self-json-id-id">
+<h3>asapy.utils.json_to_df(self, json, id=’id’)<a class="headerlink" href="#asapy-utils-json-to-df-self-json-id-id" title="Permalink to this heading"></a></h3>
+<p>Convert a JSON object to a pandas DataFrame and set the index to the given id column.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>json</strong> (<em>dict</em>) – A JSON object.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The name of the column to set as the index. Default is ‘id’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame representation of the JSON object.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pandas.DataFrame</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-list-to-df-arr-id-id">
+<h3>asapy.utils.list_to_df(arr, id=’id’)<a class="headerlink" href="#asapy-utils-list-to-df-arr-id-id" title="Permalink to this heading"></a></h3>
+<p>Convert a list of dictionaries to a pandas DataFrame and set the index to the given id column.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>arr</strong> (<em>list</em>) – A list of dictionaries.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The name of the column to set as the index. Default is ‘id’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame representation of the list of dictionaries.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pandas.DataFrame</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-unique-list-list1">
+<h3>asapy.utils.unique_list(list1)<a class="headerlink" href="#asapy-utils-unique-list-list1" title="Permalink to this heading"></a></h3>
+<p>Return a list of unique values in the given list.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>list1</strong> (<em>list</em>) – A list of values.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A list of unique values in the input list.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>list</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-get-parents-dict-dic-value">
+<h3>asapy.utils.get_parents_dict(dic, value)<a class="headerlink" href="#asapy-utils-get-parents-dict-dic-value" title="Permalink to this heading"></a></h3>
+<p>Return a list of keys that lead to the given value in the given dictionary.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – A dictionary to search.</p></li>
+<li><p><strong>value</strong> – The value to search for in the dictionary.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A list of keys that lead to the given value in the dictionary.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>list</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-check-samples-similar-new-sample-last-sample-threshold">
+<h3>asapy.utils.check_samples_similar(new_sample, last_sample, threshold)<a class="headerlink" href="#asapy-utils-check-samples-similar-new-sample-last-sample-threshold" title="Permalink to this heading"></a></h3>
+<p>Checks if two samples are similar based on a given threshold.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>new_sample</strong> (<em>np.ndarray</em>) – The new sample to compare.</p></li>
+<li><p><strong>last_sample</strong> (<em>np.ndarray</em>) – The last sample to compare.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – The threshold to use for comparison.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>True if the samples are similar, False otherwise.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>bool</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-test-t-sample1-sample2-alpha-0-05">
+<h3>asapy.utils.test_t(sample1, sample2, alpha=0.05)<a class="headerlink" href="#asapy-utils-test-t-sample1-sample2-alpha-0-05" title="Permalink to this heading"></a></h3>
+<p>Performs a t-test and compares the p-value with a given alpha value.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>sample1</strong> (<em>np.ndarray</em>) – The first sample.</p></li>
+<li><p><strong>sample2</strong> (<em>np.ndarray</em>) – The second sample.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>*, *<em>optional</em>) – The alpha value to use for comparison. Defaults to 0.05.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>True if the samples are similar, False otherwise.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>bool</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-ft2m-0-304">
+<h3>asapy.utils.FT2M(_ = 0.304_ )<a class="headerlink" href="#asapy-utils-ft2m-0-304" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from feet to meters.</p>
+</section>
+<section id="asapy-utils-m2ft">
+<h3>asapy.utils.M2FT()<a class="headerlink" href="#asapy-utils-m2ft" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to feet.</p>
+</section>
+<section id="asapy-utils-in2m-0-025">
+<h3>asapy.utils.IN2M(_ = 0.025_ )<a class="headerlink" href="#asapy-utils-in2m-0-025" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from inches to meters.</p>
+</section>
+<section id="asapy-utils-m2in">
+<h3>asapy.utils.M2IN()<a class="headerlink" href="#asapy-utils-m2in" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to inches.</p>
+</section>
+<section id="asapy-utils-nm2m-1852">
+<h3>asapy.utils.NM2M(_ = 1852._ )<a class="headerlink" href="#asapy-utils-nm2m-1852" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from nautical miles to meters.</p>
+</section>
+<section id="asapy-utils-m2nm">
+<h3>asapy.utils.M2NM()<a class="headerlink" href="#asapy-utils-m2nm" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to nautical miles.</p>
+</section>
+<section id="asapy-utils-nm2ft">
+<h3>asapy.utils.NM2FT()<a class="headerlink" href="#asapy-utils-nm2ft" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from nautical miles to feet.</p>
+</section>
+<section id="asapy-utils-ft2nm">
+<h3>asapy.utils.FT2NM()<a class="headerlink" href="#asapy-utils-ft2nm" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from feet to nautical miles.</p>
+</section>
+<section id="asapy-utils-sm2m-1609-34">
+<h3>asapy.utils.SM2M(_ = 1609.34_ )<a class="headerlink" href="#asapy-utils-sm2m-1609-34" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from statute miles to meters.</p>
+</section>
+<section id="asapy-utils-m2sm">
+<h3>asapy.utils.M2SM()<a class="headerlink" href="#asapy-utils-m2sm" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to statute miles.</p>
+</section>
+<section id="asapy-utils-sm2ft-5280">
+<h3>asapy.utils.SM2FT(_ = 5280._ )<a class="headerlink" href="#asapy-utils-sm2ft-5280" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from statute miles to feet.</p>
+</section>
+<section id="asapy-utils-ft2sm">
+<h3>asapy.utils.FT2SM()<a class="headerlink" href="#asapy-utils-ft2sm" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from feet to statute miles.</p>
+</section>
+<section id="asapy-utils-km2m-1000">
+<h3>asapy.utils.KM2M(_ = 1000._ )<a class="headerlink" href="#asapy-utils-km2m-1000" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from kilometers to meters.</p>
+</section>
+<section id="asapy-utils-m2km">
+<h3>asapy.utils.M2KM()<a class="headerlink" href="#asapy-utils-m2km" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to kilometers.</p>
+</section>
+<section id="asapy-utils-cm2m-0-0">
+<h3>asapy.utils.CM2M(_ = 0.0_ )<a class="headerlink" href="#asapy-utils-cm2m-0-0" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from centimeters to meters.</p>
+</section>
+<section id="asapy-utils-m2cm">
+<h3>asapy.utils.M2CM()<a class="headerlink" href="#asapy-utils-m2cm" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to centimeters.</p>
+</section>
+<section id="asapy-utils-um2m-1e-0">
+<h3>asapy.utils.UM2M(_ = 1e-0_ )<a class="headerlink" href="#asapy-utils-um2m-1e-0" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from micrometers to meters.</p>
+</section>
+<section id="asapy-utils-m2um">
+<h3>asapy.utils.M2UM()<a class="headerlink" href="#asapy-utils-m2um" title="Permalink to this heading"></a></h3>
+<p>Conversion factor from meters to micrometers.</p>
+</section>
+<section id="asapy-utils-meters-to-micrometers-v">
+<h3>asapy.utils.meters_to_micrometers(v)<a class="headerlink" href="#asapy-utils-meters-to-micrometers-v" title="Permalink to this heading"></a></h3>
+<p>Convert meters to micrometers.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in micrometers.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-micrometers-to-meters-v">
+<h3>asapy.utils.micrometers_to_meters(v)<a class="headerlink" href="#asapy-utils-micrometers-to-meters-v" title="Permalink to this heading"></a></h3>
+<p>Convert micrometers to meters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in micrometers.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in meters.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-meters-to-centimeters-v">
+<h3>asapy.utils.meters_to_centimeters(v)<a class="headerlink" href="#asapy-utils-meters-to-centimeters-v" title="Permalink to this heading"></a></h3>
+<p>Convert meters to centimeters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in centimeters.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-centimeters-to-meters-v">
+<h3>asapy.utils.centimeters_to_meters(v)<a class="headerlink" href="#asapy-utils-centimeters-to-meters-v" title="Permalink to this heading"></a></h3>
+<p>Convert centimeters to meters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in centimeters.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in meters.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-meters-to-kilometers-v">
+<h3>asapy.utils.meters_to_kilometers(v)<a class="headerlink" href="#asapy-utils-meters-to-kilometers-v" title="Permalink to this heading"></a></h3>
+<p>Convert meters to kilometers.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in kilometers.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-kilometers-to-meters-v">
+<h3>asapy.utils.kilometers_to_meters(v)<a class="headerlink" href="#asapy-utils-kilometers-to-meters-v" title="Permalink to this heading"></a></h3>
+<p>Convert kilometers to meters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in kilometers.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in meters.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-meters-to-inches-v">
+<h3>asapy.utils.meters_to_inches(v)<a class="headerlink" href="#asapy-utils-meters-to-inches-v" title="Permalink to this heading"></a></h3>
+<p>Convert meters to inches.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value in inches.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-inches-to-meters-v">
+<h3>asapy.utils.inches_to_meters(v)<a class="headerlink" href="#asapy-utils-inches-to-meters-v" title="Permalink to this heading"></a></h3>
+<p>Convert inches to meters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – Value in inches.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Value</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-meters-to-feet-v">
+<h3>asapy.utils.meters_to_feet(v)<a class="headerlink" href="#asapy-utils-meters-to-feet-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in meters to feet.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in meters</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in feet</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-feet-to-meters-v">
+<h3>asapy.utils.feet_to_meters(v)<a class="headerlink" href="#asapy-utils-feet-to-meters-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in feet to meters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in feet</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in meters</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-kilometers-to-nautical-miles-v">
+<h3>asapy.utils.kilometers_to_nautical_miles(v)<a class="headerlink" href="#asapy-utils-kilometers-to-nautical-miles-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in kilometers to nautical miles.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in kilometers</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in nautical miles</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-nautical-miles-to-kilometers-v">
+<h3>asapy.utils.nautical_miles_to_kilometers(v)<a class="headerlink" href="#asapy-utils-nautical-miles-to-kilometers-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in nautical miles to kilometers.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in nautical miles</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in kilometers</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-kilometers-to-statute-miles-v">
+<h3>asapy.utils.kilometers_to_statute_miles(v)<a class="headerlink" href="#asapy-utils-kilometers-to-statute-miles-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in kilometers to statute miles.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in kilometers</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in statute miles</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-statute-miles-to-kilometers-v">
+<h3>asapy.utils.statute_miles_to_kilometers(v)<a class="headerlink" href="#asapy-utils-statute-miles-to-kilometers-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in statute miles to kilometers.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in statute miles</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in kilometers</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-nautical-miles-to-statute-miles-v">
+<h3>asapy.utils.nautical_miles_to_statute_miles(v)<a class="headerlink" href="#asapy-utils-nautical-miles-to-statute-miles-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in nautical miles to statute miles.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in nautical miles</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in statute miles</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-statute-miles-to-nautical-miles-v">
+<h3>asapy.utils.statute_miles_to_nautical_miles(v)<a class="headerlink" href="#asapy-utils-statute-miles-to-nautical-miles-v" title="Permalink to this heading"></a></h3>
+<p>Converts a distance in statute miles to nautical miles.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – distance in statute miles</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>distance in nautical miles</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-d2sc-0-005555555555555">
+<h3>asapy.utils.D2SC(_ = 0.005555555555555_ )<a class="headerlink" href="#asapy-utils-d2sc-0-005555555555555" title="Permalink to this heading"></a></h3>
+<p>Conversion factor for converting degrees to semicircles.</p>
+</section>
+<section id="asapy-utils-sc2d-180">
+<h3>asapy.utils.SC2D(_ = 180._ )<a class="headerlink" href="#asapy-utils-sc2d-180" title="Permalink to this heading"></a></h3>
+<p>Conversion factor for converting semicircles to degrees.</p>
+</section>
+<section id="asapy-utils-r2sc-0-318309886183790">
+<h3>asapy.utils.R2SC(_ = 0.318309886183790_ )<a class="headerlink" href="#asapy-utils-r2sc-0-318309886183790" title="Permalink to this heading"></a></h3>
+<p>Conversion factor for converting radians to semicircles.</p>
+</section>
+<section id="asapy-utils-sc2r">
+<h3>asapy.utils.SC2R()<a class="headerlink" href="#asapy-utils-sc2r" title="Permalink to this heading"></a></h3>
+<p>Conversion factor for converting semicircles to radians.</p>
+</section>
+<section id="asapy-utils-r2dcc">
+<h3>asapy.utils.R2DCC()<a class="headerlink" href="#asapy-utils-r2dcc" title="Permalink to this heading"></a></h3>
+<p>Conversion factor for converting radians to degrees.</p>
+</section>
+<section id="asapy-utils-d2rcc">
+<h3>asapy.utils.D2RCC()<a class="headerlink" href="#asapy-utils-d2rcc" title="Permalink to this heading"></a></h3>
+<p>Conversion factor for converting degrees to radians.</p>
+</section>
+<section id="asapy-utils-degrees-to-radians-v">
+<h3>asapy.utils.degrees_to_radians(v)<a class="headerlink" href="#asapy-utils-degrees-to-radians-v" title="Permalink to this heading"></a></h3>
+<p>Converts a value from degrees to radians.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – The value in degrees to convert to radians.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The value in radians.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-degrees-to-semicircles-v">
+<h3>asapy.utils.degrees_to_semicircles(v)<a class="headerlink" href="#asapy-utils-degrees-to-semicircles-v" title="Permalink to this heading"></a></h3>
+<p>Converts a value from degrees to semicircles.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – The value in degrees to convert to semicircles.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The value in semicircles.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-radians-to-degrees-v">
+<h3>asapy.utils.radians_to_degrees(v)<a class="headerlink" href="#asapy-utils-radians-to-degrees-v" title="Permalink to this heading"></a></h3>
+<p>Converts a value from radians to degrees.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – The value in radians to convert to degrees.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The value in degrees.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-radians-to-semicircles-v">
+<h3>asapy.utils.radians_to_semicircles(v)<a class="headerlink" href="#asapy-utils-radians-to-semicircles-v" title="Permalink to this heading"></a></h3>
+<p>Converts a value from radians to semicircles.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – The value in radians to convert to semicircles.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The value in semicircles.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-semicircles-to-radians-v">
+<h3>asapy.utils.semicircles_to_radians(v)<a class="headerlink" href="#asapy-utils-semicircles-to-radians-v" title="Permalink to this heading"></a></h3>
+<p>Converts a value from semicircles to radians.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – The value in semicircles to convert to radians.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The value in radians.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-semicircles-to-degrees-v">
+<h3>asapy.utils.semicircles_to_degrees(v)<a class="headerlink" href="#asapy-utils-semicircles-to-degrees-v" title="Permalink to this heading"></a></h3>
+<p>Converts a value from semicircles to degrees.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>v</strong> (<em>float</em>) – The value in semicircles to convert to degrees.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The value in degrees.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-aepcd-deg-x">
+<h3>asapy.utils.aepcd_deg(x)<a class="headerlink" href="#asapy-utils-aepcd-deg-x" title="Permalink to this heading"></a></h3>
+<p>The method aepcd_deg keeps an angle within the range -180.0 to 180.0 as presented in the figure bellow.
+In the example of this figure, the angle of 225 degrees is converted to -135 degrees through aepcd_deg.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>x</strong> (<em>float</em>) – Angle in degrees.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The angle in degrees adjusted to lie within the range -180.0 to 180.0.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-aepcd-rad-x">
+<h3>asapy.utils.aepcd_rad(x)<a class="headerlink" href="#asapy-utils-aepcd-rad-x" title="Permalink to this heading"></a></h3>
+<p>Keeps an angle within the range -pi to pi, equivalent to the function aepcd_deg but in radians.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>x</strong> – float, the angle to be checked in radians.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>float, the angle within the range -pi to pi, with the same orientation as the original angle.</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-alimd-x-limit">
+<h3>asapy.utils.alimd(x, limit)<a class="headerlink" href="#asapy-utils-alimd-x-limit" title="Permalink to this heading"></a></h3>
+<p>Limits the value of x to +/- limit.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – The value to be limited.</p></li>
+<li><p><strong>limit</strong> (<em>float</em>) – The maximum absolute value allowed for x.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The limited value of x. If x is greater than limit, returns limit.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  If x is less than negative limit, returns -limit. Otherwise, returns x.
+</pre></div>
+</div>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>float</p>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-earth-model-data-none-none-none-none-none-none-none-none-none-none-none-none-none-none-none-none">
+<h3>asapy.utils.earth_model_data(_ = [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None,.._ )<a class="headerlink" href="#asapy-utils-earth-model-data-none-none-none-none-none-none-none-none-none-none-none-none-none-none-none-none" title="Permalink to this heading"></a></h3>
+<p>Data from Different Models of the Earth
+Data from 22 Earth surface models are stored in the array earthModelData.
+Each cell of this array corresponds to a type of model and has the following information: semi major axis (a), in meters; and flattening (f).</p>
+</section>
+<section id="asapy-utils-gbd2ll-slat-slon-brg-dist-index-earth-model">
+<h3>asapy.utils.gbd2ll(slat, slon, brg, dist, index_earth_model)<a class="headerlink" href="#asapy-utils-gbd2ll-slat-slon-brg-dist-index-earth-model" title="Permalink to this heading"></a></h3>
+<p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p>
+<p>This method considers an elliptical earth model, and it is similar to the method of the file nav_utils.cpp of MIXR.</p>
+<ul class="simple">
+<li><p><strong>Parameters</strong></p>
+<ul>
+<li><p><strong>latitude</strong> (<em>-</em>) –</p></li>
+<li><p><strong>bearing</strong> (<em>-</em>) –</p></li>
+<li><p><strong>distance</strong> (<em>-</em>) –</p></li>
+<li><p>*<em>(<em><em><strong>default</strong> (</em>- an index</em></em> of *<em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<ul>
+<li><p>latitude (dlat) and longitude (dlon) of the destination point.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>NOTE</strong>: possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</section>
+<section id="asapy-utils-fbd2ll-slat-slon-brg-dist">
+<h3>asapy.utils.fbd2ll(slat, slon, brg, dist)<a class="headerlink" href="#asapy-utils-fbd2ll-slat-slon-brg-dist" title="Permalink to this heading"></a></h3>
+<p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p>
+<p>This method considers the flat-earth projection and a spherical earth radius of ‘ERAD60’. This method is similar to the method of the file nav_utils.inl of MIXR.</p>
+<ul class="simple">
+<li><p><strong>Parameters</strong></p>
+<ul>
+<li><p><strong>latitude</strong> (<em>-</em>) –</p></li>
+<li><p><strong>bearing</strong> (<em>-</em>) –</p></li>
+<li><p><strong>distance</strong> (<em>-</em>) –</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<ul>
+<li><p>latitude (dlat) and longitude (dlon) of the destination point.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-gll2bd-slat-slon-dlat-dlon-index-earth-model">
+<h3>asapy.utils.gll2bd(slat, slon, dlat, dlon, index_earth_model)<a class="headerlink" href="#asapy-utils-gll2bd-slat-slon-dlat-dlon-index-earth-model" title="Permalink to this heading"></a></h3>
+<p>This function computes the initial bearing and the distance from the starting point to the destination point.</p>
+<p>This method considers an elliptical earth model, and it is similar to the method of the file nav_utils.cpp of MIXR.</p>
+<ul class="simple">
+<li><p><strong>Parameters</strong></p>
+<ul>
+<li><p><strong>latitude</strong> (<em>-</em>) –</p></li>
+<li><p><strong>latitude</strong> –</p></li>
+<li><p>*<em>(<em><em><strong>default</strong> (</em>- an index</em></em> of *<em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<ul>
+<li><p>bearing (brg), in degrees, between the starting and destination points; and</p></li>
+<li><p>distance (dist) or ground range, in nautical miles (nm), between the starting and destination points.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>NOTE</strong>: possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</section>
+<section id="asapy-utils-fll2bd-slat-slon-dlat-dlon">
+<h3>asapy.utils.fll2bd(slat, slon, dlat, dlon)<a class="headerlink" href="#asapy-utils-fll2bd-slat-slon-dlat-dlon" title="Permalink to this heading"></a></h3>
+<p>This function computes the initial bearing and the distance from the starting point to the destination point.</p>
+<p>This method considers a flat earth projection and a spherical earth radius of ‘ERAD60’.</p>
+<ul class="simple">
+<li><p><strong>Parameters</strong></p>
+<ul>
+<li><p><strong>latitude</strong> (<em>-</em>) –</p></li>
+<li><p><strong>latitude</strong> –</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<ul>
+<li><p>bearing (brg), in degrees, between the starting and destination points; and</p></li>
+<li><p>distance (dist) or ground range, in nautical miles (nm), between the starting and destination points.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="asapy-utils-convert-ecef-to-geod-x-y-z-index-earth-model">
+<h3>asapy.utils.convert_ecef_to_geod(x, y, z, index_earth_model)<a class="headerlink" href="#asapy-utils-convert-ecef-to-geod-x-y-z-index-earth-model" title="Permalink to this heading"></a></h3>
+<p>This function converts Earth Centered, Earth Fixed (ECEF) coordinates (x,y,z) to geodetic coordinates (latitude,longitude,altitude).</p>
+<ul class="simple">
+<li><p><strong>Parameters</strong></p>
+<ul>
+<li><p><strong>coordinates</strong> (<em>- ECEF</em>) –</p></li>
+<li><p>*<em>(<em><em><strong>default</strong> (</em>- an index</em></em> of *<em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<ul>
+<li><p>geodetic coordinates (lat, lon, alt), considering lat and lon in degrees, and alt in meters.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>NOTE</strong>: possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</section>
+<section id="asapy-utils-convert-geod-to-ecef-lat-lon-alt-index-earth-model">
+<h3>asapy.utils.convert_geod_to_ecef(lat, lon, alt, index_earth_model)<a class="headerlink" href="#asapy-utils-convert-geod-to-ecef-lat-lon-alt-index-earth-model" title="Permalink to this heading"></a></h3>
+<p>This function converts Geodetic ((Latitude,Longitude,Altitude) coordinates) to ECEF ((X,Y,Z) coordinates).</p>
+<ul class="simple">
+<li><p><strong>Parameters</strong></p>
+<ul>
+<li><p><strong>coordinates</strong> (<em>- geodetic</em>) –</p></li>
+<li><p>*<em>(<em><em><strong>default</strong> (</em>- an index</em></em> of *<em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<ul>
+<li><p>ECEF coordinates (x,y,z), in meters.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>NOTE</strong>: possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

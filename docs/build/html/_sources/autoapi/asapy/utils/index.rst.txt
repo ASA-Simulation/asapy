@@ -13,12 +13,19 @@ Functions
 
 .. autoapisummary::
 
+   asapy.utils.prepare_simulation_batch
+   asapy.utils.prepare_simulation_tacview
+   asapy.utils.load_simulation
    asapy.utils.json_to_df
    asapy.utils.list_to_df
    asapy.utils.unique_list
    asapy.utils.get_parents_dict
    asapy.utils.check_samples_similar
    asapy.utils.test_t
+   asapy.utils.convert_nested_string_to_dict
+   asapy.utils.find_key
+   asapy.utils.gen_dict_extract
+   asapy.utils.transform_stringified_dict
    asapy.utils.meters_to_micrometers
    asapy.utils.micrometers_to_meters
    asapy.utils.meters_to_centimeters
@@ -83,6 +90,42 @@ Attributes
    asapy.utils.R2DCC
    asapy.utils.D2RCC
    asapy.utils.earth_model_data
+
+
+.. py:function:: prepare_simulation_batch(sim: asaclient.Simulation) -> asaclient.Simulation
+
+   Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run in batch mode.
+
+   :param sim: The simulation instance for which the simulation setup needs to be prepared.
+   :type sim: Simulation
+
+   :returns: The updated Simulation instance with the added recorder configurations in its subcomponents.
+   :rtype: Simulation
+
+
+.. py:function:: prepare_simulation_tacview(sim: asaclient.Simulation) -> asaclient.Simulation
+
+   Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run on Tacview.
+
+   :param sim: The simulation instance for which the simulation setup needs to be prepared.
+   :type sim: Simulation
+
+   :returns: The updated Simulation instance with the added recorder configurations in its subcomponents.
+   :rtype: Simulation
+
+
+.. py:function:: load_simulation(path: str) -> asaclient.Simulation
+
+   Loads a Simulation object from a JSON file.
+
+   This method accepts a path to a JSON file, reads the content of the file and
+   creates a Simulation object using the data parsed from the file.
+
+   :param path: The absolute or relative path to the JSON file to be loaded.
+   :type path: str
+
+   :returns: The Simulation object created from the loaded JSON data.
+   :rtype: Simulation
 
 
 .. py:function:: json_to_df(self, json, id='id') -> pandas.DataFrame
@@ -162,6 +205,61 @@ Attributes
 
    :returns: True if the samples are similar, False otherwise.
    :rtype: bool
+
+
+.. py:function:: convert_nested_string_to_dict(s)
+
+   Converts a string that contains a dictionary and JSON-formatted strings into a nested dictionary.
+
+   :param s: The input string containing a dictionary and JSON-formatted strings.
+   :type s: str
+
+   :returns: The output dictionary after conversion of JSON-formatted strings.
+   :rtype: dict
+
+
+.. py:function:: find_key(nested_dict, target_key)
+
+   Find a key in a nested dictionary.
+
+   :param nested_dict: The dictionary to search.
+   :type nested_dict: dict
+   :param target_key: The key to find.
+   :type target_key: str
+
+   :returns: The value of the found key, or None if the key was not found.
+   :rtype: value
+
+
+.. py:function:: gen_dict_extract(key, var)
+
+   A generator function to iterate and yield values from a dictionary or list nested inside the dictionary, given a key.
+
+   :param key: The key to search for in the dictionary.
+   :type key: str
+   :param var: The dictionary or list to search.
+   :type var: dict or list
+
+   :Yields: *value* -- The value from the dictionary or list that corresponds to the given key.
+
+
+.. py:function:: transform_stringified_dict(data)
+
+   Recursively converts stringified JSON parts of a dictionary or list into actual dictionaries or lists.
+
+   This function checks if an item is a string and attempts to convert it to a dictionary or list
+   using `json.loads()`. If the conversion is successful, the function recursively processes the new
+   dictionary or list. If a string is not a valid JSON representation, it remains unchanged.
+
+   :param data: Input data that might contain stringified JSON parts.
+   :type data: Union[dict, list, str]
+
+   :returns: The transformed data with all stringified JSON parts converted
+             to dictionaries or lists.
+   :rtype: Union[dict, list, str]
+
+   :raises json.JSONDecodeError: If there's an issue decoding a JSON string. This is caught internally
+   :raises and the original string is returned.:
 
 
 .. py:data:: FT2M

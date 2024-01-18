@@ -24,48 +24,120 @@ class Preprocessing:
         return x
     
     @staticmethod
-    def monitor_report(df):
+    def team_metrics(df):
         """
-        Preprocesses the monitor report data.
+        Preprocesses the monitor report data with an additional filter for monitor_type.
 
         Args:
-            y (pandas.DataFrame): Input DataFrame 
+            df (pandas.DataFrame): Input DataFrame
+            monitor_type (str): The specific monitor type to filter by. For example, 'AsaTeamMetrics@AsaModels' or 'AsaAirThreatMetric@AsaModels'.
 
         Returns:
             pandas.DataFrame: The preprocessed dataframe.
         """
-        
+
         # Create a copy of the dataframe to avoid SettingWithCopyWarning
         df_copy = df.copy()
 
-        # Filters by 'asa_custom_type'
-        df_copy = df_copy[df_copy['asa_custom_type'] == 'asa::recorder::AsaMonitorReport']
-        
         # Converts the 'payload' column from nested strings to dictionaries
         df_copy.loc[:, 'payload'] = df_copy['payload'].apply(convert_nested_string_to_dict)
 
-        # Extract values from 'payload' dictionary into new columns
-        for key in ['side', 'fuel_consumed', 'time_of_flight']:
-            df_copy.loc[:, key] = df_copy['payload'].apply(lambda x: find_key(x, key))
+        # Extract 'monitor_type' from 'payload' and create a new column
+        df_copy['extracted_monitor_type'] = df_copy['payload'].apply(lambda x: x.get('monitor_type'))
+
+        # Filters by 'asa_custom_type' and the extracted 'monitor_type'
+        df_copy = df_copy[(df_copy['asa_custom_type'] == 'asa::recorder::AsaMonitorReport') & 
+                        (df_copy['extracted_monitor_type'] == 'AsaTeamMetrics@AsaModels')]
+
+        # Extract 'side', 'fuel_consumed', 'time_of_flight' values from 'payload'
+        df_copy['side'] = df_copy['payload'].apply(lambda x: find_key(x.get('attributes', {}), 'side'))
+        df_copy['fuel_consumed'] = df_copy['payload'].apply(lambda x: find_key(x.get('metrics', {}), 'fuel_consumed'))
+        df_copy['time_of_flight'] = df_copy['payload'].apply(lambda x: find_key(x.get('metrics', {}), 'time_of_flight'))
 
         # Identifying metric keys from 'payload' and creating columns for each metric
-        metrics_keys = list(df_copy['payload'].iloc[0]['metrics']['last_state'].keys())
-        for metric in metrics_keys:
-            df_copy[metric] = df_copy['payload'].apply(lambda x: find_key(x, metric))
-
-        # # Selects a subset of columns
-        df_copy = df_copy[['experiment', 'side', 'fuel_consumed', 'time_of_flight', 'acft_standing', 'acft_damaged', 
-        'acft_killed', 'aam_remaining', 'aam_hit', 'aam_frat', 'aam_lost', 'sam_remaining', 'sam_hit', 
-        'sam_frat', 'sam_lost', 'bmb_remaining', 'bmb_released']]
-
-        # Split the data into 'blue' and 'red'
-        df_blue = df_copy[df_copy['side'] == 'blue']
-        df_red = df_copy[df_copy['side'] == 'red']
-
-        # Splits the data into 'blue' and 'red', merges both on 'experiment' and removes 'side_blue' and 'side_red' columns
-        df_copy = pd.merge(df_blue, df_red, on='experiment', suffixes=('_blue', '_red')).set_index("experiment")
+        metrics_keys = set()
+        for payload in df_copy['payload']:
+            metrics_keys.update(payload.get('metrics', {}).get('last_state', {}).keys())
         
-        return df_copy.drop(['side_blue', 'side_red'], axis=1)
+        for metric in metrics_keys:
+            df_copy[metric] = df_copy['payload'].apply(lambda x: find_key(x['metrics'].get('last_state', {}), metric))
+
+        # Selects a subset of columns that are available
+        available_columns = ['experiment', 'side', 'fuel_consumed', 'time_of_flight'] + list(metrics_keys)
+        available_columns = [col for col in available_columns if col in df_copy.columns]
+        df_copy = df_copy[available_columns]
+
+        unique_sides = df_copy['side'].dropna().unique()
+
+        # Create a dictionary to hold dataframes for each side
+        dfs = {}
+        for side in unique_sides:
+            dfs[side] = df_copy[df_copy['side'] == side]
+
+        # Initialize merged DataFrame
+        df_merged = None
+
+        # Perform merging
+        for side, df_side in dfs.items():
+            if df_merged is None:
+                df_merged = df_side
+            else:
+                df_merged = pd.merge(df_merged, df_side, on='experiment', suffixes=('', f'_{side}'))
+
+        # Set index and drop redundant side columns if any
+        df_merged = df_merged.set_index('experiment')
+        side_columns = [col for col in df_merged.columns if col.startswith('side')]
+        df_merged = df_merged.drop(side_columns, axis=1)
+
+        # Reorder the dataframe by the index 'experiment'
+        df_merged = df_merged.sort_index()
+
+        return df_merged
+    
+    @staticmethod
+    def air_threat_metric(df):
+        """
+        Preprocesses the monitor report data with an additional filter for monitor_type.
+
+        Args:
+            df (pandas.DataFrame): Input DataFrame
+
+        Returns:
+            pandas.DataFrame: The preprocessed dataframe.
+        """
+
+        # Create a copy of the dataframe to avoid SettingWithCopyWarning
+        df_copy = df.copy()
+
+        # Converts the 'payload' column from nested strings to dictionaries
+        df_copy.loc[:, 'payload'] = df_copy['payload'].apply(convert_nested_string_to_dict)
+
+        # Extract 'monitor_type' from 'payload' and create a new column
+        df_copy['extracted_monitor_type'] = df_copy['payload'].apply(lambda x: x.get('monitor_type'))
+
+        # Filters by 'asa_custom_type' and the extracted 'monitor_type'
+        df_copy = df_copy[(df_copy['asa_custom_type'] == 'asa::recorder::AsaMonitorReport') & 
+                        (df_copy['extracted_monitor_type'] == 'AsaAirThreatMetric@AsaModels')]
+
+        # Extract 'side' and 'threat_index' values from 'payload'
+        df_copy['side'] = df_copy['payload'].apply(lambda x: find_key(x.get('attributes', {}), 'side'))
+        df_copy['threat_index'] = df_copy['payload'].apply(lambda x: x.get('metrics', {}).get('threat_index'))
+
+        # Selects a subset of columns that are available
+        available_columns = ['experiment', 'side', 'threat_index']
+        available_columns = [col for col in available_columns if col in df_copy.columns]
+        df_copy = df_copy[available_columns]
+
+        # Set index and drop redundant side columns if any
+        df_copy = df_copy.set_index('experiment')
+        side_columns = [col for col in df_copy.columns if col.startswith('side')]
+        df_copy = df_copy.drop(side_columns, axis=1)
+
+        # Reorder the dataframe by the index 'experiment'
+        df_copy = df_copy.sort_index()
+
+        return df_copy
+
 
     @staticmethod
     def weapon_detonation(df):

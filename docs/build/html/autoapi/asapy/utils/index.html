@@ -24,7 +24,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="prev" title="asapy.models" href="../models/index.html" /> 
+    <link rel="prev" title="asapy.preprocessing" href="../preprocessing/index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,7 +57,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../analysis/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.analysis</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../doe/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.doe</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../execution_controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../models/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.models</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prediction/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.prediction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../preprocessing/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.preprocessing</span></code></a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.utils</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#module-contents">Module Contents</a></li>
 </ul>
@@ -102,115 +103,136 @@
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.json_to_df" title="asapy.utils.json_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_to_df</span></code></a>(→ pandas.DataFrame)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.prepare_simulation_batch" title="asapy.utils.prepare_simulation_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_simulation_batch</span></code></a>(→ asaclient.Simulation)</p></td>
+<td><p>Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run in batch mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.prepare_simulation_tacview" title="asapy.utils.prepare_simulation_tacview"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_simulation_tacview</span></code></a>(→ asaclient.Simulation)</p></td>
+<td><p>Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run on Tacview.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.load_simulation" title="asapy.utils.load_simulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_simulation</span></code></a>(→ asaclient.Simulation)</p></td>
+<td><p>Loads a Simulation object from a JSON file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.json_to_df" title="asapy.utils.json_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_to_df</span></code></a>(→ pandas.DataFrame)</p></td>
 <td><p>Convert a JSON object to a pandas DataFrame and set the index to the given id column.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.list_to_df" title="asapy.utils.list_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_to_df</span></code></a>(arr[, id])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.list_to_df" title="asapy.utils.list_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_to_df</span></code></a>(arr[, id])</p></td>
 <td><p>Convert a list of dictionaries to a pandas DataFrame and set the index to the given id column.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.unique_list" title="asapy.utils.unique_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique_list</span></code></a>(list1)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.unique_list" title="asapy.utils.unique_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique_list</span></code></a>(list1)</p></td>
 <td><p>Return a list of unique values in the given list.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.get_parents_dict" title="asapy.utils.get_parents_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parents_dict</span></code></a>(dic, value)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.get_parents_dict" title="asapy.utils.get_parents_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parents_dict</span></code></a>(dic, value)</p></td>
 <td><p>Return a list of keys that lead to the given value in the given dictionary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.check_samples_similar" title="asapy.utils.check_samples_similar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_samples_similar</span></code></a>(new_sample, last_sample, threshold)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.check_samples_similar" title="asapy.utils.check_samples_similar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_samples_similar</span></code></a>(new_sample, last_sample, threshold)</p></td>
 <td><p>Checks if two samples are similar based on a given threshold.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.test_t" title="asapy.utils.test_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_t</span></code></a>(sample1, sample2[, alpha])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.test_t" title="asapy.utils.test_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_t</span></code></a>(sample1, sample2[, alpha])</p></td>
 <td><p>Performs a t-test and compares the p-value with a given alpha value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.meters_to_micrometers" title="asapy.utils.meters_to_micrometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_micrometers</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.convert_nested_string_to_dict" title="asapy.utils.convert_nested_string_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_nested_string_to_dict</span></code></a>(s)</p></td>
+<td><p>Converts a string that contains a dictionary and JSON-formatted strings into a nested dictionary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.find_key" title="asapy.utils.find_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_key</span></code></a>(nested_dict, target_key)</p></td>
+<td><p>Find a key in a nested dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.gen_dict_extract" title="asapy.utils.gen_dict_extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_dict_extract</span></code></a>(key, var)</p></td>
+<td><p>A generator function to iterate and yield values from a dictionary or list nested inside the dictionary, given a key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.transform_stringified_dict" title="asapy.utils.transform_stringified_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform_stringified_dict</span></code></a>(data)</p></td>
+<td><p>Recursively converts stringified JSON parts of a dictionary or list into actual dictionaries or lists.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_micrometers" title="asapy.utils.meters_to_micrometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_micrometers</span></code></a>(v)</p></td>
 <td><p>Convert meters to micrometers.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.micrometers_to_meters" title="asapy.utils.micrometers_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">micrometers_to_meters</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.micrometers_to_meters" title="asapy.utils.micrometers_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">micrometers_to_meters</span></code></a>(v)</p></td>
 <td><p>Convert micrometers to meters.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.meters_to_centimeters" title="asapy.utils.meters_to_centimeters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_centimeters</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_centimeters" title="asapy.utils.meters_to_centimeters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_centimeters</span></code></a>(v)</p></td>
 <td><p>Convert meters to centimeters.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.centimeters_to_meters" title="asapy.utils.centimeters_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centimeters_to_meters</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.centimeters_to_meters" title="asapy.utils.centimeters_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centimeters_to_meters</span></code></a>(v)</p></td>
 <td><p>Convert centimeters to meters.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.meters_to_kilometers" title="asapy.utils.meters_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_kilometers</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_kilometers" title="asapy.utils.meters_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_kilometers</span></code></a>(v)</p></td>
 <td><p>Convert meters to kilometers.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_meters" title="asapy.utils.kilometers_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_meters</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_meters" title="asapy.utils.kilometers_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_meters</span></code></a>(v)</p></td>
 <td><p>Convert kilometers to meters.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.meters_to_inches" title="asapy.utils.meters_to_inches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_inches</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_inches" title="asapy.utils.meters_to_inches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_inches</span></code></a>(v)</p></td>
 <td><p>Convert meters to inches.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.inches_to_meters" title="asapy.utils.inches_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inches_to_meters</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.inches_to_meters" title="asapy.utils.inches_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inches_to_meters</span></code></a>(v)</p></td>
 <td><p>Convert inches to meters.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.meters_to_feet" title="asapy.utils.meters_to_feet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_feet</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_feet" title="asapy.utils.meters_to_feet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_feet</span></code></a>(v)</p></td>
 <td><p>Converts a distance in meters to feet.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.feet_to_meters" title="asapy.utils.feet_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feet_to_meters</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.feet_to_meters" title="asapy.utils.feet_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feet_to_meters</span></code></a>(v)</p></td>
 <td><p>Converts a distance in feet to meters.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_nautical_miles" title="asapy.utils.kilometers_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_nautical_miles</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_nautical_miles" title="asapy.utils.kilometers_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_nautical_miles</span></code></a>(v)</p></td>
 <td><p>Converts a distance in kilometers to nautical miles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.nautical_miles_to_kilometers" title="asapy.utils.nautical_miles_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nautical_miles_to_kilometers</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.nautical_miles_to_kilometers" title="asapy.utils.nautical_miles_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nautical_miles_to_kilometers</span></code></a>(v)</p></td>
 <td><p>Converts a distance in nautical miles to kilometers.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_statute_miles" title="asapy.utils.kilometers_to_statute_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_statute_miles</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_statute_miles" title="asapy.utils.kilometers_to_statute_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_statute_miles</span></code></a>(v)</p></td>
 <td><p>Converts a distance in kilometers to statute miles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.statute_miles_to_kilometers" title="asapy.utils.statute_miles_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statute_miles_to_kilometers</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.statute_miles_to_kilometers" title="asapy.utils.statute_miles_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statute_miles_to_kilometers</span></code></a>(v)</p></td>
 <td><p>Converts a distance in statute miles to kilometers.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.nautical_miles_to_statute_miles" title="asapy.utils.nautical_miles_to_statute_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nautical_miles_to_statute_miles</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.nautical_miles_to_statute_miles" title="asapy.utils.nautical_miles_to_statute_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nautical_miles_to_statute_miles</span></code></a>(v)</p></td>
 <td><p>Converts a distance in nautical miles to statute miles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.statute_miles_to_nautical_miles" title="asapy.utils.statute_miles_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statute_miles_to_nautical_miles</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.statute_miles_to_nautical_miles" title="asapy.utils.statute_miles_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statute_miles_to_nautical_miles</span></code></a>(v)</p></td>
 <td><p>Converts a distance in statute miles to nautical miles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.degrees_to_radians" title="asapy.utils.degrees_to_radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degrees_to_radians</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.degrees_to_radians" title="asapy.utils.degrees_to_radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degrees_to_radians</span></code></a>(v)</p></td>
 <td><p>Converts a value from degrees to radians.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.degrees_to_semicircles" title="asapy.utils.degrees_to_semicircles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degrees_to_semicircles</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.degrees_to_semicircles" title="asapy.utils.degrees_to_semicircles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degrees_to_semicircles</span></code></a>(v)</p></td>
 <td><p>Converts a value from degrees to semicircles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.radians_to_degrees" title="asapy.utils.radians_to_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radians_to_degrees</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.radians_to_degrees" title="asapy.utils.radians_to_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radians_to_degrees</span></code></a>(v)</p></td>
 <td><p>Converts a value from radians to degrees.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.radians_to_semicircles" title="asapy.utils.radians_to_semicircles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radians_to_semicircles</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.radians_to_semicircles" title="asapy.utils.radians_to_semicircles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radians_to_semicircles</span></code></a>(v)</p></td>
 <td><p>Converts a value from radians to semicircles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.semicircles_to_radians" title="asapy.utils.semicircles_to_radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semicircles_to_radians</span></code></a>(v)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.semicircles_to_radians" title="asapy.utils.semicircles_to_radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semicircles_to_radians</span></code></a>(v)</p></td>
 <td><p>Converts a value from semicircles to radians.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.semicircles_to_degrees" title="asapy.utils.semicircles_to_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semicircles_to_degrees</span></code></a>(v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.semicircles_to_degrees" title="asapy.utils.semicircles_to_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semicircles_to_degrees</span></code></a>(v)</p></td>
 <td><p>Converts a value from semicircles to degrees.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.aepcd_deg" title="asapy.utils.aepcd_deg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aepcd_deg</span></code></a>(x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.aepcd_deg" title="asapy.utils.aepcd_deg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aepcd_deg</span></code></a>(x)</p></td>
 <td><p>The method aepcd_deg keeps an angle within the range -180.0 to 180.0 as presented in the figure bellow.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.aepcd_rad" title="asapy.utils.aepcd_rad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aepcd_rad</span></code></a>(x)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.aepcd_rad" title="asapy.utils.aepcd_rad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aepcd_rad</span></code></a>(x)</p></td>
 <td><p>Keeps an angle within the range -pi to pi, equivalent to the function aepcd_deg but in radians.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.alimd" title="asapy.utils.alimd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alimd</span></code></a>(x, limit)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.alimd" title="asapy.utils.alimd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alimd</span></code></a>(x, limit)</p></td>
 <td><p>Limits the value of <cite>x</cite> to +/- <cite>limit</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.gbd2ll" title="asapy.utils.gbd2ll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gbd2ll</span></code></a>(slat, slon, brg, dist, index_earth_model)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.gbd2ll" title="asapy.utils.gbd2ll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gbd2ll</span></code></a>(slat, slon, brg, dist, index_earth_model)</p></td>
 <td><p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.fbd2ll" title="asapy.utils.fbd2ll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fbd2ll</span></code></a>(slat, slon, brg, dist)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.fbd2ll" title="asapy.utils.fbd2ll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fbd2ll</span></code></a>(slat, slon, brg, dist)</p></td>
 <td><p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.gll2bd" title="asapy.utils.gll2bd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gll2bd</span></code></a>(slat, slon, dlat, dlon, index_earth_model)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.gll2bd" title="asapy.utils.gll2bd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gll2bd</span></code></a>(slat, slon, dlat, dlon, index_earth_model)</p></td>
 <td><p>This function computes the initial bearing and the distance from the starting point to the destination point.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.fll2bd" title="asapy.utils.fll2bd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fll2bd</span></code></a>(slat, slon, dlat, dlon)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.fll2bd" title="asapy.utils.fll2bd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fll2bd</span></code></a>(slat, slon, dlat, dlon)</p></td>
 <td><p>This function computes the initial bearing and the distance from the starting point to the destination point.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.convert_ecef_to_geod" title="asapy.utils.convert_ecef_to_geod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_ecef_to_geod</span></code></a>(x, y, z, index_earth_model)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.convert_ecef_to_geod" title="asapy.utils.convert_ecef_to_geod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_ecef_to_geod</span></code></a>(x, y, z, index_earth_model)</p></td>
 <td><p>This function converts Earth Centered, Earth Fixed (ECEF) coordinates (x,y,z) to geodetic coordinates (latitude,longitude,altitude).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.convert_geod_to_ecef" title="asapy.utils.convert_geod_to_ecef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_geod_to_ecef</span></code></a>(lat, lon, alt, index_earth_model)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.convert_geod_to_ecef" title="asapy.utils.convert_geod_to_ecef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_geod_to_ecef</span></code></a>(lat, lon, alt, index_earth_model)</p></td>
 <td><p>This function converts Geodetic ((Latitude,Longitude,Altitude) coordinates) to ECEF ((X,Y,Z) coordinates).</p></td>
 </tr>
 </tbody>
@@ -297,6 +319,59 @@
 </tr>
 </tbody>
 </table>
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.prepare_simulation_batch">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_simulation_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">asaclient.Simulation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">asaclient.Simulation</span></span></span><a class="headerlink" href="#asapy.utils.prepare_simulation_batch" title="Permalink to this definition"></a></dt>
+<dd><p>Prepares a simulation by adding specific recorder configurations to the simulation’s station subcomponents to run in batch mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sim</strong> (<em>Simulation</em>) – The simulation instance for which the simulation setup needs to be prepared.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated Simulation instance with the added recorder configurations in its subcomponents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simulation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.prepare_simulation_tacview">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_simulation_tacview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">asaclient.Simulation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">asaclient.Simulation</span></span></span><a class="headerlink" href="#asapy.utils.prepare_simulation_tacview" title="Permalink to this definition"></a></dt>
+<dd><p>Prepares a simulation by adding specific recorder configurations to the simulation’s station subcomponents to run on Tacview.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sim</strong> (<em>Simulation</em>) – The simulation instance for which the simulation setup needs to be prepared.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated Simulation instance with the added recorder configurations in its subcomponents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simulation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.load_simulation">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">load_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">asaclient.Simulation</span></span></span><a class="headerlink" href="#asapy.utils.load_simulation" title="Permalink to this definition"></a></dt>
+<dd><p>Loads a Simulation object from a JSON file.</p>
+<p>This method accepts a path to a JSON file, reads the content of the file and
+creates a Simulation object using the data parsed from the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The absolute or relative path to the JSON file to be loaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Simulation object created from the loaded JSON data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simulation</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="asapy.utils.json_to_df">
 <span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">json_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#asapy.utils.json_to_df" title="Permalink to this definition"></a></dt>
@@ -412,6 +487,87 @@
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.convert_nested_string_to_dict">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">convert_nested_string_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.convert_nested_string_to_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a string that contains a dictionary and JSON-formatted strings into a nested dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – The input string containing a dictionary and JSON-formatted strings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The output dictionary after conversion of JSON-formatted strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.find_key">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">find_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nested_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.find_key" title="Permalink to this definition"></a></dt>
+<dd><p>Find a key in a nested dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nested_dict</strong> (<em>dict</em>) – The dictionary to search.</p></li>
+<li><p><strong>target_key</strong> (<em>str</em>) – The key to find.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the found key, or None if the key was not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.gen_dict_extract">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">gen_dict_extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.gen_dict_extract" title="Permalink to this definition"></a></dt>
+<dd><p>A generator function to iterate and yield values from a dictionary or list nested inside the dictionary, given a key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – The key to search for in the dictionary.</p></li>
+<li><p><strong>var</strong> (<em>dict</em><em> or </em><em>list</em>) – The dictionary or list to search.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>value</em> – The value from the dictionary or list that corresponds to the given key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.transform_stringified_dict">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">transform_stringified_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.transform_stringified_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Recursively converts stringified JSON parts of a dictionary or list into actual dictionaries or lists.</p>
+<p>This function checks if an item is a string and attempts to convert it to a dictionary or list
+using <cite>json.loads()</cite>. If the conversion is successful, the function recursively processes the new
+dictionary or list. If a string is not a valid JSON representation, it remains unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>list</em><em>, </em><em>str</em><em>]</em>) – Input data that might contain stringified JSON parts.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed data with all stringified JSON parts converted
+to dictionaries or lists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[dict, list, str]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>json.JSONDecodeError</strong> – If there’s an issue decoding a JSON string. This is caught internally</p></li>
+<li><p><strong>and the original string is returned.</strong> – </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1240,7 +1396,7 @@ Each cell of this array corresponds to a type of model and has the following inf
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../models/index.html" class="btn btn-neutral float-left" title="asapy.models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../preprocessing/index.html" class="btn btn-neutral float-left" title="asapy.preprocessing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

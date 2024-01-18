@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.execution_controller &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../../_static/copybutton.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/build/md/markdown/autoapi/asapy/execution_controller/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asapy-execution-controller">
+<h1><code class="docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code><a class="headerlink" href="#asapy-execution-controller" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<p>| <code class="docutils literal notranslate"><span class="pre">ExecutionController</span></code>
+| A class for controlling the execution of a simulation function on a Design of Experiments (DOE) dataset.</p>
+<p>|</p>
+</section>
+<section id="class-asapy-execution-controller-executioncontroller-sim-func-callable-stop-func-callable-chunk-size-int-0">
+<h3><em>class</em> asapy.execution_controller.ExecutionController(sim_func: callable, stop_func: callable, chunk_size: int = 0)<a class="headerlink" href="#class-asapy-execution-controller-executioncontroller-sim-func-callable-stop-func-callable-chunk-size-int-0" title="Permalink to this heading"></a></h3>
+<p>A class for controlling the execution of a simulation function on a Design of Experiments (DOE) dataset.</p>
+<section id="sim-func">
+<h4>_sim_func()<a class="headerlink" href="#sim-func" title="Permalink to this heading"></a></h4>
+<p>A function that performs the simulation on a chunk of the DOE dataset.</p>
+<ul>
+<li><p><strong>Type</strong></p>
+<p>callable</p>
+</li>
+</ul>
+</section>
+<section id="stop-func">
+<h4>_stop_func()<a class="headerlink" href="#stop-func" title="Permalink to this heading"></a></h4>
+<p>A function that determines whether to stop the simulation based on the current and partial results.</p>
+<ul>
+<li><p><strong>Type</strong></p>
+<p>callable</p>
+</li>
+</ul>
+</section>
+<section id="chunk-size">
+<h4>_chunk_size()<a class="headerlink" href="#chunk-size" title="Permalink to this heading"></a></h4>
+<p>The size of each chunk of the DOE dataset.</p>
+<ul>
+<li><p><strong>Type</strong></p>
+<p>int</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="run-doe">
+<h3>run(doe()<a class="headerlink" href="#run-doe" title="Permalink to this heading"></a></h3>
+<p>pd.DataFrame) -&gt; None:
+Runs the simulation on the entire DOE dataset by dividing it into chunks of size _chunk_size (if provided).
+Stops the simulation if the stop_func returns True, and returns the result.</p>
+<ul>
+<li><p><strong>Raises</strong></p>
+<p><strong>Exception</strong> – If the _sim_func returns an invalid result (not a pandas DataFrame).</p>
+</li>
+</ul>
+<section id="run-doe-pandas-dataframe">
+<h4>run(doe: pandas.DataFrame)<a class="headerlink" href="#run-doe-pandas-dataframe" title="Permalink to this heading"></a></h4>
+<p>Runs the simulation on the entire DOE dataset by dividing it into chunks of size _chunk_size (if provided).
+Stops the simulation if the stop_func returns True, and returns the result.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>doe</strong> (<em>pd.DataFrame</em>) – The Design of Experiments dataset to be used in the simulation.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>Exception</strong> – If the _sim_func returns an invalid result (not a pandas DataFrame).</p>
+</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

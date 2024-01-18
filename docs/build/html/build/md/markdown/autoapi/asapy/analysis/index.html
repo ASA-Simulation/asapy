@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.analysis &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../../_static/copybutton.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../autoapi/asapy/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">asapy.analysis</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/build/md/markdown/autoapi/asapy/analysis/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asapy-analysis">
+<h1><code class="docutils literal notranslate"><span class="pre">asapy.analysis</span></code><a class="headerlink" href="#asapy-analysis" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<p>| <code class="docutils literal notranslate"><span class="pre">Analysis</span></code>
+| The Analysis object.</p>
+<p>|</p>
+</section>
+<section id="class-asapy-analysis-analysis">
+<h3><em>class</em> asapy.analysis.Analysis()<a class="headerlink" href="#class-asapy-analysis-analysis" title="Permalink to this heading"></a></h3>
+<p>The Analysis object.</p>
+<section id="static-hypothesis-df-pandas-dataframe-alpha-float-0-05-verbose-bool-false">
+<h4><em>static</em> hypothesis(df: pandas.DataFrame, alpha: float = 0.05, verbose: bool = False)<a class="headerlink" href="#static-hypothesis-df-pandas-dataframe-alpha-float-0-05-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Method that performs hypothesis testing</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> – (Pandas DataFrame)
+Input data (must contain at least two distributions).</p></li>
+<li><p><strong>alpha</strong> – (float)
+Significance level. Represents a cutoff value, a criterion that we set to reject or not H0. Default 0.05.</p></li>
+<li><p><strong>verbose</strong> – (bool, optional)
+Variable that defines whether or not to display detailed messages. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<ul class="simple">
+<li><p><strong>ValueError</strong> – Input variable is empty.</p></li>
+<li><p><strong>ValueError</strong> – Input data must match at least two distributions.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Indicates which distributions are statistically similar.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(Pandas DataFrame)</p>
+</li>
+</ul>
+<p>The figure below shows the flow of the hypothesis method:</p>
+<p><img alt="image" src="build/image/Diagrama_hypothesis.png" /></p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set random seed for reproducibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create DataFrame with 5 columns and 100 rows</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col0&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col3&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">logistic</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col4&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">hypothesis</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="go">Teste de normalidade</span>
+<span class="go">            W         pval  normal</span>
+<span class="go">----  --------  -----------  --------</span>
+<span class="go">col1   74.7177  5.96007e-17  False</span>
+<span class="go">col2   31.6041  1.3717e-07   False</span>
+<span class="go">col3   40.6985  1.45356e-09  False</span>
+<span class="go">col4   10.2107  0.00606431   False</span>
+<span class="go">col5  212.599   6.8361e-47   False</span>
+<span class="go">Conclusão: Ao menos uma distribuição não se assemelha à gaussiana (normal).</span>
+
+<span class="go">Teste de homocedasticidade</span>
+<span class="go">            W       pval  equal_var</span>
+<span class="go">------  -------  ---------  -----------</span>
+<span class="go">levene  2.03155  0.0888169  True</span>
+<span class="go">Conclusão: Distribuições possuem variâncias estatisticamente SEMELHANTES (homoscedasticidade).</span>
+
+<span class="go">Teste de Kruskal</span>
+<span class="go">statistic = 182.22539784431183, pvalue = 2.480716493859747e-38</span>
+<span class="go">Conclusão: Estatisticamente as amostras correspondem a distribuições DIFERENTES (Kruskal-Wallis).</span>
+
+<span class="go">Teste de Conover</span>
+<span class="go">            1             2             3             4             5</span>
+<span class="go">1  1.000000e+00  3.280180e-04  8.963739e-01  1.632161e-08  6.805120e-21</span>
+<span class="go">2  3.280180e-04  1.000000e+00  5.316246e-04  3.410392e-02  2.724152e-35</span>
+<span class="go">3  8.963739e-01  5.316246e-04  1.000000e+00  3.335991e-08  2.296912e-21</span>
+<span class="go">4  1.632161e-08  3.410392e-02  3.335991e-08  1.000000e+00  1.024363e-44</span>
+<span class="go">5  6.805120e-21  2.724152e-35  2.296912e-21  1.024363e-44  1.000000e+00</span>
+
+<span class="go">    dist1    dist2  same?</span>
+<span class="go">--  -------  -------  -------</span>
+<span class="go">0        0        1  False</span>
+<span class="go">1        0        2  False</span>
+<span class="go">2        0        3  False</span>
+<span class="go">3        0        4  False</span>
+<span class="go">4        1        2  False</span>
+<span class="go">5        1        3  True</span>
+<span class="go">6        1        4  False</span>
+<span class="go">7        2        3  False</span>
+<span class="go">8        2        4  False</span>
+<span class="go">9        3        4  False</span>
+</pre></div>
+</div>
+</section>
+<section id="static-fit-distribution-df-pandas-dataframe-verbose-bool-false">
+<h4><em>static</em> fit_distribution(df: pandas.DataFrame, verbose: bool = False)<a class="headerlink" href="#static-fit-distribution-df-pandas-dataframe-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Find the distribution that best fits the input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – Input data (must contain only one distribution).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – Flag that controls whether detailed messages are displayed. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – Input data must contain only one distribution.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>DataFrame containing information about the distribution that best fit the input data, as well as the most common distributions (<code class="docutils literal notranslate"><span class="pre">norm</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">chi2</span></code>, <code class="docutils literal notranslate"><span class="pre">uniform</span></code>, <code class="docutils literal notranslate"><span class="pre">expon</span></code>). The columns of the DataFrame are: <code class="docutils literal notranslate"><span class="pre">Distribution_Type</span></code>, <code class="docutils literal notranslate"><span class="pre">P_Value</span></code>, <code class="docutils literal notranslate"><span class="pre">Statistics</span></code>, and <code class="docutils literal notranslate"><span class="pre">Parameters</span></code>.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(Pandas DataFrame)</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">fit_distribution</span><span class="p">(</span><span class="n">X</span><span class="p">[[</span><span class="s1">&#39;magnesium&#39;</span><span class="p">]],</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">Distribution_Type      P_Value    Statistics  Parameters</span>
+<span class="go">-------------------  ---------  ------------  -------------------------------------</span>
+<span class="go">weibull_min           0.666605     0.0535577  (1.65, 77.23, 25.3)</span>
+<span class="go">beta                  0.585262     0.0571824  (6.06, 5334914.75, 65.16, 30436461.8)</span>
+<span class="go">norm                  0.110071     0.0892933  (99.74, 14.24)</span>
+<span class="go">expon                 0            0.317447   (70.0, 29.74)</span>
+<span class="go">uniform               0            0.386541   (70.0, 92.0)</span>
+<span class="go">chi2                  0            0.915856   (0.64, 70.0, 3.93)</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/output_fit_distribution.png" /></p>
+</section>
+<section id="static-feature-score-df-pandas-dataframe-x-list-str-y-list-str-scoring-function-str-verbose-bool-false">
+<h4><em>static</em> feature_score(df: pandas.DataFrame, x: List[str], y: List[str], scoring_function: str, verbose: bool = False)<a class="headerlink" href="#static-feature-score-df-pandas-dataframe-x-list-str-y-list-str-scoring-function-str-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Calculate the score of input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – DataFrame with input data.</p></li>
+<li><p><strong>x</strong> (<em>List</em>*[<strong>str</strong>]*) – Names of input variables (same name as the corresponding column of <code class="docutils literal notranslate"><span class="pre">df</span></code>).</p></li>
+<li><p><strong>y</strong> (<em>List</em>*[<strong>str</strong>]*) – Names of output variables (same name as the corresponding column of <code class="docutils literal notranslate"><span class="pre">df</span></code>).</p></li>
+<li><p><strong>scoring_function</strong> (<em>str</em>) – Name of the scoring function.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – Flag to display detailed messages. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – Invalid scoring_function name.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>DataFrame with scores of input variables.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(Pandas DataFrame)</p>
+</li>
+</ul>
+<p><strong>WARNING</strong>: Beware not to use a regression scoring function with a classification problem, you will get useless results</p>
+<p>For regression: <code class="docutils literal notranslate"><span class="pre">r_regression</span></code>, <code class="docutils literal notranslate"><span class="pre">f_regression</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_info_regression</span></code>.</p>
+<p>For classification: <code class="docutils literal notranslate"><span class="pre">chi2</span></code>, <code class="docutils literal notranslate"><span class="pre">f_classif</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_info_classif</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># getting the input variable names</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_list</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># adding the output (target variable) in the data frame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">feature_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">feature_list</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="s1">&#39;f_regression&#39;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="go">    bmi      s5      bp      s4     s3    s6     s1    age     s2    sex</span>
+<span class="go">--  ------  ------  ------  ------  -----  ----  -----  -----  -----  -----</span>
+<span class="go">0  230.65  207.27  106.52  100.07  81.24  75.4  20.71   16.1  13.75   0.82</span>
+</pre></div>
+</div>
+</section>
+<section id="static-pareto-df-pandas-dataframe-min-list-list-str-max-list-list-str">
+<h4><em>static</em> pareto(df: pandas.DataFrame, min_list: List[str], max_list: List[str])<a class="headerlink" href="#static-pareto-df-pandas-dataframe-min-list-list-str-max-list-list-str" title="Permalink to this heading"></a></h4>
+<p>Returns a subset of the input DataFrame consisting of Pareto optimal points based on the specified columns.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
+<li><p><strong>min_list</strong> (<em>List</em>*[<strong>str</strong>]*) – A list of column names that should be minimized in the Pareto optimality calculation.</p></li>
+<li><p><strong>max_list</strong> (<em>List</em>*[<strong>str</strong>]*) – A list of column names that should be maximized in the Pareto optimality calculation.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame that contains the Pareto optimal points of the input DataFrame based on the specified columns.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pd.DataFrame</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">pareto</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;malic_acid&#39;</span><span class="p">,</span><span class="s1">&#39;ash&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="go">[77, 88, 110, 112, 113, 115, 120, 121, 122, 123, 124, 136, 137, 169, 173]</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: This function drops any row that contains missing values before performing the Pareto optimality calculation.</p>
+<p>The columns specified in the min_list parameter will be multiplied by -1 to convert them into maximization criteria.</p>
+</section>
+<section id="static-get-best-pareto-point-df-pandas-dataframe-list-variable-list-str-weights-list-float-verbose-bool-false">
+<h4><em>static</em> get_best_pareto_point(df: pandas.DataFrame, list_variable: List[str], weights: List[float], verbose: bool = False)<a class="headerlink" href="#static-get-best-pareto-point-df-pandas-dataframe-list-variable-list-str-weights-list-float-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Calculate the best Pareto optimal point in the input DataFrame based on the specified variables and weights.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
+<li><p><strong>list_variable</strong> (<em>List</em>*[<strong>str</strong>]*) – A list of column names that should be considered in the Pareto optimality calculation.</p></li>
+<li><p><strong>weights</strong> (<em>List</em>*[<strong>float</strong>]*) – A list of weights that determine the relative importance of each variable.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – A flag that determines whether to print the best Pareto optimal point or not.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame that contains the best Pareto optimal point based on the specified variables and weights.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pd.DataFrame</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;malic_acid&#39;</span><span class="p">,</span><span class="s1">&#39;ash&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">get_best_pareto_point</span><span class="p">(</span><span class="n">p</span><span class="p">,[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="s1">&#39;malic_acid&#39;</span><span class="p">,</span> <span class="s1">&#39;ash&#39;</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.1</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">Melhor opção de acordo com a decomposição: Ponto 115 - [11.03  1.51  2.2 ]</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: This function assumes that the input DataFrame contains only Pareto optimal points.</p>
+<p>The weights parameter should contain a value for each variable specified in the list_variable parameter.</p>
+</section>
+<section id="static-detect-outliers-df-pandas-dataframe-method-str-iqr-thr-float-3-verbose-bool-false">
+<h4><em>static</em> detect_outliers(df: pandas.DataFrame, method: str = ‘IQR’, thr: float = 3, verbose: bool = False)<a class="headerlink" href="#static-detect-outliers-df-pandas-dataframe-method-str-iqr-thr-float-3-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Detect outliers in a Pandas DataFrame using IQR or zscore method.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – Input DataFrame containing numerical data.</p></li>
+<li><p><strong>method</strong> (<em>str</em>*, *<em>optional</em>) – Method to use for outlier detection. Available options: ‘IQR’ or ‘zscore’. Defaults to ‘IQR’.</p></li>
+<li><p><strong>thr</strong> (<em>int</em>*, *<em>optional</em>) – Threshold value for zscore method. Defaults to 3.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – Determines whether to display detailed messages. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If method is not equal to one of the following options: ‘IQR’ or ‘zscore’.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>tuple containing</p>
+<ul class="simple">
+<li><p>(Pandas DataFrame): DataFrame containing the index of the outliers.</p></li>
+<li><p>(Pandas DataFrame): The columns of the DataFrame are: <code class="docutils literal notranslate"><span class="pre">column</span></code>, <code class="docutils literal notranslate"><span class="pre">min_thres</span></code>, <code class="docutils literal notranslate"><span class="pre">max_thres</span></code>. Values smaller than <code class="docutils literal notranslate"><span class="pre">min_thres</span></code> and larger than <code class="docutils literal notranslate"><span class="pre">max_thres</span></code> are considered outliers for IQR method.</p></li>
+</ul>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">,</span> <span class="n">df_thres</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="p">()</span><span class="o">.</span><span class="n">detect_outliers</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">      outliers_index</span>
+<span class="go">--  ----------------</span>
+<span class="go">0                23</span>
+<span class="go">1                35</span>
+<span class="go">2                58</span>
+<span class="go">...</span>
+<span class="go">28               406</span>
+<span class="go">29               428</span>
+<span class="go">30               441</span>
+</pre></div>
+</div>
+</section>
+<section id="remove-outliers-df-pandas-dataframe-verbose-bool-false">
+<h4>remove_outliers(df: pandas.DataFrame, verbose: bool = False)<a class="headerlink" href="#remove-outliers-df-pandas-dataframe-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Remove outliers from a Pandas DataFrame using the Interquartile Range (IQR) method.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – DataFrame containing the data.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – If True, print the number of lines removed. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>tuple containing</p>
+<ul class="simple">
+<li><p>df_new (Pandas DataFrame): DataFrame with the outliers removed.</p></li>
+<li><p>drop_lines (list): List of indexes of the rows that were removed.</p></li>
+</ul>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_new</span><span class="p">,</span> <span class="n">drop_lines</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="p">()</span><span class="o">.</span><span class="n">remove_outliers</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">Foram removidas 31 linhas.</span>
+</pre></div>
+</div>
+</section>
+<section id="static-cramer-v-df-pandas-dataframe-verbose-bool-false-save-bool-false-path-str-none-format-str-png">
+<h4><em>static</em> cramer_V(df: pandas.DataFrame, verbose: bool = False, save: bool = False, path: str = None, format: str = ‘png’)<a class="headerlink" href="#static-cramer-v-df-pandas-dataframe-verbose-bool-false-save-bool-false-path-str-none-format-str-png" title="Permalink to this heading"></a></h4>
+<p>Calculate Cramer’s V statistic for categorical feature association in a DataFrame.</p>
+<p>Cramer’s V is a measure of association between two categorical variables. It is based on the <code class="docutils literal notranslate"><span class="pre">chi-squared</span></code> statistic
+and considers both the strength and direction of association. This function calculates Cramer’s V for all pairs of
+categorical variables in a given DataFrame and returns the results in a new DataFrame.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pandas DataFrame</em>) – The input DataFrame containing the categorical variables.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – If True, a heatmap of the Cramer’s V values will be displayed using Seaborn. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame containing Cramer’s V values for all pairs of categorical variables.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(pandas DataFrame)</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a sample DataFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;small&#39;</span><span class="p">,</span> <span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;small&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Calculate Cramer&#39;s V</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cramer_df</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">cramer_V</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/output_cramer_v.png" /></p>
+</section>
+<section id="eda-df-pandas-dataframe-save-bool-false-path-str-none-format-str-png">
+<h4>EDA(df: pandas.DataFrame, save: bool = False, path: str = None, format: str = ‘png’)<a class="headerlink" href="#eda-df-pandas-dataframe-save-bool-false-path-str-none-format-str-png" title="Permalink to this heading"></a></h4>
+<p>Perform exploratory data analysis (EDA) on a given pandas DataFrame.</p>
+<p>The function displays a summary table of the DataFrame, a table of class balance for categorical variables,
+and histograms and boxplots with information on the number of outliers for numerical variables.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Input DataFrame to be analyzed.</p></li>
+<li><p><strong>save</strong> (<em>bool</em>*, *<em>optional</em>) – If True, save the plots. Defaults to False.</p></li>
+<li><p><strong>path</strong> (<em>str</em>*, *<em>optional</em>) – Path to save the plots. Defaults to None.</p></li>
+<li><p><strong>format</strong> (<em>str</em>*, *<em>optional</em>) – Format for the plot files. Defaults to ‘png’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+<p>Example Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path-to-dataset.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="p">()</span><span class="o">.</span><span class="n">EDA</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="go">Variáveis Categóricas:</span>
+
+<span class="go">        occupation      education      educational-num</span>
+<span class="go">------  --------------  -----------  -----------------</span>
+<span class="go">nan     0               0                            0</span>
+<span class="go">count   48842           48842                    48842</span>
+<span class="go">unique  15              16                          16</span>
+<span class="go">top     Prof-specialty  HS-grad                      9</span>
+<span class="go">freq    6172            15784                    15784</span>
+
+
+<span class="go">Associação:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/association.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Histogramas</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/occupation.png" /></p>
+<p><img alt="image" src="build/image/education.png" /></p>
+<p><img alt="image" src="build/image/educational-num.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Variáveis</span> <span class="n">Numéricas</span><span class="p">:</span>
+            <span class="n">age</span>           <span class="n">fnlwgt</span>
+<span class="o">-----</span>  <span class="o">----------</span>  <span class="o">---------------</span>
+<span class="n">nan</span>        <span class="mi">0</span>            <span class="mi">0</span>
+<span class="n">count</span>  <span class="mi">48842</span>        <span class="mi">48842</span>
+<span class="n">mean</span>      <span class="mf">38.6436</span>  <span class="mi">189664</span>
+<span class="n">std</span>       <span class="mf">13.7105</span>  <span class="mi">105604</span>
+<span class="nb">min</span>       <span class="mi">17</span>        <span class="mi">12285</span>
+<span class="mi">25</span><span class="o">%</span>       <span class="mi">28</span>       <span class="mi">117550</span>
+<span class="mi">50</span><span class="o">%</span>       <span class="mi">37</span>       <span class="mi">178144</span>
+<span class="mi">75</span><span class="o">%</span>       <span class="mi">48</span>       <span class="mi">237642</span>
+<span class="nb">max</span>       <span class="mi">90</span>            <span class="mf">1.4904e+06</span>
+
+<span class="n">Correlação</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/correlation.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Histogramas</span> <span class="n">e</span> <span class="n">boxplots</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/age.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Detecção</span> <span class="n">de</span> <span class="n">outlier</span> <span class="n">da</span> <span class="n">variável</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span>
+<span class="n">Quantidade</span><span class="p">:</span> <span class="mi">216</span> <span class="n">de</span> <span class="mf">48842.</span>
+<span class="n">Método</span><span class="p">:</span> <span class="n">Intervalo</span> <span class="n">Interquartil</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">-</span> <span class="n">Interquatile</span> <span class="n">Range</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Critério</span><span class="p">:</span> <span class="n">Os</span> <span class="n">valores</span> <span class="n">menores</span> <span class="n">que</span> <span class="o">-</span><span class="mf">2.0</span> <span class="n">ou</span> <span class="n">maiores</span> <span class="n">que</span> <span class="mf">78.0</span> <span class="n">foram</span> <span class="n">considerados</span> <span class="n">outliers</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><img alt="image" src="build/image/fnlwgt.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Detecção</span> <span class="n">de</span> <span class="n">outlier</span> <span class="n">da</span> <span class="n">variável</span> <span class="s1">&#39;fnlwgt&#39;</span><span class="p">:</span>
+<span class="n">Quantidade</span><span class="p">:</span> <span class="mi">1453</span> <span class="n">de</span> <span class="mf">48842.</span>
+<span class="n">Método</span><span class="p">:</span> <span class="n">Intervalo</span> <span class="n">Interquartil</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">-</span> <span class="n">Interquatile</span> <span class="n">Range</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Critério</span><span class="p">:</span> <span class="n">Os</span> <span class="n">valores</span> <span class="n">menores</span> <span class="n">que</span> <span class="o">-</span><span class="mf">62586.75</span> <span class="n">ou</span> <span class="n">maiores</span> <span class="n">que</span> <span class="mf">417779.25</span> <span class="n">foram</span> <span class="n">considerados</span> <span class="n">outliers</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

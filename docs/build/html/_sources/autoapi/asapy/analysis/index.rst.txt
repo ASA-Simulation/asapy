@@ -19,7 +19,201 @@ Classes
 
 .. py:class:: Analysis
 
-   The Analysis object.
+
+   Class for performing Analysis on a DataFrame with simulation data.
+
+   .. py:method:: detect_outliers(df: pandas.DataFrame, method: str = 'IQR', thr: float = 3) -> Tuple[pandas.DataFrame, pandas.DataFrame]
+      :staticmethod:
+
+      Detect outliers in a Pandas DataFrame using either Inter-Quartile Range (IQR) or Z-Score method.
+
+      :param df: The input DataFrame containing numerical data.
+      :type df: pd.DataFrame
+      :param method: The method used for outlier detection, options are 'IQR' or 'zscore'. Default is 'IQR'.
+      :type method: str
+      :param thr: The threshold value for Z-Score method. Default is 3.
+      :type thr: float
+
+      :returns:     - The first DataFrame contains the index, column name, and values of the outliers.
+                    - The second DataFrame contains the outlier thresholds for each column.
+      :rtype: Tuple[pd.DataFrame, pd.DataFrame]
+
+      :raises ValueError: If the method is not 'IQR' or 'zscore'.
+
+
+   .. py:method:: remove_outliers(df: pandas.DataFrame, verbose: bool = False) -> Tuple[pandas.DataFrame, List[int]]
+      :staticmethod:
+
+      Remove outliers from a Pandas DataFrame using the Interquartile Range (IQR) method.
+
+      :param df: DataFrame containing the data.
+      :type df: pd.DataFrame
+      :param verbose: If True, print the number of lines removed. Defaults to False.
+      :type verbose: bool, optional
+
+      :returns:
+
+                DataFrame with the outliers removed,
+                                                List of indexes of the rows that were removed (unique indices).
+      :rtype: Tuple[pd.DataFrame, List[int]]
+
+
+   .. py:method:: cramer_v(df: pandas.DataFrame, verbose: bool = False, save: bool = False, path: Optional[str] = None, format: str = 'png') -> pandas.DataFrame
+      :staticmethod:
+
+      Calculate Cramer's V statistic for categorical feature association in a DataFrame.
+
+      This function takes a DataFrame and calculates Cramer's V, a measure of association between two
+      categorical variables, for all pairs of categorical columns. The result is a symmetric DataFrame where
+      each cell [i, j] contains the Cramer's V value between column i and column j.
+
+      :param df: Input DataFrame containing categorical variables.
+      :param verbose: If True, a heatmap of Cramer's V values is displayed. Default is False.
+      :param save: If True, the resulting heatmap is saved to a file. Default is False.
+      :param path: The directory path where the heatmap is to be saved, if `save` is True. Default is None.
+      :param format: The file format to save the heatmap, if `save` is True. Default is 'png'.
+
+      :returns: A DataFrame containing Cramer's V values for all pairs of categorical variables in df.
+
+      :raises ValueError: If `save` is True but `path` is None.
+
+
+   .. py:method:: eda(df: pandas.DataFrame, save: bool = False, path: Optional[str] = None, format: str = 'png') -> None
+
+      Perform exploratory data analysis (EDA) on a pandas DataFrame.
+
+      The function provides a summary of the DataFrame, showing class balance for categorical variables,
+      and displaying histograms and boxplots with outlier information for numerical variables. If desired,
+      the function can save these plots to a specified location.
+
+      :param df: DataFrame to be analyzed.
+      :type df: pd.DataFrame
+      :param save: Whether to save the plots. Defaults to False.
+      :type save: bool, optional
+      :param path: Directory where the plots should be saved. If save is True, this parameter
+                   must be provided. Defaults to None.
+      :type path: str, optional
+      :param format: The file format for saved plots. Acceptable formats include png, pdf, ps, eps and svg.
+                     Defaults to 'png'.
+      :type format: str, optional
+
+      :raises ValueError: If 'save' is set to True but 'path' is not specified.
+
+      :returns: None
+
+
+   .. py:method:: _process_categorical(df_cat, save, path, format)
+
+      Processes categorical features of a DataFrame. Moves columns from df_num to df_cat based on a condition.
+      Then, it summarizes, visualizes and saves the processed DataFrame.
+
+      :param df_cat: Categorical DataFrame to be processed.
+      :type df_cat: pd.DataFrame
+      :param df_num: Numerical DataFrame to be processed.
+      :type df_num: pd.DataFrame
+      :param save: Whether to save the generated plots.
+      :type save: bool
+      :param path: Path to save the plots.
+      :type path: str
+      :param format: Format for the plot files.
+      :type format: str
+
+
+   .. py:method:: _process_numerical(df_num, save, path, format)
+
+      Processes numerical features of a DataFrame. It summarizes, visualizes and saves the processed DataFrame.
+
+      :param df_num: Numerical DataFrame to be processed.
+      :type df_num: pd.DataFrame
+      :param save: Whether to save the generated plots.
+      :type save: bool
+      :param path: Path to save the plots.
+      :type path: str
+      :param format: Format for the plot files.
+      :type format: str
+
+
+   .. py:method:: _describe(df)
+
+      Prints a summary of the DataFrame, including the count of NaN values.
+
+      :param df: DataFrame to be summarized.
+      :type df: pd.DataFrame
+
+
+   .. py:method:: _plot_histograms(df, save, path, format)
+
+      Plots histograms of all columns in a DataFrame.
+
+      :param df: DataFrame to be plotted.
+      :type df: pd.DataFrame
+      :param save: Whether to save the plots.
+      :type save: bool
+      :param path: Path to save the plots.
+      :type path: str
+      :param format: Format for the plot files.
+      :type format: str
+
+
+   .. py:method:: _plot_single_histogram(df, column, save, path, format)
+
+      Plots a single histogram for a specific column in a DataFrame.
+
+      :param df: DataFrame to be plotted.
+      :type df: pd.DataFrame
+      :param column: Column to be plotted.
+      :type column: str
+      :param save: Whether to save the plot.
+      :type save: bool
+      :param path: Path to save the plot.
+      :type path: str
+      :param format: Format for the plot file.
+      :type format: str
+
+
+   .. py:method:: _plot_correlation(df, save, path, format)
+
+      Plots a correlation heatmap of a numerical DataFrame.
+
+      :param df: Numerical DataFrame to be plotted.
+      :type df: pd.DataFrame
+      :param save: Whether to save the plot.
+      :type save: bool
+      :param path: Path to save the plot.
+      :type path: str
+      :param format: Format for the plot file.
+      :type format: str
+
+
+   .. py:method:: _plot_histograms_boxplots(df, save, path, format)
+
+      Plots histograms and boxplots of all columns in a numerical DataFrame.
+
+      :param df: Numerical DataFrame to be plotted.
+      :type df: pd.DataFrame
+      :param save: Whether to save the plots.
+      :type save: bool
+      :param path: Path to save the plots.
+      :type path: str
+      :param format: Format for the plot files.
+      :type format: str
+
+
+   .. py:method:: _plot_single_histogram_boxplot(df, column, save, path, format)
+
+      Plots a histogram and boxplot for a given column in a DataFrame.
+
+      :param df: DataFrame to be plotted.
+      :type df: pd.DataFrame
+      :param column: Column to be plotted.
+      :type column: str
+      :param save: If True, saves the plot.
+      :type save: bool
+      :param path: File path to save the plot.
+      :type path: str
+      :param format: File format to save the plot.
+      :type format: str
+
 
    .. py:method:: hypothesis(df: pandas.DataFrame, alpha: float = 0.05, verbose: bool = False) -> pandas.DataFrame
       :staticmethod:
@@ -39,11 +233,6 @@ Classes
       :returns: Indicates which distributions are statistically similar.
       :rtype: (Pandas DataFrame)
 
-      The figure below shows the flow of the hypothesis method:
-
-      .. image:: /../../../../../image/Diagrama_hypothesis.png
-
-
       .. seealso::
 
           `pingouin.homoscedasticity <https://pingouin-stats.org/build/html/generated/pingouin.homoscedasticity.html#pingouin.homoscedasticity>`_: teste de igualdade de variância.
@@ -58,422 +247,296 @@ Classes
 
           `scikit_posthocs.posthoc_conover <https://scikit-posthocs.readthedocs.io/en/latest/tutorial.html>`_: teste de Conover.
 
-      Example usage:
-
-      .. code-block::
-
-          >>> import pandas as pd
-          >>> import asapy
-          >>> import numpy as np
-          >>> # Set random seed for reproducibility
-          >>> np.random.seed(123)
-          >>> # Create DataFrame with 5 columns and 100 rows
-          >>> data = pd.DataFrame({
-          >>>     'col0': np.random.gamma(1, size=100),
-          >>>     'col1': np.random.uniform(size=100),
-          >>>     'col2': np.random.exponential(size=100),
-          >>>     'col3': np.random.logistic(size=100),
-          >>>     'col4': np.random.pareto(1, size=100) + 1})
-          >>> output = asapy.Analysis.hypothesis(data, verbose = True)
-
-          Teste de normalidade
-                      W         pval  normal
-          ----  --------  -----------  --------
-          col1   74.7177  5.96007e-17  False
-          col2   31.6041  1.3717e-07   False
-          col3   40.6985  1.45356e-09  False
-          col4   10.2107  0.00606431   False
-          col5  212.599   6.8361e-47   False
-          Conclusão: Ao menos uma distribuição não se assemelha à gaussiana (normal).
-
-          Teste de homocedasticidade
-                      W       pval  equal_var
-          ------  -------  ---------  -----------
-          levene  2.03155  0.0888169  True
-          Conclusão: Distribuições possuem variâncias estatisticamente SEMELHANTES (homoscedasticidade).
-
-          Teste de Kruskal
-          statistic = 182.22539784431183, pvalue = 2.480716493859747e-38
-          Conclusão: Estatisticamente as amostras correspondem a distribuições DIFERENTES (Kruskal-Wallis).
-
-          Teste de Conover
-                      1             2             3             4             5
-          1  1.000000e+00  3.280180e-04  8.963739e-01  1.632161e-08  6.805120e-21
-          2  3.280180e-04  1.000000e+00  5.316246e-04  3.410392e-02  2.724152e-35
-          3  8.963739e-01  5.316246e-04  1.000000e+00  3.335991e-08  2.296912e-21
-          4  1.632161e-08  3.410392e-02  3.335991e-08  1.000000e+00  1.024363e-44
-          5  6.805120e-21  2.724152e-35  2.296912e-21  1.024363e-44  1.000000e+00
-
-              dist1    dist2  same?
-          --  -------  -------  -------
-          0        0        1  False
-          1        0        2  False
-          2        0        3  False
-          3        0        4  False
-          4        1        2  False
-          5        1        3  True
-          6        1        4  False
-          7        2        3  False
-          8        2        4  False
-          9        3        4  False
-
 
 
    .. py:method:: fit_distribution(df: pandas.DataFrame, verbose: bool = False) -> pandas.DataFrame
       :staticmethod:
 
-      Find the distribution that best fits the input data.
+      Find the best fitting distribution for the input data.
 
-      :param df: Input data (must contain only one distribution).
-      :type df: Pandas DataFrame
+      This function compares 93 available distributions in the scipy library and finds the one
+      that best fits the input data. The best fit is determined by the Kolmogorov-Smirnov test.
+
+      :param df: Input data, which must contain only one distribution.
+      :type df: pd.DataFrame
       :param verbose: Flag that controls whether detailed messages are displayed. Defaults to False.
       :type verbose: bool, optional
 
-      :raises ValueError: Input data must contain only one distribution.
+      :raises ValueError: Raised if the input data contains more than one distribution.
 
-      :returns: DataFrame containing information about the distribution that best fit the input data, as well as the most common distributions (``norm``, ``beta``, ``chi2``, ``uniform``, ``expon``). The columns of the DataFrame are: ``Distribution_Type``, ``P_Value``, ``Statistics``, and ``Parameters``.
-      :rtype: (Pandas DataFrame)
-
-      .. seealso::
-
-          `scipy.stats.kstest <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kstest.html>`_: teste de Kolmogorov-Smirnov (uma ou duas amostras) para verificar a qualidade do ajuste.
-
-      Example usage:
-
-      .. code-block::
-
-          >>> import pandas as pd
-          >>> from sklearn.datasets import load_wine
-          >>> X, y  = load_wine(as_frame=True, return_X_y=True)
-          >>> result = asapy.Analysis.fit_distribution(X[['magnesium']], verbose = True)
-          Distribution_Type      P_Value    Statistics  Parameters
-          -------------------  ---------  ------------  -------------------------------------
-          weibull_min           0.666605     0.0535577  (1.65, 77.23, 25.3)
-          beta                  0.585262     0.0571824  (6.06, 5334914.75, 65.16, 30436461.8)
-          norm                  0.110071     0.0892933  (99.74, 14.24)
-          expon                 0            0.317447   (70.0, 29.74)
-          uniform               0            0.386541   (70.0, 92.0)
-          chi2                  0            0.915856   (0.64, 70.0, 3.93)
-
-      .. image:: /../../../../../image/output_fit_distribution.png
+      :returns: DataFrame with information about the distribution that best fits the input data,
+                as well as the most common distributions (``norm``, ``beta``, ``chi2``, ``uniform``, ``expon``).
+                The DataFrame's columns are: ``Distribution_Type``, ``P_Value``, ``Statistics``, and ``Parameters``.
+      :rtype: pd.DataFrame
 
 
-   .. py:method:: feature_score(df: pandas.DataFrame, x: List[str], y: List[str], scoring_function: str, verbose: bool = False) -> pandas.DataFrame
+   .. py:method:: feature_score(df: pandas.DataFrame, x: List[str], y: str, scoring_function: str, verbose: bool = False, save_path=None) -> pandas.DataFrame
       :staticmethod:
 
-      Calculate the score of input data.
+      Calculate the score of input features using the specified scoring function.
 
-      :param df: DataFrame with input data.
-      :type df: Pandas DataFrame
-      :param x: Names of input variables (same name as the corresponding column of ``df``).
+      This function applies a specified scoring function to evaluate the relevance of each input feature for the output
+      variable in a given DataFrame. The supported scoring functions are those provided by sklearn's feature_selection module.
+
+      :param df: The input data, where each column is a feature and each row is an observation.
+      :type df: pd.DataFrame
+      :param x: A list of names of the input features in 'df'.
       :type x: List[str]
-      :param y: Names of output variables (same name as the corresponding column of ``df``).
-      :type y: List[str]
-      :param scoring_function: Name of the scoring function.
+      :param y: The name of the output feature in 'df'.
+      :type y: str
+      :param scoring_function: The name of the scoring function to be used. Should be one of the following:
+                               - 'r_regression'
+                               - 'f_regression'
+                               - 'mutual_info_regression'
+                               - 'chi2'
+                               - 'f_classif'
+                               - 'mutual_info_classif'
       :type scoring_function: str
+      :param verbose: Whether to print detailed output. Default is False.
+      :type verbose: bool, optional
+      :param save_path: Path to save the plotted figure. If not specified, the figure is simply shown.
+      :type save_path: str, optional
+
+      :raises ValueError: If 'scoring_function' is not one of the supported scoring functions.
+
+      :returns:
+
+                A DataFrame where each row corresponds to an input feature, and the 'score' column contains
+                    the corresponding score. The DataFrame is sorted by score in descending order.
+      :rtype: pd.DataFrame
+
+
+   .. py:method:: pareto_front(df, list_min=None, list_max=None, verbose=False, max_points=None)
+      :staticmethod:
+
+      Identifies the Pareto front of a DataFrame based on objectives to minimize and maximize.
+
+      :param df: Input DataFrame containing the data.
+      :type df: pd.DataFrame
+      :param list_min: List of variable names to minimize. Defaults to None.
+      :type list_min: list of str, optional
+      :param list_max: List of variable names to maximize. Defaults to None.
+      :type list_max: list of str, optional
+      :param verbose: If True, displays detailed information. Defaults to False.
+      :type verbose: bool, optional
+      :param max_points: Maximum number of points to include in the Pareto front. Defaults to None.
+      :type max_points: int, optional
+
+      :returns: DataFrame containing the Pareto optimal points.
+      :rtype: pd.DataFrame
+
+
+   .. py:method:: get_best_pareto_point(df, list_min=None, list_max=None, weights_min=None, weights_max=None, minimization_weight=0.5, verbose=False)
+      :staticmethod:
+
+      Determine the optimal Pareto point from the input DataFrame, considering specified variables and their weights.
+
+      :param df: The input DataFrame.
+      :type df: pd.DataFrame
+      :param list_min: A list of column names to minimize in the Pareto optimality calculation. Defaults to None.
+      :type list_min: List[str], optional
+      :param list_max: A list of column names to maximize in the Pareto optimality calculation. Defaults to None.
+      :type list_max: List[str], optional
+      :param weights_min: A list of weights defining the relative importance of each variable to minimize. Defaults to None.
+      :type weights_min: List[float], optional
+      :param weights_max: A list of weights defining the relative importance of each variable to maximize. Defaults to None.
+      :type weights_max: List[float], optional
+      :param minimization_weight: The global weight for the minimization part, between 0 and 1. Defaults to 0.5.
+      :type minimization_weight: float, optional
       :param verbose: Flag to display detailed messages. Defaults to False.
       :type verbose: bool, optional
 
-      :raises ValueError: Invalid scoring_function name.
+      :returns: A Pandas Series containing the best Pareto optimal point based on the specified variables and weights.
+      :rtype: pd.Series
 
-      :returns: DataFrame with scores of input variables.
-      :rtype: (Pandas DataFrame)
-
-      .. warning::
-
-          Beware not to use a regression scoring function with a classification problem, you will get useless results
-
-          For regression: ``r_regression``, ``f_regression``, ``mutual_info_regression``.
-
-          For classification: ``chi2``, ``f_classif``, ``mutual_info_classif``.
-
-      .. seealso::
-
-          `sklearn.feature_selection.SelectKBest <https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html>`_: seleciona as features de acordo com os k scores mais altos.
-
-          `sklearn.feature_selection.SelectPercentile <https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectPercentile.html#sklearn.feature_selection.SelectPercentile>`_: seleciona as features de acordo com um percentil dos scores mais altos.
-
-      Example usage:
-
-      .. code-block::
-
-          >>> import asapy
-          >>> from sklearn.datasets import load_diabetes
-          >>> # load dataset
-          >>> X, y  = load_diabetes(as_frame=True, return_X_y=True)
-          >>> # getting the input variable names
-          >>> feature_list = X.columns.tolist()
-          >>> # adding the output (target variable) in the data frame
-          >>> X['target'] = y
-          >>> scores = asapy.Analysis.feature_score(X,feature_list, ['target'], 'f_regression', verbose = True)
-
-              bmi      s5      bp      s4     s3    s6     s1    age     s2    sex
-          --  ------  ------  ------  ------  -----  ----  -----  -----  -----  -----
-          0  230.65  207.27  106.52  100.07  81.24  75.4  20.71   16.1  13.75   0.82
+      .. note:: The function assumes that the input DataFrame contains only Pareto optimal points.
 
 
-   .. py:method:: pareto(df: pandas.DataFrame, min_list: List[str], max_list: List[str]) -> pandas.DataFrame
+   .. py:method:: anova(df: pandas.DataFrame, columns: List[str] = None, alpha: float = 0.05, show_plots: bool = True, save_path: Optional[str] = None, boxplot_title: str = 'Distributions of Samples', boxplot_xlabel: str = 'Samples', boxplot_ylabel: str = 'Value', boxplot_names: Optional[List[str]] = None) -> Tuple[pandas.DataFrame, Optional[pandas.DataFrame]]
       :staticmethod:
 
-      Returns a subset of the input DataFrame consisting of Pareto optimal points based on the specified columns.
+      Perform ANOVA test on the given DataFrame columns and conduct Multiple pairwise comparisons (Post-hoc test)
+      if more than two variables are being compared.
 
-      :param df: The input DataFrame.
+      :param df: DataFrame containing the samples.
       :type df: pd.DataFrame
-      :param min_list: A list of column names that should be minimized in the Pareto optimality calculation.
-      :type min_list: List[str]
-      :param max_list: A list of column names that should be maximized in the Pareto optimality calculation.
-      :type max_list: List[str]
+      :param columns: Columns to be analyzed. If None, all columns are used. Defaults to None.
+      :type columns: List[str], optional
+      :param alpha: Significance level. Defaults to 0.05.
+      :type alpha: float, optional
+      :param show_plots: If True, plots will be displayed for visual analysis. Defaults to True.
+      :type show_plots: bool, optional
+      :param save_path: Path to save the generated plots and results. If None, the plots are
+                        displayed and results are printed without saving. If provided, plots and results will be saved to the
+                        specified path. Directory structure will be created if not exists. Defaults to None.
+      :type save_path: Optional[str], optional
+      :param boxplot_title: Title for the box plots. Defaults to 'Distributions of Samples'.
+      :type boxplot_title: str, optional
+      :param boxplot_xlabel: Label for the X-axis of the box plot. Defaults to 'Samples'.
+      :type boxplot_xlabel: str, optional
+      :param boxplot_ylabel: Label for the Y-axis of the box plot. Defaults to 'Value'.
+      :type boxplot_ylabel: str, optional
+      :param boxplot_names: Names for the box plots. Defaults to None.
+      :type boxplot_names: Optional[List[str]], optional
 
-      :returns: A DataFrame that contains the Pareto optimal points of the input DataFrame based on the specified columns.
-      :rtype: pd.DataFrame
-
-      Example usage:
-
-      .. code-block::
-
-          >>> import pandas as pd
-          >>> from sklearn.datasets import load_wine
-          >>> X, y  = load_wine(as_frame=True, return_X_y=True)
-          >>> p = pareto(X, ['alcohol'], ['malic_acid','ash'])
-          >>> print(p.index.tolist())
-          [77, 88, 110, 112, 113, 115, 120, 121, 122, 123, 124, 136, 137, 169, 173]
-
-      .. note::
-
-          This function drops any row that contains missing values before performing the Pareto optimality calculation.
-
-          The columns specified in the `min_list` parameter will be multiplied by -1 to convert them into maximization criteria.
+      :returns: ANOVA summary and optionally Post-hoc test results.
+      :rtype: Tuple[pd.DataFrame, Optional[pd.DataFrame]]
 
 
-   .. py:method:: get_best_pareto_point(df: pandas.DataFrame, list_variable: List[str], weights: List[float], verbose: bool = False) -> pandas.DataFrame
+   .. py:method:: analyze_relationship(df, col1, col2, save_path=None)
       :staticmethod:
 
-      Calculate the best Pareto optimal point in the input DataFrame based on the specified variables and weights.
+      Analyzes the relationship between two columns in a DataFrame.
 
-      :param df: The input DataFrame.
-      :type df: pd.DataFrame
-      :param list_variable: A list of column names that should be considered in the Pareto optimality calculation.
-      :type list_variable: List[str]
-      :param weights: A list of weights that determine the relative importance of each variable.
-      :type weights: List[float]
-      :param verbose: A flag that determines whether to print the best Pareto optimal point or not.
-      :type verbose: bool
+      This function performs a series of analyses to understand the relationship
+      between two numeric columns in the given DataFrame. It produces:
+      - Descriptive statistics.
+      - A scatter plot.
+      - Pearson, Spearman, and Kendall correlations.
+      - A correlation heatmap.
+      - Linear regression and a regression plot.
+      - A residual plot.
 
-      :returns: A DataFrame that contains the best Pareto optimal point based on the specified variables and weights.
-      :rtype: pd.DataFrame
+      :param df: The DataFrame containing the data.
+      :type df: pandas.DataFrame
+      :param col1: The name of the first column.
+      :type col1: str
+      :param col2: The name of the second column.
+      :type col2: str
+      :param save_path: The directory where the results, plots, and analysis
+                        will be saved. If not specified, results are just displayed.
+      :type save_path: str, optional
 
-      Example usage:
+      :returns: None. Displays or saves plots and textual analysis depending on `save_path`.
 
-      .. code-block::
-
-          >>> import asapy
-          >>> from sklearn.datasets import load_wine
-          >>> X, y  = load_wine(as_frame=True, return_X_y=True)
-          >>> p = asapy.Analysis.pareto(X, ['alcohol'], ['malic_acid','ash'])
-          >>> best = asapy.Analysis.get_best_pareto_point(p,['alcohol', 'malic_acid', 'ash'],[0.0,0.9,0.1], True)
-          Melhor opção de acordo com a decomposição: Ponto 115 - [11.03  1.51  2.2 ]
-
-      .. note::
-
-          This function assumes that the input DataFrame contains only Pareto optimal points.
-
-          The weights parameter should contain a value for each variable specified in the list_variable parameter.
+      :raises ValueError: If the specified columns are not found in the DataFrame.
+      :raises TypeError: If input data is not in the expected format.
 
 
-   .. py:method:: detect_outliers(df: pandas.DataFrame, method: str = 'IQR', thr: float = 3, verbose: bool = False) -> Tuple[pandas.DataFrame]
+   .. py:method:: plot_histograms(df, columns, figsize=(15, 5), alpha=0.7, save_path=None)
       :staticmethod:
 
-      Detect outliers in a Pandas DataFrame using IQR or zscore method.
+      Plots histograms for the given columns in the DataFrame.
 
-      :param df: Input DataFrame containing numerical data.
-      :type df: Pandas DataFrame
-      :param method: Method to use for outlier detection. Available options: 'IQR' or 'zscore'. Defaults to 'IQR'.
-      :type method: str, optional
-      :param thr: Threshold value for zscore method. Defaults to 3.
-      :type thr: int, optional
-      :param verbose: Determines whether to display detailed messages. Defaults to False.
-      :type verbose: bool, optional
-
-      :raises ValueError: If method is not equal to one of the following options: 'IQR' or 'zscore'.
-
-      :returns: tuple containing
-
-                - (Pandas DataFrame): DataFrame containing the index of the outliers.
-                - (Pandas DataFrame): The columns of the DataFrame are: ``column``, ``min_thres``, ``max_thres``. Values smaller than ``min_thres`` and larger than ``max_thres`` are considered outliers for IQR method.
-
-      Example usage:
-
-      .. code-block::
-
-          >>> import asapy
-          >>> from sklearn.datasets import load_diabetes
-          >>> # load dataset
-          >>> X, y  = load_diabetes(as_frame=True, return_X_y=True)
-          >>> df, df_thres = asapy.Analysis().detect_outliers(X, verbose = True)
-                outliers_index
-          --  ----------------
-          0                23
-          1                35
-          2                58
-          ...
-          28               406
-          29               428
-          30               441
+      :param df: The DataFrame containing the data.
+      :type df: DataFrame
+      :param columns: List of column names to plot.
+      :type columns: list
+      :param figsize: Size of the figure for each row of histograms. Default is (15, 5).
+      :type figsize: tuple
+      :param alpha: Alpha value for the histograms. Default is 0.7.
+      :type alpha: float
+      :param save_path: Path to save the plotted figure. If not specified, the figure is simply shown.
+      :type save_path: str, optional
 
 
+   .. py:method:: bootstrap(dataframe, columns, n_iterations=1000, alpha=0.05, show_plots=False, boxplot_xlabel: str = 'Samples', boxplot_ylabel: str = 'Value', boxplot_names: Optional[List[str]] = None)
+      :staticmethod:
 
-   .. py:method:: remove_outliers(df: pandas.DataFrame, verbose: bool = False) -> Tuple[pandas.DataFrame, List[int]]
+      Perform bootstrap hypothesis tests to determine if the mean of one sample
+      is statistically greater or lesser than the other for each pair of columns
+      in the provided list and optionally visualize the distributions with box plots.
 
-      Remove outliers from a Pandas DataFrame using the Interquartile Range (IQR) method.
+      :param dataframe: The dataframe containing the samples.
+      :type dataframe: pd.DataFrame
+      :param columns: List of column names to be compared.
+      :type columns: list
+      :param n_iterations: Number of bootstrap iterations. Default is 1,000.
+      :type n_iterations: int, optional
+      :param alpha: Significance level. Default is 0.05.
+      :type alpha: float, optional
+      :param show_plots: Flag to display plots. Default is False.
+      :type show_plots: bool, optional
+      :param boxplot_xlabel: Label for the X-axis of the box plot. Default is 'Samples'.
+      :type boxplot_xlabel: str, optional
+      :param boxplot_ylabel: Label for the Y-axis of the box plot. Default is 'Value'.
+      :type boxplot_ylabel: str, optional
+      :param boxplot_names: Names for the box plots. Default is None.
+      :type boxplot_names: Optional[List[str]], optional
+
+      :returns: Prints the test outcome for each pair and optionally displays a box plot.
+      :rtype: None
+
+
+   .. py:method:: create_2d_scatter_plot(df, x_col, y_col, size_col, title='2D Scatter Plot', xlabel='X-axis', ylabel='Y-axis', size_label='Size', cmap='coolwarm', figsize=(12, 8), alpha=0.5, grid=True, ref_size_value=0.5)
+      :staticmethod:
+
+      Create a 2D scatter plot with variable circle sizes.
 
       :param df: DataFrame containing the data.
-      :type df: Pandas DataFrame
-      :param verbose: If True, print the number of lines removed. Defaults to False.
-      :type verbose: bool, optional
+      :type df: DataFrame
+      :param x_col: Name of the column in df for the x-axis.
+      :type x_col: str
+      :param y_col: Name of the column in df for the y-axis.
+      :type y_col: str
+      :param size_col: Name of the column in df for determining the size of the scatter points.
+      :type size_col: str
+      :param title: Title of the plot. Defaults to '2D Scatter Plot'.
+      :type title: str, optional
+      :param xlabel: Label for the x-axis. Defaults to 'X-axis'.
+      :type xlabel: str, optional
+      :param ylabel: Label for the y-axis. Defaults to 'Y-axis'.
+      :type ylabel: str, optional
+      :param size_label: Label for the size legend. Defaults to 'Size'.
+      :type size_label: str, optional
+      :param cmap: Colormap for the scatter points. Defaults to 'coolwarm'.
+      :type cmap: str, optional
+      :param figsize: Size of the figure. Defaults to (12, 8).
+      :type figsize: tuple, optional
+      :param alpha: Alpha blending value for the scatter points, between 0 and 1. Defaults to 0.5.
+      :type alpha: float, optional
+      :param grid: Flag to add grid to the plot. Defaults to True.
+      :type grid: bool, optional
+      :param ref_size_value: Value for calculating the reference size circle. Defaults to 0.5.
+      :type ref_size_value: float, optional
 
-      :returns: tuple containing
+      :returns: The function creates a matplotlib scatter plot and does not return any value.
+      :rtype: None
 
-                - df_new (Pandas DataFrame): DataFrame with the outliers removed.
-                - drop_lines (list): List of indexes of the rows that were removed.
+      .. rubric:: Example
 
-      Example usage:
-
-      .. code-block::
-
-          >>> import asapy
-          >>> from sklearn.datasets import load_diabetes
-          >>> # load dataset
-          >>> X, y  = load_diabetes(as_frame=True, return_X_y=True)
-          >>> df_new, drop_lines = asapy.Analysis().remove_outliers(X, verbose = True)
-          Foram removidas 31 linhas.
+      create_2d_scatter_plot(df=my_dataframe,
+                          x_col='speed',
+                          y_col='altitude',
+                          size_col='fuel_consumed',
+                          title='Flight Characteristics',
+                          xlabel='Speed (knots)',
+                          ylabel='Altitude (feet)',
+                          size_label='Fuel Consumed (normalized)')
 
 
-   .. py:method:: cramer_V(df: pandas.DataFrame, verbose: bool = False, save: bool = False, path: str = None, format: str = 'png') -> pandas.DataFrame
+   .. py:method:: create_3d_surface_plot(df, x_col, y_col, z_col, title='3D Surface Plot', xlabel='X-axis', ylabel='Y-axis', zlabel='Z-axis', cmap=cm.coolwarm, figsize=(16, 12), elev=30, azim=45)
       :staticmethod:
 
-      Calculate Cramer's V statistic for categorical feature association in a DataFrame.
+      Create a 3D surface plot from three columns in a DataFrame.
 
-      Cramer's V is a measure of association between two categorical variables. It is based on the ``chi-squared`` statistic
-      and considers both the strength and direction of association. This function calculates Cramer's V for all pairs of
-      categorical variables in a given DataFrame and returns the results in a new DataFrame.
+      :param df: DataFrame containing the data.
+      :type df: DataFrame
+      :param x_col: Name of the column in df for the x-axis.
+      :type x_col: str
+      :param y_col: Name of the column in df for the y-axis.
+      :type y_col: str
+      :param z_col: Name of the column in df for the z-axis (surface height).
+      :type z_col: str
+      :param title: Title of the plot. Defaults to '3D Surface Plot'.
+      :type title: str, optional
+      :param xlabel: Label for the x-axis. Defaults to 'X-axis'.
+      :type xlabel: str, optional
+      :param ylabel: Label for the y-axis. Defaults to 'Y-axis'.
+      :type ylabel: str, optional
+      :param zlabel: Label for the z-axis. Defaults to 'Z-axis'.
+      :type zlabel: str, optional
+      :param cmap: Colormap for the surface plot. Defaults to cm.coolwarm.
+      :type cmap: Colormap, optional
+      :param figsize: Size of the figure. Defaults to (16, 12).
+      :type figsize: tuple, optional
+      :param elev: Elevation angle in the z plane for the 3D plot. Defaults to 30.
+      :type elev: int, optional
+      :param azim: Azimuth angle in the x,y plane for the 3D plot. Defaults to 45.
+      :type azim: int, optional
 
-      :param df: The input DataFrame containing the categorical variables.
-      :type df: pandas DataFrame
-      :param verbose: If True, a heatmap of the Cramer's V values will be displayed using Seaborn. Default is False.
-      :type verbose: bool, optional
-
-      :returns: A DataFrame containing Cramer's V values for all pairs of categorical variables.
-      :rtype: (pandas DataFrame)
-
-      Example usage:
-
-      .. code-block::
-
-          >>> import pandas as pd
-          >>> import asapy
-          >>> # Create a sample DataFrame
-          >>> df = pd.DataFrame({'A': ['cat', 'dog', 'bird', 'cat', 'dog'],
-          ...                    'B': ['small', 'large', 'medium', 'medium', 'small'],
-          ...                    'C': ['red', 'blue', 'green', 'red', 'blue']})
-          >>> # Calculate Cramer's V
-          >>> cramer_df = asapy.Analysis.cramer_V(df, verbose=True)
-
-      .. image:: /../../../../../image/output_cramer_v.png
-
-
-   .. py:method:: EDA(df: pandas.DataFrame, save: bool = False, path: str = None, format: str = 'png') -> None
-
-      Perform exploratory data analysis (EDA) on a given pandas DataFrame.
-
-      The function displays a summary table of the DataFrame, a table of class balance for categorical variables,
-      and histograms and boxplots with information on the number of outliers for numerical variables.
-
-      :param df: Input DataFrame to be analyzed.
-      :type df: pandas.DataFrame
-      :param save: If True, save the plots. Defaults to False.
-      :type save: bool, optional
-      :param path: Path to save the plots. Defaults to None.
-      :type path: str, optional
-      :param format: Format for the plot files. Defaults to 'png'.
-      :type format: str, optional
-
-      :returns: None
-
-      Example Usage:
-
-      .. code::
-
-          >>> import asapy
-          >>> import pandas as pd
-          >>> df = pd.read_csv('path-to-dataset.csv')
-          >>> asapy.Analysis().EDA(df)
-
-          Variáveis Categóricas:
-
-                  occupation      education      educational-num
-          ------  --------------  -----------  -----------------
-          nan     0               0                            0
-          count   48842           48842                    48842
-          unique  15              16                          16
-          top     Prof-specialty  HS-grad                      9
-          freq    6172            15784                    15784
-
-
-          Associação:
-
-      .. image:: /../../../../../image/association.png
-
-      .. code::
-
-          Histogramas:
-
-      .. image:: /../../../../../image/occupation.png
-
-      .. image:: /../../../../../image/education.png
-
-      .. image:: /../../../../../image/educational-num.png
-
-      .. code::
-
-          Variáveis Numéricas:
-                      age           fnlwgt
-          -----  ----------  ---------------
-          nan        0            0
-          count  48842        48842
-          mean      38.6436  189664
-          std       13.7105  105604
-          min       17        12285
-          25%       28       117550
-          50%       37       178144
-          75%       48       237642
-          max       90            1.4904e+06
-
-          Correlação:
-
-      .. image:: /../../../../../image/correlation.png
-
-      .. code::
-
-          Histogramas e boxplots:
-
-      .. image:: /../../../../../image/age.png
-
-      .. code::
-
-          Detecção de outlier da variável 'age':
-          Quantidade: 216 de 48842.
-          Método: Intervalo Interquartil (IQR - Interquatile Range).
-          Critério: Os valores menores que -2.0 ou maiores que 78.0 foram considerados outliers.
-
-      .. image:: /../../../../../image/fnlwgt.png
-
-      .. code::
-
-          Detecção de outlier da variável 'fnlwgt':
-          Quantidade: 1453 de 48842.
-          Método: Intervalo Interquartil (IQR - Interquatile Range).
-          Critério: Os valores menores que -62586.75 ou maiores que 417779.25 foram considerados outliers.
-
+      :returns: The function creates a matplotlib 3D surface plot and does not return any value.
+      :rtype: None
 
 
 

@@ -36,4 +36,4 @@ API Reference
 =============
 
 
-See `API Reference <docs/autoapi/asapy/index.rst>`_.
+See `API Reference </autoapi/asapy/index.rst>`_.

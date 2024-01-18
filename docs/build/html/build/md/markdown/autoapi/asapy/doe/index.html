@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.doe &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../../_static/copybutton.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">asapy.doe</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/build/md/markdown/autoapi/asapy/doe/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asapy-doe">
+<h1><code class="docutils literal notranslate"><span class="pre">asapy.doe</span></code><a class="headerlink" href="#asapy-doe" title="Permalink to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<p>| <code class="docutils literal notranslate"><span class="pre">Doe</span></code>
+|</p>
+<p>|</p>
+</section>
+<section id="class-asapy-doe-doe">
+<h3><em>class</em> asapy.doe.Doe()<a class="headerlink" href="#class-asapy-doe-doe" title="Permalink to this heading"></a></h3>
+<section id="static-get-aliases-sim">
+<h4><em>static</em> _get_aliases(sim)<a class="headerlink" href="#static-get-aliases-sim" title="Permalink to this heading"></a></h4>
+<p>Returns a generator that yields dictionaries containing information about aliases found within the input sim parameter.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>sim</strong> (<em>dict</em>) – A dictionary representing the simulation object.</p>
+</li>
+<li><p><strong>Yields</strong></p>
+<p><em>dict</em> – A dictionary containing information about an alias, including its id, alias_attribute, and alias.</p>
+</li>
+</ul>
+<p>Example Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#To extract aliases from a simulation object `sim`, you can use the following code:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">alias_info</span> <span class="ow">in</span> <span class="n">Doe</span><span class="o">.</span><span class="n">_get_aliases</span><span class="p">(</span><span class="n">sim</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">alias_info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>:</p>
+<ul class="simple">
+<li><p>This method checks if the input sim has an alias key with a non-empty value. If found, it iterates through the key-value pairs of the value dictionary and yields a dictionary containing information about the alias.</p></li>
+<li><p>If the value of the key-value pair is a dictionary, the method recursively calls itself with the dictionary as the new input sim parameter.</p></li>
+<li><p>If the value of the key-value pair is a list, it iterates through the list and recursively calls itself with each dictionary in the list as the new input sim parameter.</p></li>
+</ul>
+</section>
+<section id="static-get-configs-configs-alias">
+<h4><em>static</em> _get_configs(configs, alias)<a class="headerlink" href="#static-get-configs-configs-alias" title="Permalink to this heading"></a></h4>
+<p>Recursively searches for the attribute of the given alias in a list of configurations.</p>
+<p>Args:</p>
+<ul class="simple">
+<li><p>configs (list of dicts): List of configuration dictionaries</p></li>
+<li><p>alias (dict): Dictionary containing the alias attribute to be searched and the id to match</p></li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li><p>Generator object that yields the value of the alias attribute whenever it is found</p></li>
+</ul>
+</section>
+<section id="process-aliases-by-sim-sim-configs">
+<h4>process_aliases_by_sim(sim, configs)<a class="headerlink" href="#process-aliases-by-sim-sim-configs" title="Permalink to this heading"></a></h4>
+<p>Process aliases based on similarity and configurations.</p>
+<p>Parameters:
+sim (list): A list of dictionaries, containing ‘id’ and ‘text’ keys.
+configs (list): A list of dictionaries, containing ‘identifier’, ‘attributes’, and ‘alias_attribute’ keys.</p>
+<p>Returns:
+DataFrame: A DataFrame containing aliases and their corresponding attributes.</p>
+</section>
+<section id="static-create-df-t-samples">
+<h4><em>static</em> create(df_T, samples)<a class="headerlink" href="#static-create-df-t-samples" title="Permalink to this heading"></a></h4>
+<p>Creates a design of experiments (DOE) based on the input DataFrame <code class="docutils literal notranslate"><span class="pre">df_T</span></code>.
+The DOE is created using a Latin Hypercube Sampling (LHS) method and a sample size <code class="docutils literal notranslate"><span class="pre">samples</span></code>.
+The function returns a new DataFrame with the input variables’ names and values according to their type.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df_T</strong> – A DataFrame of the variables’ metadata. The index should contain the variables’ names, and the following columns</p></li>
+<li><p><strong>exist</strong> (<em>should</em>) –</p>
+<ul>
+<li><p>“type”: Variable’s type: integer, double, boolean, select, multi_select, or string.</p></li>
+<li><p>”default”: Default value for the variable.</p></li>
+<li><p>”min”: Minimum value for the variable (if applicable).</p></li>
+<li><p>”max”: Maximum value for the variable (if applicable).</p></li>
+<li><p>”options”: Available options for the variable (if applicable).</p></li>
+</ul>
+</li>
+<li><p><strong>samples</strong> – An integer value indicating the number of samples in the design.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A new DataFrame containing the input variables’ names and values, generated using LHS sampling.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">df_T</span></code> is not a pandas DataFrame or <code class="docutils literal notranslate"><span class="pre">samples</span></code> is not an integer.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">df_T</span></code> does not contain the required columns or the <code class="docutils literal notranslate"><span class="pre">default</span></code> value is not within the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> range.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="static-prepare-experiments-df">
+<h4><em>static</em> prepare_experiments(df)<a class="headerlink" href="#static-prepare-experiments-df" title="Permalink to this heading"></a></h4>
+<p>Prepare a list of experiments from a Pandas DataFrame.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>df</strong> – A Pandas DataFrame containing experiment data.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A list of dictionaries, where each dictionary represents an experiment and its attributes.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>None.</strong> –</p>
+</li>
+</ul>
+</section>
+<section id="static-get-metrics-sim">
+<h4><em>static</em> _get_metrics(sim)<a class="headerlink" href="#static-get-metrics-sim" title="Permalink to this heading"></a></h4>
+<p>Recursively extract monitor metrics from a simulation dictionary.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>sim</strong> (<em>dict</em>) – A simulation dictionary.</p>
+</li>
+<li><p><strong>Yields</strong></p>
+<p><em>dict</em> – A dictionary containing the workspace name, simulation identifier, and monitor metrics.</p>
+</li>
+</ul>
+</section>
+<section id="process-metrics-sim">
+<h4>process_metrics(sim)<a class="headerlink" href="#process-metrics-sim" title="Permalink to this heading"></a></h4>
+<p>Process the metrics obtained from a simulation.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>sim</strong> – A dictionary containing the simulation data.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A pandas DataFrame containing the metrics indexed by workspace name.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>None</strong> –</p>
+</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

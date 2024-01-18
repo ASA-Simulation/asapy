@@ -23,11 +23,16 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
 from scipy.stats import shapiro
 from scipy.stats import levene
-#from bioinfokit.analys import stat
 import statsmodels.api as sm
 import seaborn as sns
 import matplotlib.pyplot as plt
 from typing import List
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+from scipy.interpolate import griddata
+from itertools import combinations
+
+
 
 class Analysis:
     """
@@ -1032,7 +1037,15 @@ class Analysis:
         return best_pareto_point
 
     @staticmethod
-    def anova(df: pd.DataFrame, columns: List[str] = None, alpha: float = 0.05, show_plots: bool = True, save_path: Optional[str] = None) -> Tuple[pd.DataFrame, Optional[pd.DataFrame]]:
+    def anova(df: pd.DataFrame, 
+              columns: List[str] = None, 
+              alpha: float = 0.05, 
+              show_plots: bool = True, 
+              save_path: Optional[str] = None, 
+              boxplot_title: str = 'Distributions of Samples', 
+              boxplot_xlabel: str = 'Samples', 
+              boxplot_ylabel: str = 'Value', 
+              boxplot_names: Optional[List[str]] = None) -> Tuple[pd.DataFrame, Optional[pd.DataFrame]]:
         """
         Perform ANOVA test on the given DataFrame columns and conduct Multiple pairwise comparisons (Post-hoc test)
         if more than two variables are being compared.
@@ -1045,12 +1058,12 @@ class Analysis:
             save_path (Optional[str], optional): Path to save the generated plots and results. If None, the plots are 
                 displayed and results are printed without saving. If provided, plots and results will be saved to the 
                 specified path. Directory structure will be created if not exists. Defaults to None.
-            save_path (Optional[str], optional): Path to save the generated plots and results. If None, the plots are 
-                displayed and results are printed without saving. If provided, plots and results will be saved to the 
-                specified path. Directory structure will be created if not exists. Defaults to None.
+            boxplot_title (str, optional): Title for the box plots. Defaults to 'Distributions of Samples'.
+            boxplot_xlabel (str, optional): Label for the X-axis of the box plot. Defaults to 'Samples'.
+            boxplot_ylabel (str, optional): Label for the Y-axis of the box plot. Defaults to 'Value'.
+            boxplot_names (Optional[List[str]], optional): Names for the box plots. Defaults to None.
 
         Returns:
-            Tuple[pd.DataFrame, Optional[pd.DataFrame]]: ANOVA summary and optionally Post-hoc test results.
             Tuple[pd.DataFrame, Optional[pd.DataFrame]]: ANOVA summary and optionally Post-hoc test results.
         """
 
@@ -1068,11 +1081,7 @@ class Analysis:
         # Create directory if save_path is provided and it doesn't exist
         if save_path and not os.path.exists(save_path):
             os.makedirs(save_path)
-
-        # Create directory if save_path is provided and it doesn't exist
-        if save_path and not os.path.exists(save_path):
-            os.makedirs(save_path)
-
+        
         sub_df = df[columns].reset_index()
         sub_df.rename(columns={sub_df.columns[0]: 'index_col'}, inplace=True) 
         df_melt = pd.melt(sub_df, id_vars=['index_col'], value_vars=columns)
@@ -1082,6 +1091,17 @@ class Analysis:
 
         if show_plots:
             plt.figure(figsize=(8, 6))
+            
+            # Use the custom names for boxplots if provided
+            if boxplot_names:
+                box_names = boxplot_names
+                # Create a mapping dictionary
+                name_mapping = dict(zip(columns, box_names))
+
+                # Update the 'samples' column with the new names
+                df_melt['samples'] = df_melt['samples'].map(name_mapping)
+            else:
+                box_names = columns
 
             boxprops = dict(linewidth=1.5)
             medianprops = dict(linestyle='-', linewidth=1.5, color="red")
@@ -1105,12 +1125,13 @@ class Analysis:
             # Adjust the y-axis limits to ensure annotations are visible
             ax.set_ylim(bottom=ax.get_ylim()[0], top=y_upper + offset_from_top * 3)
 
-            plt.title('Distributions of Samples', fontsize=14)
-            plt.xlabel('Samples', fontsize=12)
-            plt.ylabel('Value', fontsize=12)
+            plt.title(boxplot_title, fontsize=14)
+            plt.xlabel(boxplot_xlabel, fontsize=12)
+            plt.ylabel(boxplot_ylabel, fontsize=12)
             plt.xticks(fontsize=10)
             plt.yticks(fontsize=10)
             sns.despine()
+
 
             if save_path:
                 plt.savefig(f"{save_path}/distribution_of_samples.png", bbox_inches='tight')
@@ -1397,97 +1418,240 @@ class Analysis:
                 plt.show()
 
     @staticmethod
-    def bootstrap(dataframe, col1, col2, n_iterations=10000, alpha=0.05, show_plots=False):
+    def bootstrap(dataframe, 
+                  columns, 
+                  n_iterations=1000, 
+                  alpha=0.05, 
+                  show_plots=False,
+                  boxplot_xlabel: str = 'Samples', 
+                  boxplot_ylabel: str = 'Value',
+                  boxplot_names: Optional[List[str]] = None):
         """
-        Perform a bootstrap hypothesis test to determine if the mean of one sample 
-        is statistically greater or lesser than the other and optionally visualize the distributions.
-        
+        Perform bootstrap hypothesis tests to determine if the mean of one sample 
+        is statistically greater or lesser than the other for each pair of columns 
+        in the provided list and optionally visualize the distributions with box plots.
+
         Args:
-        dataframe (pd.DataFrame): The dataframe containing the samples.
-        col1 (str): Column name for the first sample.
-        col2 (str): Column name for the second sample.
-        n_iterations (int, optional): Number of bootstrap iterations. Default is 10,000.
-        alpha (float, optional): Significance level. Default is 0.05.
-        show_plots (bool, optional): Flag to display plots. Default is False.
-        
+            dataframe (pd.DataFrame): The dataframe containing the samples.
+            columns (list): List of column names to be compared.
+            n_iterations (int, optional): Number of bootstrap iterations. Default is 1,000.
+            alpha (float, optional): Significance level. Default is 0.05.
+            show_plots (bool, optional): Flag to display plots. Default is False.
+            boxplot_xlabel (str, optional): Label for the X-axis of the box plot. Default is 'Samples'.
+            boxplot_ylabel (str, optional): Label for the Y-axis of the box plot. Default is 'Value'.
+            boxplot_names (Optional[List[str]], optional): Names for the box plots. Default is None.
+
         Returns:
-        None: Prints the test outcome and optionally displays a box plot.
+            None: Prints the test outcome for each pair and optionally displays a box plot.
         """
-        
-        observed_difference = dataframe[col1].mean() - dataframe[col2].mean()
-        combined_data = np.concatenate([dataframe[col1], dataframe[col2]])
-        count_greater = 0
-        count_lesser = 0
-
-        for _ in range(n_iterations):
-            np.random.shuffle(combined_data)
-            new_sample_1 = combined_data[:len(dataframe[col1])]
-            new_sample_2 = combined_data[len(dataframe[col1]):]
-            bootstrap_difference = new_sample_1.mean() - new_sample_2.mean()
-
-            if bootstrap_difference >= observed_difference:
-                count_greater += 1
-            else:
-                count_lesser += 1
-
-        p_value_greater = count_greater / n_iterations
-        p_value_lesser = count_lesser / n_iterations
-
-        result_header = f"Bootstrap Hypothesis Test Results ({col1} vs {col2})"
-        separator = "-" * len(result_header)
-        print(separator)
-        print(result_header)
-        print(separator)
-        print(f"Observed difference in means: {observed_difference:.4f}")
-
-        if observed_difference > 0 and p_value_greater < alpha:
-            print(f"Bootstrap p-value: {p_value_greater:.4f}")
-            conclusion = f"Sample {col1} is statistically greater than sample {col2}."
-        elif observed_difference < 0 and p_value_lesser < alpha:
-            print(f"Bootstrap p-value: {p_value_lesser:.4f}")
-            conclusion = f"Sample {col1} is statistically lesser than sample {col2}."
+        if boxplot_names:
+            box_names = boxplot_names
+            # Create a mapping dictionary
+            name_mapping = dict(zip(columns, box_names))
         else:
-            conclusion = "There's no sufficient evidence to claim one sample is statistically greater or lesser than the other."
+            name_mapping = dict(zip(columns, columns))
 
-        print(conclusion)
-        print(separator)
-        print()
-        
-        # Plotting
-        if show_plots:
-            plt.figure(figsize=(8, 6))
+        for i in range(len(columns)):
+            for j in range(i + 1, len(columns)):
+                col1, col2 = columns[i], columns[j]
 
-            # Preparing data for plotting
-            df_melt = pd.melt(dataframe[[col1, col2]], var_name='samples', value_name='value')
+                # Original observed difference
+                observed_difference = dataframe[col1].mean() - dataframe[col2].mean()
 
-            boxprops = dict(linewidth=1.5)
-            medianprops = dict(linestyle='-', linewidth=1.5, color="red")
-            meanprops = dict(marker='^', markeredgecolor='black', markerfacecolor='green', markersize=8)
+                combined_data = np.concatenate([dataframe[col1], dataframe[col2]])
+                bootstrap_differences = []
 
-            ax = sns.boxplot(x='samples', y='value', data=df_melt, width=0.3,  
-                            showmeans=True, meanprops=meanprops, boxprops=boxprops, medianprops=medianprops, palette="viridis")
+                for _ in range(n_iterations):
+                    np.random.shuffle(combined_data)
+                    new_sample_1 = combined_data[:len(dataframe[col1])]
+                    new_sample_2 = combined_data[len(dataframe[col1]):]
+                    bootstrap_difference = new_sample_1.mean() - new_sample_2.mean()
+                    bootstrap_differences.append(bootstrap_difference)
 
-            y_upper = ax.get_ylim()[1]
-            offset_from_top = y_upper * 0.07
+                # Null hypothesis adjustment
+                adjusted_bootstrap_differences = np.array(bootstrap_differences) - np.mean(bootstrap_differences)
 
-            columns = [col1, col2]
-            for i, column in enumerate(columns):
-                median_y = dataframe[column].median()
-                ax.annotate(f'Median: {median_y:.2f}', (i, y_upper + offset_from_top), ha='center', fontsize=8, color='red')
-                mean_y = dataframe[column].mean()
-                ax.annotate(f'Mean: {mean_y:.2f}', (i, y_upper + offset_from_top * 1.5), ha='center', fontsize=8, color='green')
+                p_value = np.mean(np.abs(adjusted_bootstrap_differences) >= np.abs(observed_difference))
 
-            ax.set_ylim(bottom=ax.get_ylim()[0], top=y_upper + offset_from_top * 3)
-            plt.title('Distributions of Samples', fontsize=14)
-            plt.xlabel('Samples', fontsize=12)
-            plt.ylabel('Value', fontsize=12)
-            plt.xticks(fontsize=10)
-            plt.yticks(fontsize=10)
-            sns.despine()
-            plt.show()
+                result_header = f"Bootstrap Hypothesis Test Results ({name_mapping[col1]} vs {name_mapping[col2]})"
+                separator = "-" * len(result_header)
+                print(separator)
+                print(result_header)
+                print(separator)
+                print(f"Observed difference in means: {observed_difference:.4f}")
+                print(f"Adjusted Bootstrap p-value: {p_value:.4f}")
+
+                if p_value < alpha:
+                    if observed_difference > 0:
+                        conclusion = f"Sample '{name_mapping[col1]}' is statistically greater than sample '{name_mapping[col2]}' (p = {p_value:.4f})."
+                    else:
+                        conclusion = f"Sample '{name_mapping[col1]}' is statistically lesser than sample '{name_mapping[col2]}' (p = {p_value:.4f})."
+                else:
+                    conclusion = "There's no sufficient evidence to claim one sample is statistically greater or lesser than the other."
+
+                print(conclusion)
+                print(separator)
+                print()
+
+                # Plotting
+                if show_plots:
+                    plt.figure(figsize=(8, 6))
+                    
+                    # Preparing data for plotting
+                    df_melt = pd.melt(dataframe[[col1, col2]], var_name='samples', value_name='value')
+
+                    # Use the custom names for boxplots if provided
+                    if boxplot_names:
+                        # Update the 'samples' column with the new names
+                        df_melt['samples'] = df_melt['samples'].map(name_mapping)
+                    else:
+                        box_names = columns
+
+                    boxprops = dict(linewidth=1.5)
+                    medianprops = dict(linestyle='-', linewidth=1.5, color="red")
+                    meanprops = dict(marker='^', markeredgecolor='black', markerfacecolor='green', markersize=8)
+
+                    ax = sns.boxplot(x='samples', y='value', data=df_melt, width=0.3,  
+                                    showmeans=True, meanprops=meanprops, boxprops=boxprops, medianprops=medianprops, palette="viridis")
+
+                    y_upper = ax.get_ylim()[1]
+                    offset_from_top = y_upper * 0.07
+
+                    columns_pair = [col1, col2]
+                    for k, column in enumerate(columns_pair):
+                        median_y = dataframe[column].median()
+                        ax.annotate(f'Median: {median_y:.2f}', (k, y_upper + offset_from_top), ha='center', fontsize=8, color='red')
+                        mean_y = dataframe[column].mean()
+                        ax.annotate(f'Mean: {mean_y:.2f}', (k, y_upper + offset_from_top * 1.5), ha='center', fontsize=8, color='green')
+
+                    ax.set_ylim(bottom=ax.get_ylim()[0], top=y_upper + offset_from_top * 3)
+                    plt.title(f"Distributions of Samples '{name_mapping[col1]}' and '{name_mapping[col2]}'", fontsize=14)
+                    plt.xlabel(boxplot_xlabel, fontsize=12)
+                    plt.ylabel(boxplot_ylabel, fontsize=12)
+                    plt.xticks(fontsize=10)
+                    plt.yticks(fontsize=10)
+                    sns.despine()
+                    plt.show()
 
 
+    
+    @staticmethod
+    def create_2d_scatter_plot(df, x_col, y_col, size_col, title='2D Scatter Plot', 
+                            xlabel='X-axis', ylabel='Y-axis', size_label='Size', 
+                            cmap='coolwarm', figsize=(12, 8), alpha=0.5, grid=True, ref_size_value=0.5):
+        """
+        Create a 2D scatter plot with variable circle sizes.
 
+        Args:
+            df (DataFrame): DataFrame containing the data.
+            x_col (str): Name of the column in df for the x-axis.
+            y_col (str): Name of the column in df for the y-axis.
+            size_col (str): Name of the column in df for determining the size of the scatter points.
+            title (str, optional): Title of the plot. Defaults to '2D Scatter Plot'.
+            xlabel (str, optional): Label for the x-axis. Defaults to 'X-axis'.
+            ylabel (str, optional): Label for the y-axis. Defaults to 'Y-axis'.
+            size_label (str, optional): Label for the size legend. Defaults to 'Size'.
+            cmap (str, optional): Colormap for the scatter points. Defaults to 'coolwarm'.
+            figsize (tuple, optional): Size of the figure. Defaults to (12, 8).
+            alpha (float, optional): Alpha blending value for the scatter points, between 0 and 1. Defaults to 0.5.
+            grid (bool, optional): Flag to add grid to the plot. Defaults to True.
+            ref_size_value (float, optional): Value for calculating the reference size circle. Defaults to 0.5.
+
+        Returns:
+            None: The function creates a matplotlib scatter plot and does not return any value.
+
+        Example:
+            create_2d_scatter_plot(df=my_dataframe, 
+                                x_col='speed', 
+                                y_col='altitude', 
+                                size_col='fuel_consumed',
+                                title='Flight Characteristics', 
+                                xlabel='Speed (knots)', 
+                                ylabel='Altitude (feet)', 
+                                size_label='Fuel Consumed (normalized)')
+        """
+        # Normalizing the size column data for circle size
+        normalized_size = df[size_col] / df[size_col].max()
+        point_size = np.log1p(normalized_size) * 100  # Logarithmic scale for size, adjusted by a factor
+
+        plt.figure(figsize=figsize)
+
+        # Creating the scatter plot
+        sc = plt.scatter(df[x_col], df[y_col], c=normalized_size, s=point_size, cmap=cmap, alpha=alpha)
+
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.title(title)
+        plt.colorbar(sc, label=size_label)
+
+        # Adding grid, minor ticks and a reference size circle for scale
+        if grid:
+            plt.grid(True, which='both', linestyle='--', linewidth=0.5)
+            plt.minorticks_on()
+
+        # Reference size circle
+        ref_size = np.log1p(ref_size_value) * 100  # Logarithmic scale for reference size
+        plt.scatter([], [], c='k', alpha=0.5, s=ref_size, label=f'Reference Size for {int(ref_size_value * 100)}% of Max {size_label}')
+        plt.legend(scatterpoints=1, frameon=False, labelspacing=1, loc='lower right', bbox_to_anchor=(1, -0.01))
+
+        plt.show()
+
+    @staticmethod
+    def create_3d_surface_plot(df, x_col, y_col, z_col, title='3D Surface Plot', 
+                            xlabel='X-axis', ylabel='Y-axis', zlabel='Z-axis', 
+                            cmap=cm.coolwarm, figsize=(16, 12), elev=30, azim=45):
+        """
+        Create a 3D surface plot from three columns in a DataFrame.
+
+        Args:
+            df (DataFrame): DataFrame containing the data.
+            x_col (str): Name of the column in df for the x-axis.
+            y_col (str): Name of the column in df for the y-axis.
+            z_col (str): Name of the column in df for the z-axis (surface height).
+            title (str, optional): Title of the plot. Defaults to '3D Surface Plot'.
+            xlabel (str, optional): Label for the x-axis. Defaults to 'X-axis'.
+            ylabel (str, optional): Label for the y-axis. Defaults to 'Y-axis'.
+            zlabel (str, optional): Label for the z-axis. Defaults to 'Z-axis'.
+            cmap (Colormap, optional): Colormap for the surface plot. Defaults to cm.coolwarm.
+            figsize (tuple, optional): Size of the figure. Defaults to (16, 12).
+            elev (int, optional): Elevation angle in the z plane for the 3D plot. Defaults to 30.
+            azim (int, optional): Azimuth angle in the x,y plane for the 3D plot. Defaults to 45.
+
+        Returns:
+            None: The function creates a matplotlib 3D surface plot and does not return any value.
+        """
+        # Data for the plot
+        x = df[x_col]
+        y = df[y_col]
+        z = df[z_col]
+
+        # Creating grid data for the surface plot
+        xi = np.linspace(x.min(), x.max(), 100)
+        yi = np.linspace(y.min(), y.max(), 100)
+        xi, yi = np.meshgrid(xi, yi)
+        zi = griddata((x, y), z, (xi, yi), method='cubic')
+
+        # Plotting the surface
+        fig = plt.figure(figsize=figsize)
+        ax = fig.add_subplot(111, projection='3d')
+        surf = ax.plot_surface(xi, yi, zi, cmap=cmap, linewidth=0, antialiased=True)
+
+        # Setting labels and title
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+        ax.set_zlabel(zlabel, labelpad=1)
+        plt.title(title)
+
+        # Enhancing the view
+        ax.view_init(elev=elev, azim=azim)
+
+        # Adding a color bar
+        cbar = fig.colorbar(surf, shrink=0.5, aspect=10)
+        cbar.set_label(zlabel)
+
+        plt.show()
+
+            
 
 
 

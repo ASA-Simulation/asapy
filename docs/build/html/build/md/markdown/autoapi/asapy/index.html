@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">asapy</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/build/md/markdown/autoapi/asapy/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asapy">
+<h1><code class="docutils literal notranslate"><span class="pre">asapy</span></code><a class="headerlink" href="#asapy" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="analysis/index.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">asapy.analysis</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="doe/index.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">asapy.doe</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="execution_controller/index.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="models/index.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">asapy.models</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="utils/index.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">asapy.utils</span></code></span></a></p></li>
+</ul>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Doe</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Analysis</span></code></p></td>
+<td><p>The Analysis object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NN</span></code></p></td>
+<td><p>The class NN is a wrapper around Keras Sequential API, which provides an easy way to create and train neural network models. It can perform hyperparameters search and model building with specified hyperparameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RandomForest</span></code></p></td>
+<td><p>This class is used to build and search hyperparameters for a random forest model in scikit-learn.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Scaler</span></code></p></td>
+<td><p>The Scaler class is designed to scale and transform data using various scaling techniques. It contains methods for fitting and transforming data, as well as saving and loading scaler objects to and from files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AsaML</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="class-asapy-doe">
+<h3><em>class</em> asapy.Doe()<a class="headerlink" href="#class-asapy-doe" title="Permalink to this heading"></a></h3>
+<section id="static-get-aliases-sim">
+<h4><em>static</em> _get_aliases(sim)<a class="headerlink" href="#static-get-aliases-sim" title="Permalink to this heading"></a></h4>
+<p>Returns a generator that yields dictionaries containing information about aliases found within the input sim parameter.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>sim</strong> (<em>dict</em>) – A dictionary representing the simulation object.</p>
+</li>
+<li><p><strong>Yields</strong></p>
+<p><em>dict</em> – A dictionary containing information about an alias, including its id, alias_attribute, and alias.</p>
+</li>
+</ul>
+<p>Example Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#To extract aliases from a simulation object `sim`, you can use the following code:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">alias_info</span> <span class="ow">in</span> <span class="n">Doe</span><span class="o">.</span><span class="n">_get_aliases</span><span class="p">(</span><span class="n">sim</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">alias_info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>:</p>
+<ul class="simple">
+<li><p>This method checks if the input sim has an alias key with a non-empty value. If found, it iterates through the key-value pairs of the value dictionary and yields a dictionary containing information about the alias.</p></li>
+<li><p>If the value of the key-value pair is a dictionary, the method recursively calls itself with the dictionary as the new input sim parameter.</p></li>
+<li><p>If the value of the key-value pair is a list, it iterates through the list and recursively calls itself with each dictionary in the list as the new input sim parameter.</p></li>
+</ul>
+</section>
+<section id="static-get-configs-configs-alias">
+<h4><em>static</em> _get_configs(configs, alias)<a class="headerlink" href="#static-get-configs-configs-alias" title="Permalink to this heading"></a></h4>
+<p>Recursively searches for the attribute of the given alias in a list of configurations.</p>
+<p>Args:</p>
+<ul class="simple">
+<li><p>configs (list of dicts): List of configuration dictionaries</p></li>
+<li><p>alias (dict): Dictionary containing the alias attribute to be searched and the id to match</p></li>
+</ul>
+<p>Returns:</p>
+<ul class="simple">
+<li><p>Generator object that yields the value of the alias attribute whenever it is found</p></li>
+</ul>
+</section>
+<section id="process-aliases-by-sim-sim-configs">
+<h4>process_aliases_by_sim(sim, configs)<a class="headerlink" href="#process-aliases-by-sim-sim-configs" title="Permalink to this heading"></a></h4>
+<p>Process aliases based on similarity and configurations.</p>
+<p>Parameters:
+sim (list): A list of dictionaries, containing ‘id’ and ‘text’ keys.
+configs (list): A list of dictionaries, containing ‘identifier’, ‘attributes’, and ‘alias_attribute’ keys.</p>
+<p>Returns:
+DataFrame: A DataFrame containing aliases and their corresponding attributes.</p>
+</section>
+<section id="static-create-df-t-samples">
+<h4><em>static</em> create(df_T, samples)<a class="headerlink" href="#static-create-df-t-samples" title="Permalink to this heading"></a></h4>
+<p>Creates a design of experiments (DOE) based on the input DataFrame <code class="docutils literal notranslate"><span class="pre">df_T</span></code>.
+The DOE is created using a Latin Hypercube Sampling (LHS) method and a sample size <code class="docutils literal notranslate"><span class="pre">samples</span></code>.
+The function returns a new DataFrame with the input variables’ names and values according to their type.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df_T</strong> – A DataFrame of the variables’ metadata. The index should contain the variables’ names, and the following columns</p></li>
+<li><p><strong>exist</strong> (<em>should</em>) –</p>
+<ul>
+<li><p>“type”: Variable’s type: integer, double, boolean, select, multi_select, or string.</p></li>
+<li><p>”default”: Default value for the variable.</p></li>
+<li><p>”min”: Minimum value for the variable (if applicable).</p></li>
+<li><p>”max”: Maximum value for the variable (if applicable).</p></li>
+<li><p>”options”: Available options for the variable (if applicable).</p></li>
+</ul>
+</li>
+<li><p><strong>samples</strong> – An integer value indicating the number of samples in the design.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A new DataFrame containing the input variables’ names and values, generated using LHS sampling.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<ul class="simple">
+<li><p><strong>TypeError</strong> – If <code class="docutils literal notranslate"><span class="pre">df_T</span></code> is not a pandas DataFrame or <code class="docutils literal notranslate"><span class="pre">samples</span></code> is not an integer.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">df_T</span></code> does not contain the required columns or the <code class="docutils literal notranslate"><span class="pre">default</span></code> value is not within the <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> range.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="static-prepare-experiments-df">
+<h4><em>static</em> prepare_experiments(df)<a class="headerlink" href="#static-prepare-experiments-df" title="Permalink to this heading"></a></h4>
+<p>Prepare a list of experiments from a Pandas DataFrame.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>df</strong> – A Pandas DataFrame containing experiment data.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A list of dictionaries, where each dictionary represents an experiment and its attributes.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>None.</strong> –</p>
+</li>
+</ul>
+</section>
+<section id="static-get-metrics-sim">
+<h4><em>static</em> _get_metrics(sim)<a class="headerlink" href="#static-get-metrics-sim" title="Permalink to this heading"></a></h4>
+<p>Recursively extract monitor metrics from a simulation dictionary.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>sim</strong> (<em>dict</em>) – A simulation dictionary.</p>
+</li>
+<li><p><strong>Yields</strong></p>
+<p><em>dict</em> – A dictionary containing the workspace name, simulation identifier, and monitor metrics.</p>
+</li>
+</ul>
+</section>
+<section id="process-metrics-sim">
+<h4>process_metrics(sim)<a class="headerlink" href="#process-metrics-sim" title="Permalink to this heading"></a></h4>
+<p>Process the metrics obtained from a simulation.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>sim</strong> – A dictionary containing the simulation data.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A pandas DataFrame containing the metrics indexed by workspace name.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>None</strong> –</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-analysis">
+<h3><em>class</em> asapy.Analysis()<a class="headerlink" href="#class-asapy-analysis" title="Permalink to this heading"></a></h3>
+<p>The Analysis object.</p>
+<section id="static-hypothesis-df-pandas-dataframe-alpha-float-0-05-verbose-bool-false">
+<h4><em>static</em> hypothesis(df: pandas.DataFrame, alpha: float = 0.05, verbose: bool = False)<a class="headerlink" href="#static-hypothesis-df-pandas-dataframe-alpha-float-0-05-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Method that performs hypothesis testing</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> – (Pandas DataFrame)
+Input data (must contain at least two distributions).</p></li>
+<li><p><strong>alpha</strong> – (float)
+Significance level. Represents a cutoff value, a criterion that we set to reject or not H0. Default 0.05.</p></li>
+<li><p><strong>verbose</strong> – (bool, optional)
+Variable that defines whether or not to display detailed messages. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<ul class="simple">
+<li><p><strong>ValueError</strong> – Input variable is empty.</p></li>
+<li><p><strong>ValueError</strong> – Input data must match at least two distributions.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Indicates which distributions are statistically similar.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(Pandas DataFrame)</p>
+</li>
+</ul>
+<p>The figure below shows the flow of the hypothesis method:</p>
+<p><img alt="image" src="../../../../../_images/Diagrama_hypothesis.png" /></p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set random seed for reproducibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create DataFrame with 5 columns and 100 rows</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col0&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col3&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">logistic</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="s1">&#39;col4&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">hypothesis</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="go">Teste de normalidade</span>
+<span class="go">            W         pval  normal</span>
+<span class="go">----  --------  -----------  --------</span>
+<span class="go">col1   74.7177  5.96007e-17  False</span>
+<span class="go">col2   31.6041  1.3717e-07   False</span>
+<span class="go">col3   40.6985  1.45356e-09  False</span>
+<span class="go">col4   10.2107  0.00606431   False</span>
+<span class="go">col5  212.599   6.8361e-47   False</span>
+<span class="go">Conclusão: Ao menos uma distribuição não se assemelha à gaussiana (normal).</span>
+
+<span class="go">Teste de homocedasticidade</span>
+<span class="go">            W       pval  equal_var</span>
+<span class="go">------  -------  ---------  -----------</span>
+<span class="go">levene  2.03155  0.0888169  True</span>
+<span class="go">Conclusão: Distribuições possuem variâncias estatisticamente SEMELHANTES (homoscedasticidade).</span>
+
+<span class="go">Teste de Kruskal</span>
+<span class="go">statistic = 182.22539784431183, pvalue = 2.480716493859747e-38</span>
+<span class="go">Conclusão: Estatisticamente as amostras correspondem a distribuições DIFERENTES (Kruskal-Wallis).</span>
+
+<span class="go">Teste de Conover</span>
+<span class="go">            1             2             3             4             5</span>
+<span class="go">1  1.000000e+00  3.280180e-04  8.963739e-01  1.632161e-08  6.805120e-21</span>
+<span class="go">2  3.280180e-04  1.000000e+00  5.316246e-04  3.410392e-02  2.724152e-35</span>
+<span class="go">3  8.963739e-01  5.316246e-04  1.000000e+00  3.335991e-08  2.296912e-21</span>
+<span class="go">4  1.632161e-08  3.410392e-02  3.335991e-08  1.000000e+00  1.024363e-44</span>
+<span class="go">5  6.805120e-21  2.724152e-35  2.296912e-21  1.024363e-44  1.000000e+00</span>
+
+<span class="go">    dist1    dist2  same?</span>
+<span class="go">--  -------  -------  -------</span>
+<span class="go">0        0        1  False</span>
+<span class="go">1        0        2  False</span>
+<span class="go">2        0        3  False</span>
+<span class="go">3        0        4  False</span>
+<span class="go">4        1        2  False</span>
+<span class="go">5        1        3  True</span>
+<span class="go">6        1        4  False</span>
+<span class="go">7        2        3  False</span>
+<span class="go">8        2        4  False</span>
+<span class="go">9        3        4  False</span>
+</pre></div>
+</div>
+</section>
+<section id="static-fit-distribution-df-pandas-dataframe-verbose-bool-false">
+<h4><em>static</em> fit_distribution(df: pandas.DataFrame, verbose: bool = False)<a class="headerlink" href="#static-fit-distribution-df-pandas-dataframe-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Find the distribution that best fits the input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – Input data (must contain only one distribution).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – Flag that controls whether detailed messages are displayed. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – Input data must contain only one distribution.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>DataFrame containing information about the distribution that best fit the input data, as well as the most common distributions (<code class="docutils literal notranslate"><span class="pre">norm</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">chi2</span></code>, <code class="docutils literal notranslate"><span class="pre">uniform</span></code>, <code class="docutils literal notranslate"><span class="pre">expon</span></code>). The columns of the DataFrame are: <code class="docutils literal notranslate"><span class="pre">Distribution_Type</span></code>, <code class="docutils literal notranslate"><span class="pre">P_Value</span></code>, <code class="docutils literal notranslate"><span class="pre">Statistics</span></code>, and <code class="docutils literal notranslate"><span class="pre">Parameters</span></code>.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(Pandas DataFrame)</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">fit_distribution</span><span class="p">(</span><span class="n">X</span><span class="p">[[</span><span class="s1">&#39;magnesium&#39;</span><span class="p">]],</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">Distribution_Type      P_Value    Statistics  Parameters</span>
+<span class="go">-------------------  ---------  ------------  -------------------------------------</span>
+<span class="go">weibull_min           0.666605     0.0535577  (1.65, 77.23, 25.3)</span>
+<span class="go">beta                  0.585262     0.0571824  (6.06, 5334914.75, 65.16, 30436461.8)</span>
+<span class="go">norm                  0.110071     0.0892933  (99.74, 14.24)</span>
+<span class="go">expon                 0            0.317447   (70.0, 29.74)</span>
+<span class="go">uniform               0            0.386541   (70.0, 92.0)</span>
+<span class="go">chi2                  0            0.915856   (0.64, 70.0, 3.93)</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/output_fit_distribution.png" /></p>
+</section>
+<section id="static-feature-score-df-pandas-dataframe-x-list-str-y-list-str-scoring-function-str-verbose-bool-false">
+<h4><em>static</em> feature_score(df: pandas.DataFrame, x: List[str], y: List[str], scoring_function: str, verbose: bool = False)<a class="headerlink" href="#static-feature-score-df-pandas-dataframe-x-list-str-y-list-str-scoring-function-str-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Calculate the score of input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – DataFrame with input data.</p></li>
+<li><p><strong>x</strong> (<em>List</em>*[<strong>str</strong>]*) – Names of input variables (same name as the corresponding column of <code class="docutils literal notranslate"><span class="pre">df</span></code>).</p></li>
+<li><p><strong>y</strong> (<em>List</em>*[<strong>str</strong>]*) – Names of output variables (same name as the corresponding column of <code class="docutils literal notranslate"><span class="pre">df</span></code>).</p></li>
+<li><p><strong>scoring_function</strong> (<em>str</em>) – Name of the scoring function.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – Flag to display detailed messages. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – Invalid scoring_function name.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>DataFrame with scores of input variables.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(Pandas DataFrame)</p>
+</li>
+</ul>
+<p><strong>WARNING</strong>: Beware not to use a regression scoring function with a classification problem, you will get useless results</p>
+<p>For regression: <code class="docutils literal notranslate"><span class="pre">r_regression</span></code>, <code class="docutils literal notranslate"><span class="pre">f_regression</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_info_regression</span></code>.</p>
+<p>For classification: <code class="docutils literal notranslate"><span class="pre">chi2</span></code>, <code class="docutils literal notranslate"><span class="pre">f_classif</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_info_classif</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># getting the input variable names</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_list</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># adding the output (target variable) in the data frame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scores</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">feature_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">feature_list</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="s1">&#39;f_regression&#39;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="go">    bmi      s5      bp      s4     s3    s6     s1    age     s2    sex</span>
+<span class="go">--  ------  ------  ------  ------  -----  ----  -----  -----  -----  -----</span>
+<span class="go">0  230.65  207.27  106.52  100.07  81.24  75.4  20.71   16.1  13.75   0.82</span>
+</pre></div>
+</div>
+</section>
+<section id="static-pareto-df-pandas-dataframe-min-list-list-str-max-list-list-str">
+<h4><em>static</em> pareto(df: pandas.DataFrame, min_list: List[str], max_list: List[str])<a class="headerlink" href="#static-pareto-df-pandas-dataframe-min-list-list-str-max-list-list-str" title="Permalink to this heading"></a></h4>
+<p>Returns a subset of the input DataFrame consisting of Pareto optimal points based on the specified columns.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
+<li><p><strong>min_list</strong> (<em>List</em>*[<strong>str</strong>]*) – A list of column names that should be minimized in the Pareto optimality calculation.</p></li>
+<li><p><strong>max_list</strong> (<em>List</em>*[<strong>str</strong>]*) – A list of column names that should be maximized in the Pareto optimality calculation.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame that contains the Pareto optimal points of the input DataFrame based on the specified columns.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pd.DataFrame</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">pareto</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;malic_acid&#39;</span><span class="p">,</span><span class="s1">&#39;ash&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="go">[77, 88, 110, 112, 113, 115, 120, 121, 122, 123, 124, 136, 137, 169, 173]</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: This function drops any row that contains missing values before performing the Pareto optimality calculation.</p>
+<p>The columns specified in the min_list parameter will be multiplied by -1 to convert them into maximization criteria.</p>
+</section>
+<section id="static-get-best-pareto-point-df-pandas-dataframe-list-variable-list-str-weights-list-float-verbose-bool-false">
+<h4><em>static</em> get_best_pareto_point(df: pandas.DataFrame, list_variable: List[str], weights: List[float], verbose: bool = False)<a class="headerlink" href="#static-get-best-pareto-point-df-pandas-dataframe-list-variable-list-str-weights-list-float-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Calculate the best Pareto optimal point in the input DataFrame based on the specified variables and weights.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
+<li><p><strong>list_variable</strong> (<em>List</em>*[<strong>str</strong>]*) – A list of column names that should be considered in the Pareto optimality calculation.</p></li>
+<li><p><strong>weights</strong> (<em>List</em>*[<strong>float</strong>]*) – A list of weights that determine the relative importance of each variable.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – A flag that determines whether to print the best Pareto optimal point or not.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame that contains the best Pareto optimal point based on the specified variables and weights.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pd.DataFrame</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;malic_acid&#39;</span><span class="p">,</span><span class="s1">&#39;ash&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">get_best_pareto_point</span><span class="p">(</span><span class="n">p</span><span class="p">,[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span> <span class="s1">&#39;malic_acid&#39;</span><span class="p">,</span> <span class="s1">&#39;ash&#39;</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.1</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">Melhor opção de acordo com a decomposição: Ponto 115 - [11.03  1.51  2.2 ]</span>
+</pre></div>
+</div>
+<p><strong>NOTE</strong>: This function assumes that the input DataFrame contains only Pareto optimal points.</p>
+<p>The weights parameter should contain a value for each variable specified in the list_variable parameter.</p>
+</section>
+<section id="static-detect-outliers-df-pandas-dataframe-method-str-iqr-thr-float-3-verbose-bool-false">
+<h4><em>static</em> detect_outliers(df: pandas.DataFrame, method: str = ‘IQR’, thr: float = 3, verbose: bool = False)<a class="headerlink" href="#static-detect-outliers-df-pandas-dataframe-method-str-iqr-thr-float-3-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Detect outliers in a Pandas DataFrame using IQR or zscore method.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – Input DataFrame containing numerical data.</p></li>
+<li><p><strong>method</strong> (<em>str</em>*, *<em>optional</em>) – Method to use for outlier detection. Available options: ‘IQR’ or ‘zscore’. Defaults to ‘IQR’.</p></li>
+<li><p><strong>thr</strong> (<em>int</em>*, *<em>optional</em>) – Threshold value for zscore method. Defaults to 3.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – Determines whether to display detailed messages. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If method is not equal to one of the following options: ‘IQR’ or ‘zscore’.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>tuple containing</p>
+<ul class="simple">
+<li><p>(Pandas DataFrame): DataFrame containing the index of the outliers.</p></li>
+<li><p>(Pandas DataFrame): The columns of the DataFrame are: <code class="docutils literal notranslate"><span class="pre">column</span></code>, <code class="docutils literal notranslate"><span class="pre">min_thres</span></code>, <code class="docutils literal notranslate"><span class="pre">max_thres</span></code>. Values smaller than <code class="docutils literal notranslate"><span class="pre">min_thres</span></code> and larger than <code class="docutils literal notranslate"><span class="pre">max_thres</span></code> are considered outliers for IQR method.</p></li>
+</ul>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">,</span> <span class="n">df_thres</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="p">()</span><span class="o">.</span><span class="n">detect_outliers</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">      outliers_index</span>
+<span class="go">--  ----------------</span>
+<span class="go">0                23</span>
+<span class="go">1                35</span>
+<span class="go">2                58</span>
+<span class="go">...</span>
+<span class="go">28               406</span>
+<span class="go">29               428</span>
+<span class="go">30               441</span>
+</pre></div>
+</div>
+</section>
+<section id="remove-outliers-df-pandas-dataframe-verbose-bool-false">
+<h4>remove_outliers(df: pandas.DataFrame, verbose: bool = False)<a class="headerlink" href="#remove-outliers-df-pandas-dataframe-verbose-bool-false" title="Permalink to this heading"></a></h4>
+<p>Remove outliers from a Pandas DataFrame using the Interquartile Range (IQR) method.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>Pandas DataFrame</em>) – DataFrame containing the data.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – If True, print the number of lines removed. Defaults to False.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>tuple containing</p>
+<ul class="simple">
+<li><p>df_new (Pandas DataFrame): DataFrame with the outliers removed.</p></li>
+<li><p>drop_lines (list): List of indexes of the rows that were removed.</p></li>
+</ul>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span>  <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_new</span><span class="p">,</span> <span class="n">drop_lines</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="p">()</span><span class="o">.</span><span class="n">remove_outliers</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">Foram removidas 31 linhas.</span>
+</pre></div>
+</div>
+</section>
+<section id="static-cramer-v-df-pandas-dataframe-verbose-bool-false-save-bool-false-path-str-none-format-str-png">
+<h4><em>static</em> cramer_V(df: pandas.DataFrame, verbose: bool = False, save: bool = False, path: str = None, format: str = ‘png’)<a class="headerlink" href="#static-cramer-v-df-pandas-dataframe-verbose-bool-false-save-bool-false-path-str-none-format-str-png" title="Permalink to this heading"></a></h4>
+<p>Calculate Cramer’s V statistic for categorical feature association in a DataFrame.</p>
+<p>Cramer’s V is a measure of association between two categorical variables. It is based on the <code class="docutils literal notranslate"><span class="pre">chi-squared</span></code> statistic
+and considers both the strength and direction of association. This function calculates Cramer’s V for all pairs of
+categorical variables in a given DataFrame and returns the results in a new DataFrame.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pandas DataFrame</em>) – The input DataFrame containing the categorical variables.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – If True, a heatmap of the Cramer’s V values will be displayed using Seaborn. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A DataFrame containing Cramer’s V values for all pairs of categorical variables.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>(pandas DataFrame)</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a sample DataFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;small&#39;</span><span class="p">,</span> <span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;small&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Calculate Cramer&#39;s V</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cramer_df</span> <span class="o">=</span> <span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="o">.</span><span class="n">cramer_V</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/output_cramer_v.png" /></p>
+</section>
+<section id="eda-df-pandas-dataframe-save-bool-false-path-str-none-format-str-png">
+<h4>EDA(df: pandas.DataFrame, save: bool = False, path: str = None, format: str = ‘png’)<a class="headerlink" href="#eda-df-pandas-dataframe-save-bool-false-path-str-none-format-str-png" title="Permalink to this heading"></a></h4>
+<p>Perform exploratory data analysis (EDA) on a given pandas DataFrame.</p>
+<p>The function displays a summary table of the DataFrame, a table of class balance for categorical variables,
+and histograms and boxplots with information on the number of outliers for numerical variables.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Input DataFrame to be analyzed.</p></li>
+<li><p><strong>save</strong> (<em>bool</em>*, *<em>optional</em>) – If True, save the plots. Defaults to False.</p></li>
+<li><p><strong>path</strong> (<em>str</em>*, *<em>optional</em>) – Path to save the plots. Defaults to None.</p></li>
+<li><p><strong>format</strong> (<em>str</em>*, *<em>optional</em>) – Format for the plot files. Defaults to ‘png’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+<p>Example Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asapy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path-to-dataset.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asapy</span><span class="o">.</span><span class="n">Analysis</span><span class="p">()</span><span class="o">.</span><span class="n">EDA</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="go">Variáveis Categóricas:</span>
+
+<span class="go">        occupation      education      educational-num</span>
+<span class="go">------  --------------  -----------  -----------------</span>
+<span class="go">nan     0               0                            0</span>
+<span class="go">count   48842           48842                    48842</span>
+<span class="go">unique  15              16                          16</span>
+<span class="go">top     Prof-specialty  HS-grad                      9</span>
+<span class="go">freq    6172            15784                    15784</span>
+
+
+<span class="go">Associação:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/association.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Histogramas</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/occupation.png" /></p>
+<p><img alt="image" src="../../../../../_images/education.png" /></p>
+<p><img alt="image" src="../../../../../_images/educational-num.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Variáveis</span> <span class="n">Numéricas</span><span class="p">:</span>
+            <span class="n">age</span>           <span class="n">fnlwgt</span>
+<span class="o">-----</span>  <span class="o">----------</span>  <span class="o">---------------</span>
+<span class="n">nan</span>        <span class="mi">0</span>            <span class="mi">0</span>
+<span class="n">count</span>  <span class="mi">48842</span>        <span class="mi">48842</span>
+<span class="n">mean</span>      <span class="mf">38.6436</span>  <span class="mi">189664</span>
+<span class="n">std</span>       <span class="mf">13.7105</span>  <span class="mi">105604</span>
+<span class="nb">min</span>       <span class="mi">17</span>        <span class="mi">12285</span>
+<span class="mi">25</span><span class="o">%</span>       <span class="mi">28</span>       <span class="mi">117550</span>
+<span class="mi">50</span><span class="o">%</span>       <span class="mi">37</span>       <span class="mi">178144</span>
+<span class="mi">75</span><span class="o">%</span>       <span class="mi">48</span>       <span class="mi">237642</span>
+<span class="nb">max</span>       <span class="mi">90</span>            <span class="mf">1.4904e+06</span>
+
+<span class="n">Correlação</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/correlation.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Histogramas</span> <span class="n">e</span> <span class="n">boxplots</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/age.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Detecção</span> <span class="n">de</span> <span class="n">outlier</span> <span class="n">da</span> <span class="n">variável</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span>
+<span class="n">Quantidade</span><span class="p">:</span> <span class="mi">216</span> <span class="n">de</span> <span class="mf">48842.</span>
+<span class="n">Método</span><span class="p">:</span> <span class="n">Intervalo</span> <span class="n">Interquartil</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">-</span> <span class="n">Interquatile</span> <span class="n">Range</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Critério</span><span class="p">:</span> <span class="n">Os</span> <span class="n">valores</span> <span class="n">menores</span> <span class="n">que</span> <span class="o">-</span><span class="mf">2.0</span> <span class="n">ou</span> <span class="n">maiores</span> <span class="n">que</span> <span class="mf">78.0</span> <span class="n">foram</span> <span class="n">considerados</span> <span class="n">outliers</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><img alt="image" src="../../../../../_images/fnlwgt.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Detecção</span> <span class="n">de</span> <span class="n">outlier</span> <span class="n">da</span> <span class="n">variável</span> <span class="s1">&#39;fnlwgt&#39;</span><span class="p">:</span>
+<span class="n">Quantidade</span><span class="p">:</span> <span class="mi">1453</span> <span class="n">de</span> <span class="mf">48842.</span>
+<span class="n">Método</span><span class="p">:</span> <span class="n">Intervalo</span> <span class="n">Interquartil</span> <span class="p">(</span><span class="n">IQR</span> <span class="o">-</span> <span class="n">Interquatile</span> <span class="n">Range</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Critério</span><span class="p">:</span> <span class="n">Os</span> <span class="n">valores</span> <span class="n">menores</span> <span class="n">que</span> <span class="o">-</span><span class="mf">62586.75</span> <span class="n">ou</span> <span class="n">maiores</span> <span class="n">que</span> <span class="mf">417779.25</span> <span class="n">foram</span> <span class="n">considerados</span> <span class="n">outliers</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="class-asapy-nn-model-none">
+<h3><em>class</em> asapy.NN(model=None)<a class="headerlink" href="#class-asapy-nn-model-none" title="Permalink to this heading"></a></h3>
+<p>Bases: <code class="docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>The class NN is a wrapper around Keras Sequential API, which provides an easy way to create and train neural network models. It can perform hyperparameters search and model building with specified hyperparameters.</p>
+<section id="attributes">
+<h4>Attributes:<a class="headerlink" href="#attributes" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>model: the built Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>loss: the loss function used to compile the Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>metrics: the metrics used to compile the Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>dir_name: a string that defines the name of the directory to save the hyperparameters search results.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>input_shape: the shape of the input data for the Keras model.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>output_shape: the shape of the output data for the Keras model.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="model-search-hp-kwargs">
+<h4>_model_search(hp, **kwargs)<a class="headerlink" href="#model-search-hp-kwargs" title="Permalink to this heading"></a></h4>
+<p>Searches for the best hyperparameters to create a Keras model using the given hyperparameters space.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>hp</strong> (<em>keras_tuner.engine.hyperparameters.HyperParameters</em>) – Object that holds
+the hyperparameters space to search.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A compiled Keras model with the best hyperparameters found.</p>
+</li>
+</ul>
+</section>
+<section id="search-hyperparams-x-y-project-name-verbose-false">
+<h4>search_hyperparams(X, y, project_name=’’, verbose=False)<a class="headerlink" href="#search-hyperparams-x-y-project-name-verbose-false" title="Permalink to this heading"></a></h4>
+<p>Perform hyperparameter search for the neural network using Keras Tuner.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> (<em>numpy.ndarray</em>) – Input data.</p></li>
+<li><p><strong>y</strong> (<em>numpy.ndarray</em>) – Target data.</p></li>
+<li><p><strong>project_name</strong> (<em>str</em>) – Name of the Keras Tuner project (default ‘’).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether or not to print out information about the search progress (default False).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A dictionary containing the optimal hyperparameters found by the search.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>dict</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If self.loss is not a supported loss function.</p>
+</li>
+</ul>
+</section>
+<section id="build-input-shape-1-output-shape-1-n-neurons-1-n-layers-1-learning-rate-0-001-activation-relu-kwargs">
+<h4>build(input_shape=(1,), output_shape=(1,), n_neurons=[1], n_layers=1, learning_rate=0.001, activation=’relu’, **kwargs)<a class="headerlink" href="#build-input-shape-1-output-shape-1-n-neurons-1-n-layers-1-learning-rate-0-001-activation-relu-kwargs" title="Permalink to this heading"></a></h4>
+<p>Builds a Keras neural network model with the given hyperparameters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>input_shape</strong> (<em>tuple</em>*, *<em>optional</em>) – The shape of the input data. Defaults to (1,).</p></li>
+<li><p><strong>output_shape</strong> (<em>tuple</em>*, *<em>optional</em>) – The shape of the output data. Defaults to (1,).</p></li>
+<li><p><strong>n_neurons</strong> (<em>list</em>*, *<em>optional</em>) – A list of integers representing the number of neurons in each hidden layer.
+The length of the list determines the number of hidden layers. Defaults to [1].</p></li>
+<li><p><strong>n_layers</strong> (<em>int</em>*, *<em>optional</em>) – The number of hidden layers in the model. Defaults to 1.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>*, *<em>optional</em>) – The learning rate of the optimizer. Defaults to 1e-3.</p></li>
+<li><p><strong>activation</strong> (<em>str</em>*, *<em>optional</em>) – The activation function used for the hidden layers. Defaults to ‘relu’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None.</p>
+</li>
+</ul>
+</section>
+<section id="load-path">
+<h4>load(path)<a class="headerlink" href="#load-path" title="Permalink to this heading"></a></h4>
+<p>Load a Keras model from an H5 file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – Path to the H5 file containing the Keras model.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the file extension is not ‘.h5’.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="predict-x">
+<h4>predict(x)<a class="headerlink" href="#predict-x" title="Permalink to this heading"></a></h4>
+<p>Uses the trained neural network to make predictions on input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>x</strong> (<em>numpy.ndarray</em>) – Input data to be used for prediction. It must have the same number of features
+as the input_shape used to build the network.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Predicted outputs for the input data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>numpy.ndarray</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the input data x does not have the same number of features as the input_shape
+used to build the network.</p>
+</li>
+</ul>
+</section>
+<section id="fit-x-y-validation-data-batch-size-32-epochs-500-save-true-patience-5-path">
+<h4>fit(x, y, validation_data, batch_size=32, epochs=500, save=True, patience=5, path=’’)<a class="headerlink" href="#fit-x-y-validation-data-batch-size-32-epochs-500-save-true-patience-5-path" title="Permalink to this heading"></a></h4>
+<p>Trains the neural network model using the given input and output data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>x</strong> (<em>numpy array</em>) – The input data used to train the model.</p></li>
+<li><p><strong>y</strong> (<em>numpy array</em>) – The output data used to train the model.</p></li>
+<li><p><strong>validation_data</strong> (<em>tuple</em>) – A tuple containing the validation data as input and output data.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – The batch size used for training the model (default=32).</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – The number of epochs used for training the model (default=500).</p></li>
+<li><p><strong>save</strong> (<em>bool</em>) – Whether to save the model after training (default=True).</p></li>
+<li><p><strong>patience</strong> (<em>int</em>) – The number of epochs to wait before early stopping if the validation loss does not improve (default=5).</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – The path to save the trained model (default=’’).</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="save-path">
+<h4>save(path)<a class="headerlink" href="#save-path" title="Permalink to this heading"></a></h4>
+<p>Saves the trained neural network model to a file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> – A string specifying the path and filename for the saved model. The “.h5” file extension
+will be appended to the provided filename if not already present.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the provided file extension is not “.h5”.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-randomforest-model-none">
+<h3><em>class</em> asapy.RandomForest(model=None)<a class="headerlink" href="#class-asapy-randomforest-model-none" title="Permalink to this heading"></a></h3>
+<p>Bases: <code class="docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>This class is used to build and search hyperparameters for a random forest model in scikit-learn.</p>
+<section id="id1">
+<h4>Attributes:<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>model: the built RandomForest scikit-learn model.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="search-hyperparams-x-y-verbose-false-kwargs">
+<h4>search_hyperparams(X, y, verbose=False, **kwargs)<a class="headerlink" href="#search-hyperparams-x-y-verbose-false-kwargs" title="Permalink to this heading"></a></h4>
+<p>Perform a hyperparameter search for a Random Forest model using RandomizedSearchCV.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> (<em>numpy array</em>) – The feature matrix of the data.</p></li>
+<li><p><strong>y</strong> (<em>numpy array</em>) – The target vector of the data.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>*, *<em>optional</em>) – If True, print the optimal hyperparameters. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments. The following hyperparameters can be set:</p></li>
+</ul>
+<ul class="simple">
+<li><p>n_estimators (int): Number of trees in the forest. Defaults to sp_randint(10, 1000).</p></li>
+<li><p>max_features (list): The number of features to consider when looking for the best split.
+Allowed values are ‘sqrt’, ‘log2’ or a float between 0 and 1. Defaults to [‘sqrt’, ‘log2’].</p></li>
+<li><p>max_depth (list): The maximum depth of the tree. Defaults to [None, 5, 10, 15, 20, 30, 40].</p></li>
+<li><p>min_samples_split (int): The minimum number of samples required to split an internal node.
+Defaults to sp_randint(2, 20).</p></li>
+<li><p>min_samples_leaf (int): The minimum number of samples required to be at a leaf node.
+Defaults to sp_randint(1, 20).</p></li>
+<li><p>bootstrap (bool): Whether bootstrap samples are used when building trees.
+Defaults to [True, False].</p></li>
+<li><p>y_type (str): Type of target variable. Either ‘num’ for numeric or ‘cat’ for categorical.
+Defaults to ‘cat’.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A dictionary with the best hyperparameters found during the search.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>dict</p>
+</li>
+</ul>
+</section>
+<section id="build-n-estimators-100-max-depth-none-min-samples-split-2-min-samples-leaf-1-max-features-sqrt-kwargs">
+<h4>build(n_estimators=100, max_depth=None, min_samples_split=2, min_samples_leaf=1, max_features=’sqrt’, **kwargs)<a class="headerlink" href="#build-n-estimators-100-max-depth-none-min-samples-split-2-min-samples-leaf-1-max-features-sqrt-kwargs" title="Permalink to this heading"></a></h4>
+<p>Builds a new Random Forest model with the specified hyperparameters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>n_estimators</strong> (<em>int</em>*, *<em>optional</em>) – The number of trees in the forest. Default is 100.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em>* or <strong>None</strong>, *<em>optional</em>) – The maximum depth of each tree. None means unlimited. Default is None.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em>*, *<em>optional</em>) – The minimum number of samples required to split an internal node. Default is 2.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em>*, *<em>optional</em>) – The minimum number of samples required to be at a leaf node. Default is 1.</p></li>
+<li><p><strong>max_features</strong> (<em>str</em>* or <strong>int</strong>, *<em>optional</em>) – The maximum number of features to consider when looking for the best split.
+Can be ‘sqrt’, ‘log2’, an integer or None. Default is ‘sqrt’.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments. Must include a ‘y_type’ parameter, which should be set to ‘num’ for
+regression problems and ‘cat’ for classification problems.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h4>load(path)<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>Load a saved random forest model.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path to the saved model file. The file must be a joblib file with the extension ‘.joblib’.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the extension of the file is not ‘.joblib’.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None.</p>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h4>predict(x)<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<p>Makes predictions using the trained Random Forest model on the given input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>x</strong> – The input data to make predictions on.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>An array of predicted target values.</p>
+</li>
+</ul>
+</section>
+<section id="fit-x-y">
+<h4>fit(x, y)<a class="headerlink" href="#fit-x-y" title="Permalink to this heading"></a></h4>
+<p>Trains the Random Forest model on the given input and target data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>x</strong> – The input data to train the model on.</p></li>
+<li><p><strong>y</strong> – The target data to train the model on.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h4>save(path)<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h4>
+<p>Saves the trained model to a file with the specified path.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The file path where the model should be saved. The file extension should be ‘.joblib’.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the file extension is invalid or missing.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-scaler-scaler-none">
+<h3><em>class</em> asapy.Scaler(scaler=None)<a class="headerlink" href="#class-asapy-scaler-scaler-none" title="Permalink to this heading"></a></h3>
+<p>The Scaler class is designed to scale and transform data using various scaling techniques. It contains methods for fitting and transforming data, as well as saving and loading scaler objects to and from files.</p>
+<section id="fit-transform-data">
+<h4>fit_transform(data)<a class="headerlink" href="#fit-transform-data" title="Permalink to this heading"></a></h4>
+<p>Fit to data, then transform it.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>data</strong> (<em>array-like</em>) – The data to be transformed.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The transformed data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>array-like</p>
+</li>
+</ul>
+</section>
+<section id="transform-data">
+<h4>transform(data)<a class="headerlink" href="#transform-data" title="Permalink to this heading"></a></h4>
+<p>Perform standardization on an array.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>data</strong> (<em>array-like</em>) – The data to be standardized.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The standardized data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>array-like</p>
+</li>
+</ul>
+</section>
+<section id="inverse-transform-data">
+<h4>inverse_transform(data)<a class="headerlink" href="#inverse-transform-data" title="Permalink to this heading"></a></h4>
+<p>Scale back the data to the original representation.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>data</strong> (<em>array-like</em>) – The data to be scaled back.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The original representation of the data.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>array-like</p>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h4>save(path)<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h4>
+<p>Save the scaler object to a file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path where the scaler object will be saved.</p>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h4>load(path)<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h4>
+<p>Load a saved scaler object from a file.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path where the scaler object is saved.</p>
+</li>
+</ul>
+</section>
+</section>
+<section id="class-asapy-asaml-dir-name-none">
+<h3><em>class</em> asapy.AsaML(dir_name=None)<a class="headerlink" href="#class-asapy-asaml-dir-name-none" title="Permalink to this heading"></a></h3>
+<section id="static-identify-categorical-data-df">
+<h4><em>static</em> identify_categorical_data(df)<a class="headerlink" href="#static-identify-categorical-data-df" title="Permalink to this heading"></a></h4>
+<p>Identifies categorical data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>df</strong> (<em>pandas.DataFrame</em>) – The DataFrame containing the data.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A tuple containing two DataFrames - one containing the categorical columns and the other containing the numerical columns.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>tuple</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the input DataFrame is empty or if it contains no categorical or numerical data.</p>
+</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;col3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_cat</span><span class="p">,</span> <span class="n">df_num</span> <span class="o">=</span> <span class="n">identify_categorical_data</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_cat</span>
+<span class="go">col1</span>
+<span class="go">0    a</span>
+<span class="go">1    b</span>
+<span class="go">2    c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_num</span>
+<span class="go">col2</span>
+<span class="go">0     1</span>
+<span class="go">1     2</span>
+<span class="go">2     3</span>
+</pre></div>
+</div>
+</section>
+<section id="pre-processing-train-x-y-remove-outlier-false">
+<h4>pre_processing_train(X, y, remove_outlier=False)<a class="headerlink" href="#pre-processing-train-x-y-remove-outlier-false" title="Permalink to this heading"></a></h4>
+<p>Perform pre-processing steps for the training dataset.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> – pandas.DataFrame - input features.</p></li>
+<li><p><strong>y</strong> – pandas.DataFrame - target variable.</p></li>
+<li><p><strong>remove_outlier</strong> – bool - if True, removes the outliers from the dataset.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>pandas.DataFrame - pre-processed input features.
+y: pandas.DataFrame - pre-processed target variable.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>X</p>
+</li>
+</ul>
+</section>
+<section id="add-random-value-to-max-row">
+<h4>__add_random_value_to_max(row)<a class="headerlink" href="#add-random-value-to-max-row" title="Permalink to this heading"></a></h4>
+</section>
+<section id="train-model-x-none-y-none-name-model-none-save-true-scaling-true-scaler-type-standardscaler-remove-outlier-false-search-false-params-none-kwargs">
+<h4>train_model(X=None, y=None, name_model=None, save=True, scaling=True, scaler_Type=’StandardScaler’, remove_outlier=False, search=False, params=None, **kwargs)<a class="headerlink" href="#train-model-x-none-y-none-name-model-none-save-true-scaling-true-scaler-type-standardscaler-remove-outlier-false-search-false-params-none-kwargs" title="Permalink to this heading"></a></h4>
+<p>Train a model on a given dataset.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> – A pandas dataframe containing the feature data. Default is None.</p></li>
+<li><p><strong>y</strong> – A pandas dataframe containing the target data. Default is None.</p></li>
+<li><p><strong>name_model</strong> – The name of the model to train. Default is None.</p></li>
+<li><p><strong>save</strong> – A boolean indicating whether to save the model or not. Default is True.</p></li>
+<li><p><strong>scaling</strong> – A boolean indicating whether to perform data scaling or not. Default is True.</p></li>
+<li><p><strong>scaler_Type</strong> – The type of data scaling to perform. Must be one of ‘StandardScaler’, ‘Normalizer’, or ‘MinMaxScaler’. Default is ‘StandardScaler’.</p></li>
+<li><p><strong>remove_outlier</strong> – A boolean indicating whether to remove outliers or not. Default is False.</p></li>
+<li><p><strong>search</strong> – A boolean indicating whether to search for the best hyperparameters or not. Default is False.</p></li>
+<li><p><strong>params</strong> – A dictionary containing the hyperparameters to use for training. Default is None.</p></li>
+<li><p><strong>**kwargs</strong> – Additional arguments to be passed to the training function.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>None</p>
+</li>
+</ul>
+</section>
+<section id="load-model-path">
+<h4>load_model(path=’’)<a class="headerlink" href="#load-model-path" title="Permalink to this heading"></a></h4>
+<p>Loads a saved model from the specified path and returns a dictionary of models
+with their corresponding parameters.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<p><strong>path</strong> (<em>str</em>) – The path where the model and its associated files are saved.
+Defaults to an empty string.</p>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A dictionary containing the loaded models with their corresponding parameters.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>dict</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If the path argument is empty.</p>
+</li>
+</ul>
+<p><strong>NOTE</strong>: The path variable must be the address of the ‘dirname’ folder and MUST contain the scaler.pkl file and each subdirectory MUST contain the ‘paramenters’, ‘model’ files.</p>
+</section>
+<section id="pre-processing-predict-x-input-list-var-type">
+<h4>pre_processing_predict(X, input_list, var_type)<a class="headerlink" href="#pre-processing-predict-x-input-list-var-type" title="Permalink to this heading"></a></h4>
+<p>Pre-processes the input data before prediction by scaling numerical features and creating dummy variables
+for categorical features. Also handles missing and extra features in the input data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> (<em>pandas.DataFrame</em>) – The input data to be pre-processed.</p></li>
+<li><p><strong>input_list</strong> (<em>list</em>) – A list of expected input features.</p></li>
+<li><p><strong>var_type</strong> (<em>dict</em>) – A dictionary with the types of the input features. The keys ‘cat’ and ‘num’ contain lists
+of categorical and numerical feature names respectively.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>The pre-processed input data with scaled numerical features and dummy variables</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  for categorical features. Any missing or extra features are handled accordingly.
+</pre></div>
+</div>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pandas.DataFrame</p>
+</li>
+</ul>
+</section>
+<section id="pos-processing-y-output-list">
+<h4>pos_processing(y, output_list)<a class="headerlink" href="#pos-processing-y-output-list" title="Permalink to this heading"></a></h4>
+<p>Post-processes the output of a model prediction to transform it into a more usable format.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – The output of the model prediction, as a NumPy array.</p></li>
+<li><p><strong>output_list</strong> (<em>list</em>) – A list of column names representing the output variables.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A pandas DataFrame containing the post-processed output values.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pd.DataFrame</p>
+</li>
+</ul>
+<p>This function takes the output of a model prediction, which is typically a NumPy array of raw output values, and transforms it into a more usable format. The output variables are expected to have been one-hot encoded with the use of triple underscores (‘___’) as separator, and possibly have a random value added to the max value of each row. The function first separates the categorical and numerical variables, then processes the categorical variables by selecting the maximum value for each row and one-hot encoding them. Finally, it concatenates the categorical and numerical variables back together to produce a pandas DataFrame containing the post-processed output values.</p>
+</section>
+<section id="predict-all-x-model-dict">
+<h4>predict_all(X, model_dict)<a class="headerlink" href="#predict-all-x-model-dict" title="Permalink to this heading"></a></h4>
+<p>Apply all models in the model dictionary to the input data frame X and return the predictions.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X</strong> – A pandas DataFrame representing the input data.</p></li>
+<li><p><strong>model_dict</strong> – A dictionary containing the models and their associated metadata. The keys are the names of the
+models and the values are themselves dictionaries containing the following keys:</p></li>
+</ul>
+<ul class="simple">
+<li><p>‘model’: A trained machine learning model.</p></li>
+<li><p>‘input_list’: A list of the names of the input features used by the model.</p></li>
+<li><p>‘output_list’: A list of the names of the output features produced by the model.</p></li>
+<li><p>‘var_type’: A dictionary containing the types of the input and output features, with the keys</p></li>
+</ul>
+<blockquote>
+<div><p>’X’ and ‘y’, respectively, and the values being dictionaries themselves with
+the following keys:</p>
+<ul class="simple">
+<li><p>‘cat’: A list of the categorical input features.</p></li>
+<li><p>‘num’: A list of the numerical input features.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>A pandas DataFrame containing the predictions of all models in the model dictionary. The columns of the
+DataFrame are the names of the models, and the rows correspond to the input rows in X.</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If X is empty or None, or if the model dictionary is empty or None.</p>
+</li>
+</ul>
+</section>
+<section id="full-cycle-x-pred-load-false-kwargs">
+<h4>full_cycle(X_pred, load=False, **kwargs)<a class="headerlink" href="#full-cycle-x-pred-load-false-kwargs" title="Permalink to this heading"></a></h4>
+<p>Performs the full cycle of the machine learning pipeline: loads or trains the models, preprocesses the input data,
+generates predictions, and post-processes the output data.</p>
+<ul>
+<li><p><strong>Parameters</strong></p>
+<ul class="simple">
+<li><p><strong>X_pred</strong> (<em>pandas.DataFrame</em>) – Input data to generate predictions for.</p></li>
+<li><p><strong>load</strong> (<em>bool</em>*, *<em>optional</em>) – If True, loads the trained models from disk instead of training new ones. Default is False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments passed to either load_model() or train_model() method.</p></li>
+</ul>
+</li>
+<li><p><strong>Returns</strong></p>
+<p>Dataframe with the generated predictions.</p>
+</li>
+<li><p><strong>Return type</strong></p>
+<p>pandas.DataFrame</p>
+</li>
+<li><p><strong>Raises</strong></p>
+<p><strong>ValueError</strong> – If load is True and path is not provided in kwargs.</p>
+</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

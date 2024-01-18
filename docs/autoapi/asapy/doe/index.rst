@@ -19,6 +19,7 @@ Classes
 
 .. py:class:: Doe
 
+
    .. py:method:: _get_aliases(sim)
       :staticmethod:
 
@@ -71,7 +72,7 @@ Classes
       DataFrame: A DataFrame containing aliases and their corresponding attributes.
 
 
-   .. py:method:: create(df_T, samples)
+   .. py:method:: create(df_T, samples, seed=42)
       :staticmethod:
 
       Creates a design of experiments (DOE) based on the input DataFrame ``df_T``.

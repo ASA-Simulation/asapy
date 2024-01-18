@@ -15,4 +15,4 @@
     :caption: Documentation
 
     contributing
-    API Reference `</autoapi/asapy/index.rst>`_
+    API Reference </autoapi/asapy/index.rst>

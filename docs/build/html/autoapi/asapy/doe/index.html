@@ -61,7 +61,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../execution_controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../models/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.models</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prediction/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.prediction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../preprocessing/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.preprocessing</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.utils</span></code></a></li>
 </ul>
 </li>
@@ -163,7 +164,7 @@ DataFrame: A DataFrame containing aliases and their corresponding attributes.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="asapy.doe.Doe.create">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.doe.Doe.create" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.doe.Doe.create" title="Permalink to this definition"></a></dt>
 <dd><p>Creates a design of experiments (DOE) based on the input DataFrame <code class="docutils literal notranslate"><span class="pre">df_T</span></code>.
 The DOE is created using a Latin Hypercube Sampling (LHS) method and a sample size <code class="docutils literal notranslate"><span class="pre">samples</span></code>.
 The function returns a new DataFrame with the input variables’ names and values according to their type.</p>

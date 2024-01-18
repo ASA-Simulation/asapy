@@ -5,17 +5,15 @@ import datetime
 import os
 import joblib 
 import numpy as np
-import csv
 
 from numpy import sqrt
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, mean_squared_error, precision_score, recall_score, f1_score, mean_absolute_error, r2_score
 from sklearn.model_selection import RandomizedSearchCV
 from tensorflow import keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Input
+from tensorflow.keras.layers import Dense
 from keras import regularizers
 from sklearn.preprocessing import MinMaxScaler, Normalizer, StandardScaler
 from .analysis import Analysis
@@ -24,8 +22,8 @@ from abc import ABC, abstractmethod
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import KFold
 from keras_tuner import HyperParameters
-from tensorflow.keras.metrics import MeanAbsoluteError, MeanSquaredError, RootMeanSquaredError
 from scipy.stats import randint as sp_randint
+
 
 class Model(ABC):
     """
@@ -122,50 +120,43 @@ class NN(Model):
         model.compile(optimizer=optimizer, loss=loss_function, metrics=metrics)
         return model
 
-    def search_hyperparams(self, X, y, project_name='',  verbose = False):
-        """Perform hyperparameter search for the neural network using Keras Tuner.
+    def search_hyperparams(self, X, y, project_name='', y_type='num', verbose=False):
+        """
+        Perform hyperparameter search for the neural network using Keras Tuner.
 
         Args:
             X (numpy.ndarray): Input data.
             y (numpy.ndarray): Target data.
             project_name (str): Name of the Keras Tuner project (default '').
+            y_type (str): Type of target variable. Either 'num' for numeric or 'cat' for categorical (default 'num').
             verbose (bool): Whether or not to print out information about the search progress (default False).
 
         Returns:
             dict: A dictionary containing the optimal hyperparameters found by the search.
-
-        Raises:
-            ValueError: If `self.loss` is not a supported loss function.
-
         """
         
-        if self.loss == 'mean_squared_error':
-            objective = 'val_loss'
-        else:
-            objective = 'val_accuracy'
+        objective = 'val_loss' if y_type == 'num' else 'val_accuracy'
         
         callback = tf.keras.callbacks.EarlyStopping(monitor=objective, patience=5)
         tuner = kt.RandomSearch(self._model_search,
                                 objective=objective,
                                 max_trials=30,
-                                directory='hpSearch/' +self.dir_name + '_hpSearch',
+                                directory='hpSearch/' + self.dir_name + '_hpSearch',
                                 project_name=project_name
                                 )
         
         tuner.search(X, y, epochs=200, validation_split=0.2, verbose=True, shuffle=True, callbacks=[callback])
-        best_hps=tuner.get_best_hyperparameters(num_trials=1)[0]
+        best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
 
-        n = []
-        for i in range(best_hps.get('n_layers')):
-            n.append(best_hps.get('neurons_' + str(i)))
+        n = [best_hps.get('neurons_' + str(i)) for i in range(best_hps.get('n_layers'))]
+        params = {'n_layers': best_hps.get('n_layers'), 'n_neurons': n, 'learning_rate': best_hps.get('learning_rate')}
+
         if verbose:
-                print(f"""
-                Os valores ótimos dos hyperparamentros para a rede neural são:
-                Número de camadas: {best_hps.get('n_layers')} 
-                Número de neurônios: {n} 
-                Taxe de aprendizado (learning rate): {best_hps.get('learning_rate')}.
-                """)
-        params = {'n_layers': best_hps.get('n_layers'), 'n_neurons': n, 'learning_rate':best_hps.get('learning_rate') }
+            print(f"Optimal hyperparameters for the neural network are:\n"
+                  f"Number of layers: {params['n_layers']}\n"
+                  f"Number of neurons: {params['n_neurons']}\n"
+                  f"Learning rate: {params['learning_rate']}.")
+
         return params
 
     def build(self,input_shape = (1,), output_shape = (1,), n_neurons = [1], n_layers =  1, learning_rate = 1e-3, activation = 'relu', **kwargs):
@@ -404,20 +395,29 @@ class RandomForest(Model):
         """
         return self.model.predict(x)
 
-    def fit(self, x, y):
+    def fit(self, x, y, validation_data=None, batch_size=32, epochs=500, save=True, patience=5, path=''):
         """
         Trains the Random Forest model on the given input and target data.
         
         Args:
-            x: The input data to train the model on.
-            y: The target data to train the model on.
-            
+            x (numpy array): The input data to train the model on.
+            y (numpy array): The target data to train the model on.
+            validation_data (tuple): Not used in this context. For compatibility only.
+            batch_size (int): Not used in this context. For compatibility only.
+            epochs (int): Not used in this context. For compatibility only.
+            save (bool): If True, saves the model to the specified path.
+            patience (int): Not used in this context. For compatibility only.
+            path (str): The path to save the trained model.
+
         Returns:
             None
         """
-        if y.shape[1]==1:
-            y = np.reshape(y, (y.shape[0],))
+        if y.ndim == 2 and y.shape[1] == 1:
+            y = np.ravel(y)
         self.model.fit(x, y)
+
+        if save and path:
+            self.save(os.path.join(path, "random_forest_model.joblib"))
 
     def save(self, path):
         """
@@ -687,8 +687,7 @@ class AsaML():
             for fold, (train_index, val_index) in enumerate(kfold.split(X_train, y_train)):
                 xtrain, ytrain = X_train[train_index], y_train[train_index]
                 xval, yval = X_train[val_index], y_train[val_index]
-                model.fit(xtrain, ytrain, validation_data=(xval, yval), path = path, **kwargs)
-                                
+                model.fit(xtrain, ytrain, validation_data=(xval, yval), path = path, **kwargs)              
                 if self.y_type[col] == 'num':
                     y_pred = model.predict(X_test)
                     metrics.append([fold, mean_absolute_error(y_test, y_pred), mean_squared_error(y_test, y_pred), 
@@ -703,11 +702,11 @@ class AsaML():
                     recall_score(y_test, y_pred,average='micro'), f1_score(y_test, y_pred,average='micro')])
                 
             if save:
-                with open(path + "/paramenters.txt", 'w') as f:
+                with open(path + "/parameters.txt", 'w') as f:
                     d = {'model_name': name_model, 'input_list': X_.columns.tolist(), 'output_list' : y_.columns.tolist(), 'var_type': self.var_type}
                     f.writelines(f"{d}\n")
-                    f.writelines(f"pre processing optinal paramenters: save = {save},  scaling = {scaling}, scaler = {scaler_Type}, remove_outlier = {remove_outlier}\n")
-                    f.writelines(f"model paramenters: {params}\n")  
+                    f.writelines(f"pre processing optinal parameters: save = {save},  scaling = {scaling}, scaler = {scaler_Type}, remove_outlier = {remove_outlier}\n")
+                    f.writelines(f"model parameters: {params}\n")  
 
                 model.save(path + "/model_" + col)
 
@@ -756,7 +755,7 @@ class AsaML():
         model_dict = {}
 
         for p in subdirs:
-            with open( p + '/paramenters.txt', 'r') as file:
+            with open( p + '/parameters.txt', 'r') as file:
                 first_line = file.readline()
             col = os.path.basename(p)
             model_dict[col] = eval(f"{first_line}")
