@@ -1,900 +1,2130 @@
-import tensorflow as tf
-import pandas as pd
-import keras_tuner as kt
-import datetime
-import os
-import joblib 
-import numpy as np
+import warnings
+warnings.filterwarnings('ignore')
 
-from numpy import sqrt
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.metrics import accuracy_score, mean_squared_error, precision_score, recall_score, f1_score, mean_absolute_error, r2_score
-from sklearn.model_selection import RandomizedSearchCV
-from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from keras import regularizers
-from sklearn.preprocessing import MinMaxScaler, Normalizer, StandardScaler
-from .analysis import Analysis
-from keras.models import load_model
-from abc import ABC, abstractmethod 
-from tensorflow.keras.callbacks import EarlyStopping
-from sklearn.model_selection import KFold
-from keras_tuner import HyperParameters
-from scipy.stats import randint as sp_randint
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['OUTDATED_IGNORE'] = '1'
+
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-v0_8-paper')
+plt.rcParams['figure.dpi'] = 400
+
+import optuna
+optuna.logging.set_verbosity(optuna.logging.WARNING)
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import warnings
+import gower
+
+from sklearn.model_selection import train_test_split, KFold
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, FunctionTransformer
+from sklearn.manifold import TSNE
+from sklearn.cluster import KMeans as _KMeans, DBSCAN as _DBSCAN
+from sklearn.metrics import silhouette_score, pairwise_distances, confusion_matrix, r2_score
+
+from keras.layers import Input, Dense, BatchNormalization, Activation, Dropout
+from keras.models import Sequential, load_model 
+from keras.callbacks import EarlyStopping, ReduceLROnPlateau, TerminateOnNaN
+from keras.metrics import AUC, Precision, Recall, CategoricalAccuracy, MeanSquaredError, RootMeanSquaredError, \
+                          MeanSquaredLogarithmicError, MeanAbsoluteError, MeanAbsolutePercentageError                        
+
+from abc import ABC
+from xgboost import XGBClassifier, XGBRegressor
+from matplotlib.ticker import MaxNLocator
+from datetime import datetime
+from joblib import dump, load
+from time import time
+from math import log, ceil
+from functools import wraps
+
+
+def validate_split_size(func):
+
+    @wraps(func)
+    def wrapper(self, data, **kwargs):
+        split_size = kwargs.get('split_size', (0.7, 0.15, 0.15))
+
+        if not isinstance(split_size, tuple):
+            print("split_size deve ser uma tupla!")
+
+        elif len(split_size) != 3:
+            print("split_size deve ter 3 elementos")
+
+        elif any(ss <= 0 for ss in split_size):
+            print("Todos os valores em 'split_size' devem ser maiores que zero.")
+        
+        elif sum(split_size) != 1:
+            print("A soma dos valores em 'split_size' deve ser igual a 1.")
+        
+        else:
+            return func(self, data, **kwargs)
+        
+    return wrapper
+
+
+def validate_task(func):
+
+    @wraps(func)
+    def wrapper(self, data, **kwargs):
+        task = kwargs.get('task', None)
+
+        if task is not None and task not in ['regression', 'classification']:
+            print("Já que deseja informar a task explicitamente, ela deve ser 'regression' ou 'classification'")
+        
+        else:
+            return func(self, data, **kwargs)
+        
+    return wrapper
+
+
+def validate_target(func):
+
+    @wraps(func)
+    def wrapper(self, data, **kwargs):
+
+        if self.target not in data.columns:
+            print(f"O dataset não contém a variável '{self.target}'")
+        
+        else:
+            return func(self, data, **kwargs)
+        
+    return wrapper
 
 
 class Model(ABC):
     """
-    Abstract base class for machine learning models.
+    Base class for all models in the library. This abstract class provides a template for the methods and attributes
+    that all models should implement and maintain.
 
     Attributes:
-    -----------
-    None
-
+        target (str): The name of the target variable in the dataset.
+        name (str): The name of the model, used for identification and referencing.
+        seed (int, optional): Random seed used to ensure reproducibility. Defaults to None.
+        preprocessor (dict): Stores the preprocessing pipelines for features and target. Defaults to None.
+        preprocessed_data (dict): Stores the preprocessed training, validation, and test data. Defaults to None.
+        task (str, optional): Task type (e.g., 'classification', 'regression'). Defaults to None.
+        model (model object, optional): The underlying model object. Defaults to None.
+        hyperparameter (dict, optional): Stores hyperparameters used by the model. Defaults to None.
+        history_kfold (list, optional): Stores the training history for each fold during k-fold cross-validation. Defaults to None.
+        have_cat (bool): Indicates whether the dataset contains categorical features. Defaults to False.
+    
     Methods:
-    --------
-    build():
-        Builds the machine learning model.
-
-    load(path: str):
-        Loads the machine learning model from a file.
-
-    fit(X_train: np.ndarray, y_train: np.ndarray):
-        Trains the machine learning model on the input data.
-
-    predict(X: np.ndarray):
-        Makes predictions using the trained machine learning model.
-
-    save(path: str):
-        Saves the trained machine learning model to a file.
-
-    Raises:
-    -------
-    None
+        build(): Placeholder method for building the model structure. Should be overridden by subclasses.
+        _optimizer(): Placeholder method for setting up the optimization algorithm. Should be overridden by subclasses.
+        hyperparameter_optimization(): Placeholder for hyperparameter optimization. Should be overridden by subclasses.
+        load(): Placeholder for loading a saved model from disk. Should be overridden by subclasses.
+        fit(): Placeholder for fitting the model on training data. Should be overridden by subclasses.
+        predict(): Placeholder for making predictions with the trained model. Should be overridden by subclasses.
+        save(): Placeholder for saving the current state of the model to disk. Should be overridden by subclasses.
+        _preprocess(data, target_one_hot_encoder=False, **kwargs): Preprocesses the data according to the specified parameters.
+        _cluster_preprocess(data, **kwargs): Preprocesses the data for clustering tasks according to the specified parameters.
     """
-    def build():
-        pass
 
-    def load():
-        pass
-
-    def fit():
-        pass
-
-    def predict():
-        pass
-
-    def save():
-        pass
-
-class NN(Model):
-    """
-    The class NN is a wrapper around Keras Sequential API, which provides an easy way to create and train neural network models. It can perform hyperparameters search and model building with specified hyperparameters.
-
-    Attributes:
-    -----------
-        - model: the built Keras model.
-        - loss: the loss function used to compile the Keras model.
-        - metrics: the metrics used to compile the Keras model.
-        - dir_name: a string that defines the name of the directory to save the hyperparameters search results.
-        - input_shape: the shape of the input data for the Keras model.
-        - output_shape: the shape of the output data for the Keras model.
-
-    """
-    def __init__(self, model = None):
-        self.model = None
-        self.loss = None
-        self.metrics = None
-        self.dir_name =None
-        self.input_shape = None
-        self.output_shape = None
-
-    def _model_search(self, hp, **kwargs):
+    def __init__(self, target, name, seed=None):
         """
-        Searches for the best hyperparameters to create a Keras model using the given hyperparameters space.
+        Initializes a new instance of the Model class.
 
         Args:
-            hp (keras_tuner.engine.hyperparameters.HyperParameters): Object that holds
-                the hyperparameters space to search.
-
-        Returns:
-            A compiled Keras model with the best hyperparameters found.
+            target (str): The name of the target variable.
+            name (str): The name of the model.
+            seed (int, optional): Random seed for reproducibility. Defaults to None.
         """
-        defaultKwargs = { 'n': [2, 256],'n_l': [1,20], 'list_lr': [1e-1,1e-2, 1e-3, 1e-4,1e-5]}
-        kwargs = { **defaultKwargs, **kwargs }
-        n_layers = hp.Int('n_layers', min_value=kwargs['n_l'][0], max_value=kwargs['n_l'][1])
-        learning_rate = hp.Choice('learning_rate', values= kwargs['list_lr'])
-        loss_function = self.loss
-        metrics = self.metrics
-        optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+       
+        self.target = target
+        self.name = name
+        self.seed = seed
+        self.preprocessor = None
+        self.preprocessed_data = None
+        self.task  = None
+        self.model = None
+        self.hyperparameter = None
+        self.history_kfold = None
+        self.have_cat = False
+
+
+    def build(self):
+        """
+        Placeholder method for setting up the optimization algorithm. This method should be overridden by
+        subclasses to specify how the model should be optimized during training (e.g., SGD, Adam).
+        """
+
+        pass
+
+
+    def _optimizer(self):
+        """
+        Placeholder method for setting up the optimization algorithm. This method should be overridden by
+        subclasses to specify how the model should be optimized during training (e.g., SGD, Adam).
+        """
+
+        pass
+
+
+    def hyperparameter_optimization(self):
+        """
+        Placeholder method for performing hyperparameter optimization. This method should be overridden by
+        subclasses to implement hyperparameter tuning techniques (e.g., grid search, random search).
+        """
+
+        pass
+
+
+    def load(self):
+        """
+        Placeholder method for loading a saved model from disk. This method should be overridden by subclasses
+        to enable loading model state, allowing for model persistence across sessions.
+        """
+
+        pass
+
+
+    def fit(self):
+        """
+        Placeholder method for fitting the model on the training data. This method should be overridden by
+        subclasses to implement the training process, including any preprocessing, training iterations, and
+        validation.
+        """
+
+        pass
+
+
+    def predict(self):
+        """
+        Placeholder method for making predictions with the trained model. This method should be overridden
+        by subclasses to use the model for making predictions on new or unseen data.
+        """
+
+        pass
+
+
+    def save(self):
+        """
+        Placeholder method for saving the current state of the model to disk. This method should be overridden
+        by subclasses to provide a way to serialize and save the model structure and trained weights.
+        """
+
+        pass
+    
+
+    def _preprocess(self, data, target_one_hot_encoder=False, **kwargs):
+        """
+        Preprocesses the data based on the provided parameters and updates the instance attributes accordingly.
+
+        Args:
+            data (Pandas DataFrame): The dataset to preprocess.
+            target_one_hot_encoder (bool, optional): Indicates whether to apply one-hot encoding to the target variable. Defaults to False.
+            **kwargs: Additional keyword arguments for preprocessing options.
+
+        Note: This method updates the 'preprocessed_data' and 'preprocessor' attributes of the instance.
+        """
+
+        max_cat_nunique = kwargs.get('max_cat_nunique', 10)
+        split_size = kwargs.get('split_size', (0.7, 0.15, 0.15))
+        info = kwargs.get('info', False)
+        task = kwargs.get('task', None)  
+
+        train_size = split_size[0]
+        valid_size = split_size[1]
+        test_size = split_size[2]
+
+        _data = data.copy()
+
+        num_rows_with_nan = _data.isna().any(axis=1).sum()
+        _data.dropna(axis=0, inplace=True)
+        
+        for feature in _data.columns:
+            if _data[feature].dtype == 'object' and pd.to_numeric(_data[feature], errors='coerce').notna().all():
+                _data[feature] = pd.to_numeric(_data[feature])
+
+        types_num = ['int8', 'int16', 'int32', 'int64', 'uint8', 'uint16', 'uint32', 'uint64',
+                     'float16', 'float32', 'float64']
+
+    
+        ######### X #########
+        _X = _data.drop(columns=[self.target])
+        df_preprocessor = None
+
+        categorical_cols = list()
+        numerical_cols= list()
+        high_cardinality_cols = list()
+
+        for feature in _X.columns:
+
+            if _X[feature].dtype in types_num:
+                numerical_cols.append(feature)
+
+            elif np.unique(_X[feature]).size <= max_cat_nunique:
+                categorical_cols.append(feature)
+                self.have_cat = True
+
+            else:
+                high_cardinality_cols.append(feature)
+
+        
+        _X[categorical_cols] = _X[categorical_cols].astype('category')
+
+        df_preprocessor_num = Pipeline(steps=[
+            ('standardlization_num', StandardScaler(with_mean=True))
+        ])
+    
+        df_preprocessor_cat = Pipeline(steps=[
+            ('onehot_cat', OneHotEncoder(handle_unknown='ignore'))
+        ])
+        
+        df_preprocessor = ColumnTransformer(
+            transformers=[
+                ('df_preprocessor_num', df_preprocessor_num, numerical_cols),
+                ('df_preprocessor_cat', df_preprocessor_cat, categorical_cols)
+            ],
+            remainder='drop',
+            sparse_threshold=0
+        )
+    
+        ######### Y #########
+        _y = _data[[self.target]]
+        target_preprocessor = None
+
+        if task in ['classification', 'regression']:
+            self.task = task
+
+        elif _y[self.target].dtypes not in types_num:
+            self.task = 'classification'
+
+        elif np.unique(_y[self.target]).size > max_cat_nunique:
+            self.task = 'regression'
+
+        else:
+            self.task = 'classification'
+
+
+        ######### transformation #########
+        if self.task == 'classification':
+
+            if target_one_hot_encoder:
+                encoder = OneHotEncoder(handle_unknown='ignore')
+
+            else:
+                encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=999)
+            
+            target_preprocessor_cat = Pipeline(steps=[
+                ('target_encoder_cat', encoder)
+            ])
+            
+            target_preprocessor = ColumnTransformer(
+                transformers=[
+                    ('target_preprocessor_cat', target_preprocessor_cat, [self.target])
+                ],
+                remainder='drop',
+                sparse_threshold=0
+            )
+    
+            _y = target_preprocessor.fit_transform(_y)
+        
+        else:
+            # _y = _y.to_numpy()
+
+            target_preprocessor_num = Pipeline(steps=[
+                ('standardlization_num', StandardScaler(with_mean=True))
+            ])
+           
+            target_preprocessor = ColumnTransformer(
+                transformers=[
+                    ('target_preprocessor_cat', target_preprocessor_num, [self.target])
+                ],
+                remainder='drop',
+                sparse_threshold=0
+            )
+    
+            _y = target_preprocessor.fit_transform(_y)
+
+    
+        ######### TRAIN / VALID / TEST SPLIT #########
+        _X_train, _X_temp, y_train, _y_temp = train_test_split(_X, _y, test_size=1-train_size, random_state=self.seed)
+
+        X_train = df_preprocessor.fit_transform(_X_train)
+        _X_temp = df_preprocessor.transform(_X_temp)
+    
+        X_test, X_val, y_test, y_val = train_test_split(_X_temp, _y_temp, test_size=valid_size/(valid_size + test_size), random_state=self.seed)
+    
+        X_train_val = np.concatenate((X_train, X_val), axis=0)
+        y_train_val = np.concatenate((y_train, y_val), axis=0)
+        
+        if not target_one_hot_encoder:
+            y_train = y_train.reshape(-1)
+            y_val = y_val.reshape(-1)
+            y_train_val = y_train_val.reshape(-1)
+            y_test = y_test.reshape(-1)
+        
+        self.preprocessed_data = {
+            'X_train': X_train,
+            'y_train': y_train,
+            'X_val': X_val,
+            'y_val': y_val,
+            'X_train_val': X_train_val,
+            'y_train_val': y_train_val,
+            'X_test': X_test,
+            'y_test': y_test
+        }
+    
+        self.preprocessor = {
+            "features": df_preprocessor,
+            "target": target_preprocessor 
+        }
+
+        if info:
+            msg = f"""
+                Task: {self.task}
+
+                Total of registers: {len(data)}
+                Total of valid registers: {len(_X)}
+                Total of invalid registers: {num_rows_with_nan}
+
+                Total of training registers: {X_train.shape[0]}
+                Total of validation registers: {X_val.shape[0]}
+                Total of test registers: {X_test.shape[0]}
+
+                Features before preprocessing: {_X_train.shape[1]}
+                Features after preprocessing: {X_train.shape[1]}
+
+                Numerical Features: {numerical_cols}
+                Categorical Features: {categorical_cols}
+                Categorical Features removed due to high cardinality: {high_cardinality_cols}
+
+                Target: ['{self.target}']
+            """
+
+            if self.task == 'classification':
+                if target_one_hot_encoder == False:
+                    msg += f"\tCardinality (Target): {np.unique(self.preprocessed_data['y_train']).size}"
+
+                else:
+                    msg += f"\tCardinality (Target): {self.preprocessed_data['y_train'].shape[1]}"
+
+            print(msg)
+
+
+    def _cluster_preprocess(self, data, **kwargs):
+        """
+        Preprocesses the data for clustering tasks based on the provided parameters and updates the instance attributes accordingly.
+
+        Args:
+            data (Pandas DataFrame): The dataset to preprocess.
+            **kwargs: Additional keyword arguments for preprocessing options.
+
+        Note: This method updates the 'preprocessed_data' and 'preprocessor' attributes of the instance.
+        """
+
+        info = kwargs.get('info', False)
+        max_cat_nunique = kwargs.get('max_cat_nunique', 10)
+
+        types_num = ['int8', 'int16', 'int32', 'int64', 'uint8', 'uint16', 'uint32', 'uint64',
+                     'float16', 'float32', 'float64']
+            
+        ######### X #########
+        _X = data.copy()
+
+        num_rows_with_nan = _X.isna().any(axis=1).sum()
+        _X.dropna(axis=0, inplace=True)
+
+        for feature in _X.columns:
+            if _X[feature].dtype == 'object' and pd.to_numeric(_X[feature], errors='coerce').notna().all():
+                _X[feature] = pd.to_numeric(_X[feature])
+        
+
+        df_preprocessor = None
+
+        categorical_cols = list()
+        numerical_cols= list()
+        high_cardinality_cols = list()
+
+        for feature in _X.columns:
+
+            if _X[feature].dtype in types_num:
+                numerical_cols.append(feature)
+
+            elif np.unique(_X[feature]).size <= max_cat_nunique:
+                categorical_cols.append(feature)
+                self.have_cat = True
+
+            else:
+                high_cardinality_cols.append(feature)
+
+        
+        _X[categorical_cols] = _X[categorical_cols].astype('category')
+        
+        df_preprocessor_num = Pipeline(steps=[
+            ('standardlization_num', StandardScaler(with_mean=True))
+        ])
+
+    
+        df_preprocessor_cat = Pipeline(steps=[
+            ('identidade', FunctionTransformer(None))
+        ])
+
+        df_preprocessor = ColumnTransformer(
+            transformers=[
+                ('df_preprocessor_num', df_preprocessor_num, numerical_cols),
+                ('df_preprocessor_cat', df_preprocessor_cat, categorical_cols)
+            ],
+            remainder='drop',
+            sparse_threshold=0
+        )
+
+        ### One-hot Encoding
+        df_preprocessor_cat_ohe = Pipeline(steps=[
+            ('onehot_cat', OneHotEncoder(handle_unknown='ignore'))
+        ])
+
+        df_preprocessor_ohe = ColumnTransformer(
+            transformers=[
+                ('df_preprocessor_num', df_preprocessor_num, numerical_cols),
+                ('df_preprocessor_cat', df_preprocessor_cat_ohe, categorical_cols)
+            ],
+            remainder='drop',
+            sparse_threshold=0
+        )
+      
+        X = df_preprocessor.fit_transform(_X)
+        X_ohe = df_preprocessor_ohe.fit_transform(_X)
+  
+        self.preprocessed_data = {'X': X, 'X_ohe': X_ohe}
+        self.preprocessor = {"features": df_preprocessor, "features_ohe": df_preprocessor_ohe}
+
+        if info:
+            msg = f"""
+                Total of registers: {len(data)}
+                Total of valid registers: {len(_X)}
+                Total of invalid registers: {num_rows_with_nan}
+
+                Total of Features: {X.shape[1]}
+                Numerical Features: {numerical_cols}
+                Categorical Features: {categorical_cols}
+                Categorical Features removed due to high cardinality: {high_cardinality_cols}
+            """
+
+            print(msg)
+
+
+class NeuralNetwork(Model):
+    """
+    A class for constructing and training neural networks, with built-in methods for preprocessing,
+    hyperparameter optimization, training, and inference. Inherits from the Model base class.
+
+    Attributes:
+        n_input (int): Number of input features.
+        n_neurons (int): Number of neurons in each hidden layer.
+        n_output (int): Number of output neurons.
+        metrics (list): List of Keras metrics to be used for model evaluation.
+        callbacks (list): List of Keras Callbacks to be used during model training.
+    
+    Methods:
+        build(data, **kwargs): Prepares the neural network model based on the provided dataset and hyperparameters.
+        _make_nn(dropout, layers, optimizer): Constructs the neural network architecture.
+        _optimizer(trial, **kwargs): Defines and runs the optimization trial for hyperparameter tuning.
+        hyperparameter_optimization(n_trials=1, info=False, **kwargs): Performs hyperparameter optimization using Optuna.
+        load(foldername): Loads the model and preprocessor from the specified folder.
+        fit(return_history=False, graphic=True, graphic_save_extension=None, verbose=0, **kwargs): Trains the neural network on preprocessed data.
+        predict(x, verbose=0): Makes predictions using the trained neural network model.
+        save(): Saves the model and preprocessor to disk.
+    """
+
+    def __init__(self, target, name=None, seed=None):
+        """
+        Initializes a new instance of the NeuralNetwork class.
+
+        Args:
+            target (str): The name of the target variable.
+            name (str, optional): The name of the model. Defaults to a generated name based on the current datetime.
+            seed (int, optional): Random seed for reproducibility. Defaults to None.
+        """
+        
+        if name is None:
+            _name = f'neuralNetwork {datetime.now().strftime("%d-%m-%y %Hh%Mmin")}'
+
+        else:
+            _name = name
+
+        super().__init__(target, _name, seed)
+
+        self.n_input = None
+        self.n_neurons = None
+        self.n_output = None
+        self._metrics = None
+        self.callbacks = None
+
+
+    @validate_target
+    @validate_task  
+    @validate_split_size
+    def build(self, data, **kwargs):
+        """
+        Prepares the neural network model based on the provided dataset and hyperparameters. This includes preprocessing
+        the data and initializing the model architecture based on the data's characteristics and specified hyperparameters.
+
+        Args:
+            data (Pandas DataFrame): The dataset to be used for building the model.
+            **kwargs: Additional keyword arguments for preprocessing and model configuration.
+        """
+
+        super()._preprocess(data, target_one_hot_encoder=True, **kwargs)
+        
+        self.n_input = self.preprocessed_data['X_train'].shape[1]
+        self.n_neurons = 2 ** ceil(log(self.n_input, 2))
+        self.n_output = self.preprocessed_data['y_train'].shape[1]
+
+        dict_metrics = {
+            # Regression
+            'mse': MeanSquaredError(),
+            'rmse': RootMeanSquaredError(),
+            'msle': MeanSquaredLogarithmicError(),
+            'mae': MeanAbsoluteError(),
+            'mape': MeanAbsolutePercentageError(),
+
+            # Classification
+            'auc': AUC(),
+            'precision': Precision(),
+            'recall': Recall(),
+            'accuracy': CategoricalAccuracy()
+        }
+
+        if self.task == 'regression':
+            _metrics = kwargs.get('metrics', [])
+            self._metrics = [dict_metrics[metric] for metric in _metrics]
+
+        else:
+            _metrics = kwargs.get('metrics', [])
+            self._metrics = [dict_metrics[metric] for metric in _metrics]
+
+        patience_early_stopping = kwargs.get('patience_early_stopping', 20)
+        patience_early_reduceLR = kwargs.get('patience_early_reduceLR', 4)
+
+        earlystop = EarlyStopping(
+            monitor='val_loss',
+            min_delta=0,
+            patience=patience_early_stopping,
+            verbose=0,
+            restore_best_weights=True
+        )
+
+        reduceLr = ReduceLROnPlateau(
+            monitor='loss',
+            factor=0.2,
+            patience=patience_early_reduceLR,
+            mode="min",
+            verbose=0,
+            min_delta=0.0001,
+            min_lr=0
+        )
+        
+        self.callbacks = [earlystop, reduceLr, TerminateOnNaN()]
+
+
+    def _make_nn(self, dropout, layers, optimizer):
+        """
+        Constructs the neural network architecture with the specified number of layers, dropout rate, and optimizer.
+
+        Args:
+            dropout (float): The dropout rate to be applied to each hidden layer.
+            layers (int): The number of hidden layers in the neural network.
+            optimizer (str): The name of the optimizer to be used for training the neural network.
+        
+        Returns:
+            keras.models.Sequential: The constructed Keras Sequential model.
+        """
+       
         model = Sequential()
-        neurons = hp.Int('neurons_0', min_value=kwargs['n'][0], max_value=kwargs['n'][1])
-        model.add(Dense(neurons, activation='relu', input_shape=self.input_shape))
-        for i in range(1,n_layers):
-            name = 'neurons_' + str(i)
-            neurons = hp.Int(name, min_value=kwargs['n'][0], max_value=kwargs['n'][1])
-            model.add(Dense(neurons, activation='relu'))
-        model.add(Dense(self.output_shape[0]))
-        model.compile(optimizer=optimizer, loss=loss_function, metrics=metrics)
+        model.add(Input(shape=(self.n_input,)))
+        
+        #################################################################
+        for _ in range(layers):
+            
+            model.add(Dense(self.n_neurons))
+            model.add(BatchNormalization())
+            model.add(Activation('relu'))
+            model.add(Dropout(dropout))
+        ##################################################################
+
+        if self.task == 'classification':
+            model.add(Dense(self.n_output, activation='softmax'))
+            
+        else:
+            model.add(Dense(1, activation='linear'))
+
+        model.compile(
+            loss = 'mean_squared_error' if self.task == 'regression' else 'categorical_crossentropy',
+            metrics = self._metrics,
+            optimizer = optimizer
+        )
+
         return model
 
-    def search_hyperparams(self, X, y, project_name='', y_type='num', verbose=False):
+
+    def _optimizer(self, trial, **kwargs):
         """
-        Perform hyperparameter search for the neural network using Keras Tuner.
+        Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+        a callback within an Optuna optimization study.
 
         Args:
-            X (numpy.ndarray): Input data.
-            y (numpy.ndarray): Target data.
-            project_name (str): Name of the Keras Tuner project (default '').
-            y_type (str): Type of target variable. Either 'num' for numeric or 'cat' for categorical (default 'num').
-            verbose (bool): Whether or not to print out information about the search progress (default False).
-
-        Returns:
-            dict: A dictionary containing the optimal hyperparameters found by the search.
-        """
+            trial (optuna.trial.Trial): An Optuna trial object.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
         
-        objective = 'val_loss' if y_type == 'num' else 'val_accuracy'
-        
-        callback = tf.keras.callbacks.EarlyStopping(monitor=objective, patience=5)
-        tuner = kt.RandomSearch(self._model_search,
-                                objective=objective,
-                                max_trials=30,
-                                directory='hpSearch/' + self.dir_name + '_hpSearch',
-                                project_name=project_name
-                                )
-        
-        tuner.search(X, y, epochs=200, validation_split=0.2, verbose=True, shuffle=True, callbacks=[callback])
-        best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
-
-        n = [best_hps.get('neurons_' + str(i)) for i in range(best_hps.get('n_layers'))]
-        params = {'n_layers': best_hps.get('n_layers'), 'n_neurons': n, 'learning_rate': best_hps.get('learning_rate')}
-
-        if verbose:
-            print(f"Optimal hyperparameters for the neural network are:\n"
-                  f"Number of layers: {params['n_layers']}\n"
-                  f"Number of neurons: {params['n_neurons']}\n"
-                  f"Learning rate: {params['learning_rate']}.")
-
-        return params
-
-    def build(self,input_shape = (1,), output_shape = (1,), n_neurons = [1], n_layers =  1, learning_rate = 1e-3, activation = 'relu', **kwargs):
-        """
-        Builds a Keras neural network model with the given hyperparameters.
-
-        Args:
-            input_shape (tuple, optional): The shape of the input data. Defaults to (1,).
-            output_shape (tuple, optional): The shape of the output data. Defaults to (1,).
-            n_neurons (list, optional): A list of integers representing the number of neurons in each hidden layer.
-                                        The length of the list determines the number of hidden layers. Defaults to [1].
-            n_layers (int, optional): The number of hidden layers in the model. Defaults to 1.
-            learning_rate (float, optional): The learning rate of the optimizer. Defaults to 1e-3.
-            activation (str, optional): The activation function used for the hidden layers. Defaults to 'relu'.
-
         Returns:
-            None.
+            float: The average validation loss across all folds for the current trial.
         """
-        optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
-        model = Sequential()
-        model.add(keras.layers.Dense(n_neurons[0], activation='relu', input_shape=input_shape))
-        for i in range(1, n_layers):
-            neurons = n_neurons[i]
-            model.add(Dense(neurons, activation=activation))
 
-        model.add(Dense(output_shape[0], activation='linear'))
-        model.compile(optimizer=optimizer, loss=self.loss, metrics=self.metrics)
-        model.summary()
+        num_folds = kwargs.get('num_folds', 5)
+       
+        search_space_dropout = kwargs.get('search_space_dropout', [0, 0.05])
+        search_space_layers = kwargs.get('search_space_layers', [2, 3, 4])
+        search_space_batch_size = kwargs.get('search_space_batch_size', [32, 64, 128])
+        search_space_optimizer = kwargs.get('search_space_optimizer', ['Adam'])
+        
+        dropout = trial.suggest_categorical('dropout', search_space_dropout)
+        layers = trial.suggest_categorical('layers', search_space_layers)
+        batch_size = trial.suggest_categorical('batch_size', search_space_batch_size)
+        optimizer = trial.suggest_categorical('optimizer', search_space_optimizer)
 
-        self.model = model
+        kfold = KFold(n_splits=num_folds, shuffle=True)
 
-    def load(self, path):
-        """Load a Keras model from an H5 file.
+        scores = []
+        
+        X_train_val = self.preprocessed_data['X_train_val']
+        y_train_val = self.preprocessed_data['y_train_val']
 
-        Args:
-            path (str): Path to the H5 file containing the Keras model.
+        for index_train, index_val in kfold.split(X_train_val, y_train_val):
 
-        Raises:
-            ValueError: If the file extension is not '.h5'.
+            modelStudy = self._make_nn(
+                dropout=dropout,
+                layers=layers,
+                optimizer=optimizer
+            )
+            
+            history = modelStudy.fit(
+                X_train_val[index_train],
+                y_train_val[index_train],
+                epochs=10_000,
+                batch_size=batch_size,
+                validation_data=(
+                    X_train_val[index_val],
+                    y_train_val[index_val],
+                ),
+                callbacks = self.callbacks,
+                verbose=0
+            )
 
-        Returns:
-            None
-        """
-        extension = os.path.splitext(path)[1]
-        if not extension:
-            path = path + '.h5'
-        elif extension != '.h5':
-            raise ValueError("Extensão inválida para o modelo de rede neural. A extensão do arquivo deve ser '.h5'.")
+            scores.append(min(history.history['val_loss']))
+
+        new_trial = pd.DataFrame([scores], columns=self.history_kfold.columns)
+        self.history_kfold = self.history_kfold.append(new_trial, ignore_index=True)
+        self.history_kfold.rename_axis('Trial (nº)', inplace=True)
+
+        return sum(scores) / num_folds
     
-        self.model = load_model(path)
 
-    def predict(self, x):
+    def hyperparameter_optimization(self, n_trials=1, info=False, **kwargs):
         """
-        Uses the trained neural network to make predictions on input data.
+        Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+        and updates the model's hyperparameters with the best found values.
 
         Args:
-            x (numpy.ndarray): Input data to be used for prediction. It must have the same number of features
-                            as the input_shape used to build the network.
-
+            n_trials (int, optional): The number of optimization trials to perform. Defaults to 1.
+            info (bool, optional): Whether to print detailed information about each trial. Defaults to False.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
+        
         Returns:
-            numpy.ndarray: Predicted outputs for the input data.
-
-        Raises:
-            ValueError: If the input data x does not have the same number of features as the input_shape
-                        used to build the network.
+            pd.DataFrame: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
         """
-        return self.model.predict(x)
 
-    def fit(self, x, y, validation_data, batch_size = 32, epochs = 500, save = True, patience = 5, path = ''):
+        num_folds = kwargs.get('num_folds', 5)
+        columns_name = [f'Fold nº {i}' for i in range(1, num_folds + 1)]
+
+        self.history_kfold = pd.DataFrame(columns=columns_name).rename_axis('Trial (nº)')
+
+        self.hyperparameter = optuna.create_study(study_name='optimization', direction='minimize')
+        self.hyperparameter.optimize(lambda trial: self._optimizer(trial, **kwargs), n_trials = n_trials)
+       
+        if info:
+            trial = self.hyperparameter.trials_dataframe()
+            trial = trial.set_index("number")
+            trial.rename_axis('Trial (nº)', inplace=True)
+            trial.rename(columns={'value': 'Folds mean'}, inplace=True)
+
+            self.history_kfold['Folds std'] = self.history_kfold.std(axis=1)      
+
+            df_info = self.history_kfold.join(trial.drop(['datetime_start', 'datetime_complete', 'duration', 'state'], axis=1))
+            df_info = df_info.sort_values(by='Folds mean', ascending=True)
+            df_info.reset_index(inplace=True)
+            df_info.index = [f'{i}º' for i in df_info.index + 1]
+            df_info.rename_axis('Ranking', inplace=True)
+
+            fist_level_multiindex = 'Categorical Crossentropy' if self.task == "classification" else "Mean Squared Error"
+
+            trial_columns = [(fist_level_multiindex, col) for col in df_info.columns[: num_folds + 3]]
+            hyperparameter_columns =[('Hyperparameters', col) for col in df_info.columns[num_folds + 3 :]]
+            
+            multi_columns = pd.MultiIndex.from_tuples(trial_columns + hyperparameter_columns)
+            df_info.columns = multi_columns
+
+            return df_info.style.set_table_styles([dict(selector='th', props=[('text-align', 'center')])])
+
+
+    def load(self, foldername):
         """
-        Trains the neural network model using the given input and output data.
+        Loads the model and preprocessor from the specified folder.
 
         Args:
-            x (numpy array): The input data used to train the model.
-            y (numpy array): The output data used to train the model.
-            validation_data (tuple): A tuple containing the validation data as input and output data.
-            batch_size (int): The batch size used for training the model (default=32).
-            epochs (int): The number of epochs used for training the model (default=500).
-            save (bool): Whether to save the model after training (default=True).
-            patience (int): The number of epochs to wait before early stopping if the validation loss does not improve (default=5).
-            path (str): The path to save the trained model (default='').
-
-        Returns:
-            None
+            foldername (str): The name of the folder where the model and preprocessor are saved.
         """
-        early_stop = EarlyStopping(monitor='val_loss', verbose=1, patience=patience)
-        callbacks = [early_stop]
-        if save:
-            csv_logger = keras.callbacks.CSVLogger(path + "/training.log")
-            callbacks.append(csv_logger)
-        self.model.fit(x, y,
-                       batch_size = batch_size,
-                       epochs = epochs, 
-                       validation_data = validation_data, 
-                       callbacks = callbacks)
 
-    def save(self, path):
+        if not os.path.exists(f'./saved/{foldername}'):
+            print("There is no folder with that name!")
+            return
+
+        self.name = foldername
+        self.preprocessor = load(f'./saved/{foldername}/preprocessor.joblib')
+        self.model = load_model(f'./saved/{foldername}/model.h5')
+
+    
+    def fit(self, return_history=False, graphic=False, graphic_save_extension=None, verbose=0, **kwargs):
         """
-        Saves the trained neural network model to a file.
+        Trains the neural network on preprocessed data. This method supports early stopping and learning rate reduction
+        based on the performance on the validation set.
 
         Args:
-            path: A string specifying the path and filename for the saved model. The ".h5" file extension 
-                will be appended to the provided filename if not already present.
-
-        Raises:
-            ValueError: If the provided file extension is not ".h5".
-
+            return_history (bool, optional): Whether to return the training history object. Defaults to False.
+            graphic (bool, optional): Whether to plot training and validation loss and metrics. Defaults to True.
+            graphic_save_extension (str, optional): Extension to save the graphics (e.g., 'png', 'svg'). If None, graphics are not saved. Defaults to None.
+            verbose (int, optional): Verbosity mode for training progress. Defaults to 0.
+            **kwargs: Additional keyword arguments for configuring the training process.
+        
         Returns:
-            None
+            keras.callbacks.History: The training history object, if `return_history` is True. Otherwise, None.
         """
-        path = os.path.splitext(path)[0]
-        self.model.save(path + '.h5')
 
-class RandomForest(Model):
+        if self.hyperparameter is None:
+           self.hyperparameter_optimization()
+            
+        self.model = self._make_nn(
+            dropout = self.hyperparameter.best_params['dropout'],
+            layers = self.hyperparameter.best_params['layers'],
+            optimizer = self.hyperparameter.best_params['optimizer']
+        )
+        
+        history = self.model.fit(
+            self.preprocessed_data['X_train'],
+            self.preprocessed_data['y_train'],
+            epochs=10_000,
+            batch_size= self.hyperparameter.best_params['batch_size'],
+            validation_data = (
+                self.preprocessed_data['X_val'],
+                self.preprocessed_data['y_val']
+            ),
+            callbacks = self.callbacks,
+            verbose=verbose
+        )
+
+        loss = self.model.evaluate(self.preprocessed_data['X_test'], self.preprocessed_data['y_test'], verbose=0)
+
+        if graphic:
+
+            height = kwargs.get('subplot_height', 4)
+            width = kwargs.get('subplot_width', 8)
+
+            color = kwargs.get('subplot_color', {
+                "train": 'red',
+                "validation": "blue",
+                "test": "green" 
+            })
+
+            if self.task == "regression":
+                fig, axs = plt.subplots(len(self._metrics) + 1, 1, figsize=(width, height * (len(self._metrics) + 1)))
+
+            else:
+                fig, axs = plt.subplots(len(self._metrics) + 2, 1, figsize=(width, height * (len(self._metrics) + 2)))
+            
+            title = "Bias-Variance Graphic (Neural Network)"
+            fig.suptitle(title, fontweight='bold', fontsize=12)
+
+            if not hasattr(axs, '__getitem__'):
+                axs = [axs]
+
+            if len(self._metrics) == 0:
+                loss = [loss]
+
+            if self.task == "regression":
+                y_true = self.preprocessed_data['y_test']
+                y_pred = self.model.predict(self.preprocessed_data['X_test'], verbose=0)
+
+                r2 = r2_score(y_true, y_pred)
+
+                axs[0].set_title(
+                    f"R²: {r2:.3f} | cost function [mean square error] (train: {history.history['loss'][-1]:.5f}  val: {history.history['val_loss'][-1]:.5f}  test: {loss[0]:.5f})",
+                    fontsize=12
+                    )
+
+            else:
+                axs[0].set_title(
+                    f"cost function [categorical crossentropy] (train: {history.history['loss'][-1]:.5f}  val: {history.history['val_loss'][-1]:.5f}  test: {loss[0]:.5f})",
+                    fontsize=12
+                    )
+            
+            axs[0].plot(history.history['loss'], linestyle='-', linewidth=2, label = 'Train', color=color['train'])
+            axs[0].plot(history.history['val_loss'], linestyle='-', linewidth=1, label = 'Validation', color=color['validation'])
+            axs[0].axhline(y=loss[0], linestyle='--', linewidth=1, label = 'Test', color=color['test'])
+            axs[0].set_xlabel('Epoch')
+            axs[0].set_ylabel('Metric')
+            axs[0].legend(loc = 'best')
+            axs[0].xaxis.set_major_locator(MaxNLocator(integer=True))
+
+
+            if self.task == "regression":
+                for i, metric in enumerate(self._metrics):
+                    axs[i+1].set_title(f"R²: {r2:.3f} | {metric.name} (train: {history.history[metric.name][-1]:.5f}  val: {history.history[f'val_{metric.name}'][-1]:.5f}  test: {loss[i+1]:.5f})", fontsize=12)
+                    axs[i+1].plot(history.history[f'{metric.name}'], linestyle='-', linewidth=2, label = 'Train', color=color['train'])
+                    axs[i+1].plot(history.history[f'val_{metric.name}'], linestyle='-', linewidth=1, label = 'Validation', color=color['validation'])
+                    axs[i+1].axhline(y=loss[i+1], linestyle='--', linewidth=1, label = 'Test', color=color['test'])
+                    axs[i+1].set_xlabel('Epoch')
+                    axs[i+1].set_ylabel('Metric')
+                    axs[i+1].legend(loc = 'best')
+                    axs[i+1].xaxis.set_major_locator(MaxNLocator(integer=True))
+
+            else:
+                for i, metric in enumerate(self._metrics):
+                    axs[i+1].set_title(f"{metric.name} (train: {history.history[metric.name][-1]:.5f}  val: {history.history[f'val_{metric.name}'][-1]:.5f}  test: {loss[i+1]:.5f})", fontsize=12)
+                    axs[i+1].plot(history.history[f'{metric.name}'], linestyle='-', linewidth=2, label = 'Train', color=color['train'])
+                    axs[i+1].plot(history.history[f'val_{metric.name}'], linestyle='-', linewidth=1, label = 'Validation', color=color['validation'])
+                    axs[i+1].axhline(y=loss[i+1], linestyle='--', linewidth=1, label = 'Test', color=color['test'])
+                    axs[i+1].set_xlabel('Epoch')
+                    axs[i+1].set_ylabel('Metric')
+                    axs[i+1].legend(loc = 'best')
+                    axs[i+1].xaxis.set_major_locator(MaxNLocator(integer=True))
+
+
+            if self.task == "classification":
+                y_true = np.argmax(self.preprocessed_data['y_test'], axis=1)
+                y_pred = np.argmax(self.model.predict(self.preprocessed_data['X_test'], verbose=0), axis=1)
+
+                conf_mat = confusion_matrix(y_true, y_pred)
+
+                encoder = self.preprocessor['target'].named_transformers_['target_preprocessor_cat'].named_steps['target_encoder_cat']
+                class_labels = encoder.categories_[0].tolist()
+
+                ax_conf = axs[-1]
+
+                sns.heatmap(conf_mat, annot=True, fmt="d", cmap="Greens", cbar=False, ax=ax_conf,
+                            xticklabels=class_labels, yticklabels=class_labels)
+                
+                ax_conf.set_xlabel(f'Predicted Values ({self.target})')
+                ax_conf.set_ylabel(f'True Values ({self.target})')
+                ax_conf.set_title('Confusion Matrix (Test Dataset)')
+
+            plt.tight_layout(rect=[0, 0.05, 1, 0.98])
+
+            if graphic_save_extension in ['png', 'svg', 'pdf', 'eps']:
+
+                if not os.path.exists(f'./saved/{self.name}/figures'):
+                    os.makedirs(f'./saved/{self.name}/figures')
+
+                plt.savefig(
+                    f'./saved/{self.name}/figures/{title}.{graphic_save_extension}',
+                    format=f'{graphic_save_extension}'
+                )
+
+            plt.show()
+            plt.close()
+
+        if return_history:
+            return history
+
+    
+    def predict(self, x, verbose=0):
+        """
+        Makes predictions using the trained neural network model.
+
+        Args:
+            x (Pandas DataFrame): The input data for making predictions.
+            verbose (int, optional): Verbosity mode for prediction. Defaults to 0.
+        
+        Returns:
+            Pandas DataFrame: The input data with an additional column for predictions.
+        """
+
+        _x = x.copy()
+
+        if self.target in _x.columns:
+            _y_real = _x[self.target]
+            _x.drop(self.target, axis=1, inplace=True)
+     
+        ################### INFERENCE #######################
+        start_time = time()
+
+        _x_temp = self.preprocessor['features'].transform(_x)
+        y = self.model.predict(_x_temp, verbose=verbose)
+
+        if self.preprocessor['target'] is not None:
+            target_preprocessor = self.preprocessor['target'].named_transformers_['target_preprocessor_cat']
+            y = target_preprocessor.inverse_transform(y)
+
+        end_time = time() 
+        #####################################################
+
+        inference_time = end_time - start_time
+        print(f"Inference time: {inference_time * 1000:.2f} milliseconds ({len(x)} register(s))") 
+
+        if '_y_real' in locals(): 
+            _x[self.target] = _y_real
+
+        _x[f'{self.target} (NN prediction)'] = y
+        
+        return _x
+
+    
+    def save(self):
+        """
+        Saves the model and preprocessor to disk.
+        """
+
+        if not os.path.exists(f'./saved/{self.name}'):
+            os.makedirs(f'./saved/{self.name}')
+        
+        dump(self.preprocessor, f'./saved/{self.name}/preprocessor.joblib')
+        self.model.save(f'./saved/{self.name}/model.h5')
+
+
+class XgBoost(Model):
     """
-    This class is used to build and search hyperparameters for a random forest model in scikit-learn.
+    A class for constructing and training XGBoost models, with built-in methods for preprocessing,
+    hyperparameter optimization, training, and inference. Inherits from the Model base class.
 
     Attributes:
-    -----------
-        - model: the built RandomForest scikit-learn model.
+        metrics (list): List of evaluation metrics to be used for model evaluation.
+        patience_early_stopping (int): Number of rounds without improvement to wait before stopping training.
+
+    Methods:
+        build(data, **kwargs): Prepares the XGBoost model based on provided dataset and hyperparameters.
+        _make_xgBooster(**kwargs): Constructs the XGBoost model with specified hyperparameters.
+        _optimizer(trial, **kwargs): Defines and runs the optimization trial for hyperparameter tuning.
+        hyperparameter_optimization(n_trials=1, info=False, **kwargs): Performs hyperparameter optimization using Optuna.
+        load(foldername): Loads the model and preprocessor from the specified folder.
+        fit(return_history=False, graphic=True, graphic_save_extension=None, verbose=0, **kwargs): Trains the XGBoost model on preprocessed data.
+        predict(x): Makes predictions using the trained XGBoost model.
+        save(): Saves the model and preprocessor to disk.
     """
-    def __init__(self, model = None):
-        self.model = model
 
-    def search_hyperparams(self, X, y, verbose = False, **kwargs):
+    def __init__(self, target, name=None, seed=None):
         """
-        Perform a hyperparameter search for a Random Forest model using RandomizedSearchCV.
+        Initializes a new instance of the XgBoost class.
 
         Args:
-            X (numpy array): The feature matrix of the data.
-            y (numpy array): The target vector of the data.
-            verbose (bool, optional): If True, print the optimal hyperparameters. Defaults to False.
-            **kwargs: Additional keyword arguments. The following hyperparameters can be set:
-                - n_estimators (int): Number of trees in the forest. Defaults to sp_randint(10, 1000).
-                - max_features (list): The number of features to consider when looking for the best split.
-                Allowed values are 'sqrt', 'log2' or a float between 0 and 1. Defaults to ['sqrt', 'log2'].
-                - max_depth (list): The maximum depth of the tree. Defaults to [None, 5, 10, 15, 20, 30, 40].
-                - min_samples_split (int): The minimum number of samples required to split an internal node.
-                Defaults to sp_randint(2, 20).
-                - min_samples_leaf (int): The minimum number of samples required to be at a leaf node.
-                Defaults to sp_randint(1, 20).
-                - bootstrap (bool): Whether bootstrap samples are used when building trees.
-                Defaults to [True, False].
-                - y_type (str): Type of target variable. Either 'num' for numeric or 'cat' for categorical.
-                Defaults to 'cat'.
-
-        Returns:
-            dict: A dictionary with the best hyperparameters found during the search.
+            target (str): The name of the target variable.
+            name (str, optional): The name of the model. Defaults to a generated name based on the current datetime.
+            seed (int, optional): Random seed for reproducibility. Defaults to None.
         """
-        if y.shape[1]==1:
-            y = np.reshape(y, (y.shape[0],))
-        defaultKwargs = {
-                        'n_estimators': sp_randint(10, 1000),
-                        'max_features': ['sqrt', 'log2'],
-                        'max_depth': [None, 5, 10, 15, 20, 30, 40],
-                        'min_samples_split': sp_randint(2, 20),
-                        'min_samples_leaf': sp_randint(1, 20),
-                        'bootstrap': [True, False]
-                        }
-        kwargs = { **defaultKwargs, **kwargs }
-        if kwargs['y_type'] == 'num':
-            rf = RandomForestRegressor()
+
+        if name is None:
+            _name = f'xgBoost {datetime.now().strftime("%d-%m-%y %Hh%Mmin")}'
+
         else:
-            rf = RandomForestClassifier()
-        param_dist = {
-                        'n_estimators': kwargs['n_estimators'],
-                        'max_features': kwargs['max_features'],
-                        'max_depth': kwargs['max_depth'],
-                        'min_samples_split': kwargs['min_samples_split'],
-                        'min_samples_leaf': kwargs['min_samples_leaf'],
-                        'bootstrap': kwargs['bootstrap'],
-                        }
-        random_search = RandomizedSearchCV(rf, param_distributions=param_dist, n_iter=50, cv=5)
-        #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        random_search.fit(X, y)
-        
-        print("Best hyperparameters:", random_search.best_params_)
-        if verbose:
-            print("Os valores ótimos dos hyperparamentros para a Random Forest são:")
-            for key, value in random_search.best_params_.items():
-                print(key,': ', value)
-        return random_search.best_params_
+            _name = name
 
-    def build(self, n_estimators = 100, max_depth =  None, min_samples_split = 2, min_samples_leaf = 1, max_features = 'sqrt', **kwargs):  
+        super().__init__(target, _name, seed)
+        
+        self._metrics = None
+        self.patience_early_stopping = None
+          
+
+    @validate_target
+    @validate_task
+    @validate_split_size
+    def build(self, data, **kwargs):
         """
-        Builds a new Random Forest model with the specified hyperparameters.
+        Prepares the XGBoost model based on the provided dataset and hyperparameters. This includes preprocessing
+        the data and initializing the model parameters based on the data's characteristics and specified hyperparameters.
 
         Args:
-            n_estimators (int, optional): The number of trees in the forest. Default is 100.
-            max_depth (int or None, optional): The maximum depth of each tree. None means unlimited. Default is None.
-            min_samples_split (int, optional): The minimum number of samples required to split an internal node. Default is 2.
-            min_samples_leaf (int, optional): The minimum number of samples required to be at a leaf node. Default is 1.
-            max_features (str or int, optional): The maximum number of features to consider when looking for the best split.
-                Can be 'sqrt', 'log2', an integer or None. Default is 'sqrt'.
-            **kwargs: Additional keyword arguments. Must include a 'y_type' parameter, which should be set to 'num' for
-                regression problems and 'cat' for classification problems.
-
-        Returns:
-            None
+            data (Pandas DataFrame): The dataset to be used for building the model.
+            **kwargs: Additional keyword arguments for preprocessing and model configuration.
         """
-        if kwargs['y_type'] == 'num':
-            rf = RandomForestRegressor(n_estimators = n_estimators, max_depth = max_depth, min_samples_split = min_samples_split, min_samples_leaf = min_samples_leaf, max_features = max_features)
+
+        super()._preprocess(data, **kwargs)
+        
+        if self.task == 'regression':
+            self._metrics = ['rmse']
+
         else:
-            rf = RandomForestClassifier(n_estimators = n_estimators, max_depth = max_depth, min_samples_split = min_samples_split, min_samples_leaf = min_samples_leaf, max_features = max_features)
-        self.model = rf
+            self._metrics = ['mlogloss']
 
-    def load(self, path):
-        """Load a saved random forest model.
+
+        self.patience_early_stopping = kwargs.get('patience_early_stopping', 20)
+
+
+    def _make_xgBooster(self, tree_method, booster, learning_rate, min_split_loss, max_depth,
+                        min_child_weight, max_delta_step, subsample, sampling_method,
+                        colsample_bytree, colsample_bylevel, colsample_bynode, reg_lambda,
+                        reg_alpha, scale_pos_weight, grow_policy, max_leaves, max_bin,
+                        num_parallel_tree, verbose=0):
+        """
+        Constructs the XGBoost model with the specified hyperparameters.
 
         Args:
-            path (str): The path to the saved model file. The file must be a joblib file with the extension '.joblib'.
-
-        Raises:
-            ValueError: If the extension of the file is not '.joblib'.
-
-        Returns:
-            None.
-        """
-        extension = os.path.splitext(path)[1]
-        if extension != '.joblib':
-            raise ValueError("Extensão inválida para o modelo de Random Forest. A extensão do arquivo deve ser '.joblib'.")
+            **kwargs: Hyperparameters for the XGBoost model.
         
-        elif not extension:
-            path = path + '.joblib'
-        self.model = joblib.load(path)
+        Returns:
+            xgboost.XGBModel: The constructed XGBoost model.
+        """
+        
+        common_arguments = {
+            'tree_method': tree_method,
+            'n_estimators': 100_000,
+            'early_stopping_rounds': self.patience_early_stopping,
+            'booster': booster,
+            'eval_metric': self._metrics,
+            'validate_parameters': False,
+            'learning_rate': learning_rate,
+            'min_split_loss': min_split_loss,
+            'max_depth': max_depth,
+            'min_child_weight': min_child_weight,
+            'max_delta_step': max_delta_step,
+            'subsample': subsample,
+            'sampling_method': sampling_method,
+            'colsample_bytree': colsample_bytree,
+            'colsample_bylevel': colsample_bylevel,
+            'colsample_bynode': colsample_bynode,
+            'reg_lambda': reg_lambda,
+            'reg_alpha': reg_alpha,
+            'scale_pos_weight': scale_pos_weight,
+            'grow_policy': grow_policy,
+            'max_leaves': max_leaves,
+            'max_bin': max_bin,
+            'num_parallel_tree': num_parallel_tree,
+            'random_state': self.seed,
+            'verbosity': verbose
+        } 
 
+        if self.task == "regression":
+            model = XGBRegressor(
+                objective='reg:squarederror',
+                **common_arguments
+            )
+
+        else:
+            model = XGBClassifier(
+                objective='multi:softprob',
+                num_class= np.unique(self.preprocessed_data['y_train']).size,
+                use_label_encoder=False,
+                **common_arguments
+            )
+            
+        return model
+
+    def _optimizer(self, trial, **kwargs):
+        """
+        Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+        a callback within an Optuna optimization study.
+
+        Args:
+            trial (optuna.trial.Trial): An Optuna trial object.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
+        
+        Returns:
+            float: The average validation loss across all folds for the current trial.
+        """
+
+        num_folds = kwargs.get('num_folds', 5)
+
+        search_space_tree_method = kwargs.get('search_space_tree_method', ['auto'])
+        search_space_booster = kwargs.get('search_space_booster', ['gbtree', 'gblinear', 'dart'])
+        search_space_learning_rate = kwargs.get('search_space_learning_rate', [0.1, 0.3])
+        search_space_min_split_loss = kwargs.get('search_space_min_split_loss', [0])
+        search_space_max_depth = kwargs.get('search_space_max_depth', [5, 6, 7])
+        search_space_min_child_weight = kwargs.get('search_space_min_child_weight', [1])
+        search_space_max_delta_step = kwargs.get('search_space_max_delta_step', [0])
+        search_space_subsample = kwargs.get('search_space_subsample', [1])
+        search_space_sampling_method = kwargs.get('search_space_sampling_method', ['uniform'])
+        search_space_colsample_bytree = kwargs.get('search_space_colsample_bytree', [1])
+        search_space_colsample_bylevel = kwargs.get('search_space_colsample_bylevel', [1])
+        search_space_colsample_bynode = kwargs.get('search_space_colsample_bynode', [1])
+        search_space_reg_lambda = kwargs.get('search_space_reg_lambda', [1])
+        search_space_reg_alpha = kwargs.get('search_space_reg_alpha', [0])
+        search_space_scale_pos_weight = kwargs.get('search_space_scale_pos_weight', [1])
+        search_space_grow_policy = kwargs.get('search_space_grow_policy', ['depthwise', 'lossguide'])
+        search_space_max_leaves = kwargs.get('search_space_max_leaves', [0])
+        search_space_max_bin = kwargs.get('search_space_max_bin', [256])
+        search_space_num_parallel_tree = kwargs.get('search_space_num_parallel_tree', [1])
+
+        tree_method = trial.suggest_categorical('tree_method', search_space_tree_method)
+        booster = trial.suggest_categorical('booster', search_space_booster)
+        learning_rate = trial.suggest_categorical('learning_rate', search_space_learning_rate)
+        min_split_loss = trial.suggest_categorical('min_split_loss', search_space_min_split_loss)
+        max_depth = trial.suggest_categorical('max_depth', search_space_max_depth)
+        min_child_weight = trial.suggest_categorical('min_child_weight', search_space_min_child_weight)
+        max_delta_step = trial.suggest_categorical('max_delta_step', search_space_max_delta_step)
+        subsample = trial.suggest_categorical('subsample', search_space_subsample)
+        sampling_method = trial.suggest_categorical('sampling_method', search_space_sampling_method)
+        colsample_bytree = trial.suggest_categorical('colsample_bytree', search_space_colsample_bytree)
+        colsample_bylevel = trial.suggest_categorical('colsample_bylevel', search_space_colsample_bylevel)
+        colsample_bynode = trial.suggest_categorical('colsample_bynode', search_space_colsample_bynode)
+        reg_lambda = trial.suggest_categorical('reg_lambda', search_space_reg_lambda)
+        reg_alpha = trial.suggest_categorical('reg_alpha', search_space_reg_alpha)
+        scale_pos_weight = trial.suggest_categorical('scale_pos_weight', search_space_scale_pos_weight)
+        grow_policy = trial.suggest_categorical('grow_policy', search_space_grow_policy)
+        max_leaves = trial.suggest_categorical('max_leaves', search_space_max_leaves)
+        max_bin = trial.suggest_categorical('max_bin', search_space_max_bin)
+        num_parallel_tree = trial.suggest_categorical('num_parallel_tree', search_space_num_parallel_tree)
+
+        kfold = KFold(n_splits=num_folds, shuffle=True)
+
+        scores = []
+
+        X_train_val = self.preprocessed_data['X_train_val']
+        y_train_val = self.preprocessed_data['y_train_val']
+
+        for index_train, index_val in kfold.split(X_train_val, y_train_val):
+
+            modelStudy = self._make_xgBooster(
+                tree_method = tree_method,
+                booster = booster,
+                learning_rate = learning_rate,
+                min_split_loss = min_split_loss,
+                max_depth = max_depth,
+                min_child_weight = min_child_weight,
+                max_delta_step = max_delta_step,
+                subsample = subsample,
+                sampling_method = sampling_method,
+                colsample_bytree = colsample_bytree,
+                colsample_bylevel = colsample_bylevel,
+                colsample_bynode = colsample_bynode,
+                reg_lambda = reg_lambda,
+                reg_alpha = reg_alpha,
+                scale_pos_weight = scale_pos_weight,
+                grow_policy = grow_policy,
+                max_leaves = max_leaves,
+                max_bin = max_bin,
+                num_parallel_tree = num_parallel_tree
+            )
+        
+            modelStudy.fit(
+                X_train_val[index_train],
+                y_train_val[index_train],
+                eval_set = [(
+                    X_train_val[index_val],
+                    y_train_val[index_val]
+                )],
+                verbose=0
+            )
+
+            scores.append(modelStudy.best_score)
+
+        new_trial = pd.DataFrame([scores], columns=self.history_kfold.columns)
+        self.history_kfold = self.history_kfold.append(new_trial, ignore_index=True)
+        self.history_kfold.rename_axis('Trial (nº)', inplace=True)
+
+        return sum(scores) / num_folds
+
+    
+    def hyperparameter_optimization(self, n_trials=1, info=False, **kwargs):
+        """
+        Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+        and updates the model's hyperparameters with the best found values.
+
+        Args:
+            n_trials (int, optional): The number of optimization trials to perform. Defaults to 1.
+            info (bool, optional): Whether to print detailed information about each trial. Defaults to False.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
+        
+        Returns:
+            pd.DataFrame: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
+        """
+
+        num_folds = kwargs.get('num_folds', 5)
+        columns_name = [f'Fold nº {i}' for i in range(1, num_folds + 1)]
+
+        self.history_kfold = pd.DataFrame(columns=columns_name).rename_axis('Trial (nº)')
+
+        self.hyperparameter = optuna.create_study(study_name='optimization', direction='minimize')
+        self.hyperparameter.optimize(lambda trial: self._optimizer(trial, **kwargs), n_trials = n_trials)
+
+        if info:
+            trial = self.hyperparameter.trials_dataframe()
+            trial = trial.set_index("number")
+            trial.rename_axis('Trial (nº)', inplace=True)
+            trial.rename(columns={'value': 'Folds mean'}, inplace=True)
+
+            self.history_kfold['Folds std'] = self.history_kfold.std(axis=1)      
+
+            df_info = self.history_kfold.join(trial.drop(['datetime_start', 'datetime_complete', 'duration', 'state'], axis=1))
+            df_info = df_info.sort_values(by='Folds mean', ascending=True)
+            df_info.reset_index(inplace=True)
+            df_info.index = [f'{i}º' for i in df_info.index + 1]
+            df_info.rename_axis('Ranking', inplace=True)
+
+            fist_level_multiindex = 'Categorical Crossentropy' if self.task == "classification" else "Mean Squared Error"
+
+            trial_columns = [(fist_level_multiindex, col) for col in df_info.columns[: num_folds + 3]]
+            hyperparameter_columns =[('Hyperparameters', col) for col in df_info.columns[num_folds + 3 :]]
+            
+            multi_columns = pd.MultiIndex.from_tuples(trial_columns + hyperparameter_columns)
+            df_info.columns = multi_columns
+
+            return df_info.style.set_table_styles([dict(selector='th', props=[('text-align', 'center')])])
+
+
+    def load(self, foldername):
+        """
+        Loads the model and preprocessor from the specified folder.
+
+        Args:
+            foldername (str): The name of the folder where the model and preprocessor are saved.
+        """
+
+        if not os.path.exists(f'./saved/{foldername}'):
+            print("There is no folder with that name!")
+            return
+        
+        self.name = foldername
+        self.preprocessor = load(f'./saved/{foldername}/preprocessor.joblib')
+
+        try:
+            self.model = XGBRegressor()
+            self.model.load_model(f'./saved/{foldername}/model.bin')
+
+        except:
+            self.model = XGBClassifier()
+            self.model.load_model(f'./saved/{foldername}/model.bin')
+
+    
+    def fit(self, return_history=False, graphic=False, graphic_save_extension=None, verbose=0, **kwargs):
+        """
+        Trains the XGBoost model on preprocessed data. This method supports early stopping based on the performance
+        on the validation set.
+
+        Args:
+            return_history (bool, optional): Whether to return the training history object. Defaults to False.
+            graphic (bool, optional): Whether to plot training and validation loss and metrics. Defaults to True.
+            graphic_save_extension (str, optional): Extension to save the graphics (e.g., 'png', 'svg'). If None, graphics are not saved. Defaults to None.
+            verbose (int, optional): Verbosity mode for training progress. Defaults to 0.
+            **kwargs: Additional keyword arguments for configuring the training process.
+        
+        Returns:
+            dict: The training history object, if `return_history` is True. Otherwise, None.
+        """
+
+        if self.hyperparameter is None:
+           self.hyperparameter_optimization()
+
+        self.model = self._make_xgBooster(
+            tree_method = self.hyperparameter.best_params['tree_method'],
+            booster = self.hyperparameter.best_params['booster'],
+            learning_rate = self.hyperparameter.best_params['learning_rate'],
+            min_split_loss = self.hyperparameter.best_params['min_split_loss'],
+            max_depth = self.hyperparameter.best_params['max_depth'],
+            min_child_weight = self.hyperparameter.best_params['min_child_weight'],
+            max_delta_step = self.hyperparameter.best_params['max_delta_step'],
+            subsample = self.hyperparameter.best_params['subsample'],
+            sampling_method = self.hyperparameter.best_params['sampling_method'],
+            colsample_bytree = self.hyperparameter.best_params['colsample_bytree'],
+            colsample_bylevel = self.hyperparameter.best_params['colsample_bylevel'],
+            colsample_bynode = self.hyperparameter.best_params['colsample_bynode'],
+            reg_lambda = self.hyperparameter.best_params['reg_lambda'],
+            reg_alpha = self.hyperparameter.best_params['reg_alpha'],
+            scale_pos_weight = self.hyperparameter.best_params['scale_pos_weight'],
+            grow_policy = self.hyperparameter.best_params['grow_policy'],
+            max_leaves = self.hyperparameter.best_params['max_leaves'],
+            max_bin = self.hyperparameter.best_params['max_bin'],
+            num_parallel_tree = self.hyperparameter.best_params['num_parallel_tree']
+        )
+    
+        self.model.fit(
+            self.preprocessed_data['X_train'],
+            self.preprocessed_data['y_train'],
+            
+            ## Não ocorre data leaking. EarlyStopping utiliza somente eval_set[-1]
+            eval_set = [(
+                self.preprocessed_data['X_train'],
+                self.preprocessed_data['y_train']
+                ), (
+                self.preprocessed_data['X_test'],
+                self.preprocessed_data['y_test']
+                ), (
+                self.preprocessed_data['X_val'],
+                self.preprocessed_data['y_val']
+                )],
+
+            verbose=verbose
+        )
+
+        history = self.model.evals_result()
+
+        if graphic:
+            height = kwargs.get('subplot_height', 4)
+            width = kwargs.get('subplot_width', 8)
+
+            color = kwargs.get('subplot_color', {
+                "train": 'red',
+                "validation": "blue",
+                "test": "green" 
+            })
+
+            if self.task == "regression":
+                fig, axs = plt.subplots(len(self._metrics), 1, figsize=(width, height * (len(self._metrics))))
+
+            else:
+                fig, axs = plt.subplots(len(self._metrics) + 1, 1, figsize=(width, height * (len(self._metrics) + 1)))
+
+            if not hasattr(axs, '__getitem__'):
+                axs = [axs]
+            
+            title = "Bias-Variance Graphic (XG Boost)"
+
+            fig.suptitle(title, fontweight='bold', fontsize=12)
+
+            for i, metric in enumerate(self._metrics):
+
+                if i == 0 and self.task == "regression":
+                    y_true = self.preprocessed_data['y_test']
+                    y_pred = self.model.predict(self.preprocessed_data['X_test'])
+
+                    r2 = r2_score(y_true, y_pred)
+
+                    axs[i].set_title(
+                        f"R²: {r2:.3f} | {metric} (train: {history['validation_0'][metric][-1]:.5f}  val: {history['validation_2'][metric][-1]:.5f}  test: {history['validation_1'][metric][-1]:.5f})",
+                        fontsize=12
+                        )
+
+                elif i == 0:
+                    ## mlogloss == categorical crossentropy (muticlassification problem)
+                    axs[i].set_title(
+                        f"cost function [categorical crossentropy] (train: {history['validation_0'][metric][-1]:.5f}  val: {history['validation_2'][metric][-1]:.5f}  test: {history['validation_1'][metric][-1]:.5f})",
+                        fontsize=12
+                        )
+
+                else:
+                    axs[i].set_title(f"{metric} (train: {history['validation_0'][metric][-1]:.5f}  val: {history['validation_2'][metric][-1]:.5f}  test: {history['validation_1'][metric][-1]:.5f})")
+                
+                axs[i].plot(history['validation_0'][metric], linestyle='-', linewidth=2, label = 'Train', color=color['train'])
+                axs[i].plot(history['validation_2'][metric], linestyle='-', linewidth=1, label = 'Validation', color=color['validation'])
+                axs[i].axhline(y=history['validation_1'][metric][-1], linestyle='--', linewidth=1, label = 'Test', color=color['test'])
+                axs[i].set_xlabel('Estimators')
+                axs[i].set_ylabel('Metric')
+                axs[i].legend(loc = 'best')
+                axs[i].xaxis.set_major_locator(MaxNLocator(integer=True))
+
+            if self.task == "classification":
+                y_true = self.preprocessed_data['y_test']                
+                y_pred = self.model.predict(self.preprocessed_data['X_test'])
+
+                if y_pred.ndim == 2:
+                    y_pred = np.argmax(y_pred, axis=1)
+
+                conf_mat = confusion_matrix(y_true, y_pred)
+
+                encoder = self.preprocessor['target'].named_transformers_['target_preprocessor_cat'].named_steps['target_encoder_cat']
+                class_labels = encoder.categories_[0].tolist()
+
+                ax_conf = axs[-1]
+
+                sns.heatmap(conf_mat, annot=True, fmt="d", cmap="Greens", cbar=False, ax=ax_conf,
+                            xticklabels=class_labels, yticklabels=class_labels)
+                
+                ax_conf.set_xlabel(f'Predicted Values ({self.target})')
+                ax_conf.set_ylabel(f'True Values ({self.target})')
+                ax_conf.set_title('Confusion Matrix (Test Dataset)')
+
+            plt.tight_layout(rect=[0, 0.05, 1, 0.98])
+
+            if graphic_save_extension in ['png', 'svg', 'pdf', 'eps']:
+
+                if not os.path.exists(f'./saved/{self.name}/figures'):
+                    os.makedirs(f'./saved/{self.name}/figures')
+
+                plt.savefig(f'./saved/{self.name}/figures/{title}.{graphic_save_extension}', format=f'{graphic_save_extension}')
+
+            plt.show()
+            plt.close()
+
+        if return_history:
+            return history
+
+    
     def predict(self, x):
         """
-        Makes predictions using the trained Random Forest model on the given input data.
-        
+        Makes predictions using the trained XGBoost model.
+
         Args:
-            x: The input data to make predictions on.
+            x (Pandas DataFrame): The input data for making predictions.
+        
+        Returns:
+            Pandas DataFrame: The input data with an additional column for predictions.
+        """
+
+        _x = x.copy()
+
+        if self.target in _x.columns:
+            _y_real = _x[self.target]
+            _x.drop(self.target, axis=1, inplace=True)
+
+        ################### INFERENCE #######################
+        start_time = time()
+
+        _x_temp = self.preprocessor['features'].transform(_x)
+        y = self.model.predict(_x_temp)
+
+        if y.ndim == 2:
+            y = np.argmax(y, axis=1)
+
+        if self.preprocessor['target'] is not None:
+            target_preprocessor = self.preprocessor['target'].named_transformers_['target_preprocessor_cat']
+            y = target_preprocessor.inverse_transform(y.reshape(-1, 1))
+
+        end_time = time() 
+        #####################################################
+
+        inference_time = end_time - start_time
+        print(f"Inference time: {inference_time * 1000:.2f} milliseconds ({len(x)} register(s))") 
+
+
+        if '_y_real' in locals(): 
+            _x[self.target] = _y_real
+
+        _x[f'{self.target} (XGB prediction)'] = y
+        
+        return _x
+
+    
+    def save(self):
+        """
+        Saves the model and preprocessor to disk.
+        """
+    
+        if not os.path.exists(f'./saved/{self.name}'):
+            os.makedirs(f'./saved/{self.name}')
+        
+        dump(self.preprocessor, f'./saved/{self.name}/preprocessor.joblib')
+        self.model.save_model(f'./saved/{self.name}/model.bin')
+
+
+class DBSCAN(Model):
+    """
+    A class for constructing and running the DBSCAN clustering algorithm, with built-in methods for preprocessing,
+    hyperparameter optimization, and silhouette analysis. Inherits from the Model base class.
+
+    Attributes:
+        have_categ (bool): Indicates whether the dataset contains categorical features.
+        distance_matrix (numpy.ndarray): The computed distance matrix for the dataset.
+        clusters (numpy.ndarray): The cluster labels for each point in the dataset.
+
+    Methods:
+        build(data, **kwargs): Prepares the DBSCAN model based on provided dataset and hyperparameters.
+        _make_dbscan(eps, min_samples, algorithm, leaf_size, p): Constructs the DBSCAN model with specified hyperparameters.
+        _optimizer(trial, **kwargs): Defines and runs the optimization trial for hyperparameter tuning.
+        hyperparameter_optimization(n_trials=100, info=False, **kwargs): Performs hyperparameter optimization using Optuna.
+        load(foldername): Loads the preprocessor, preprocessed data, clusters, and model from the specified folder.
+        fit(): Applies the DBSCAN algorithm to the preprocessed data.
+        predict(projection='2d', graphic_save_extension=None): Generates and displays a 2D or 3D t-SNE plot of the clusters.
+        save(): Saves the preprocessor, preprocessed data, clusters, and model to disk.
+    """
+
+    def __init__(self, name=None, seed=None):
+        """
+        Initializes a new instance of the DBSCAN class.
+
+        Args:
+            name (str, optional): The name of the model. Defaults to a generated name based on the current datetime.
+            seed (int, optional): Random seed for reproducibility. Defaults to None.
+        """
+
+        if name is None:
+            _name = f'dbscan {datetime.now().strftime("%d-%m-%y %Hh%Mmin")}'
+
+        else:
+            _name = name
+
+        super().__init__(None, _name, seed)
+
+        self.have_categ = None
+        self.distance_matrix = None
+        self.clusters = None
+
+    def build(self, data, **kwargs):
+        """
+        Prepares the DBSCAN model based on the provided dataset and hyperparameters. This includes preprocessing
+        the data and calculating the distance matrix if necessary.
+
+        Args:
+            data (Pandas DataFrame): The dataset to be used for clustering.
+            **kwargs: Additional keyword arguments for preprocessing.
+        """
+
+        super()._cluster_preprocess(data, **kwargs)
+
+        if self.have_cat:
+            self.distance_matrix = gower.gower_matrix(self.preprocessed_data['X'])
+
+        else:
+            self.distance_matrix = pairwise_distances(self.preprocessed_data['X'], metric='euclidean')
+
+    def _make_dbscan(self, eps, min_samples, algorithm, leaf_size, p):
+        """
+        Constructs the DBSCAN model with the specified hyperparameters.
+
+        Args:
+            eps (float): The maximum distance between two samples for them to be considered as in the same neighborhood.
+            min_samples (int): The number of samples in a neighborhood for a point to be considered as a core point.
+            algorithm (str): The algorithm to be used by the DBSCAN model.
+            leaf_size (int): Leaf size passed to the underlying BallTree or KDTree.
+            p (float): The power of the Minkowski metric to be used to calculate distance between points.
+
+        Returns:
+            sklearn.cluster._dbscan.DBSCAN: The constructed DBSCAN model.
+        """
+
+        model = _DBSCAN(
+            eps=eps,
+            min_samples=min_samples,
+            algorithm=algorithm,
+            leaf_size=leaf_size,
+            p=p,
+            metric='precomputed'
+        )
             
-        Returns:
-            An array of predicted target values.
-        """
-        return self.model.predict(x)
+        return model
 
-    def fit(self, x, y, validation_data=None, batch_size=32, epochs=500, save=True, patience=5, path=''):
+    def _optimizer(self, trial, **kwargs):
         """
-        Trains the Random Forest model on the given input and target data.
+        Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+        a callback within an Optuna optimization study.
+
+        Args:
+            trial (optuna.trial.Trial): An Optuna trial object.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
         
-        Args:
-            x (numpy array): The input data to train the model on.
-            y (numpy array): The target data to train the model on.
-            validation_data (tuple): Not used in this context. For compatibility only.
-            batch_size (int): Not used in this context. For compatibility only.
-            epochs (int): Not used in this context. For compatibility only.
-            save (bool): If True, saves the model to the specified path.
-            patience (int): Not used in this context. For compatibility only.
-            path (str): The path to save the trained model.
-
         Returns:
-            None
+            float: The silhouette score for the clustering configuration defined by the trial.
         """
-        if y.ndim == 2 and y.shape[1] == 1:
-            y = np.ravel(y)
-        self.model.fit(x, y)
 
-        if save and path:
-            self.save(os.path.join(path, "random_forest_model.joblib"))
+        search_space_eps = kwargs.get('search_space_eps', [0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 1])
+        search_space_min_samples = kwargs.get('search_space_min_samples', [3, 4, 5, 6, 7])
+        search_space_algorithm = kwargs.get('search_space_algorithm', ['auto'])
+        search_space_leaf_size = kwargs.get('search_space_leaf_size', [10, 20, 30, 40, 50])
+        search_space_p = kwargs.get('search_space_p', [2])
 
-    def save(self, path):
-        """
-        Saves the trained model to a file with the specified path.
+        eps = trial.suggest_categorical('eps', search_space_eps)
+        min_samples = trial.suggest_categorical('min_samples', search_space_min_samples)
+        algorithm = trial.suggest_categorical('algorithm', search_space_algorithm)
+        leaf_size = trial.suggest_categorical('leaf_size', search_space_leaf_size)
+        p = trial.suggest_categorical('p', search_space_p)
+           
+        modelStudy = self._make_dbscan(
+            eps=eps,
+            min_samples=min_samples,
+            algorithm=algorithm,
+            leaf_size=leaf_size,
+            p=p
+        )
+        
+        clusters = modelStudy.fit_predict(self.distance_matrix)
+        clusters_filtered = clusters[clusters != -1]
 
-        Args:
-            path (str): The file path where the model should be saved. The file extension should be '.joblib'.
-
-        Raises:
-            ValueError: If the file extension is invalid or missing.
-
-        Returns:
-            None
-        """
-        path = os.path.splitext(path)[0]
-        joblib.dump(self.model, path + '.joblib')
-
-class Scaler():
-    """The Scaler class is designed to scale and transform data using various scaling techniques. It contains methods for fitting and transforming data, as well as saving and loading scaler objects to and from files."""
-    def __init__(self, scaler = None):
-        if scaler:
-            self.scaler = eval(f"{scaler}()")
+        if len(np.unique(clusters_filtered)) > 1:
+            score = silhouette_score(self.preprocessed_data['X_ohe'], clusters)
+        
         else:
-            self.scaler = scaler
-
-    def fit_transform(self, data):
-        """
-        Fit to data, then transform it.
-
-        Args:
-            data (array-like): The data to be transformed.
-
-        Returns:
-            array-like: The transformed data.
-        """
-        return self.scaler.fit_transform(data)
-
-    def transform(self, data):
-        """
-        Perform standardization on an array.
-
-        Args:
-            data (array-like): The data to be standardized.
-
-        Returns:
-            array-like: The standardized data.
-        """
-        return self.scaler.transform(data)
-
-    def inverse_transform(self, data):
-        """
-        Scale back the data to the original representation.
-
-        Args:
-            data (array-like): The data to be scaled back.
-
-        Returns:
-            array-like: The original representation of the data.
-        """
-        return self.scaler.inverse_transform(data)
-
-    def save(self, path):
-        """
-        Save the scaler object to a file.
-
-        Args:
-            path (str): The path where the scaler object will be saved.
-        """
-        path = os.path.splitext(path)[0]
-        joblib.dump(self.scaler, path + '.pkl')
-
-    def load(self, path):
-        """
-        Load a saved scaler object from a file.
-
-        Args:
-            path (str): The path where the scaler object is saved.
-        """
-        self.scaler = joblib.load(path)
-
-class AsaML():
-    def __init__(self, dir_name = None):
-        if not dir_name:
-            self.dir_name = datetime.datetime.now().strftime("%Y_%m_%d_(%H-%M-%S)")
-        else:
-            self.dir_name = dir_name
-        self.y_type = {}
-        self.var_type = {'X':{}, 'y':{}}
-        self.losses_dict = {'bi_cat': 'categorical_crossentropy', 'multi_cat': 'binary_crossentropy', 'num': 'mean_squared_error'}
-        self.metrics_dict = {'bi_cat': ['accuracy'], 'multi_cat': ['accuracy'], 'num': ['mean_squared_error']}
-        self.scaler = None
+            score = -1
+        
+        return score
     
-    @staticmethod
-    def identify_categorical_data(df):
-        """Identifies categorical data.
+
+    def hyperparameter_optimization(self, n_trials=100, info=False, **kwargs):
+        """
+        Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+        and identifies the best hyperparameters for DBSCAN clustering.
 
         Args:
-            df (pandas.DataFrame): The DataFrame containing the data.
-
+            n_trials (int, optional): The number of optimization trials to perform. Defaults to 100.
+            info (bool, optional): Whether to print detailed information about each trial. Defaults to False.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
+        
         Returns:
-            tuple: A tuple containing two DataFrames - one containing the categorical columns and the other containing the numerical columns.
-
-        Raises:
-            ValueError: If the input DataFrame is empty or if it contains no categorical or numerical data.
-        
-        Example usage:
-        
-        .. code-block::
-
-            >>> import pandas as pd
-            >>> df = pd.DataFrame({'col1': ['a', 'b', 'c'], 'col2': [1, 2, 3], 'col3': ['x', 'y', 'z']})
-            >>> df_cat, df_num = identify_categorical_data(df)
-            >>> df_cat
-            col1
-            0    a
-            1    b
-            2    c
-            >>> df_num
-            col2
-            0     1
-            1     2
-            2     3
-        """
-        df_cat = df.select_dtypes(exclude=["number"])
-        df_num = df.select_dtypes("number")
-        for col in df_num:
-            unique_values = df_num[col].nunique()
-            if unique_values < 20 and unique_values/len(df_num) <0.05:
-                df_cat[col] = pd.Categorical(df_num[col])
-                df_num = df_num.drop(columns=[col])
-        return df_cat, df_num
-
-    def pre_processing_train(self, X, y, remove_outlier = False):
-        """Perform pre-processing steps for the training dataset.
-    
-        Args:
-            X: pandas.DataFrame - input features.
-            y: pandas.DataFrame - target variable.
-            remove_outlier: bool - if True, removes the outliers from the dataset.
-
-        Returns:
-            X: pandas.DataFrame - pre-processed input features.
-            y: pandas.DataFrame - pre-processed target variable.
-        """
-        # Removendo Outliers
-        if remove_outlier:
-            y, drop_lines = Analysis().remove_outliers(y, y.columns.tolist())
-            for i in drop_lines:
-                X = X.drop(index = i)
-            X = X.reset_index(drop=True)
-            y = y.reset_index(drop=True)
-
-        y_cat, y_num = self.identify_categorical_data(y)
-        self.var_type['y']['cat'] = y_cat.columns.tolist()
-        self.var_type['y']['num'] = y_num.columns.tolist()
-    
-        for col in y_cat:
-            n_unique = y_cat[col].nunique()
-            if n_unique>2:
-                self.y_type[col] = 'multi_cat'
-            else:
-                self.y_type[col] = 'bi_cat'
-            dummies = pd.get_dummies(y_cat[col], prefix=col, prefix_sep="___")
-            y_cat = pd.concat([y_cat, dummies], axis=1)
-            y_cat = y_cat.drop(col, axis=1)
-        for col in y_num:
-            self.y_type[col] = 'num'
-        y = pd.concat([y_cat, y_num], axis=1)
-        X_cat, X_num = self.identify_categorical_data(X)
-        for col in X_cat:
-            dummies = pd.get_dummies(X_cat[col], prefix=col, prefix_sep="___")
-            X_cat = pd.concat([X_cat, dummies], axis=1)
-            X_cat = X_cat.drop(col, axis=1)
-
-        X = pd.concat([X_cat, X_num], axis=1)
-
-        return X, y
-
-    def __add_random_value_to_max(self, row):
-        max_idx = row.idxmax()
-        row[max_idx] += np.random.rand()
-        return row
- 
-    def train_model(self, X = None, y =None, name_model = None, save =True, scaling = True, scaler_Type = 'StandardScaler', remove_outlier = False, search = False, params = None, **kwargs):
-        """
-        Train a model on a given dataset.
-
-        Args:
-            X: A pandas dataframe containing the feature data. Default is None.
-            y: A pandas dataframe containing the target data. Default is None.
-            name_model: The name of the model to train. Default is None.
-            save: A boolean indicating whether to save the model or not. Default is True.
-            scaling: A boolean indicating whether to perform data scaling or not. Default is True.
-            scaler_Type: The type of data scaling to perform. Must be one of 'StandardScaler', 'Normalizer', or 'MinMaxScaler'. Default is 'StandardScaler'.
-            remove_outlier: A boolean indicating whether to remove outliers or not. Default is False.
-            search: A boolean indicating whether to search for the best hyperparameters or not. Default is False.
-            params: A dictionary containing the hyperparameters to use for training. Default is None.
-            **kwargs: Additional arguments to be passed to the training function.
-
-        Returns:
-            None
+            pd.DataFrame: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
         """
 
-        if  (X is None and y is  None) or (X.empty or y.empty):
-            raise ValueError("As variáveis de entrada 'X' e 'y' não podem ser vazias.")
-        path = './models/'+ self.dir_name
-        if save:
-            if not os.path.exists(path):
-                os.makedirs(path)
-                with open(path + "/READ.md", 'w') as f:
-                    d = {'X_var_list': X.columns.tolist(), 'y_car_list': y.columns.tolist()}
-                    f.writelines(f"{d}\n")
-                    f.writelines(f"pre processing optinal paramenters: save = {save},  scaling = {scaling}, scaler = {scaler_Type}, remove_outlier = {remove_outlier} \n")
-                for column in y:
-                    p = path + '/' + column
-                    if not os.path.exists(p):
-                        os.makedirs(p)
-        # Removendo Nan values
-        df = pd.concat([X, y], axis=1)
-        df = df.dropna()
-        df = df.reset_index(drop=True)
-        X = df[X.columns.tolist()]
-        y = df[y.columns.tolist()]
-        
-        X_cat, X_num = self.identify_categorical_data(X)
-        self.var_type['X']['cat'] = X_cat.columns.tolist()
-        self.var_type['X']['num'] = X_num.columns.tolist()
-        method_list = ['StandardScaler', 'Normalizer', 'MinMaxScaler']
-        if scaling:
-            if scaler_Type not in method_list:
-                raise NameError(f"O método {scaler_Type} não consta na lista de métodos suportados para data scaling. Por favor, tente:'StandardScaler',  Normalizer' ou 'MinMaxScaler'.")
-            # Scalling 
-            scaler = Scaler(scaler_Type)
-            sc_X_num = scaler.fit_transform(X_num)
-            self.scaler = scaler
-            if save:
-                scaler.save(path + '/scaler.pkl')
-            X_num = pd.DataFrame(sc_X_num, columns= X_num.columns.tolist())
-            X = pd.concat([X_cat, X_num], axis=1)
-        
-        model_dict = {}
-        for col in y.columns.tolist():
-            X_, y_ = self.pre_processing_train(X, y[[col]], remove_outlier)
-            X_pp = np.array(X_.values.tolist())
-            y_pp = np.array(y_.values.tolist())
-            self.input_shape = (X_pp.shape[1],)
-            self.output_shape = (y_pp.shape[1],)
-            model = eval(f"{name_model}()") 
-            if name_model == 'NN':
-                model.loss = self.losses_dict[self.y_type[col]]
-                model.metrics = self.metrics_dict[self.y_type[col]]
-                model.dir_name = self.dir_name
-                model.input_shape = (X_pp.shape[1],)
-                model.output_shape = (y_pp.shape[1],)
-            if search:
-                params = model.search_hyperparams(X_pp, y_pp, project_name = col, y_type = self.y_type[col])
-            elif params == None:
-                raise ValueError("A variável 'params' não pode ser vazia. Essa variável corresponde aos parâmetros para a construção do model.")
+        self.hyperparameter = optuna.create_study(study_name='optimization', direction='maximize')
+        self.hyperparameter.optimize(lambda trial: self._optimizer(trial, **kwargs), n_trials = n_trials)
+
+        if info:
+            trial = self.hyperparameter.trials_dataframe()
+
+            df_info = trial.drop(['datetime_start', 'datetime_complete', 'duration', 'state'], axis=1)
+            df_info.set_index("number", inplace =True)
+            df_info.rename_axis('Trial (nº)', inplace=True)
+            df_info = df_info.sort_values('value', ascending=False)
+            df_info.rename(columns={'value': 'Silhouette Score'}, inplace=True)      
+            df_info.reset_index(inplace=True)
+            df_info.index = [f'{i}º' for i in df_info.index + 1]
+            df_info.rename_axis('Ranking', inplace=True)
             
-            params['input_shape'] = (X_pp.shape[1],)
-            params['output_shape'] = (y_pp.shape[1],)
-            model.build(y_type = self.y_type[col], **params)
-            kfold = KFold(n_splits=5, shuffle=True)
-            metrics = []
-            X_train, X_test, y_train, y_test = train_test_split(X_pp, y_pp, test_size=0.2)
-            path = './models/'+ self.dir_name+'/' + col
-            for fold, (train_index, val_index) in enumerate(kfold.split(X_train, y_train)):
-                xtrain, ytrain = X_train[train_index], y_train[train_index]
-                xval, yval = X_train[val_index], y_train[val_index]
-                model.fit(xtrain, ytrain, validation_data=(xval, yval), path = path, **kwargs)              
-                if self.y_type[col] == 'num':
-                    y_pred = model.predict(X_test)
-                    metrics.append([fold, mean_absolute_error(y_test, y_pred), mean_squared_error(y_test, y_pred), 
-                      sqrt(mean_squared_error(y_test, y_pred)), r2_score(y_test, y_pred)])
-                else: 
-                    y_pred = model.predict(X_test)
-                    df_pred = pd.DataFrame(y_pred, columns = y_.columns.tolist())
-                    df_pred = df_pred.apply(self.__add_random_value_to_max, axis=1)
-                    df_pred = df_pred.eq(df_pred.max(axis=1),axis=0).astype(int)
-                    y_pred = np.array(df_pred.values.tolist())
-                    metrics.append([fold,accuracy_score(y_test, y_pred), precision_score(y_test, y_pred, average='micro'), 
-                    recall_score(y_test, y_pred,average='micro'), f1_score(y_test, y_pred,average='micro')])
-                
-            if save:
-                with open(path + "/parameters.txt", 'w') as f:
-                    d = {'model_name': name_model, 'input_list': X_.columns.tolist(), 'output_list' : y_.columns.tolist(), 'var_type': self.var_type}
-                    f.writelines(f"{d}\n")
-                    f.writelines(f"pre processing optinal parameters: save = {save},  scaling = {scaling}, scaler = {scaler_Type}, remove_outlier = {remove_outlier}\n")
-                    f.writelines(f"model parameters: {params}\n")  
+            return df_info
+        
 
-                model.save(path + "/model_" + col)
-
-                if self.y_type[col] == 'num':
-                    columns = ['fold', 'mae', 'mse', 'rmse', 'r2']
-                else: 
-                    columns = ['fold', 'accuracy', 'precision', 'recall', 'f1_score']
-                
-                df_metrics = pd.DataFrame(metrics, columns=columns)
-                df_metrics.to_csv(path + "/metrics.csv")
-
-            model_dict[col] = {'model': model,  'model_name': name_model , 'var_type': self.var_type,
-                                'input_list': X_.columns.tolist(), 'output_list' : y_.columns.tolist()}
-                    
-        return model_dict
-
-    def load_model(self, path = ''):
+    def load(self, foldername):
         """
-        Loads a saved model from the specified path and returns a dictionary of models
-        with their corresponding parameters.
+        Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.
 
         Args:
-            path (str): The path where the model and its associated files are saved.
-                        Defaults to an empty string.
-
-        Returns:
-            dict: A dictionary containing the loaded models with their corresponding parameters.
-
-        Raises:
-            ValueError: If the path argument is empty.
-
-        .. note::
-            The path variable must be the address of the 'dirname' folder and MUST contain the scaler.pkl file and each subdirectory MUST contain the 'paramenters', 'model' files.
-        
+            foldername (str): The name of the folder where the data and model are saved.
         """
-        if not path:
-            raise ValueError("A variável 'path' não pode ser vazia.")
 
-        parent_dir = path
-        subdirs = [os.path.join(parent_dir, name) for name in os.listdir(parent_dir)
-           if os.path.isdir(os.path.join(parent_dir, name))]
+        if not os.path.exists(f'./saved/{foldername}'):
+            print("There is no folder with that name!")
+            return
         
-        scaler = Scaler()
-        scaler.load(path +'/scaler.pkl')
-        self.scaler = scaler
-        model_dict = {}
+        self.preprocessor = load(f'./saved/{foldername}/preprocessor.joblib')
+        self.preprocessed_data = load(f'./saved/{foldername}/preprocessed_data.joblib')
+        self.clusters = load(f'./saved/{foldername}/clusters.joblib')
+        self.model = load(f'./saved/{foldername}/model.bin')
 
-        for p in subdirs:
-            with open( p + '/parameters.txt', 'r') as file:
-                first_line = file.readline()
-            col = os.path.basename(p)
-            model_dict[col] = eval(f"{first_line}")
-            path =  p +'/model_' + col
-            model =  eval(f"{model_dict[col]['model_name']}()")
-            model.load(path)
-            model_dict[col]['model'] =  model
-        
-        return model_dict
-        
 
-    def pre_processing_predict(self, X, input_list, var_type):
+    def fit(self, return_cluster=False):
         """
-        Pre-processes the input data before prediction by scaling numerical features and creating dummy variables
-        for categorical features. Also handles missing and extra features in the input data.
+        Applies DBSCAN clustering to the preprocessed dataset and updates the 'clusters' attribute with the cluster labels.
+        """
+
+        if self.hyperparameter is None:
+           self.hyperparameter_optimization()
+           
+        self.model = self._make_dbscan(
+            eps = self.hyperparameter.best_params['eps'],
+            min_samples = self.hyperparameter.best_params['min_samples'],
+            algorithm = self.hyperparameter.best_params['algorithm'],
+            leaf_size = self.hyperparameter.best_params['leaf_size'],
+            p = self.hyperparameter.best_params['p']
+        )
+        
+        self.clusters = self.model.fit_predict(self.distance_matrix)
+
+        if return_cluster:
+            return self.clusters
+
+    
+    def predict(self, projection='2d', graphic_save_extension=None):
+        """
+        Projects the clustered data into 2D or 3D space using t-SNE and visualizes the clusters.
 
         Args:
-            X (pandas.DataFrame): The input data to be pre-processed.
-            input_list (list): A list of expected input features.
-            var_type (dict): A dictionary with the types of the input features. The keys 'cat' and 'num' contain lists 
-                of categorical and numerical feature names respectively.
-
-        Returns:
-            pandas.DataFrame: The pre-processed input data with scaled numerical features and dummy variables 
-                for categorical features. Any missing or extra features are handled accordingly.
+            projection (str, optional): The type of projection for visualization ('2d' or '3d'). Defaults to '2d'.
+            graphic_save_extension (str, optional): Extension to save the graphics (e.g., 'png', 'svg'). If None, graphics are not saved. Defaults to None.
         """
-        X = X.dropna()
-        X = X.reset_index(drop=True)
-        cat_list = var_type['cat']
-        num_list = var_type['num']
-        X_num = X[num_list]
-        sc_X_num = self.scaler.transform(X_num)
-        X_num = pd.DataFrame(sc_X_num, columns= X_num.columns.tolist())
-        X_cat = X[cat_list]  
-        for col in X_cat:
-            dummies = pd.get_dummies(X_cat[col], prefix=col, prefix_sep="___")
-            X_cat = pd.concat([X_cat, dummies], axis=1)
-            X_cat = X_cat.drop(col, axis=1)
-        if len(cat_list) > 0:
-            if len(num_list) > 0: 
-                X = pd.concat([X_cat, X_num], axis=1)
-            else:
-                X = X_cat
+
+        if projection=='3d' and self.preprocessed_data['X_ohe'].shape[1] < 3:
+            print('Os dados possuem dimensionalidade inferior a 3!')
+            return
+
+        tsne = TSNE(n_components=3 if projection == '3d' else 2, random_state=self.seed)
+        X_reduced = tsne.fit_transform(self.preprocessed_data['X_ohe'])
+
+        colors = [plt.cm.Spectral(each) for each in np.linspace(0, 1, len(np.unique(self.clusters)))]
+        
+        if projection == '3d':
+
+            fig = plt.figure(figsize=(8, 6))
+            title = '3-Dimensional t-SNE Clusters (DBSCAN)'
+
+            ax = fig.add_subplot(111, projection='3d')
+            ax.set_title(title, fontweight='bold', fontsize=10)
+            ax.set_zlabel('3rd component', fontsize=10)
+
+            for color, i in zip(colors, np.unique(self.clusters)):
+
+                ax.scatter(
+                    X_reduced[self.clusters == i, 0],
+                    X_reduced[self.clusters == i, 1],
+                    X_reduced[self.clusters == i, 2],
+                    edgecolor='k',
+                    color='gray' if i == -1 else color,
+                    s=10 if i == -1 else 40,
+                    alpha=0.6,
+                    linewidths=1,
+                    depthshade=False,
+                    marker='x' if i == -1 else 'o',
+                    label='unmatch' if i == -1 else f'cluster {i + 1}',
+                )
+            
+            ax.xaxis.pane.set_edgecolor('gray')
+            ax.yaxis.pane.set_edgecolor('gray')
+            ax.zaxis.pane.set_edgecolor('gray')
+            ax.xaxis.pane.fill = True
+            ax.yaxis.pane.fill = True
+            ax.zaxis.pane.fill = True
+            ax.xaxis.pane.set_facecolor('#EAF2F8')
+            ax.yaxis.pane.set_facecolor('#D4E6F1')
+            ax.zaxis.pane.set_facecolor('#A9CCE3')
+
         else:
-            if len(num_list) > 0: 
-                X = X_num
+
+            fig = plt.figure(figsize=(6, 4))
+            title = '2-Dimensional t-SNE Clusters (DBSCAN)'
+            ax = fig.add_subplot(111)
+            ax.set_facecolor('#EAF2F8')
+
+            ax.set_title(title, fontweight='bold', fontsize=10)
+
+            for color, i in zip(colors, np.unique(self.clusters)):
+
+                ax.scatter(
+                    X_reduced[self.clusters == i, 0],
+                    X_reduced[self.clusters == i, 1],
+                    edgecolor='k',
+                    color='gray' if i == -1 else color,
+                    s=10 if i == -1 else 40,
+                    alpha=0.6,
+                    linewidths=1,
+                    marker='x' if i == -1 else 'o',
+                    label=f'unmatch' if i == -1 else f'cluster {i + 1}'
+                )
+
+        ax.set_xlabel('1th Component', fontsize=10)
+        ax.set_ylabel('2nd Component', fontsize=10)
+
+        ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1), frameon=True, framealpha=0.9, facecolor='white')
+
+        plt.tight_layout()
+
+        if graphic_save_extension in ['png', 'svg', 'pdf', 'eps']:
+
+            if not os.path.exists(f'./saved/{self.name}/figures'):
+                os.makedirs(f'./saved/{self.name}/figures')
+
+            plt.savefig(f'./saved/{self.name}/figures/{title}.{graphic_save_extension}', format=f'{graphic_save_extension}')
+
+        plt.show()
+        plt.close()
+
+
+    def save(self):
+        """
+        Saves the preprocessor, preprocessed data, cluster labels, and model to disk.
+        """
+
+        if not os.path.exists(f'./saved/{self.name}'):
+            os.makedirs(f'./saved/{self.name}')
         
-        X_cols = X.columns.tolist()
-        missing_list = [x for x in input_list if x not in X_cols]
-        extra_list = [x for x in X_cols if x not in input_list]
-        X = X.drop(columns= extra_list)
-        for col in missing_list:
-            X[col] = 0
-        return X
+        dump(self.preprocessor, f'./saved/{self.name}/preprocessor.joblib')
+        dump(self.preprocessed_data, f'./saved/{self.name}/preprocessed_data.joblib')
+        dump(self.clusters, f'./saved/{self.name}/clusters.joblib')
+        dump(self.model, f'./saved/{self.name}/model.bin')
 
-    def pos_processing(self, y, output_list):
+
+class KMeans(Model):
+    """
+    A class for constructing and applying KMeans clustering algorithm, with built-in methods for preprocessing,
+    hyperparameter optimization, and visualization. Inherits from the Model base class.
+
+    Attributes:
+        clusters (array): Stores the cluster labels for each sample.
+
+    Methods:
+        build(data, **kwargs): Prepares the dataset for KMeans clustering.
+        _make_kmeans(n_clusters, init, n_init, tol, algorithm, verbose=0): Constructs the KMeans model with specified hyperparameters.
+        _optimizer(trial, **kwargs): Defines and runs the optimization trial for hyperparameter tuning.
+        hyperparameter_optimization(n_trials=100, info=False, **kwargs): Performs hyperparameter optimization using Optuna.
+        load(foldername): Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.
+        fit(verbose=0): Applies KMeans clustering to the preprocessed dataset.
+        predict(projection='2d', graphic_save_extension=None): Projects the clustered data into 2D or 3D space and visualizes the clusters.
+        save(): Saves the preprocessor, preprocessed data, cluster labels, and model to disk.
+    """
+
+    def __init__(self, name=None, seed=None):
         """
-        Post-processes the output of a model prediction to transform it into a more usable format.
+        Initializes a new instance of the KMeans class.
 
         Args:
-            y (np.ndarray): The output of the model prediction, as a NumPy array.
-            output_list (list): A list of column names representing the output variables.
-
-        Returns:
-            pd.DataFrame: A pandas DataFrame containing the post-processed output values.
-
-        This function takes the output of a model prediction, which is typically a NumPy array of raw output values, and transforms it into a more usable format. The output variables are expected to have been one-hot encoded with the use of triple underscores ('___') as separator, and possibly have a random value added to the max value of each row. The function first separates the categorical and numerical variables, then processes the categorical variables by selecting the maximum value for each row and one-hot encoding them. Finally, it concatenates the categorical and numerical variables back together to produce a pandas DataFrame containing the post-processed output values.
-
+            name (str, optional): The name of the model. Defaults to a generated name based on the current datetime.
+            seed (int, optional): Random seed for reproducibility. Defaults to None.
         """
-        df_y = pd.DataFrame(y, columns = output_list)
-        df_num = df_y.loc[:, ~df_y.columns.str.contains('___')]
-        df_cat = df_y.filter(like='___')
-        if not df_cat.empty:
-            df_cat = df_cat.apply(self.__add_random_value_to_max, axis=1)
-            df_cat=df_cat.eq(df_cat.max(axis=1),axis=0).astype(int)
-            df_cat=pd.from_dummies(df_cat, sep="___")
-        if len(df_cat.columns) > 0:
-            if len(df_num.columns) > 0: 
-                y = pd.concat([df_num, df_cat])
-            else:
-                y = df_cat
+
+        if name is None:
+            _name = f'KMeans {datetime.now().strftime("%d-%m-%y %Hh%Mmin")}'
+
         else:
-            if len(df_num.columns) > 0: 
-                y = df_num
-        return y
+            _name = name
+    
+        super().__init__(None, _name, seed)
+        self.clusters = None
 
-    def predict_all(self, X, model_dict):
+
+    def build(self, data, **kwargs):
         """
-        Apply all models in the model dictionary to the input data frame X and return the predictions.
+        Prepares the dataset for KMeans clustering. This includes preprocessing the data based on its characteristics and specified parameters.
 
         Args:
-            X: A pandas DataFrame representing the input data.
-            model_dict: A dictionary containing the models and their associated metadata. The keys are the names of the 
-                        models and the values are themselves dictionaries containing the following keys:
-                        - 'model': A trained machine learning model.
-                        - 'input_list': A list of the names of the input features used by the model.
-                        - 'output_list': A list of the names of the output features produced by the model.
-                        - 'var_type': A dictionary containing the types of the input and output features, with the keys 
-                                        'X' and 'y', respectively, and the values being dictionaries themselves with 
-                                        the following keys:
-                                        - 'cat': A list of the categorical input features.
-                                        - 'num': A list of the numerical input features.
-
-        Returns:
-            A pandas DataFrame containing the predictions of all models in the model dictionary. The columns of the 
-            DataFrame are the names of the models, and the rows correspond to the input rows in X.
-
-        Raises:
-            ValueError: If X is empty or None, or if the model dictionary is empty or None.
+            data (Pandas DataFrame): The dataset to be used for clustering.
+            **kwargs: Additional keyword arguments for preprocessing.
         """
-        out = pd.DataFrame()
-        for col, model_dict_col in model_dict.items():
-            model = model_dict_col['model']
-            X_pp = self.pre_processing_predict(X, model_dict_col['input_list'], model_dict_col['var_type']['X'])
-            X_pp = np.array(X_pp.values.tolist())
-            Y_pred = model.predict(X_pp)
-            Y_pred = self.pos_processing(Y_pred, model_dict_col['output_list'])
-            out[col] = Y_pred[col]
-        return out
 
-    def full_cycle(self, X_pred, load = False, **kwargs):
+        super()._cluster_preprocess(data, **kwargs)
+
+
+    def _make_kmeans(self, n_clusters, init, n_init, tol, algorithm, verbose=0):
         """
-        Performs the full cycle of the machine learning pipeline: loads or trains the models, preprocesses the input data,
-        generates predictions, and post-processes the output data.
+        Constructs the KMeans model with the specified hyperparameters.
 
         Args:
-            X_pred (pandas.DataFrame): Input data to generate predictions for.
-            load (bool, optional): If True, loads the trained models from disk instead of training new ones. Default is False.
-            **kwargs: Additional keyword arguments passed to either `load_model()` or `train_model()` method.
-
+            n_clusters (int): The number of clusters to form as well as the number of centroids to generate.
+            init (str): Method for initialization ('k-means++', 'random' or an ndarray).
+            n_init (int): Number of time the k-means algorithm will be run with different centroid seeds.
+            tol (float): Relative tolerance with regards to Frobenius norm of the difference in the cluster centers of two consecutive iterations to declare convergence.
+            algorithm (str): K-means algorithm to use ('auto', 'full' or 'elkan').
+            verbose (int): Verbosity mode.
+        
         Returns:
-            pandas.DataFrame: Dataframe with the generated predictions.
-
-        Raises:
-            ValueError: If `load` is True and `path` is not provided in `kwargs`.
+            sklearn.cluster._kmeans.KMeans: The constructed KMeans clustering model.
         """
-        if load:
-            model_dict = self.load_model(**kwargs)
+
+        model = _KMeans(
+            n_clusters=n_clusters,
+            init=init,
+            n_init=n_init,
+            max_iter=300,
+            tol=tol,
+            algorithm=algorithm,
+            verbose=verbose,
+            random_state=self.seed
+        )
+
+        return model
+    
+
+    def _optimizer(self, trial, **kwargs):
+        """
+        Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+        a callback within an Optuna optimization study.
+
+        Args:
+            trial (optuna.trial.Trial): An Optuna trial object.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
+        
+        Returns:
+            float: The silhouette score for the clustering configuration defined by the trial.
+        """
+
+        search_space_n_clusters = kwargs.get('search_space_n_clusters', [8])
+        search_space_init  = kwargs.get('search_space_init ', ['k-means++'])
+        search_space_n_init = kwargs.get('search_space_n_init', ['auto'])
+        search_space_tol = kwargs.get('search_space_tol', [1e-5, 1e-4, 1e-3]) 
+        search_space_algorithm = kwargs.get('search_space_algorithm', ['lloyd', 'elkan']) 
+
+        n_clusters = trial.suggest_categorical('n_clusters', search_space_n_clusters)
+        init = trial.suggest_categorical('init', search_space_init)
+        n_init = trial.suggest_categorical('n_init', search_space_n_init)
+        tol = trial.suggest_categorical('tol', search_space_tol)
+        algorithm = trial.suggest_categorical('algorithm', search_space_algorithm)
+
+        modelStudy = self._make_kmeans(
+            n_clusters=n_clusters,
+            init=init,
+            n_init=n_init,
+            tol=tol,
+            algorithm=algorithm
+        )
+
+        clusters = modelStudy.fit_predict(self.preprocessed_data['X_ohe'])
+        clusters_filtered = clusters[clusters != -1]
+
+        if len(np.unique(clusters_filtered)) > 1:
+            score = silhouette_score(self.preprocessed_data['X_ohe'], clusters)
+
         else:
-            model_dict = self.train_model(**kwargs)
-        out = self.predict_all(X_pred, model_dict)
-        return out
+            score = -1
+
+        return score
+    
+
+    def hyperparameter_optimization(self, n_trials=100, info=False, **kwargs):
+        """
+        Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+        and identifies the best hyperparameters for KMeans clustering.
+
+        Args:
+            n_trials (int, optional): The number of optimization trials to perform. Defaults to 100.
+            info (bool, optional): Whether to print detailed information about each trial. Defaults to False.
+            **kwargs: Additional keyword arguments for configuring the optimization process.
+        
+        Returns:
+            pd.DataFrame: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
+        """
+
+        self.hyperparameter = optuna.create_study(study_name='optimization', direction='maximize')
+        self.hyperparameter.optimize(lambda trial: self._optimizer(trial, **kwargs), n_trials=n_trials)
+
+        if info:
+            trial = self.hyperparameter.trials_dataframe()
+
+            df_info = trial.drop(['datetime_start', 'datetime_complete', 'duration', 'state'], axis=1)
+            df_info.set_index("number", inplace =True)
+            df_info.rename_axis('Trial (nº)', inplace=True)
+            df_info = df_info.sort_values('value', ascending=False)
+            df_info.rename(columns={'value': 'Silhouette Score'}, inplace=True)
+            df_info.reset_index(inplace=True)
+            df_info.index = [f'{i}º' for i in df_info.index + 1]
+            df_info.rename_axis('Ranking', inplace=True)
+            
+            return df_info
+        
+
+    def load(self, foldername):
+        """
+        Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.
+
+        Args:
+            foldername (str): The name of the folder where the data and model are saved.
+        """
+
+        if not os.path.exists(f'./saved/{foldername}'):
+            print("There is no folder with that name!")
+            return
+        
+        self.preprocessor = load(f'./saved/{foldername}/preprocessor.joblib')
+        self.preprocessed_data = load(f'./saved/{foldername}/preprocessed_data.joblib')
+        self.clusters = load(f'./saved/{foldername}/clusters.joblib')
+        self.model = load(f'./saved/{foldername}/model.bin')
+
+
+    def fit(self, return_cluster=False, verbose=0):
+        """
+        Applies KMeans clustering to the preprocessed dataset and updates the 'clusters' attribute with the cluster labels.
+        
+        Args:
+            verbose (int): Verbosity mode.
+        """
+
+        if self.hyperparameter is None:
+            self.hyperparameter_optimization(n_trials=100)
+
+        n_clusters = self.hyperparameter.best_params['n_clusters']
+        init = self.hyperparameter.best_params['init']
+        n_init = self.hyperparameter.best_params['n_init']
+        tol = self.hyperparameter.best_params['tol']
+        algorithm = self.hyperparameter.best_params['algorithm']
+
+        self.model = self._make_kmeans(
+            n_clusters=n_clusters,
+            init=init,
+            n_init=n_init,
+            tol=tol,
+            algorithm=algorithm,
+            verbose=verbose
+        )
+
+        self.clusters = self.model.fit_predict(self.preprocessed_data['X_ohe'])
+
+        if return_cluster:
+            return self.clusters
+
+
+    def predict(self, projection='2d', graphic_save_extension=None):
+        """
+        Projects the clustered data into 2D or 3D space using t-SNE and visualizes the clusters.
+
+        Args:
+            projection (str, optional): The type of projection for visualization ('2d' or '3d'). Defaults to '2d'.
+            graphic_save_extension (str, optional): Extension to save the graphics (e.g., 'png', 'svg'). If None, graphics are not saved. Defaults to None.
+        """
+
+        tsne = TSNE(n_components=3 if projection == '3d' else 2, random_state=self.seed)
+        X_reduced = tsne.fit_transform(self.preprocessed_data['X_ohe'])
+
+        colors = [plt.cm.Spectral(each) for each in np.linspace(0, 1, len(np.unique(self.clusters)))]
+        
+        if projection == '3d':
+
+            fig = plt.figure(figsize=(8, 6))
+            title = '3-Dimensional t-SNE Clusters (K-Means)'
+            ax = fig.add_subplot(111, projection='3d')
+            ax.set_title(title, fontweight='bold', fontsize=10)
+            ax.set_zlabel('3rd component', fontsize=12)
+
+            for color, i in zip(colors, np.unique(self.clusters)):
+
+                ax.scatter(
+                    X_reduced[self.clusters == i, 0],
+                    X_reduced[self.clusters == i, 1],
+                    X_reduced[self.clusters == i, 2],
+                    edgecolor='k',
+                    color='gray' if i == -1 else color,
+                    s=10 if i == -1 else 40,
+                    alpha=0.6,
+                    linewidths=1,
+                    depthshade=False,
+                    marker='x' if i == -1 else 'o',
+                    label='resíduo' if i == -1 else f'cluster {i + 1}',
+                )
+            
+            ax.xaxis.pane.set_edgecolor('gray')
+            ax.yaxis.pane.set_edgecolor('gray')
+            ax.zaxis.pane.set_edgecolor('gray')
+            ax.xaxis.pane.fill = True
+            ax.yaxis.pane.fill = True
+            ax.zaxis.pane.fill = True
+            ax.xaxis.pane.set_facecolor('#EAF2F8')
+            ax.yaxis.pane.set_facecolor('#D4E6F1')
+            ax.zaxis.pane.set_facecolor('#A9CCE3')
+
+        else:
+
+            fig = plt.figure(figsize=(6, 4))
+            title = '2-Dimensional t-SNE Clusters (K-Means)'
+            ax = fig.add_subplot(111)
+            ax.set_facecolor('#EAF2F8')
+
+            ax.set_title(title, fontweight='bold', fontsize=10)
+
+            for color, i in zip(colors, np.unique(self.clusters)):
+
+                ax.scatter(
+                    X_reduced[self.clusters == i, 0],
+                    X_reduced[self.clusters == i, 1],
+                    edgecolor='k',
+                    color='gray' if i == -1 else color,
+                    s=10 if i == -1 else 40,
+                    alpha=0.6,
+                    linewidths=1,
+                    marker='x' if i == -1 else 'o',
+                    label=f'resíduo' if i == -1 else f'cluster {i + 1}'
+                )
+
+        ax.set_xlabel('1th Component', fontsize=10)
+        ax.set_ylabel('2nd Component', fontsize=10)
+
+        ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1), frameon=True, framealpha=0.9, facecolor='white')
+
+        plt.tight_layout()
+
+        if graphic_save_extension in ['png', 'svg', 'pdf', 'eps']:
+
+            if not os.path.exists(f'./saved/{self.name}/figures'):
+                os.makedirs(f'./saved/{self.name}/figures')
+
+            plt.savefig(f'./saved/{self.name}/figures/{title}.{graphic_save_extension}', format=f'{graphic_save_extension}')
+
+        plt.show()
+        plt.close()
+
+
+    def save(self):
+        """
+        Saves the preprocessor, preprocessed data, cluster labels, and model to disk.
+        """
+
+        if not os.path.exists(f'./saved/{self.name}'):
+            os.makedirs(f'./saved/{self.name}')
+        
+        dump(self.preprocessor, f'./saved/{self.name}/preprocessor.joblib')
+        dump(self.preprocessed_data, f'./saved/{self.name}/preprocessed_data.joblib')
+        dump(self.clusters, f'./saved/{self.name}/clusters.joblib')
+        dump(self.model, f'./saved/{self.name}/model.bin')

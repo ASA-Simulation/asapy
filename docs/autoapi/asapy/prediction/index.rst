@@ -4,537 +4,629 @@
 .. py:module:: asapy.prediction
 
 
-Module Contents
----------------
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   DBSCAN/index.rst
+   KMeans/index.rst
+   NeuralNetwork/index.rst
+   XgBoost/index.rst
+   model/index.rst
+
+
+Package Contents
+----------------
 
 Classes
 ~~~~~~~
 
 .. autoapisummary::
 
-   asapy.prediction.Model
-   asapy.prediction.NN
-   asapy.prediction.RandomForest
-   asapy.prediction.Scaler
-   asapy.prediction.AsaML
+   asapy.prediction.NeuralNetwork
+   asapy.prediction.XgBoost
+   asapy.prediction.DBSCAN
+   asapy.prediction.KMeans
 
 
 
 
-.. py:class:: Model
+.. py:class:: NeuralNetwork(target, name=None, seed=None)
 
 
-   Bases: :py:obj:`abc.ABC`
+   Bases: :py:obj:`asapy.prediction.model.Model`
 
-   Abstract base class for machine learning models.
+   A class for constructing and training neural networks, with built-in methods for preprocessing,
+   hyperparameter optimization, training, and inference. Inherits from the Model base class.
 
-   Attributes:
-   -----------
-   None
+   .. attribute:: n_input
 
-   Methods:
-   --------
-   build():
-       Builds the machine learning model.
+      Number of input features.
 
-   load(path: str):
-       Loads the machine learning model from a file.
+      :type: int
 
-   fit(X_train: np.ndarray, y_train: np.ndarray):
-       Trains the machine learning model on the input data.
+   .. attribute:: n_neurons
 
-   predict(X: np.ndarray):
-       Makes predictions using the trained machine learning model.
+      Number of neurons in each hidden layer.
 
-   save(path: str):
-       Saves the trained machine learning model to a file.
+      :type: int
 
-   Raises:
-   -------
-   None
+   .. attribute:: n_output
 
-   .. py:method:: build()
+      Number of output neurons.
+
+      :type: int
+
+   .. attribute:: metrics
+
+      List of Keras metrics to be used for model evaluation.
+
+      :type: list
+
+   .. attribute:: callbacks
+
+      List of Keras Callbacks to be used during model training.
+
+      :type: list
+
+   .. method:: build(data, **kwargs)
+
+      Prepares the neural network model based on the provided dataset and hyperparameters.
+
+   .. method:: _make_nn(dropout, layers, optimizer)
+
+      Constructs the neural network architecture.
+
+   .. method:: _optimizer(trial, **kwargs)
+
+      Defines and runs the optimization trial for hyperparameter tuning.
+
+   .. method:: hyperparameter_optimization(n_trials=1, info=False, **kwargs)
+
+      Performs hyperparameter optimization using Optuna.
+
+   .. method:: load(foldername)
+
+      Loads the model and preprocessor from the specified folder.
+
+   .. method:: fit(return_history=False, graph=True, graph_save_extension=None, verbose=0, **kwargs)
+
+      Trains the neural network on preprocessed data.
+
+   .. method:: predict(x, verbose=0)
+
+      Makes predictions using the trained neural network model.
+
+   .. method:: save()
+
+      Saves the model and preprocessor to disk.
+      
+
+   .. py:method:: build(data, **kwargs)
+
+      Prepares the neural network model based on the provided dataset and hyperparameters. This includes preprocessing
+      the data and initializing the model architecture based on the data's characteristics and specified hyperparameters.
+
+      :param data: The dataset to be used for building the model.
+      :type data: Pandas DataFrame
+      :param \*\*kwargs: Additional keyword arguments for preprocessing and model configuration.
 
 
-   .. py:method:: load()
+   .. py:method:: _make_nn(dropout, layers, optimizer)
+
+      Constructs the neural network architecture with the specified number of layers, dropout rate, and optimizer.
+
+      :param dropout: The dropout rate to be applied to each hidden layer.
+      :type dropout: float
+      :param layers: The number of hidden layers in the neural network.
+      :type layers: int
+      :param optimizer: The name of the optimizer to be used for training the neural network.
+      :type optimizer: str
+
+      :returns: The constructed Keras Sequential model.
+      :rtype: keras.models.Sequential
 
 
-   .. py:method:: fit()
+   .. py:method:: _optimizer(trial, **kwargs)
+
+      Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+      a callback within an Optuna optimization study.
+
+      :param trial: An Optuna trial object.
+      :type trial: optuna.trial.Trial
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
+
+      :returns: The average validation loss across all folds for the current trial.
+      :rtype: float
 
 
-   .. py:method:: predict()
+   .. py:method:: hyperparameter_optimization(n_trials=1, info=False, **kwargs)
+
+      Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+      and updates the model's hyperparameters with the best found values.
+
+      :param n_trials: The number of optimization trials to perform. Defaults to 1.
+      :type n_trials: int, optional
+      :param info: Whether to print detailed information about each trial. Defaults to False.
+      :type info: bool, optional
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
+
+      :returns: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
+      :rtype: pd.DataFrame
+
+
+   .. py:method:: load(foldername)
+
+      Loads the model and preprocessor from the specified folder.
+
+      :param foldername: The name of the folder where the model and preprocessor are saved.
+      :type foldername: str
+
+
+   .. py:method:: fit(return_history=False, graph=False, graph_save_extension=None, verbose=0, **kwargs)
+
+      Trains the neural network on preprocessed data. This method supports early stopping and learning rate reduction
+      based on the performance on the validation set.
+
+      :param return_history: Whether to return the training history object. Defaults to False.
+      :type return_history: bool, optional
+      :param graph: Whether to plot training and validation loss and metrics. Defaults to True.
+      :type graph: bool, optional
+      :param graph_save_extension: Extension to save the graphs (e.g., 'png', 'svg'). If None, graphs are not saved. Defaults to None.
+      :type graph_save_extension: str, optional
+      :param verbose: Verbosity mode for training progress. Defaults to 0.
+      :type verbose: int, optional
+      :param \*\*kwargs: Additional keyword arguments for configuring the training process.
+
+      :returns: The training history object, if `return_history` is True. Otherwise, None.
+      :rtype: keras.callbacks.History
+
+
+   .. py:method:: predict(x, verbose=0)
+
+      Makes predictions using the trained neural network model.
+
+      :param x: The input data for making predictions.
+      :type x: Pandas DataFrame
+      :param verbose: Verbosity mode for prediction. Defaults to 0.
+      :type verbose: int, optional
+
+      :returns: The input data with an additional column for predictions.
+      :rtype: Pandas DataFrame
 
 
    .. py:method:: save()
 
+      Saves the model and preprocessor to disk.
 
 
-.. py:class:: NN(model=None)
 
+.. py:class:: XgBoost(target, name=None, seed=None)
 
-   Bases: :py:obj:`Model`
 
-   The class NN is a wrapper around Keras Sequential API, which provides an easy way to create and train neural network models. It can perform hyperparameters search and model building with specified hyperparameters.
+   Bases: :py:obj:`asapy.prediction.model.Model`
 
-   Attributes:
-   -----------
-       - model: the built Keras model.
-       - loss: the loss function used to compile the Keras model.
-       - metrics: the metrics used to compile the Keras model.
-       - dir_name: a string that defines the name of the directory to save the hyperparameters search results.
-       - input_shape: the shape of the input data for the Keras model.
-       - output_shape: the shape of the output data for the Keras model.
+   A class for constructing and training XGBoost models, with built-in methods for preprocessing,
+   hyperparameter optimization, training, and inference. Inherits from the Model base class.
 
+   .. attribute:: metrics
 
-   .. py:method:: _model_search(hp, **kwargs)
+      List of evaluation metrics to be used for model evaluation.
 
-      Searches for the best hyperparameters to create a Keras model using the given hyperparameters space.
+      :type: list
 
-      :param hp: Object that holds
-                 the hyperparameters space to search.
-      :type hp: keras_tuner.engine.hyperparameters.HyperParameters
+   .. attribute:: patience_early_stopping
 
-      :returns: A compiled Keras model with the best hyperparameters found.
+      Number of rounds without improvement to wait before stopping training.
 
+      :type: int
 
-   .. py:method:: search_hyperparams(X, y, project_name='', y_type='num', verbose=False)
+   .. method:: build(data, **kwargs)
 
-      Perform hyperparameter search for the neural network using Keras Tuner.
+      Prepares the XGBoost model based on provided dataset and hyperparameters.
 
-      :param X: Input data.
-      :type X: numpy.ndarray
-      :param y: Target data.
-      :type y: numpy.ndarray
-      :param project_name: Name of the Keras Tuner project (default '').
-      :type project_name: str
-      :param y_type: Type of target variable. Either 'num' for numeric or 'cat' for categorical (default 'num').
-      :type y_type: str
-      :param verbose: Whether or not to print out information about the search progress (default False).
-      :type verbose: bool
+   .. method:: _make_xgBooster(**kwargs)
 
-      :returns: A dictionary containing the optimal hyperparameters found by the search.
-      :rtype: dict
+      Constructs the XGBoost model with specified hyperparameters.
 
+   .. method:: _optimizer(trial, **kwargs)
 
-   .. py:method:: build(input_shape=(1, ), output_shape=(1, ), n_neurons=[1], n_layers=1, learning_rate=0.001, activation='relu', **kwargs)
+      Defines and runs the optimization trial for hyperparameter tuning.
 
-      Builds a Keras neural network model with the given hyperparameters.
+   .. method:: hyperparameter_optimization(n_trials=1, info=False, **kwargs)
 
-      :param input_shape: The shape of the input data. Defaults to (1,).
-      :type input_shape: tuple, optional
-      :param output_shape: The shape of the output data. Defaults to (1,).
-      :type output_shape: tuple, optional
-      :param n_neurons: A list of integers representing the number of neurons in each hidden layer.
-                        The length of the list determines the number of hidden layers. Defaults to [1].
-      :type n_neurons: list, optional
-      :param n_layers: The number of hidden layers in the model. Defaults to 1.
-      :type n_layers: int, optional
-      :param learning_rate: The learning rate of the optimizer. Defaults to 1e-3.
-      :type learning_rate: float, optional
-      :param activation: The activation function used for the hidden layers. Defaults to 'relu'.
-      :type activation: str, optional
+      Performs hyperparameter optimization using Optuna.
 
-      :returns: None.
+   .. method:: load(foldername)
 
+      Loads the model and preprocessor from the specified folder.
 
-   .. py:method:: load(path)
+   .. method:: fit(return_history=False, graph=True, graph_save_extension=None, verbose=0, **kwargs)
 
-      Load a Keras model from an H5 file.
+      Trains the XGBoost model on preprocessed data.
 
-      :param path: Path to the H5 file containing the Keras model.
-      :type path: str
+   .. method:: predict(x)
 
-      :raises ValueError: If the file extension is not '.h5'.
+      Makes predictions using the trained XGBoost model.
 
-      :returns: None
+   .. method:: save()
 
+      Saves the model and preprocessor to disk.
+      
 
-   .. py:method:: predict(x)
+   .. py:method:: build(data, **kwargs)
 
-      Uses the trained neural network to make predictions on input data.
+      Prepares the XGBoost model based on the provided dataset and hyperparameters. This includes preprocessing
+      the data and initializing the model parameters based on the data's characteristics and specified hyperparameters.
 
-      :param x: Input data to be used for prediction. It must have the same number of features
-                as the input_shape used to build the network.
-      :type x: numpy.ndarray
+      :param data: The dataset to be used for building the model.
+      :type data: Pandas DataFrame
+      :param \*\*kwargs: Additional keyword arguments for preprocessing and model configuration.
 
-      :returns: Predicted outputs for the input data.
-      :rtype: numpy.ndarray
 
-      :raises ValueError: If the input data x does not have the same number of features as the input_shape
-          used to build the network.
+   .. py:method:: _make_xgBooster(tree_method, booster, learning_rate, min_split_loss, max_depth, min_child_weight, max_delta_step, subsample, sampling_method, colsample_bytree, colsample_bylevel, colsample_bynode, reg_lambda, reg_alpha, scale_pos_weight, grow_policy, max_leaves, max_bin, num_parallel_tree, verbose=0)
 
+      Constructs the XGBoost model with the specified hyperparameters.
 
-   .. py:method:: fit(x, y, validation_data, batch_size=32, epochs=500, save=True, patience=5, path='')
+      :param \*\*kwargs: Hyperparameters for the XGBoost model.
 
-      Trains the neural network model using the given input and output data.
+      :returns: The constructed XGBoost model.
+      :rtype: xgboost.XGBModel
 
-      :param x: The input data used to train the model.
-      :type x: numpy array
-      :param y: The output data used to train the model.
-      :type y: numpy array
-      :param validation_data: A tuple containing the validation data as input and output data.
-      :type validation_data: tuple
-      :param batch_size: The batch size used for training the model (default=32).
-      :type batch_size: int
-      :param epochs: The number of epochs used for training the model (default=500).
-      :type epochs: int
-      :param save: Whether to save the model after training (default=True).
-      :type save: bool
-      :param patience: The number of epochs to wait before early stopping if the validation loss does not improve (default=5).
-      :type patience: int
-      :param path: The path to save the trained model (default='').
-      :type path: str
 
-      :returns: None
+   .. py:method:: _optimizer(trial, **kwargs)
 
+      Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+      a callback within an Optuna optimization study.
 
-   .. py:method:: save(path)
+      :param trial: An Optuna trial object.
+      :type trial: optuna.trial.Trial
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
 
-      Saves the trained neural network model to a file.
+      :returns: The average validation loss across all folds for the current trial.
+      :rtype: float
 
-      :param path: A string specifying the path and filename for the saved model. The ".h5" file extension
-                   will be appended to the provided filename if not already present.
 
-      :raises ValueError: If the provided file extension is not ".h5".
+   .. py:method:: hyperparameter_optimization(n_trials=1, info=False, **kwargs)
 
-      :returns: None
+      Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+      and updates the model's hyperparameters with the best found values.
 
+      :param n_trials: The number of optimization trials to perform. Defaults to 1.
+      :type n_trials: int, optional
+      :param info: Whether to print detailed information about each trial. Defaults to False.
+      :type info: bool, optional
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
 
-
-.. py:class:: RandomForest(model=None)
-
-
-   Bases: :py:obj:`Model`
-
-   This class is used to build and search hyperparameters for a random forest model in scikit-learn.
-
-   Attributes:
-   -----------
-       - model: the built RandomForest scikit-learn model.
-
-   .. py:method:: search_hyperparams(X, y, verbose=False, **kwargs)
-
-      Perform a hyperparameter search for a Random Forest model using RandomizedSearchCV.
-
-      :param X: The feature matrix of the data.
-      :type X: numpy array
-      :param y: The target vector of the data.
-      :type y: numpy array
-      :param verbose: If True, print the optimal hyperparameters. Defaults to False.
-      :type verbose: bool, optional
-      :param \*\*kwargs: Additional keyword arguments. The following hyperparameters can be set:
-                         - n_estimators (int): Number of trees in the forest. Defaults to sp_randint(10, 1000).
-                         - max_features (list): The number of features to consider when looking for the best split.
-                         Allowed values are 'sqrt', 'log2' or a float between 0 and 1. Defaults to ['sqrt', 'log2'].
-                         - max_depth (list): The maximum depth of the tree. Defaults to [None, 5, 10, 15, 20, 30, 40].
-                         - min_samples_split (int): The minimum number of samples required to split an internal node.
-                         Defaults to sp_randint(2, 20).
-                         - min_samples_leaf (int): The minimum number of samples required to be at a leaf node.
-                         Defaults to sp_randint(1, 20).
-                         - bootstrap (bool): Whether bootstrap samples are used when building trees.
-                         Defaults to [True, False].
-                         - y_type (str): Type of target variable. Either 'num' for numeric or 'cat' for categorical.
-                         Defaults to 'cat'.
-
-      :returns: A dictionary with the best hyperparameters found during the search.
-      :rtype: dict
-
-
-   .. py:method:: build(n_estimators=100, max_depth=None, min_samples_split=2, min_samples_leaf=1, max_features='sqrt', **kwargs)
-
-      Builds a new Random Forest model with the specified hyperparameters.
-
-      :param n_estimators: The number of trees in the forest. Default is 100.
-      :type n_estimators: int, optional
-      :param max_depth: The maximum depth of each tree. None means unlimited. Default is None.
-      :type max_depth: int or None, optional
-      :param min_samples_split: The minimum number of samples required to split an internal node. Default is 2.
-      :type min_samples_split: int, optional
-      :param min_samples_leaf: The minimum number of samples required to be at a leaf node. Default is 1.
-      :type min_samples_leaf: int, optional
-      :param max_features: The maximum number of features to consider when looking for the best split.
-                           Can be 'sqrt', 'log2', an integer or None. Default is 'sqrt'.
-      :type max_features: str or int, optional
-      :param \*\*kwargs: Additional keyword arguments. Must include a 'y_type' parameter, which should be set to 'num' for
-                         regression problems and 'cat' for classification problems.
-
-      :returns: None
-
-
-   .. py:method:: load(path)
-
-      Load a saved random forest model.
-
-      :param path: The path to the saved model file. The file must be a joblib file with the extension '.joblib'.
-      :type path: str
-
-      :raises ValueError: If the extension of the file is not '.joblib'.
-
-      :returns: None.
-
-
-   .. py:method:: predict(x)
-
-      Makes predictions using the trained Random Forest model on the given input data.
-
-      :param x: The input data to make predictions on.
-
-      :returns: An array of predicted target values.
-
-
-   .. py:method:: fit(x, y, validation_data=None, batch_size=32, epochs=500, save=True, patience=5, path='')
-
-      Trains the Random Forest model on the given input and target data.
-
-      :param x: The input data to train the model on.
-      :type x: numpy array
-      :param y: The target data to train the model on.
-      :type y: numpy array
-      :param validation_data: Not used in this context. For compatibility only.
-      :type validation_data: tuple
-      :param batch_size: Not used in this context. For compatibility only.
-      :type batch_size: int
-      :param epochs: Not used in this context. For compatibility only.
-      :type epochs: int
-      :param save: If True, saves the model to the specified path.
-      :type save: bool
-      :param patience: Not used in this context. For compatibility only.
-      :type patience: int
-      :param path: The path to save the trained model.
-      :type path: str
-
-      :returns: None
-
-
-   .. py:method:: save(path)
-
-      Saves the trained model to a file with the specified path.
-
-      :param path: The file path where the model should be saved. The file extension should be '.joblib'.
-      :type path: str
-
-      :raises ValueError: If the file extension is invalid or missing.
-
-      :returns: None
-
-
-
-.. py:class:: Scaler(scaler=None)
-
-
-   The Scaler class is designed to scale and transform data using various scaling techniques. It contains methods for fitting and transforming data, as well as saving and loading scaler objects to and from files.
-
-   .. py:method:: fit_transform(data)
-
-      Fit to data, then transform it.
-
-      :param data: The data to be transformed.
-      :type data: array-like
-
-      :returns: The transformed data.
-      :rtype: array-like
-
-
-   .. py:method:: transform(data)
-
-      Perform standardization on an array.
-
-      :param data: The data to be standardized.
-      :type data: array-like
-
-      :returns: The standardized data.
-      :rtype: array-like
-
-
-   .. py:method:: inverse_transform(data)
-
-      Scale back the data to the original representation.
-
-      :param data: The data to be scaled back.
-      :type data: array-like
-
-      :returns: The original representation of the data.
-      :rtype: array-like
-
-
-   .. py:method:: save(path)
-
-      Save the scaler object to a file.
-
-      :param path: The path where the scaler object will be saved.
-      :type path: str
-
-
-   .. py:method:: load(path)
-
-      Load a saved scaler object from a file.
-
-      :param path: The path where the scaler object is saved.
-      :type path: str
-
-
-
-.. py:class:: AsaML(dir_name=None)
-
-
-   .. py:method:: identify_categorical_data(df)
-      :staticmethod:
-
-      Identifies categorical data.
-
-      :param df: The DataFrame containing the data.
-      :type df: pandas.DataFrame
-
-      :returns: A tuple containing two DataFrames - one containing the categorical columns and the other containing the numerical columns.
-      :rtype: tuple
-
-      :raises ValueError: If the input DataFrame is empty or if it contains no categorical or numerical data.
-
-      Example usage:
-
-      .. code-block::
-
-          >>> import pandas as pd
-          >>> df = pd.DataFrame({'col1': ['a', 'b', 'c'], 'col2': [1, 2, 3], 'col3': ['x', 'y', 'z']})
-          >>> df_cat, df_num = identify_categorical_data(df)
-          >>> df_cat
-          col1
-          0    a
-          1    b
-          2    c
-          >>> df_num
-          col2
-          0     1
-          1     2
-          2     3
-
-
-   .. py:method:: pre_processing_train(X, y, remove_outlier=False)
-
-      Perform pre-processing steps for the training dataset.
-
-      :param X: pandas.DataFrame - input features.
-      :param y: pandas.DataFrame - target variable.
-      :param remove_outlier: bool - if True, removes the outliers from the dataset.
-
-      :returns: pandas.DataFrame - pre-processed input features.
-                y: pandas.DataFrame - pre-processed target variable.
-      :rtype: X
-
-
-   .. py:method:: __add_random_value_to_max(row)
-
-
-   .. py:method:: train_model(X=None, y=None, name_model=None, save=True, scaling=True, scaler_Type='StandardScaler', remove_outlier=False, search=False, params=None, **kwargs)
-
-      Train a model on a given dataset.
-
-      :param X: A pandas dataframe containing the feature data. Default is None.
-      :param y: A pandas dataframe containing the target data. Default is None.
-      :param name_model: The name of the model to train. Default is None.
-      :param save: A boolean indicating whether to save the model or not. Default is True.
-      :param scaling: A boolean indicating whether to perform data scaling or not. Default is True.
-      :param scaler_Type: The type of data scaling to perform. Must be one of 'StandardScaler', 'Normalizer', or 'MinMaxScaler'. Default is 'StandardScaler'.
-      :param remove_outlier: A boolean indicating whether to remove outliers or not. Default is False.
-      :param search: A boolean indicating whether to search for the best hyperparameters or not. Default is False.
-      :param params: A dictionary containing the hyperparameters to use for training. Default is None.
-      :param \*\*kwargs: Additional arguments to be passed to the training function.
-
-      :returns: None
-
-
-   .. py:method:: load_model(path='')
-
-      Loads a saved model from the specified path and returns a dictionary of models
-      with their corresponding parameters.
-
-      :param path: The path where the model and its associated files are saved.
-                   Defaults to an empty string.
-      :type path: str
-
-      :returns: A dictionary containing the loaded models with their corresponding parameters.
-      :rtype: dict
-
-      :raises ValueError: If the path argument is empty.
-
-      .. note::
-          The path variable must be the address of the 'dirname' folder and MUST contain the scaler.pkl file and each subdirectory MUST contain the 'paramenters', 'model' files.
-
-
-
-   .. py:method:: pre_processing_predict(X, input_list, var_type)
-
-      Pre-processes the input data before prediction by scaling numerical features and creating dummy variables
-      for categorical features. Also handles missing and extra features in the input data.
-
-      :param X: The input data to be pre-processed.
-      :type X: pandas.DataFrame
-      :param input_list: A list of expected input features.
-      :type input_list: list
-      :param var_type: A dictionary with the types of the input features. The keys 'cat' and 'num' contain lists
-                       of categorical and numerical feature names respectively.
-      :type var_type: dict
-
-      :returns:
-
-                The pre-processed input data with scaled numerical features and dummy variables
-                    for categorical features. Any missing or extra features are handled accordingly.
-      :rtype: pandas.DataFrame
-
-
-   .. py:method:: pos_processing(y, output_list)
-
-      Post-processes the output of a model prediction to transform it into a more usable format.
-
-      :param y: The output of the model prediction, as a NumPy array.
-      :type y: np.ndarray
-      :param output_list: A list of column names representing the output variables.
-      :type output_list: list
-
-      :returns: A pandas DataFrame containing the post-processed output values.
+      :returns: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
       :rtype: pd.DataFrame
 
-      This function takes the output of a model prediction, which is typically a NumPy array of raw output values, and transforms it into a more usable format. The output variables are expected to have been one-hot encoded with the use of triple underscores ('___') as separator, and possibly have a random value added to the max value of each row. The function first separates the categorical and numerical variables, then processes the categorical variables by selecting the maximum value for each row and one-hot encoding them. Finally, it concatenates the categorical and numerical variables back together to produce a pandas DataFrame containing the post-processed output values.
+
+   .. py:method:: load(foldername)
+
+      Loads the model and preprocessor from the specified folder.
+
+      :param foldername: The name of the folder where the model and preprocessor are saved.
+      :type foldername: str
+
+
+   .. py:method:: fit(return_history=False, graph=False, graph_save_extension=None, verbose=0, **kwargs)
+
+      Trains the XGBoost model on preprocessed data. This method supports early stopping based on the performance
+      on the validation set.
+
+      :param return_history: Whether to return the training history object. Defaults to False.
+      :type return_history: bool, optional
+      :param graph: Whether to plot training and validation loss and metrics. Defaults to True.
+      :type graph: bool, optional
+      :param graph_save_extension: Extension to save the graphs (e.g., 'png', 'svg'). If None, graphs are not saved. Defaults to None.
+      :type graph_save_extension: str, optional
+      :param verbose: Verbosity mode for training progress. Defaults to 0.
+      :type verbose: int, optional
+      :param \*\*kwargs: Additional keyword arguments for configuring the training process.
+
+      :returns: The training history object, if `return_history` is True. Otherwise, None.
+      :rtype: dict
+
+
+   .. py:method:: predict(x)
+
+      Makes predictions using the trained XGBoost model.
+
+      :param x: The input data for making predictions.
+      :type x: Pandas DataFrame
+
+      :returns: The input data with an additional column for predictions.
+      :rtype: Pandas DataFrame
+
+
+   .. py:method:: save()
+
+      Saves the model and preprocessor to disk.
 
 
 
-   .. py:method:: predict_all(X, model_dict)
-
-      Apply all models in the model dictionary to the input data frame X and return the predictions.
-
-      :param X: A pandas DataFrame representing the input data.
-      :param model_dict: A dictionary containing the models and their associated metadata. The keys are the names of the
-                         models and the values are themselves dictionaries containing the following keys:
-                         - 'model': A trained machine learning model.
-                         - 'input_list': A list of the names of the input features used by the model.
-                         - 'output_list': A list of the names of the output features produced by the model.
-                         - 'var_type': A dictionary containing the types of the input and output features, with the keys
-                                         'X' and 'y', respectively, and the values being dictionaries themselves with
-                                         the following keys:
-                                         - 'cat': A list of the categorical input features.
-                                         - 'num': A list of the numerical input features.
-
-      :returns: A pandas DataFrame containing the predictions of all models in the model dictionary. The columns of the
-                DataFrame are the names of the models, and the rows correspond to the input rows in X.
-
-      :raises ValueError: If X is empty or None, or if the model dictionary is empty or None.
+.. py:class:: DBSCAN(name=None, seed=None)
 
 
-   .. py:method:: full_cycle(X_pred, load=False, **kwargs)
+   Bases: :py:obj:`asapy.prediction.model.Model`
 
-      Performs the full cycle of the machine learning pipeline: loads or trains the models, preprocesses the input data,
-      generates predictions, and post-processes the output data.
+   A class for constructing and running the DBSCAN clustering algorithm, with built-in methods for preprocessing,
+   hyperparameter optimization, and silhouette analysis. Inherits from the Model base class.
 
-      :param X_pred: Input data to generate predictions for.
-      :type X_pred: pandas.DataFrame
-      :param load: If True, loads the trained models from disk instead of training new ones. Default is False.
-      :type load: bool, optional
-      :param \*\*kwargs: Additional keyword arguments passed to either `load_model()` or `train_model()` method.
+   .. attribute:: have_categ
 
-      :returns: Dataframe with the generated predictions.
-      :rtype: pandas.DataFrame
+      Indicates whether the dataset contains categorical features.
 
-      :raises ValueError: If `load` is True and `path` is not provided in `kwargs`.
+      :type: bool
+
+   .. attribute:: distance_matrix
+
+      The computed distance matrix for the dataset.
+
+      :type: numpy.ndarray
+
+   .. attribute:: clusters
+
+      The cluster labels for each point in the dataset.
+
+      :type: numpy.ndarray
+
+   .. method:: build(data, **kwargs)
+
+      Prepares the DBSCAN model based on provided dataset and hyperparameters.
+
+   .. method:: _make_dbscan(eps, min_samples, algorithm, leaf_size, p)
+
+      Constructs the DBSCAN model with specified hyperparameters.
+
+   .. method:: _optimizer(trial, **kwargs)
+
+      Defines and runs the optimization trial for hyperparameter tuning.
+
+   .. method:: hyperparameter_optimization(n_trials=100, info=False, **kwargs)
+
+      Performs hyperparameter optimization using Optuna.
+
+   .. method:: load(foldername)
+
+      Loads the preprocessor, preprocessed data, clusters, and model from the specified folder.
+
+   .. method:: fit()
+
+      Applies the DBSCAN algorithm to the preprocessed data.
+
+   .. method:: predict(projection='2d', graph_save_extension=None)
+
+      Generates and displays a 2D or 3D t-SNE plot of the clusters.
+
+   .. method:: save()
+
+      Saves the preprocessor, preprocessed data, clusters, and model to disk.
+      
+
+   .. py:method:: build(data, **kwargs)
+
+      Prepares the DBSCAN model based on the provided dataset and hyperparameters. This includes preprocessing
+      the data and calculating the distance matrix if necessary.
+
+      :param data: The dataset to be used for clustering.
+      :type data: Pandas DataFrame
+      :param \*\*kwargs: Additional keyword arguments for preprocessing.
+
+
+   .. py:method:: _make_dbscan(eps, min_samples, algorithm, leaf_size, p)
+
+      Constructs the DBSCAN model with the specified hyperparameters.
+
+      :param eps: The maximum distance between two samples for them to be considered as in the same neighborhood.
+      :type eps: float
+      :param min_samples: The number of samples in a neighborhood for a point to be considered as a core point.
+      :type min_samples: int
+      :param algorithm: The algorithm to be used by the DBSCAN model.
+      :type algorithm: str
+      :param leaf_size: Leaf size passed to the underlying BallTree or KDTree.
+      :type leaf_size: int
+      :param p: The power of the Minkowski metric to be used to calculate distance between points.
+      :type p: float
+
+      :returns: The constructed DBSCAN model.
+      :rtype: sklearn.cluster._dbscan.DBSCAN
+
+
+   .. py:method:: _optimizer(trial, **kwargs)
+
+      Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+      a callback within an Optuna optimization study.
+
+      :param trial: An Optuna trial object.
+      :type trial: optuna.trial.Trial
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
+
+      :returns: The silhouette score for the clustering configuration defined by the trial.
+      :rtype: float
+
+
+   .. py:method:: hyperparameter_optimization(n_trials=100, info=False, **kwargs)
+
+      Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+      and identifies the best hyperparameters for DBSCAN clustering.
+
+      :param n_trials: The number of optimization trials to perform. Defaults to 100.
+      :type n_trials: int, optional
+      :param info: Whether to print detailed information about each trial. Defaults to False.
+      :type info: bool, optional
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
+
+      :returns: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
+      :rtype: pd.DataFrame
+
+
+   .. py:method:: load(foldername)
+
+      Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.
+
+      :param foldername: The name of the folder where the data and model are saved.
+      :type foldername: str
+
+
+   .. py:method:: fit()
+
+      Applies DBSCAN clustering to the preprocessed dataset and updates the 'clusters' attribute with the cluster labels.
+
+
+   .. py:method:: predict(projection='2d', graph_save_extension=None)
+
+      Projects the clustered data into 2D or 3D space using t-SNE and visualizes the clusters.
+
+      :param projection: The type of projection for visualization ('2d' or '3d'). Defaults to '2d'.
+      :type projection: str, optional
+      :param graph_save_extension: Extension to save the graphs (e.g., 'png', 'svg'). If None, graphs are not saved. Defaults to None.
+      :type graph_save_extension: str, optional
+
+
+   .. py:method:: save()
+
+      Saves the preprocessor, preprocessed data, cluster labels, and model to disk.
+
+
+
+.. py:class:: KMeans(name=None, seed=None)
+
+
+   Bases: :py:obj:`asapy.prediction.model.Model`
+
+   A class for constructing and applying KMeans clustering algorithm, with built-in methods for preprocessing,
+   hyperparameter optimization, and visualization. Inherits from the Model base class.
+
+   .. attribute:: clusters
+
+      Stores the cluster labels for each sample.
+
+      :type: array
+
+   .. method:: build(data, **kwargs)
+
+      Prepares the dataset for KMeans clustering.
+
+   .. method:: _make_kmeans(n_clusters, init, n_init, tol, algorithm, verbose=0)
+
+      Constructs the KMeans model with specified hyperparameters.
+
+   .. method:: _optimizer(trial, **kwargs)
+
+      Defines and runs the optimization trial for hyperparameter tuning.
+
+   .. method:: hyperparameter_optimization(n_trials=100, info=False, **kwargs)
+
+      Performs hyperparameter optimization using Optuna.
+
+   .. method:: load(foldername)
+
+      Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.
+
+   .. method:: fit(verbose=0)
+
+      Applies KMeans clustering to the preprocessed dataset.
+
+   .. method:: predict(projection='2d', graph_save_extension=None)
+
+      Projects the clustered data into 2D or 3D space and visualizes the clusters.
+
+   .. method:: save()
+
+      Saves the preprocessor, preprocessed data, cluster labels, and model to disk.
+      
+
+   .. py:method:: build(data, **kwargs)
+
+      Prepares the dataset for KMeans clustering. This includes preprocessing the data based on its characteristics and specified parameters.
+
+      :param data: The dataset to be used for clustering.
+      :type data: Pandas DataFrame
+      :param \*\*kwargs: Additional keyword arguments for preprocessing.
+
+
+   .. py:method:: _make_kmeans(n_clusters, init, n_init, tol, algorithm, verbose=0)
+
+      Constructs the KMeans model with the specified hyperparameters.
+
+      :param n_clusters: The number of clusters to form as well as the number of centroids to generate.
+      :type n_clusters: int
+      :param init: Method for initialization ('k-means++', 'random' or an ndarray).
+      :type init: str
+      :param n_init: Number of time the k-means algorithm will be run with different centroid seeds.
+      :type n_init: int
+      :param tol: Relative tolerance with regards to Frobenius norm of the difference in the cluster centers of two consecutive iterations to declare convergence.
+      :type tol: float
+      :param algorithm: K-means algorithm to use ('auto', 'full' or 'elkan').
+      :type algorithm: str
+      :param verbose: Verbosity mode.
+      :type verbose: int
+
+      :returns: The constructed KMeans clustering model.
+      :rtype: sklearn.cluster._kmeans.KMeans
+
+
+   .. py:method:: _optimizer(trial, **kwargs)
+
+      Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+      a callback within an Optuna optimization study.
+
+      :param trial: An Optuna trial object.
+      :type trial: optuna.trial.Trial
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
+
+      :returns: The silhouette score for the clustering configuration defined by the trial.
+      :rtype: float
+
+
+   .. py:method:: hyperparameter_optimization(n_trials=100, info=False, **kwargs)
+
+      Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+      and identifies the best hyperparameters for KMeans clustering.
+
+      :param n_trials: The number of optimization trials to perform. Defaults to 100.
+      :type n_trials: int, optional
+      :param info: Whether to print detailed information about each trial. Defaults to False.
+      :type info: bool, optional
+      :param \*\*kwargs: Additional keyword arguments for configuring the optimization process.
+
+      :returns: A DataFrame containing detailed information about each trial if `info` is True. Otherwise, None.
+      :rtype: pd.DataFrame
+
+
+   .. py:method:: load(foldername)
+
+      Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.
+
+      :param foldername: The name of the folder where the data and model are saved.
+      :type foldername: str
+
+
+   .. py:method:: fit(verbose=0)
+
+      Applies KMeans clustering to the preprocessed dataset and updates the 'clusters' attribute with the cluster labels.
+
+      :param verbose: Verbosity mode.
+      :type verbose: int
+
+
+   .. py:method:: predict(projection='2d', graph_save_extension=None)
+
+      Projects the clustered data into 2D or 3D space using t-SNE and visualizes the clusters.
+
+      :param projection: The type of projection for visualization ('2d' or '3d'). Defaults to '2d'.
+      :type projection: str, optional
+      :param graph_save_extension: Extension to save the graphs (e.g., 'png', 'svg'). If None, graphs are not saved. Defaults to None.
+      :type graph_save_extension: str, optional
+
+
+   .. py:method:: save()
+
+      Saves the preprocessor, preprocessed data, cluster labels, and model to disk.
 
 
 

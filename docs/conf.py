@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'ASAPY'
-copyright = '2023, ASA team'
+copyright = '2024, ASA team'
 author = 'ASA team'
 
 # -- General configuration ---------------------------------------------------
