@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.utils &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=90a2dc74" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8946c2f5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="asapy.preprocessing" href="../preprocessing/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../analysis/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.analysis</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doe/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.doe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../execution_controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prediction/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.prediction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../preprocessing/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.preprocessing</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.utils</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/asapy/utils/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-asapy.utils">
+<span id="asapy-utils"></span><h1><a class="reference internal" href="#module-asapy.utils" title="asapy.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.utils</span></code></a><a class="headerlink" href="#module-asapy.utils" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.prepare_simulation_batch" title="asapy.utils.prepare_simulation_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_simulation_batch</span></code></a>(→ asaclient.Simulation)</p></td>
+<td><p>Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run in batch mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.prepare_simulation_tacview" title="asapy.utils.prepare_simulation_tacview"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_simulation_tacview</span></code></a>(→ asaclient.Simulation)</p></td>
+<td><p>Prepares a simulation by adding specific recorder configurations to the simulation's station subcomponents to run on Tacview.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.load_simulation" title="asapy.utils.load_simulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_simulation</span></code></a>(→ asaclient.Simulation)</p></td>
+<td><p>Loads a Simulation object from a JSON file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.json_to_df" title="asapy.utils.json_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">json_to_df</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Convert a JSON object to a pandas DataFrame and set the index to the given id column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.list_to_df" title="asapy.utils.list_to_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">list_to_df</span></code></a>(arr[, id])</p></td>
+<td><p>Convert a list of dictionaries to a pandas DataFrame and set the index to the given id column.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.unique_list" title="asapy.utils.unique_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique_list</span></code></a>(list1)</p></td>
+<td><p>Return a list of unique values in the given list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.get_parents_dict" title="asapy.utils.get_parents_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parents_dict</span></code></a>(dic, value)</p></td>
+<td><p>Return a list of keys that lead to the given value in the given dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.check_samples_similar" title="asapy.utils.check_samples_similar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_samples_similar</span></code></a>(new_sample, last_sample, threshold)</p></td>
+<td><p>Checks if two samples are similar based on a given threshold.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.test_t" title="asapy.utils.test_t"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_t</span></code></a>(sample1, sample2[, alpha])</p></td>
+<td><p>Performs a t-test and compares the p-value with a given alpha value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.convert_nested_string_to_dict" title="asapy.utils.convert_nested_string_to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_nested_string_to_dict</span></code></a>(s)</p></td>
+<td><p>Converts a string that contains a dictionary and JSON-formatted strings into a nested dictionary.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.find_key" title="asapy.utils.find_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_key</span></code></a>(nested_dict, target_key)</p></td>
+<td><p>Find a key in a nested dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.gen_dict_extract" title="asapy.utils.gen_dict_extract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gen_dict_extract</span></code></a>(key, var)</p></td>
+<td><p>A generator function to iterate and yield values from a dictionary or list nested inside the dictionary, given a key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.transform_stringified_dict" title="asapy.utils.transform_stringified_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform_stringified_dict</span></code></a>(data)</p></td>
+<td><p>Recursively converts stringified JSON parts of a dictionary or list into actual dictionaries or lists.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_micrometers" title="asapy.utils.meters_to_micrometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_micrometers</span></code></a>(v)</p></td>
+<td><p>Convert meters to micrometers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.micrometers_to_meters" title="asapy.utils.micrometers_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">micrometers_to_meters</span></code></a>(v)</p></td>
+<td><p>Convert micrometers to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_centimeters" title="asapy.utils.meters_to_centimeters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_centimeters</span></code></a>(v)</p></td>
+<td><p>Convert meters to centimeters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.centimeters_to_meters" title="asapy.utils.centimeters_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centimeters_to_meters</span></code></a>(v)</p></td>
+<td><p>Convert centimeters to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_kilometers" title="asapy.utils.meters_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_kilometers</span></code></a>(v)</p></td>
+<td><p>Convert meters to kilometers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_meters" title="asapy.utils.kilometers_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_meters</span></code></a>(v)</p></td>
+<td><p>Convert kilometers to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_inches" title="asapy.utils.meters_to_inches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_inches</span></code></a>(v)</p></td>
+<td><p>Convert meters to inches.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.inches_to_meters" title="asapy.utils.inches_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inches_to_meters</span></code></a>(v)</p></td>
+<td><p>Convert inches to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.meters_to_feet" title="asapy.utils.meters_to_feet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_feet</span></code></a>(v)</p></td>
+<td><p>Converts a distance in meters to feet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.feet_to_meters" title="asapy.utils.feet_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feet_to_meters</span></code></a>(v)</p></td>
+<td><p>Converts a distance in feet to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_nautical_miles" title="asapy.utils.kilometers_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_nautical_miles</span></code></a>(v)</p></td>
+<td><p>Converts a distance in kilometers to nautical miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.nautical_miles_to_kilometers" title="asapy.utils.nautical_miles_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nautical_miles_to_kilometers</span></code></a>(v)</p></td>
+<td><p>Converts a distance in nautical miles to kilometers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.kilometers_to_statute_miles" title="asapy.utils.kilometers_to_statute_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_statute_miles</span></code></a>(v)</p></td>
+<td><p>Converts a distance in kilometers to statute miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.statute_miles_to_kilometers" title="asapy.utils.statute_miles_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statute_miles_to_kilometers</span></code></a>(v)</p></td>
+<td><p>Converts a distance in statute miles to kilometers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.nautical_miles_to_statute_miles" title="asapy.utils.nautical_miles_to_statute_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nautical_miles_to_statute_miles</span></code></a>(v)</p></td>
+<td><p>Converts a distance in nautical miles to statute miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.statute_miles_to_nautical_miles" title="asapy.utils.statute_miles_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statute_miles_to_nautical_miles</span></code></a>(v)</p></td>
+<td><p>Converts a distance in statute miles to nautical miles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.degrees_to_radians" title="asapy.utils.degrees_to_radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degrees_to_radians</span></code></a>(v)</p></td>
+<td><p>Converts a value from degrees to radians.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.degrees_to_semicircles" title="asapy.utils.degrees_to_semicircles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degrees_to_semicircles</span></code></a>(v)</p></td>
+<td><p>Converts a value from degrees to semicircles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.radians_to_degrees" title="asapy.utils.radians_to_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radians_to_degrees</span></code></a>(v)</p></td>
+<td><p>Converts a value from radians to degrees.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.radians_to_semicircles" title="asapy.utils.radians_to_semicircles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radians_to_semicircles</span></code></a>(v)</p></td>
+<td><p>Converts a value from radians to semicircles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.semicircles_to_radians" title="asapy.utils.semicircles_to_radians"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semicircles_to_radians</span></code></a>(v)</p></td>
+<td><p>Converts a value from semicircles to radians.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.semicircles_to_degrees" title="asapy.utils.semicircles_to_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">semicircles_to_degrees</span></code></a>(v)</p></td>
+<td><p>Converts a value from semicircles to degrees.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.aepcd_deg" title="asapy.utils.aepcd_deg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aepcd_deg</span></code></a>(x)</p></td>
+<td><p>The method aepcd_deg keeps an angle within the range -180.0 to 180.0 as presented in the figure bellow.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.aepcd_rad" title="asapy.utils.aepcd_rad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aepcd_rad</span></code></a>(x)</p></td>
+<td><p>Keeps an angle within the range -pi to pi, equivalent to the function aepcd_deg but in radians.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.alimd" title="asapy.utils.alimd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alimd</span></code></a>(x, limit)</p></td>
+<td><p>Limits the value of <cite>x</cite> to +/- <cite>limit</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.gbd2ll" title="asapy.utils.gbd2ll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gbd2ll</span></code></a>(slat, slon, brg, dist, index_earth_model)</p></td>
+<td><p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.fbd2ll" title="asapy.utils.fbd2ll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fbd2ll</span></code></a>(slat, slon, brg, dist)</p></td>
+<td><p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.gll2bd" title="asapy.utils.gll2bd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gll2bd</span></code></a>(slat, slon, dlat, dlon, index_earth_model)</p></td>
+<td><p>This function computes the initial bearing and the distance from the starting point to the destination point.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.fll2bd" title="asapy.utils.fll2bd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fll2bd</span></code></a>(slat, slon, dlat, dlon)</p></td>
+<td><p>This function computes the initial bearing and the distance from the starting point to the destination point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.convert_ecef_to_geod" title="asapy.utils.convert_ecef_to_geod"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_ecef_to_geod</span></code></a>(x, y, z, index_earth_model)</p></td>
+<td><p>This function converts Earth Centered, Earth Fixed (ECEF) coordinates (x,y,z) to geodetic coordinates (latitude,longitude,altitude).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.convert_geod_to_ecef" title="asapy.utils.convert_geod_to_ecef"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_geod_to_ecef</span></code></a>(lat, lon, alt, index_earth_model)</p></td>
+<td><p>This function converts Geodetic ((Latitude,Longitude,Altitude) coordinates) to ECEF ((X,Y,Z) coordinates).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.FT2M" title="asapy.utils.FT2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FT2M</span></code></a></p></td>
+<td><p>Conversion factor from feet to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2FT" title="asapy.utils.M2FT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2FT</span></code></a></p></td>
+<td><p>Conversion factor from meters to feet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.IN2M" title="asapy.utils.IN2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IN2M</span></code></a></p></td>
+<td><p>Conversion factor from inches to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2IN" title="asapy.utils.M2IN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2IN</span></code></a></p></td>
+<td><p>Conversion factor from meters to inches.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.NM2M" title="asapy.utils.NM2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NM2M</span></code></a></p></td>
+<td><p>Conversion factor from nautical miles to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2NM" title="asapy.utils.M2NM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2NM</span></code></a></p></td>
+<td><p>Conversion factor from meters to nautical miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.NM2FT" title="asapy.utils.NM2FT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NM2FT</span></code></a></p></td>
+<td><p>Conversion factor from nautical miles to feet.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.FT2NM" title="asapy.utils.FT2NM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FT2NM</span></code></a></p></td>
+<td><p>Conversion factor from feet to nautical miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.SM2M" title="asapy.utils.SM2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SM2M</span></code></a></p></td>
+<td><p>Conversion factor from statute miles to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2SM" title="asapy.utils.M2SM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2SM</span></code></a></p></td>
+<td><p>Conversion factor from meters to statute miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.SM2FT" title="asapy.utils.SM2FT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SM2FT</span></code></a></p></td>
+<td><p>Conversion factor from statute miles to feet.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.FT2SM" title="asapy.utils.FT2SM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FT2SM</span></code></a></p></td>
+<td><p>Conversion factor from feet to statute miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.KM2M" title="asapy.utils.KM2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KM2M</span></code></a></p></td>
+<td><p>Conversion factor from kilometers to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2KM" title="asapy.utils.M2KM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2KM</span></code></a></p></td>
+<td><p>Conversion factor from meters to kilometers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.CM2M" title="asapy.utils.CM2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CM2M</span></code></a></p></td>
+<td><p>Conversion factor from centimeters to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2CM" title="asapy.utils.M2CM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2CM</span></code></a></p></td>
+<td><p>Conversion factor from meters to centimeters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.UM2M" title="asapy.utils.UM2M"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UM2M</span></code></a></p></td>
+<td><p>Conversion factor from micrometers to meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.M2UM" title="asapy.utils.M2UM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">M2UM</span></code></a></p></td>
+<td><p>Conversion factor from meters to micrometers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.D2SC" title="asapy.utils.D2SC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">D2SC</span></code></a></p></td>
+<td><p>Conversion factor for converting degrees to semicircles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.SC2D" title="asapy.utils.SC2D"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SC2D</span></code></a></p></td>
+<td><p>Conversion factor for converting semicircles to degrees.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.R2SC" title="asapy.utils.R2SC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">R2SC</span></code></a></p></td>
+<td><p>Conversion factor for converting radians to semicircles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.SC2R" title="asapy.utils.SC2R"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SC2R</span></code></a></p></td>
+<td><p>Conversion factor for converting semicircles to radians.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.R2DCC" title="asapy.utils.R2DCC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">R2DCC</span></code></a></p></td>
+<td><p>Conversion factor for converting radians to degrees.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.utils.D2RCC" title="asapy.utils.D2RCC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">D2RCC</span></code></a></p></td>
+<td><p>Conversion factor for converting degrees to radians.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.utils.earth_model_data" title="asapy.utils.earth_model_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">earth_model_data</span></code></a></p></td>
+<td><p>Data from Different Models of the Earth</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.prepare_simulation_batch">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_simulation_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">asaclient.Simulation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">asaclient.Simulation</span></span></span><a class="headerlink" href="#asapy.utils.prepare_simulation_batch" title="Link to this definition"></a></dt>
+<dd><p>Prepares a simulation by adding specific recorder configurations to the simulation’s station subcomponents to run in batch mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sim</strong> (<em>Simulation</em>) – The simulation instance for which the simulation setup needs to be prepared.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated Simulation instance with the added recorder configurations in its subcomponents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simulation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.prepare_simulation_tacview">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">prepare_simulation_tacview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">asaclient.Simulation</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">asaclient.Simulation</span></span></span><a class="headerlink" href="#asapy.utils.prepare_simulation_tacview" title="Link to this definition"></a></dt>
+<dd><p>Prepares a simulation by adding specific recorder configurations to the simulation’s station subcomponents to run on Tacview.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sim</strong> (<em>Simulation</em>) – The simulation instance for which the simulation setup needs to be prepared.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated Simulation instance with the added recorder configurations in its subcomponents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simulation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.load_simulation">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">load_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">asaclient.Simulation</span></span></span><a class="headerlink" href="#asapy.utils.load_simulation" title="Link to this definition"></a></dt>
+<dd><p>Loads a Simulation object from a JSON file.</p>
+<p>This method accepts a path to a JSON file, reads the content of the file and
+creates a Simulation object using the data parsed from the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The absolute or relative path to the JSON file to be loaded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Simulation object created from the loaded JSON data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Simulation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.json_to_df">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">json_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="headerlink" href="#asapy.utils.json_to_df" title="Link to this definition"></a></dt>
+<dd><p>Convert a JSON object to a pandas DataFrame and set the index to the given id column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json</strong> (<em>dict</em>) – A JSON object.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The name of the column to set as the index. Default is ‘id’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame representation of the JSON object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.list_to_df">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">list_to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.list_to_df" title="Link to this definition"></a></dt>
+<dd><p>Convert a list of dictionaries to a pandas DataFrame and set the index to the given id column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<em>list</em>) – A list of dictionaries.</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – The name of the column to set as the index. Default is ‘id’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame representation of the list of dictionaries.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.unique_list">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">unique_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.unique_list" title="Link to this definition"></a></dt>
+<dd><p>Return a list of unique values in the given list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>list1</strong> (<em>list</em>) – A list of values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of unique values in the input list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.get_parents_dict">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">get_parents_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.get_parents_dict" title="Link to this definition"></a></dt>
+<dd><p>Return a list of keys that lead to the given value in the given dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – A dictionary to search.</p></li>
+<li><p><strong>value</strong> – The value to search for in the dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of keys that lead to the given value in the dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.check_samples_similar">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">check_samples_similar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_sample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.check_samples_similar" title="Link to this definition"></a></dt>
+<dd><p>Checks if two samples are similar based on a given threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_sample</strong> (<em>np.ndarray</em>) – The new sample to compare.</p></li>
+<li><p><strong>last_sample</strong> (<em>np.ndarray</em>) – The last sample to compare.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – The threshold to use for comparison.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the samples are similar, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.test_t">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">test_t</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.test_t" title="Link to this definition"></a></dt>
+<dd><p>Performs a t-test and compares the p-value with a given alpha value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sample1</strong> (<em>np.ndarray</em>) – The first sample.</p></li>
+<li><p><strong>sample2</strong> (<em>np.ndarray</em>) – The second sample.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – The alpha value to use for comparison. Defaults to 0.05.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the samples are similar, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.convert_nested_string_to_dict">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">convert_nested_string_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.convert_nested_string_to_dict" title="Link to this definition"></a></dt>
+<dd><p>Converts a string that contains a dictionary and JSON-formatted strings into a nested dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – The input string containing a dictionary and JSON-formatted strings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The output dictionary after conversion of JSON-formatted strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.find_key">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">find_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nested_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.find_key" title="Link to this definition"></a></dt>
+<dd><p>Find a key in a nested dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nested_dict</strong> (<em>dict</em>) – The dictionary to search.</p></li>
+<li><p><strong>target_key</strong> (<em>str</em>) – The key to find.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the found key, or None if the key was not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.gen_dict_extract">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">gen_dict_extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.gen_dict_extract" title="Link to this definition"></a></dt>
+<dd><p>A generator function to iterate and yield values from a dictionary or list nested inside the dictionary, given a key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – The key to search for in the dictionary.</p></li>
+<li><p><strong>var</strong> (<em>dict</em><em> or </em><em>list</em>) – The dictionary or list to search.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>value</em> – The value from the dictionary or list that corresponds to the given key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.transform_stringified_dict">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">transform_stringified_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.transform_stringified_dict" title="Link to this definition"></a></dt>
+<dd><p>Recursively converts stringified JSON parts of a dictionary or list into actual dictionaries or lists.</p>
+<p>This function checks if an item is a string and attempts to convert it to a dictionary or list
+using <cite>json.loads()</cite>. If the conversion is successful, the function recursively processes the new
+dictionary or list. If a string is not a valid JSON representation, it remains unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>dict</em><em>, </em><em>list</em><em>, </em><em>str</em><em>]</em>) – Input data that might contain stringified JSON parts.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed data with all stringified JSON parts converted
+to dictionaries or lists.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[dict, list, str]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>json.JSONDecodeError</strong> – If there’s an issue decoding a JSON string. This is caught internally</p></li>
+<li><p><strong>and the original string is returned.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.FT2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">FT2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3048</span></em><a class="headerlink" href="#asapy.utils.FT2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from feet to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2FT">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2FT</span></span><a class="headerlink" href="#asapy.utils.M2FT" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to feet.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.IN2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">IN2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0254</span></em><a class="headerlink" href="#asapy.utils.IN2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from inches to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2IN">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2IN</span></span><a class="headerlink" href="#asapy.utils.M2IN" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to inches.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.NM2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">NM2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1852.0</span></em><a class="headerlink" href="#asapy.utils.NM2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from nautical miles to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2NM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2NM</span></span><a class="headerlink" href="#asapy.utils.M2NM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to nautical miles.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.NM2FT">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">NM2FT</span></span><a class="headerlink" href="#asapy.utils.NM2FT" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from nautical miles to feet.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.FT2NM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">FT2NM</span></span><a class="headerlink" href="#asapy.utils.FT2NM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from feet to nautical miles.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.SM2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">SM2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1609.344</span></em><a class="headerlink" href="#asapy.utils.SM2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from statute miles to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2SM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2SM</span></span><a class="headerlink" href="#asapy.utils.M2SM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to statute miles.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.SM2FT">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">SM2FT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5280.0</span></em><a class="headerlink" href="#asapy.utils.SM2FT" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from statute miles to feet.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.FT2SM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">FT2SM</span></span><a class="headerlink" href="#asapy.utils.FT2SM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from feet to statute miles.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.KM2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">KM2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000.0</span></em><a class="headerlink" href="#asapy.utils.KM2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from kilometers to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2KM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2KM</span></span><a class="headerlink" href="#asapy.utils.M2KM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to kilometers.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.CM2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">CM2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.01</span></em><a class="headerlink" href="#asapy.utils.CM2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from centimeters to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2CM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2CM</span></span><a class="headerlink" href="#asapy.utils.M2CM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to centimeters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.UM2M">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">UM2M</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e-06</span></em><a class="headerlink" href="#asapy.utils.UM2M" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from micrometers to meters.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.M2UM">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">M2UM</span></span><a class="headerlink" href="#asapy.utils.M2UM" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor from meters to micrometers.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.meters_to_micrometers">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">meters_to_micrometers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.meters_to_micrometers" title="Link to this definition"></a></dt>
+<dd><p>Convert meters to micrometers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in micrometers.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.micrometers_to_meters">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">micrometers_to_meters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.micrometers_to_meters" title="Link to this definition"></a></dt>
+<dd><p>Convert micrometers to meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in micrometers.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in meters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.meters_to_centimeters">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">meters_to_centimeters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.meters_to_centimeters" title="Link to this definition"></a></dt>
+<dd><p>Convert meters to centimeters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in centimeters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.centimeters_to_meters">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">centimeters_to_meters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.centimeters_to_meters" title="Link to this definition"></a></dt>
+<dd><p>Convert centimeters to meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in centimeters.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in meters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.meters_to_kilometers">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">meters_to_kilometers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.meters_to_kilometers" title="Link to this definition"></a></dt>
+<dd><p>Convert meters to kilometers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in kilometers.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.kilometers_to_meters">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">kilometers_to_meters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.kilometers_to_meters" title="Link to this definition"></a></dt>
+<dd><p>Convert kilometers to meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in kilometers.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in meters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.meters_to_inches">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">meters_to_inches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.meters_to_inches" title="Link to this definition"></a></dt>
+<dd><p>Convert meters to inches.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in meters.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value in inches.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.inches_to_meters">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">inches_to_meters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.inches_to_meters" title="Link to this definition"></a></dt>
+<dd><p>Convert inches to meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – Value in inches.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.meters_to_feet">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">meters_to_feet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.meters_to_feet" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in meters to feet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in meters</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in feet</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.feet_to_meters">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">feet_to_meters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.feet_to_meters" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in feet to meters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in feet</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in meters</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.kilometers_to_nautical_miles">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">kilometers_to_nautical_miles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.kilometers_to_nautical_miles" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in kilometers to nautical miles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in kilometers</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in nautical miles</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.nautical_miles_to_kilometers">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">nautical_miles_to_kilometers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.nautical_miles_to_kilometers" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in nautical miles to kilometers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in nautical miles</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in kilometers</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.kilometers_to_statute_miles">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">kilometers_to_statute_miles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.kilometers_to_statute_miles" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in kilometers to statute miles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in kilometers</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in statute miles</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.statute_miles_to_kilometers">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">statute_miles_to_kilometers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.statute_miles_to_kilometers" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in statute miles to kilometers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in statute miles</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in kilometers</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.nautical_miles_to_statute_miles">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">nautical_miles_to_statute_miles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.nautical_miles_to_statute_miles" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in nautical miles to statute miles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in nautical miles</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in statute miles</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.statute_miles_to_nautical_miles">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">statute_miles_to_nautical_miles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.statute_miles_to_nautical_miles" title="Link to this definition"></a></dt>
+<dd><p>Converts a distance in statute miles to nautical miles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – distance in statute miles</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>distance in nautical miles</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.D2SC">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">D2SC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0055555555555556</span></em><a class="headerlink" href="#asapy.utils.D2SC" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor for converting degrees to semicircles.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.SC2D">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">SC2D</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">180.0</span></em><a class="headerlink" href="#asapy.utils.SC2D" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor for converting semicircles to degrees.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.R2SC">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">R2SC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.3183098861837906</span></em><a class="headerlink" href="#asapy.utils.R2SC" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor for converting radians to semicircles.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.SC2R">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">SC2R</span></span><a class="headerlink" href="#asapy.utils.SC2R" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor for converting semicircles to radians.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.R2DCC">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">R2DCC</span></span><a class="headerlink" href="#asapy.utils.R2DCC" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor for converting radians to degrees.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.D2RCC">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">D2RCC</span></span><a class="headerlink" href="#asapy.utils.D2RCC" title="Link to this definition"></a></dt>
+<dd><p>Conversion factor for converting degrees to radians.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.degrees_to_radians">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">degrees_to_radians</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.degrees_to_radians" title="Link to this definition"></a></dt>
+<dd><p>Converts a value from degrees to radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – The value in degrees to convert to radians.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value in radians.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.degrees_to_semicircles">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">degrees_to_semicircles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.degrees_to_semicircles" title="Link to this definition"></a></dt>
+<dd><p>Converts a value from degrees to semicircles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – The value in degrees to convert to semicircles.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value in semicircles.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.radians_to_degrees">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">radians_to_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.radians_to_degrees" title="Link to this definition"></a></dt>
+<dd><p>Converts a value from radians to degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – The value in radians to convert to degrees.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value in degrees.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.radians_to_semicircles">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">radians_to_semicircles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.radians_to_semicircles" title="Link to this definition"></a></dt>
+<dd><p>Converts a value from radians to semicircles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – The value in radians to convert to semicircles.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value in semicircles.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.semicircles_to_radians">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">semicircles_to_radians</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.semicircles_to_radians" title="Link to this definition"></a></dt>
+<dd><p>Converts a value from semicircles to radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – The value in semicircles to convert to radians.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value in radians.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.semicircles_to_degrees">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">semicircles_to_degrees</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.semicircles_to_degrees" title="Link to this definition"></a></dt>
+<dd><p>Converts a value from semicircles to degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>float</em>) – The value in semicircles to convert to degrees.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value in degrees.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.aepcd_deg">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">aepcd_deg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.aepcd_deg" title="Link to this definition"></a></dt>
+<dd><p>The method aepcd_deg keeps an angle within the range -180.0 to 180.0 as presented in the figure bellow.
+In the example of this figure, the angle of 225 degrees is converted to -135 degrees through aepcd_deg.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>float</em>) – Angle in degrees.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The angle in degrees adjusted to lie within the range -180.0 to 180.0.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.aepcd_rad">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">aepcd_rad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.aepcd_rad" title="Link to this definition"></a></dt>
+<dd><p>Keeps an angle within the range -pi to pi, equivalent to the function aepcd_deg but in radians.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> – float, the angle to be checked in radians.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>float, the angle within the range -pi to pi, with the same orientation as the original angle.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.alimd">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">alimd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.alimd" title="Link to this definition"></a></dt>
+<dd><p>Limits the value of <cite>x</cite> to +/- <cite>limit</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – The value to be limited.</p></li>
+<li><p><strong>limit</strong> (<em>float</em>) – The maximum absolute value allowed for <cite>x</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The limited value of <cite>x</cite>. If <cite>x</cite> is greater than <cite>limit</cite>, returns <cite>limit</cite>.</dt><dd><p>If <cite>x</cite> is less than negative <cite>limit</cite>, returns <cite>-limit</cite>. Otherwise, returns <cite>x</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="asapy.utils.earth_model_data">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">earth_model_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None,...</span></em><a class="headerlink" href="#asapy.utils.earth_model_data" title="Link to this definition"></a></dt>
+<dd><p>Data from Different Models of the Earth
+Data from 22 Earth surface models are stored in the array earthModelData.
+Each cell of this array corresponds to a type of model and has the following information: semi major axis (a), in meters; and flattening (f).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.gbd2ll">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">gbd2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_earth_model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.gbd2ll" title="Link to this definition"></a></dt>
+<dd><p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p>
+<p>This method considers an elliptical earth model, and it is similar to the method of the file nav_utils.cpp of MIXR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>-</em>)</p></li>
+<li><p><strong>bearing</strong> (<em>-</em>)</p></li>
+<li><p><strong>distance</strong> (<em>-</em>)</p></li>
+<li><p><strong>(</strong><strong>default</strong> (<em>- an index</em><em> of </em><em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>latitude (dlat) and longitude (dlon) of the destination point.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.fbd2ll">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">fbd2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.fbd2ll" title="Link to this definition"></a></dt>
+<dd><p>This function computes the destination (target) point from starting (ref) point given distance and initial bearing.</p>
+<p>This method considers the flat-earth projection and a spherical earth radius of ‘ERAD60’. This method is similar to the method of the file nav_utils.inl of MIXR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>-</em>)</p></li>
+<li><p><strong>bearing</strong> (<em>-</em>)</p></li>
+<li><p><strong>distance</strong> (<em>-</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>latitude (dlat) and longitude (dlon) of the destination point.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.gll2bd">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">gll2bd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_earth_model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.gll2bd" title="Link to this definition"></a></dt>
+<dd><p>This function computes the initial bearing and the distance from the starting point to the destination point.</p>
+<p>This method considers an elliptical earth model, and it is similar to the method of the file nav_utils.cpp of MIXR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>-</em>)</p></li>
+<li><p><strong>latitude</strong></p></li>
+<li><p><strong>(</strong><strong>default</strong> (<em>- an index</em><em> of </em><em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>bearing (brg), in degrees, between the starting and destination points; and</p></li>
+<li><p>distance (dist) or ground range, in nautical miles (nm), between the starting and destination points.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.fll2bd">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">fll2bd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dlon</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.fll2bd" title="Link to this definition"></a></dt>
+<dd><p>This function computes the initial bearing and the distance from the starting point to the destination point.</p>
+<p>This method considers a flat earth projection and a spherical earth radius of ‘ERAD60’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>latitude</strong> (<em>-</em>)</p></li>
+<li><p><strong>latitude</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>bearing (brg), in degrees, between the starting and destination points; and</p></li>
+<li><p>distance (dist) or ground range, in nautical miles (nm), between the starting and destination points.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.convert_ecef_to_geod">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">convert_ecef_to_geod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_earth_model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.convert_ecef_to_geod" title="Link to this definition"></a></dt>
+<dd><p>This function converts Earth Centered, Earth Fixed (ECEF) coordinates (x,y,z) to geodetic coordinates (latitude,longitude,altitude).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinates</strong> (<em>- ECEF</em>)</p></li>
+<li><p><strong>(</strong><strong>default</strong> (<em>- an index</em><em> of </em><em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>geodetic coordinates (lat, lon, alt), considering lat and lon in degrees, and alt in meters.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.utils.convert_geod_to_ecef">
+<span class="sig-prename descclassname"><span class="pre">asapy.utils.</span></span><span class="sig-name descname"><span class="pre">convert_geod_to_ecef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_earth_model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.utils.convert_geod_to_ecef" title="Link to this definition"></a></dt>
+<dd><p>This function converts Geodetic ((Latitude,Longitude,Altitude) coordinates) to ECEF ((X,Y,Z) coordinates).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coordinates</strong> (<em>- geodetic</em>)</p></li>
+<li><p><strong>(</strong><strong>default</strong> (<em>- an index</em><em> of </em><em>an optional earth model</em>) – WGS-84 (indexEarthModel = 0)).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ECEF coordinates (x,y,z), in meters.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>possible values for indexEarthModel.</p>
+<p>wgs84 -&gt; indexEarthModel = 0</p>
+<p>airy -&gt; indexEarthModel = 1</p>
+<p>australianNational -&gt; indexEarthModel = 2</p>
+<p>bessel1841 -&gt; indexEarthModel = 3</p>
+<p>clark1866 -&gt; indexEarthModel = 4</p>
+<p>clark1880 -&gt; indexEarthModel = 5</p>
+<p>everest -&gt; indexEarthModel = 6</p>
+<p>fischer1960 -&gt; indexEarthModel = 7</p>
+<p>fischer1968 -&gt; indexEarthModel = 8</p>
+<p>grs1967 -&gt; indexEarthModel = 9</p>
+<p>grs1980 -&gt; indexEarthModel = 10</p>
+<p>helmert1906 -&gt; indexEarthModel = 11</p>
+<p>hough -&gt; indexEarthModel = 12</p>
+<p>international -&gt; indexEarthModel = 13</p>
+<p>kravosky -&gt; indexEarthModel = 14</p>
+<p>modAiry -&gt; indexEarthModel = 15</p>
+<p>modEverest -&gt; indexEarthModel = 16</p>
+<p>modFischer -&gt; indexEarthModel = 17</p>
+<p>southAmerican1969 -&gt; indexEarthModel = 18</p>
+<p>wgs60 -&gt; indexEarthModel = 19</p>
+<p>wgs66 -&gt; indexEarthModel = 20</p>
+<p>wgs72 -&gt; indexEarthModel = 21</p>
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../preprocessing/index.html" class="btn btn-neutral float-left" title="asapy.preprocessing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

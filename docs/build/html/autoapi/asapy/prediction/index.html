@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-BR" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>asapy.prediction &mdash; ASAPY  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=90a2dc74" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8946c2f5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="asapy.preprocessing" href="../preprocessing/index.html" />
+    <link rel="prev" title="asapy.execution_controller" href="../execution_controller/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ASAPY
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html"><strong>AsaPy Library</strong></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../analysis/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.analysis</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../doe/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.doe</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../execution_controller/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.execution_controller</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.prediction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../preprocessing/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.preprocessing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.utils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ASAPY</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.prediction</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/asapy/prediction/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-asapy.prediction">
+<span id="asapy-prediction"></span><h1><a class="reference internal" href="#module-asapy.prediction" title="asapy.prediction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asapy.prediction</span></code></a><a class="headerlink" href="#module-asapy.prediction" title="Link to this heading"></a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.prediction.Model" title="asapy.prediction.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a></p></td>
+<td><p>Base class for all models in the library. This abstract class provides a template for the methods and attributes</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.prediction.NeuralNetwork" title="asapy.prediction.NeuralNetwork"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NeuralNetwork</span></code></a></p></td>
+<td><p>A class for constructing and training neural networks, with built-in methods for preprocessing,</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.prediction.XgBoost" title="asapy.prediction.XgBoost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">XgBoost</span></code></a></p></td>
+<td><p>A class for constructing and training XGBoost models, with built-in methods for preprocessing,</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.prediction.DBSCAN" title="asapy.prediction.DBSCAN"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DBSCAN</span></code></a></p></td>
+<td><p>A class for constructing and running the DBSCAN clustering algorithm, with built-in methods for preprocessing,</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.prediction.KMeans" title="asapy.prediction.KMeans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KMeans</span></code></a></p></td>
+<td><p>A class for constructing and applying KMeans clustering algorithm, with built-in methods for preprocessing,</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.prediction.validate_split_size" title="asapy.prediction.validate_split_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_split_size</span></code></a>(func)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#asapy.prediction.validate_task" title="asapy.prediction.validate_task"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_task</span></code></a>(func)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#asapy.prediction.validate_target" title="asapy.prediction.validate_target"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_target</span></code></a>(func)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.prediction.validate_split_size">
+<span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">validate_split_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.validate_split_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.prediction.validate_task">
+<span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">validate_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.validate_task" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="asapy.prediction.validate_target">
+<span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">validate_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.validate_target" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asapy.prediction.Model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for all models in the library. This abstract class provides a template for the methods and attributes
+that all models should implement and maintain.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.target">
+<span class="sig-name descname"><span class="pre">target</span></span><a class="headerlink" href="#asapy.prediction.Model.target" title="Link to this definition"></a></dt>
+<dd><p>The name of the target variable in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#asapy.prediction.Model.name" title="Link to this definition"></a></dt>
+<dd><p>The name of the model, used for identification and referencing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.seed">
+<span class="sig-name descname"><span class="pre">seed</span></span><a class="headerlink" href="#asapy.prediction.Model.seed" title="Link to this definition"></a></dt>
+<dd><p>Random seed used to ensure reproducibility. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.preprocessor">
+<span class="sig-name descname"><span class="pre">preprocessor</span></span><a class="headerlink" href="#asapy.prediction.Model.preprocessor" title="Link to this definition"></a></dt>
+<dd><p>Stores the preprocessing pipelines for features and target. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.preprocessed_data">
+<span class="sig-name descname"><span class="pre">preprocessed_data</span></span><a class="headerlink" href="#asapy.prediction.Model.preprocessed_data" title="Link to this definition"></a></dt>
+<dd><p>Stores the preprocessed training, validation, and test data. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#asapy.prediction.Model.task" title="Link to this definition"></a></dt>
+<dd><p>Task type (e.g., ‘classification’, ‘regression’). Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#asapy.prediction.Model.model" title="Link to this definition"></a></dt>
+<dd><p>The underlying model object. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>model object, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.hyperparameter">
+<span class="sig-name descname"><span class="pre">hyperparameter</span></span><a class="headerlink" href="#asapy.prediction.Model.hyperparameter" title="Link to this definition"></a></dt>
+<dd><p>Stores hyperparameters used by the model. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.history_kfold">
+<span class="sig-name descname"><span class="pre">history_kfold</span></span><a class="headerlink" href="#asapy.prediction.Model.history_kfold" title="Link to this definition"></a></dt>
+<dd><p>Stores the training history for each fold during k-fold cross-validation. Defaults to None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.Model.have_cat">
+<span class="sig-name descname"><span class="pre">have_cat</span></span><a class="headerlink" href="#asapy.prediction.Model.have_cat" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the dataset contains categorical features. Defaults to False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model.build" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for building the model structure. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model._optimizer">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model._optimizer" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for setting up the optimization algorithm. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model.hyperparameter_optimization">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model.hyperparameter_optimization" title="Link to this definition"></a></dt>
+<dd><p>Placeholder for hyperparameter optimization. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model.load" title="Link to this definition"></a></dt>
+<dd><p>Placeholder for loading a saved model from disk. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model.fit" title="Link to this definition"></a></dt>
+<dd><p>Placeholder for fitting the model on training data. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model.predict" title="Link to this definition"></a></dt>
+<dd><p>Placeholder for making predictions with the trained model. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model.save" title="Link to this definition"></a></dt>
+<dd><p>Placeholder for saving the current state of the model to disk. Should be overridden by subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model._preprocess">
+<span class="sig-name descname"><span class="pre">_preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_one_hot_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model._preprocess" title="Link to this definition"></a></dt>
+<dd><p>Preprocesses the data according to the specified parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.Model._cluster_preprocess">
+<span class="sig-name descname"><span class="pre">_cluster_preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.Model._cluster_preprocess" title="Link to this definition"></a></dt>
+<dd><p>Preprocesses the data for clustering tasks according to the specified parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for setting up the optimization algorithm. This method should be overridden by
+subclasses to specify how the model should be optimized during training (e.g., SGD, Adam).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for setting up the optimization algorithm. This method should be overridden by
+subclasses to specify how the model should be optimized during training (e.g., SGD, Adam).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for performing hyperparameter optimization. This method should be overridden by
+subclasses to implement hyperparameter tuning techniques (e.g., grid search, random search).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for loading a saved model from disk. This method should be overridden by subclasses
+to enable loading model state, allowing for model persistence across sessions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for fitting the model on the training data. This method should be overridden by
+subclasses to implement the training process, including any preprocessing, training iterations, and
+validation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for making predictions with the trained model. This method should be overridden
+by subclasses to use the model for making predictions on new or unseen data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>Placeholder method for saving the current state of the model to disk. This method should be overridden
+by subclasses to provide a way to serialize and save the model structure and trained weights.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">_preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_one_hot_encoder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>Preprocesses the data based on the provided parameters and updates the instance attributes accordingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Pandas DataFrame</em>) – The dataset to preprocess.</p></li>
+<li><p><strong>target_one_hot_encoder</strong> (<em>bool</em><em>, </em><em>optional</em>) – Indicates whether to apply one-hot encoding to the target variable. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for preprocessing options.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note: This method updates the ‘preprocessed_data’ and ‘preprocessor’ attributes of the instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">_cluster_preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd><p>Preprocesses the data for clustering tasks based on the provided parameters and updates the instance attributes accordingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Pandas DataFrame</em>) – The dataset to preprocess.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for preprocessing options.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note: This method updates the ‘preprocessed_data’ and ‘preprocessor’ attributes of the instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">NeuralNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asapy.prediction.Model" title="asapy.prediction.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A class for constructing and training neural networks, with built-in methods for preprocessing,
+hyperparameter optimization, training, and inference. Inherits from the Model base class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.n_input">
+<span class="sig-name descname"><span class="pre">n_input</span></span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.n_input" title="Link to this definition"></a></dt>
+<dd><p>Number of input features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.n_neurons">
+<span class="sig-name descname"><span class="pre">n_neurons</span></span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.n_neurons" title="Link to this definition"></a></dt>
+<dd><p>Number of neurons in each hidden layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.n_output">
+<span class="sig-name descname"><span class="pre">n_output</span></span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.n_output" title="Link to this definition"></a></dt>
+<dd><p>Number of output neurons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.metrics" title="Link to this definition"></a></dt>
+<dd><p>List of Keras metrics to be used for model evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.callbacks">
+<span class="sig-name descname"><span class="pre">callbacks</span></span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.callbacks" title="Link to this definition"></a></dt>
+<dd><p>List of Keras Callbacks to be used during model training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.build" title="Link to this definition"></a></dt>
+<dd><p>Prepares the neural network model based on the provided dataset and hyperparameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork._make_nn">
+<span class="sig-name descname"><span class="pre">_make_nn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork._make_nn" title="Link to this definition"></a></dt>
+<dd><p>Constructs the neural network architecture.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork._optimizer">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork._optimizer" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.hyperparameter_optimization">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.hyperparameter_optimization" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.load" title="Link to this definition"></a></dt>
+<dd><p>Loads the model and preprocessor from the specified folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.fit" title="Link to this definition"></a></dt>
+<dd><p>Trains the neural network on preprocessed data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.predict" title="Link to this definition"></a></dt>
+<dd><p>Makes predictions using the trained neural network model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.NeuralNetwork.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.NeuralNetwork.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the model and preprocessor to disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd><p>Prepares the neural network model based on the provided dataset and hyperparameters. This includes preprocessing
+the data and initializing the model architecture based on the data’s characteristics and specified hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Pandas DataFrame</em>) – The dataset to be used for building the model.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for preprocessing and model configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">_make_nn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd><p>Constructs the neural network architecture with the specified number of layers, dropout rate, and optimizer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dropout</strong> (<em>float</em>) – The dropout rate to be applied to each hidden layer.</p></li>
+<li><p><strong>layers</strong> (<em>int</em>) – The number of hidden layers in the neural network.</p></li>
+<li><p><strong>optimizer</strong> (<em>str</em>) – The name of the optimizer to be used for training the neural network.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The constructed Keras Sequential model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>keras.models.Sequential</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+a callback within an Optuna optimization study.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trial</strong> (<em>optuna.trial.Trial</em>) – An Optuna trial object.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The average validation loss across all folds for the current trial.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+and updates the model’s hyperparameters with the best found values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trials</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of optimization trials to perform. Defaults to 1.</p></li>
+<li><p><strong>info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to print detailed information about each trial. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing detailed information about each trial if <cite>info</cite> is True. Otherwise, None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd><p>Loads the model and preprocessor from the specified folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>foldername</strong> (<em>str</em>) – The name of the folder where the model and preprocessor are saved.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Trains the neural network on preprocessed data. This method supports early stopping and learning rate reduction
+based on the performance on the validation set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>return_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return the training history object. Defaults to False.</p></li>
+<li><p><strong>graphic</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot training and validation loss and metrics. Defaults to True.</p></li>
+<li><p><strong>graphic_save_extension</strong> (<em>str</em><em>, </em><em>optional</em>) – Extension to save the graphics (e.g., ‘png’, ‘svg’). If None, graphics are not saved. Defaults to None.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – Verbosity mode for training progress. Defaults to 0.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the training process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The training history object, if <cite>return_history</cite> is True. Otherwise, None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>keras.callbacks.History</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd><p>Makes predictions using the trained neural network model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Pandas DataFrame</em>) – The input data for making predictions.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – Verbosity mode for prediction. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The input data with an additional column for predictions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<dd><p>Saves the model and preprocessor to disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">XgBoost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asapy.prediction.Model" title="asapy.prediction.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A class for constructing and training XGBoost models, with built-in methods for preprocessing,
+hyperparameter optimization, training, and inference. Inherits from the Model base class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.metrics">
+<span class="sig-name descname"><span class="pre">metrics</span></span><a class="headerlink" href="#asapy.prediction.XgBoost.metrics" title="Link to this definition"></a></dt>
+<dd><p>List of evaluation metrics to be used for model evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.patience_early_stopping">
+<span class="sig-name descname"><span class="pre">patience_early_stopping</span></span><a class="headerlink" href="#asapy.prediction.XgBoost.patience_early_stopping" title="Link to this definition"></a></dt>
+<dd><p>Number of rounds without improvement to wait before stopping training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost.build" title="Link to this definition"></a></dt>
+<dd><p>Prepares the XGBoost model based on provided dataset and hyperparameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost._make_xgBooster">
+<span class="sig-name descname"><span class="pre">_make_xgBooster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost._make_xgBooster" title="Link to this definition"></a></dt>
+<dd><p>Constructs the XGBoost model with specified hyperparameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost._optimizer">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost._optimizer" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.hyperparameter_optimization">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost.hyperparameter_optimization" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost.load" title="Link to this definition"></a></dt>
+<dd><p>Loads the model and preprocessor from the specified folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost.fit" title="Link to this definition"></a></dt>
+<dd><p>Trains the XGBoost model on preprocessed data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost.predict" title="Link to this definition"></a></dt>
+<dd><p>Makes predictions using the trained XGBoost model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.XgBoost.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.XgBoost.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the model and preprocessor to disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<dd><p>Prepares the XGBoost model based on the provided dataset and hyperparameters. This includes preprocessing
+the data and initializing the model parameters based on the data’s characteristics and specified hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Pandas DataFrame</em>) – The dataset to be used for building the model.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for preprocessing and model configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">_make_xgBooster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">booster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_split_loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_child_weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_delta_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsample</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsample_bytree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsample_bylevel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colsample_bynode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_lambda</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_pos_weight</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grow_policy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_leaves</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_parallel_tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
+<dd><p>Constructs the XGBoost model with the specified hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Hyperparameters for the XGBoost model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The constructed XGBoost model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xgboost.XGBModel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id19">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id19" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+a callback within an Optuna optimization study.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trial</strong> (<em>optuna.trial.Trial</em>) – An Optuna trial object.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The average validation loss across all folds for the current trial.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id20">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id20" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+and updates the model’s hyperparameters with the best found values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trials</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of optimization trials to perform. Defaults to 1.</p></li>
+<li><p><strong>info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to print detailed information about each trial. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing detailed information about each trial if <cite>info</cite> is True. Otherwise, None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id21">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id21" title="Link to this definition"></a></dt>
+<dd><p>Loads the model and preprocessor from the specified folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>foldername</strong> (<em>str</em>) – The name of the folder where the model and preprocessor are saved.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id22">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_history</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id22" title="Link to this definition"></a></dt>
+<dd><p>Trains the XGBoost model on preprocessed data. This method supports early stopping based on the performance
+on the validation set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>return_history</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return the training history object. Defaults to False.</p></li>
+<li><p><strong>graphic</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot training and validation loss and metrics. Defaults to True.</p></li>
+<li><p><strong>graphic_save_extension</strong> (<em>str</em><em>, </em><em>optional</em>) – Extension to save the graphics (e.g., ‘png’, ‘svg’). If None, graphics are not saved. Defaults to None.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>optional</em>) – Verbosity mode for training progress. Defaults to 0.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the training process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The training history object, if <cite>return_history</cite> is True. Otherwise, None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id23">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id23" title="Link to this definition"></a></dt>
+<dd><p>Makes predictions using the trained XGBoost model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>Pandas DataFrame</em>) – The input data for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The input data with an additional column for predictions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id24">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id24" title="Link to this definition"></a></dt>
+<dd><p>Saves the model and preprocessor to disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">DBSCAN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asapy.prediction.Model" title="asapy.prediction.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A class for constructing and running the DBSCAN clustering algorithm, with built-in methods for preprocessing,
+hyperparameter optimization, and silhouette analysis. Inherits from the Model base class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.have_categ">
+<span class="sig-name descname"><span class="pre">have_categ</span></span><a class="headerlink" href="#asapy.prediction.DBSCAN.have_categ" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the dataset contains categorical features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.distance_matrix">
+<span class="sig-name descname"><span class="pre">distance_matrix</span></span><a class="headerlink" href="#asapy.prediction.DBSCAN.distance_matrix" title="Link to this definition"></a></dt>
+<dd><p>The computed distance matrix for the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.clusters">
+<span class="sig-name descname"><span class="pre">clusters</span></span><a class="headerlink" href="#asapy.prediction.DBSCAN.clusters" title="Link to this definition"></a></dt>
+<dd><p>The cluster labels for each point in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN.build" title="Link to this definition"></a></dt>
+<dd><p>Prepares the DBSCAN model based on provided dataset and hyperparameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN._make_dbscan">
+<span class="sig-name descname"><span class="pre">_make_dbscan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN._make_dbscan" title="Link to this definition"></a></dt>
+<dd><p>Constructs the DBSCAN model with specified hyperparameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN._optimizer">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN._optimizer" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.hyperparameter_optimization">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN.hyperparameter_optimization" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN.load" title="Link to this definition"></a></dt>
+<dd><p>Loads the preprocessor, preprocessed data, clusters, and model from the specified folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN.fit" title="Link to this definition"></a></dt>
+<dd><p>Applies the DBSCAN algorithm to the preprocessed data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN.predict" title="Link to this definition"></a></dt>
+<dd><p>Generates and displays a 2D or 3D t-SNE plot of the clusters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.DBSCAN.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.DBSCAN.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the preprocessor, preprocessed data, clusters, and model to disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id25">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id25" title="Link to this definition"></a></dt>
+<dd><p>Prepares the DBSCAN model based on the provided dataset and hyperparameters. This includes preprocessing
+the data and calculating the distance matrix if necessary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Pandas DataFrame</em>) – The dataset to be used for clustering.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for preprocessing.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id26">
+<span class="sig-name descname"><span class="pre">_make_dbscan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id26" title="Link to this definition"></a></dt>
+<dd><p>Constructs the DBSCAN model with the specified hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eps</strong> (<em>float</em>) – The maximum distance between two samples for them to be considered as in the same neighborhood.</p></li>
+<li><p><strong>min_samples</strong> (<em>int</em>) – The number of samples in a neighborhood for a point to be considered as a core point.</p></li>
+<li><p><strong>algorithm</strong> (<em>str</em>) – The algorithm to be used by the DBSCAN model.</p></li>
+<li><p><strong>leaf_size</strong> (<em>int</em>) – Leaf size passed to the underlying BallTree or KDTree.</p></li>
+<li><p><strong>p</strong> (<em>float</em>) – The power of the Minkowski metric to be used to calculate distance between points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The constructed DBSCAN model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sklearn.cluster._dbscan.DBSCAN</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id27">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id27" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+a callback within an Optuna optimization study.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trial</strong> (<em>optuna.trial.Trial</em>) – An Optuna trial object.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The silhouette score for the clustering configuration defined by the trial.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id28">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id28" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+and identifies the best hyperparameters for DBSCAN clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trials</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of optimization trials to perform. Defaults to 100.</p></li>
+<li><p><strong>info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to print detailed information about each trial. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing detailed information about each trial if <cite>info</cite> is True. Otherwise, None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id29">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id29" title="Link to this definition"></a></dt>
+<dd><p>Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>foldername</strong> (<em>str</em>) – The name of the folder where the data and model are saved.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id30">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_cluster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id30" title="Link to this definition"></a></dt>
+<dd><p>Applies DBSCAN clustering to the preprocessed dataset and updates the ‘clusters’ attribute with the cluster labels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id31">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id31" title="Link to this definition"></a></dt>
+<dd><p>Projects the clustered data into 2D or 3D space using t-SNE and visualizes the clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>projection</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of projection for visualization (‘2d’ or ‘3d’). Defaults to ‘2d’.</p></li>
+<li><p><strong>graphic_save_extension</strong> (<em>str</em><em>, </em><em>optional</em>) – Extension to save the graphics (e.g., ‘png’, ‘svg’). If None, graphics are not saved. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id32">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id32" title="Link to this definition"></a></dt>
+<dd><p>Saves the preprocessor, preprocessed data, cluster labels, and model to disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asapy.prediction.</span></span><span class="sig-name descname"><span class="pre">KMeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#asapy.prediction.Model" title="asapy.prediction.Model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A class for constructing and applying KMeans clustering algorithm, with built-in methods for preprocessing,
+hyperparameter optimization, and visualization. Inherits from the Model base class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.clusters">
+<span class="sig-name descname"><span class="pre">clusters</span></span><a class="headerlink" href="#asapy.prediction.KMeans.clusters" title="Link to this definition"></a></dt>
+<dd><p>Stores the cluster labels for each sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans.build" title="Link to this definition"></a></dt>
+<dd><p>Prepares the dataset for KMeans clustering.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans._make_kmeans">
+<span class="sig-name descname"><span class="pre">_make_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans._make_kmeans" title="Link to this definition"></a></dt>
+<dd><p>Constructs the KMeans model with specified hyperparameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans._optimizer">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans._optimizer" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.hyperparameter_optimization">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans.hyperparameter_optimization" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans.load" title="Link to this definition"></a></dt>
+<dd><p>Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans.fit" title="Link to this definition"></a></dt>
+<dd><p>Applies KMeans clustering to the preprocessed dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans.predict" title="Link to this definition"></a></dt>
+<dd><p>Projects the clustered data into 2D or 3D space and visualizes the clusters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="asapy.prediction.KMeans.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asapy.prediction.KMeans.save" title="Link to this definition"></a></dt>
+<dd><p>Saves the preprocessor, preprocessed data, cluster labels, and model to disk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id33">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id33" title="Link to this definition"></a></dt>
+<dd><p>Prepares the dataset for KMeans clustering. This includes preprocessing the data based on its characteristics and specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>Pandas DataFrame</em>) – The dataset to be used for clustering.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for preprocessing.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id34">
+<span class="sig-name descname"><span class="pre">_make_kmeans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id34" title="Link to this definition"></a></dt>
+<dd><p>Constructs the KMeans model with the specified hyperparameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clusters</strong> (<em>int</em>) – The number of clusters to form as well as the number of centroids to generate.</p></li>
+<li><p><strong>init</strong> (<em>str</em>) – Method for initialization (‘k-means++’, ‘random’ or an ndarray).</p></li>
+<li><p><strong>n_init</strong> (<em>int</em>) – Number of time the k-means algorithm will be run with different centroid seeds.</p></li>
+<li><p><strong>tol</strong> (<em>float</em>) – Relative tolerance with regards to Frobenius norm of the difference in the cluster centers of two consecutive iterations to declare convergence.</p></li>
+<li><p><strong>algorithm</strong> (<em>str</em>) – K-means algorithm to use (‘auto’, ‘full’ or ‘elkan’).</p></li>
+<li><p><strong>verbose</strong> (<em>int</em>) – Verbosity mode.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The constructed KMeans clustering model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sklearn.cluster._kmeans.KMeans</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id35">
+<span class="sig-name descname"><span class="pre">_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trial</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id35" title="Link to this definition"></a></dt>
+<dd><p>Defines and runs the optimization trial for hyperparameter tuning. This method is intended to be used as
+a callback within an Optuna optimization study.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trial</strong> (<em>optuna.trial.Trial</em>) – An Optuna trial object.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The silhouette score for the clustering configuration defined by the trial.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id36">
+<span class="sig-name descname"><span class="pre">hyperparameter_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id36" title="Link to this definition"></a></dt>
+<dd><p>Performs hyperparameter optimization using Optuna over a specified number of trials. Reports the results
+and identifies the best hyperparameters for KMeans clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trials</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of optimization trials to perform. Defaults to 100.</p></li>
+<li><p><strong>info</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to print detailed information about each trial. Defaults to False.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments for configuring the optimization process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing detailed information about each trial if <cite>info</cite> is True. Otherwise, None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id37">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foldername</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id37" title="Link to this definition"></a></dt>
+<dd><p>Loads the preprocessor, preprocessed data, and cluster labels from the specified folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>foldername</strong> (<em>str</em>) – The name of the folder where the data and model are saved.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id38">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_cluster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id38" title="Link to this definition"></a></dt>
+<dd><p>Applies KMeans clustering to the preprocessed dataset and updates the ‘clusters’ attribute with the cluster labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>int</em>) – Verbosity mode.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id39">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2d'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphic_save_extension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id39" title="Link to this definition"></a></dt>
+<dd><p>Projects the clustered data into 2D or 3D space using t-SNE and visualizes the clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>projection</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of projection for visualization (‘2d’ or ‘3d’). Defaults to ‘2d’.</p></li>
+<li><p><strong>graphic_save_extension</strong> (<em>str</em><em>, </em><em>optional</em>) – Extension to save the graphics (e.g., ‘png’, ‘svg’). If None, graphics are not saved. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id40">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id40" title="Link to this definition"></a></dt>
+<dd><p>Saves the preprocessor, preprocessed data, cluster labels, and model to disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../execution_controller/index.html" class="btn btn-neutral float-left" title="asapy.execution_controller" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../preprocessing/index.html" class="btn btn-neutral float-right" title="asapy.preprocessing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ASA team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
