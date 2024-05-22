@@ -215,5 +215,47 @@ class Preprocessing:
         df = pd.concat([df.iloc[:, :idx], dummies, df.iloc[:, idx:]], axis=1)
 
         return df
+    
+    @staticmethod
+    def parse_recorder(df: pd.DataFrame, asa_type: int = None, asa_custom_type: str = None, extra_fields = ['frame', 'sim_time', 'utc_time']) -> pd.DataFrame:
+    
+        def unnested(j: dict, prefix: str='') -> dict:
+            ds = [k for k in j if isinstance(j[k], dict)]
+            for d in ds:
+                t = j.pop(d)
+                prefix = f"{prefix}{d}_"
+                tt = {prefix + key: val for key, val in t.items()}
+                j = dict(j, **unnested(tt, prefix))
+            return j
+        
+        if df.size == 0:
+            return pd.DataFrame()
+        
+        if 'payload' not in df.columns:
+            raise Exception("Invalid dataframe. Missing 'payload' column.") 
+
+        data = df.copy()
+
+        if asa_type:
+            if 'asa_type' not in df.columns:
+                raise Exception("Invalid dataframe. Missing 'asa_type' column.") 
+            data = data[data['asa_type'] == asa_type]
+        
+        if asa_custom_type:
+            if 'asa_custom_type' not in df.columns:
+                raise Exception("Invalid dataframe. Missing 'asa_custom_type' column.") 
+            data = data[data['asa_custom_type'] == asa_custom_type]
+        
+        js = []
+        for index, row in data.iterrows():
+            j = convert_nested_string_to_dict(row['payload'])
+            # removendo variaveis aninhadas
+            j = unnested(j)
+            j = dict(j, **{k: row[k] for k in extra_fields})
+            js.append(j)
+
+        r = pd.DataFrame.from_records(js)
+        
+        return r
 
 

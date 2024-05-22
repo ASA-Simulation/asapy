@@ -86,7 +86,7 @@ class Doe:
         Returns:
         DataFrame: A DataFrame containing aliases and their corresponding attributes.
         """
-        required_columns = ['label', 'type', 'default', 'min', 'max', 'alias_attribute']
+        required_columns = ['label', 'type', 'default', 'min', 'max', 'alias_attribute', 'options']
         
         aliases_dic = dict()
         
@@ -147,7 +147,7 @@ class Doe:
                     values.append(dic['value'])
                 doe[col] = doe[col].apply(lambda x: values[int(x * len(values))])
             elif df[col].loc['type'] == 'boolean':
-                doe[col] = doe[col].apply(lambda x: round(x))
+                doe[col] = doe[col].apply(lambda x: round(x)).astype(bool)
             else:
                 if isnan((df[col].loc['max'])):
                     max_value = 5 * df[col].loc['default']
