@@ -26,7 +26,6 @@ setup(name='asapy',
       license='MIT',
       setup_requires=['pytest-runner'],
       install_requires=[
-            'asa-client @ git+https://gitlab.asa.dcta.mil.br/asa/asa-client.git@main#egg=asa-client', 
             'requests==2.28.1',
             'python-dateutil==2.8.2',
             'pyDOE==0.3.8',
